@@ -32,7 +32,7 @@ export default class Home extends PureComponent {
   };
 
   async componentDidMount() {
-    await fetch('https://api.sheety.co/7e9e78e3-6e36-47da-b0c8-3c39943cef1b')
+    await fetch(process.env.API_HOST)
       .then((response) => response.json())
       .then((data) => {
         this.setState({ list: this.normalize(data) });
