@@ -37,3 +37,7 @@ workflows:
       - deploy:
           requires:
             - build
+          filters:
+            branches:
+              only:
+                - feat/init-project
