@@ -14,10 +14,10 @@
 - Crie `.env.development.local` com o seguinte conteúdo:
 
   ```
-  REACT_APP_API=https://api.sheety.co/7e9e78e3-6e36-47da-b0c8-3c39943cef1b
+  API_HOST=https://api.sheety.co/7e9e78e3-6e36-47da-b0c8-3c39943cef1b
   ```
 
-- Inicie o projeto: `yarn start`
+- Inicie o projeto: `yarn dev`
 
 ## 💬 Comunidade
 
