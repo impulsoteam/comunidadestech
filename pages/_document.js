@@ -11,6 +11,11 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="theme-color" content="#8c43ff" />
+          <meta
+            name="description"
+            content="Lista de comunidades profissionais de tecnologia do Brasil"
+          />
           <link
             rel="shortcut icon"
             type="image/png"
