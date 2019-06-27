@@ -11,7 +11,7 @@
 
 - Clone o projeto: `git clone git@github.com:universoimpulso/comunidadestech.git`
 - Instale as dependências: `yarn`
-- Crie `.env.development.local` com o seguinte conteúdo:
+- Crie `.env` com o seguinte conteúdo:
 
   ```
   API_HOST=https://api.sheety.co/7e9e78e3-6e36-47da-b0c8-3c39943cef1b
