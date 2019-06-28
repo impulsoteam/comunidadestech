@@ -8,7 +8,7 @@ import Document, { Head, Main, NextScript } from 'next/document';
 export default class MyDocument extends Document {
   render() {
     return (
-      <html>
+      <html lang="pt-br">
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content="#8c43ff" />
