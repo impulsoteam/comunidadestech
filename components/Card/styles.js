@@ -1,12 +1,24 @@
 import css from 'styled-jsx/css';
+import { colors } from '/utils/variables';
 
 export default css`
   .description {
     font-family: 'Raleway', sans-serif;
+    height: 36px;
+    overflow: hidden;
   }
 
   .card {
     border-radius: 2px;
+    height: 100%;
+
+    a {
+      color: ${colors.dakr};
+    }
+  }
+
+  .control {
+    margin-bottom: 4px;
   }
 
   .card .media:not(:last-child) {
@@ -32,7 +44,6 @@ export default css`
 
     .tag {
       font-size: 10px;
-      margin: 4px 4px 4px 0;
     }
   }
 `;
