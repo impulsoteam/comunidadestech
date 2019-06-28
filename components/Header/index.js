@@ -22,6 +22,7 @@ class Header extends Component {
                   className="navbar-item is-flex-touch is-vcentered"
                   href="https://github.com/universoimpulso/comunidadestech"
                   target="_blank"
+                  rel="noopener"
                 >
                   <img
                     src="/static/github.png"
@@ -36,6 +37,7 @@ class Header extends Component {
                         className="button is-primary"
                         href="https://impulsowork.typeform.com/to/Ke2sdP"
                         target="_blank"
+                        rel="noopener"
                         title="Cadastrar nova comunidade"
                       >
                         <strong>Cadastrar</strong>
