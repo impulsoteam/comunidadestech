@@ -4,6 +4,8 @@ import Card from '/components/Card/';
 import Hero from '/components/Hero/';
 import Menu from '/components/Menu/';
 
+const API_HOST = 'https://api.sheety.co/7e9e78e3-6e36-47da-b0c8-3c39943cef1b';
+
 export default class Home extends PureComponent {
   state = {
     list: [],
@@ -32,7 +34,7 @@ export default class Home extends PureComponent {
   };
 
   async componentDidMount() {
-    await fetch(process.env.API_HOST)
+    await fetch(API_HOST)
       .then((response) => response.json())
       .then((data) => {
         this.setState({ list: this.normalize(data) });
