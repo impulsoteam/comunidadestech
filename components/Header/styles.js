@@ -9,6 +9,9 @@ export default css`
   .logo {
     min-height: 48px;
   }
+  a[href*='github'] {
+    align-items: center;
+  }
   .github {
     height: 32px;
   }

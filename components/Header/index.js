@@ -6,7 +6,7 @@ class Header extends Component {
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="container">
-          <div className="container columns is-vcentered">
+          <div className="container columns is-vcentered is-flex-mobile">
             <div className="navbar-brand column">
               <a className="navbar-item" href="/">
                 <img
@@ -17,9 +17,9 @@ class Header extends Component {
               </a>
             </div>
             <div clasName="navbar-menu column">
-              <div className="navbar-end">
+              <div className="navbar-end is-flex-touch">
                 <a
-                  className="navbar-item"
+                  className="navbar-item is-flex-touch is-vcentered"
                   href="https://github.com/universoimpulso/comunidadestech"
                   target="_blank"
                 >
