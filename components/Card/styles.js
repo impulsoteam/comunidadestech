@@ -13,7 +13,7 @@ export default css`
     height: 100%;
 
     a {
-      color: ${colors.dakr};
+      color: ${colors.dark};
     }
   }
 
