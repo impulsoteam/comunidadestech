@@ -1,4 +1,5 @@
 import css from 'styled-jsx/css';
+import { colors } from '/utils/variables';
 
 export default css`
   .description {
@@ -12,7 +13,7 @@ export default css`
     height: 100%;
 
     a {
-      color: hsl(0, 0%, 21%);
+      color: ${colors.dakr};
     }
   }
 
