@@ -21,7 +21,7 @@ export default class Home extends PureComponent {
       .filter((item) => item['status'] === 'PUBLICADO')
       .map((item, index) => ({
         id: `community-${index}`,
-        city: item['EmQualCidadeDoBrasil'],
+        city: item['emQualCidadeDoBrasil'],
         description: item['descrevaAComunidadeComUmaBreveFrase'],
         isPresential: item['HáEncontrosPresenciais?'] === 'TRUE',
         link: item['linkDaPrincipaláReaDeConteúDoDaComunidade'],

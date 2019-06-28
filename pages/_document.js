@@ -6,6 +6,17 @@ You could include it into the page using either next/head or a custom _document.
 import Document, { Head, Main, NextScript } from 'next/document';
 
 export default class MyDocument extends Document {
+  setGoogleTags() {
+    return {
+      __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-143000900-1');
+      `,
+    };
+  }
+
   render() {
     return (
       <html lang="pt-br">
@@ -98,6 +109,11 @@ export default class MyDocument extends Document {
             content="/ms-icon-144x144.png?v1"
           />
           <meta name="theme-color" content="#ffffff" />
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-143000900-1"
+          ></script>
+          <script dangerouslySetInnerHTML={this.setGoogleTags()} />
         </Head>
         <body>
           <Main />
