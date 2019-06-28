@@ -87,10 +87,11 @@ export default class Home extends PureComponent {
                 list={stacks}
                 select={this.handleStack}
                 selected={selectedStack || 'Todas'}
+                selectedStack={selectedStack}
               />
             </div>
             <div className="column">
-              <h4 className="menu-label">{selectedStack}</h4>
+              <h4 className="menu-label">{selectedStack || 'Todas'}</h4>
               <div className="columns is-multiline">
                 {filteredList.map((card) => (
                   <div className="column is-one-quarter" key={card.id}>

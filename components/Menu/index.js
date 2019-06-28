@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './styles';
 
 class Menu extends Component {
   render() {
@@ -9,12 +10,16 @@ class Menu extends Component {
         <ul className="menu-list">
           {list.map((item) => (
             <li>
-              <a className="is-active" onClick={() => select(item.name)}>
+              <a
+                className={item.name === selectedStack && 'is-active'}
+                onClick={() => select(item.name)}
+              >
                 {item.name}
               </a>
             </li>
           ))}
         </ul>
+        <style jsx>{styles}</style>
       </aside>
     );
   }
