@@ -3,10 +3,13 @@ import css from 'styled-jsx/css';
 export default css`
   .description {
     font-family: 'Raleway', sans-serif;
+    height: 36px;
+    overflow: hidden;
   }
 
   .card {
     border-radius: 2px;
+    height: 100%;
   }
 
   .card .media:not(:last-child) {
