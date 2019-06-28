@@ -8,13 +8,22 @@ class Menu extends Component {
       <aside className="menu">
         <p className="menu-label">Categorias</p>
         <ul className="menu-list">
-          {list.map((item) => (
-            <li>
+          <li key="all">
+            <a onClick={() => select('')}>
+              <span className="column">Todas</span>
+              <span className="tag is-primary column">
+                {list.length > 0 && list.reduce((a, b) => a.value + b.value)}
+              </span>
+            </a>
+          </li>
+          {list.map((item, index) => (
+            <li key={`${index}-${item.name}`}>
               <a
                 className={item.name === selectedStack && 'is-active'}
                 onClick={() => select(item.name)}
               >
-                {item.name}
+                <span className="column">{item.name}</span>
+                <span className="tag is-primary column">{item.value}</span>
               </a>
             </li>
           ))}

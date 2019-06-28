@@ -28,15 +28,13 @@ class Card extends Component {
 
             <div className="content">
               <p className="description">{content.description}</p>
-              <p>
-                <div className="control">
-                  <div className="tags has-addons">
-                    <span className="tag is-dark">membros</span>
-                    <span className="tag is-primary">{content.size}</span>
-                  </div>
+              <div className="control">
+                <div className="tags has-addons">
+                  <span className="tag is-dark">membros</span>
+                  <span className="tag is-primary">{content.size}</span>
                 </div>
-                <span className="tag is-dark">{content.primaryStack}</span>
-              </p>
+              </div>
+              <span className="tag is-dark">{content.primaryStack}</span>
             </div>
           </div>
         </a>
