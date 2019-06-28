@@ -1,4 +1,4 @@
 export const colors = {
-  dakr: 'hsl(0, 0%, 21%)',
+  dakr: '#363636',
   primary: '#8c43ff',
 };
