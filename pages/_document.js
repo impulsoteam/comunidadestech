@@ -102,13 +102,14 @@ export default class MyDocument extends Document {
             sizes="16x16"
             href="/static/favicon/favicon-16x16.png?v1"
           />
-          <link rel="manifest" href="/static/favicon/manifest.json" />
           <meta name="msapplication-TileColor" content="#ffffff" />
           <meta
             name="msapplication-TileImage"
             content="/ms-icon-144x144.png?v1"
           />
           <meta name="theme-color" content="#ffffff" />
+          <link rel="manifest" href="/static/manifest.json" />
+          <script src="/static/sw-register.js"></script>
           <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=UA-143000900-1"
