@@ -4,7 +4,7 @@ import Card from '/components/Card/';
 import Hero from '/components/Hero/';
 import Menu from '/components/Menu/';
 
-const API_HOST = 'https://api.sheety.co/eda627db-5d04-4ce5-bd7e-9e537b5ed3f7';
+const API_HOST = 'https://api.sheety.co/f29670ad-1584-4fc8-a946-db9474934c3a';
 
 export default class Home extends PureComponent {
   state = {
