@@ -4,15 +4,22 @@ import styles from './styles';
 export default class Footer extends PureComponent {
   render() {
     return (
-      <footer className="footer">
-        <div className="content has-text-centered">
-          <p>
-            <strong>Comunidades.tech</strong> é um projeto open source
-            desenvolvido pela comunidade da <strong>Impulso.Network</strong>.
-          </p>
+      <div>
+        <div className="hero-foot has-text-centered">
+          <div className="container">
+            <img className="is-bottom" src="/static/hero.svg" alt="tech" />
+          </div>
         </div>
+        <footer className="footer">
+          <div className="content has-text-centered">
+            <p>
+              <strong>Comunidades.tech</strong> é um projeto open source
+              desenvolvido pela comunidade da <strong>Impulso.Network</strong>.
+            </p>
+          </div>
+        </footer>
         <style jsx>{styles}</style>
-      </footer>
+      </div>
     );
   }
 }

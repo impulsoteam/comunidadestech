@@ -1,5 +1,4 @@
 import css from 'styled-jsx/css';
-import { colors } from '/utils/variables';
 
 export default css`
   .subtitle {
@@ -8,14 +7,7 @@ export default css`
     font-weight: 300;
   }
 
-  .hero-foot {
-    margin-top: 32px;
-    border-bottom: 3px solid ${colors.primary};
-    border-radius: 1px;
-
-    img {
-      max-width: 100%;
-      width: 650px;
-    }
+  .hero-body {
+    padding: 0 1.5rem 1rem;
   }
 `;
