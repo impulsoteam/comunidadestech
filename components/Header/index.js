@@ -38,9 +38,9 @@ class Header extends Component {
                         href="https://impulsowork.typeform.com/to/Ke2sdP"
                         target="_blank"
                         rel="noopener"
-                        title="Cadastrar nova comunidade"
+                        title="Cadastre uma comunidade"
                       >
-                        <strong>Cadastrar</strong>
+                        <strong>Cadastre uma comunidade</strong>
                       </a>
                     </p>
                   </div>
