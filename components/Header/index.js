@@ -40,7 +40,12 @@ class Header extends Component {
                         rel="noopener"
                         title="Cadastre uma comunidade"
                       >
-                        <strong>Cadastre uma comunidade</strong>
+                        <strong className="is-hidden-mobile">
+                          Cadastre uma comunidade
+                        </strong>
+                        <strong className="is-hidden-tablet is-hidden-desktop">
+                          Cadastre
+                        </strong>
                       </a>
                     </p>
                   </div>
