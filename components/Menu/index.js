@@ -9,7 +9,10 @@ class Menu extends Component {
         <p className="menu-label">Categorias</p>
         <ul className="menu-list">
           <li key="all">
-            <a onClick={() => select('')}>
+            <a
+              onClick={() => select('')}
+              className={!selectedStack && 'is-active'}
+            >
               <span className="column">Todas</span>
               <span className="tag is-primary column">
                 {list.length > 0 && list.reduce((a, b) => a.value + b.value)}
