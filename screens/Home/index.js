@@ -3,6 +3,7 @@ import styles from './styles';
 import Card from '/components/Card/';
 import Hero from '/components/Hero/';
 import Menu from '/components/Menu/';
+import Filter from '../../components/Filter';
 
 const API_HOST = 'https://api.sheety.co/f29670ad-1584-4fc8-a946-db9474934c3a';
 
@@ -83,6 +84,12 @@ export default class Home extends PureComponent {
         <Hero />
         <br />
         <div className="container">
+          <Filter
+            list={stacks}
+            select={this.handleStack}
+            selected={selectedStack || 'Todas'}
+            selectedStack={selectedStack}
+          />
           <div className="columns">
             <div className="column is-one-quarter">
               <Menu
