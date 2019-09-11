@@ -105,5 +105,50 @@ export default css`
         display: none;
       }
     }
+
+    @media screen and (max-width: 1215px) {
+      .filter-box {
+        flex-wrap: wrap;
+
+        .filter-title,
+        .reset-title {
+          flex-basis: 100%;
+          justify-content: center;
+        }
+
+        .filter-title {
+          border-bottom: solid 2px #e6e6e6;
+        }
+
+        .reset-title {
+          border-top-right-radius: 0;
+          border-bottom-left-radius: 4px;
+        }
+
+        .filter-options .filter-option-wrapper:first-of-type {
+          border-left: none;
+        }
+      }
+    }
+    @media screen and (max-width: 1023px) {
+      .filter-options {
+        flex-wrap: wrap;
+
+        .filter-option-wrapper:nth-of-type(-n + 6) {
+          flex-basis: 25%;
+          border-bottom: solid 2px #e6e6e6;
+        }
+
+        .filter-option-wrapper:last-of-type {
+          flex-basis: 50%;
+          border-bottom: solid 2px #e6e6e6;
+        }
+      }
+    }
+    @media screen and (max-width: 769px) {
+      .filter-options .filter-option-wrapper:nth-of-type(-n + 6) {
+        flex-basis: 50%;
+      }
+    }
   }
 `;

@@ -136,10 +136,10 @@ class Filter extends Component {
                 <a className="button is-light is-small">OK</a>
               </div>
             </div>
-            <div className="reset-title">
-              <div className="reset-label" onClick={(event) => reset(event)}>
-                <i className="fa fa-refresh"></i> Resetar Filtro
-              </div>
+          </div>
+          <div className="reset-title">
+            <div className="reset-label" onClick={(event) => reset(event)}>
+              <i className="fa fa-refresh"></i> Resetar Filtro
             </div>
           </div>
         </div>
