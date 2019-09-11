@@ -3,7 +3,7 @@ import styles from './styles';
 
 class Filter extends Component {
   render() {
-    const { list, select, reset } = this.props;
+    const { list, select, reset, filteredList } = this.props;
 
     const unify = (array, object) => {
       const item = [...new Set(array.map((x) => x[`${object}`]))].filter(
@@ -11,12 +11,6 @@ class Filter extends Component {
       );
       return item;
     };
-
-    console.log('minha lista', list);
-    console.log(
-      'minha lista tags',
-      list.map((item) => item.tags.map((item) => item))
-    );
     return (
       <div className="columns filter">
         <div className="column filter-box">
@@ -78,7 +72,7 @@ class Filter extends Component {
                 <div className="control has-icons-left">
                   <div className="select is-small">
                     <select name="country" onChange={(event) => select(event)}>
-                      <option>Todos</option>
+                      <option>{list.country || 'Todos'}</option>
                       {unify(list, 'country').map((item, index) => (
                         <option key={`${index}-${item}`}>{item}</option>
                       ))}
@@ -96,7 +90,7 @@ class Filter extends Component {
                 <div className="control has-icons-left">
                   <div className="select is-small">
                     <select name="state" onChange={(event) => select(event)}>
-                      <option>Todos</option>
+                      <option>{list.country || 'Todos'}</option>
                       {unify(list, 'state').map((item, index) => (
                         <option key={`${index}-${item}`}>{item}</option>
                       ))}

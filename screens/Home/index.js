@@ -78,6 +78,7 @@ export default class Home extends PureComponent {
             list={list}
             select={this.handleChange}
             reset={this.handleResetButton}
+            filteredList={filteredList}
           />
           <div className="columns">
             <div className="column">
