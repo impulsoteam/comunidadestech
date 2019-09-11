@@ -34,7 +34,16 @@ class Card extends Component {
                   <span className="tag is-primary">{content.size}</span>
                 </div>
               </div>
-              <span className="tag is-dark">{content.primaryStack}</span>
+              <div className="control">
+                <span className="tag is-dark">{content.category}</span>
+              </div>
+              <div className="tags">
+                {content.tags.map((tag, index) => (
+                  <span key={index} className="tag is-primary">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </a>

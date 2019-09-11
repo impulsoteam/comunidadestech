@@ -7,40 +7,79 @@ export default css`
       box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1),
         0 0 0 1px rgba(10, 10, 10, 0.1);
       border-radius: 4px;
-      padding: 0;
       display: flex;
+      padding: 0;
     }
     .filter-title {
-      padding: 0.75rem;
+      align-items: center;
       background-color: whitesmoke;
-    }
-    .filter-options {
       display: flex;
+      padding: 0.75rem;
+    }
+
+    .filter-label {
+      background-color: whitesmoke;
+      color: ${colors.boulder};
+      font-size: 0.65em;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .reset-title {
+      align-items: center;
+      background-color: ${colors.silverChalice};
+      border-bottom-right-radius: 4px;
+      border-top-right-radius: 4px;
+      display: flex;
+      padding: 0.75rem;
+    }
+
+    .reset-label {
+      color: ${colors.white};
+      font-size: 0.65em;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      max-width: 75px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .filter-options {
       align-items: stretch;
+      display: flex;
+      flex: 1;
 
       .filter-option-wrapper {
-        padding: 0 0.6rem;
+        align-items: stretch;
+        border-left: solid 2px rgba(10, 10, 10, 0.1);
         display: flex;
-
-        :not(:last-of-type) {
-          border-right: solid 2px rgba(10, 10, 10, 0.1);
-        }
+        flex-direction: column;
+        flex: 1;
+        text-align: center;
 
         .filter-option {
-          display: flex;
           align-items: center;
+          display: flex;
+          justify-content: center;
+          padding: 10px 10px;
 
           .control.has-icons-left .select select {
-            padding-left: 1.75em;
             max-width: 115px;
+            padding-left: 1.75em;
           }
 
           .button {
             margin-left: 5px;
           }
+
+          &.check {
+            flex-direction: column;
+            padding: 7px 10px;
+          }
         }
 
         .checkbox {
+          align-items: center;
           display: flex;
           font-size: 13px;
 
@@ -50,7 +89,11 @@ export default css`
         }
 
         .checkbox:not(:last-of-type) {
-          margin-right: 5px;
+          margin-bottom: 1px;
+        }
+
+        &.filter-by-name {
+          flex: 1.8;
         }
       }
 

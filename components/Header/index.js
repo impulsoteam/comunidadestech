@@ -16,7 +16,7 @@ class Header extends Component {
                 />
               </a>
             </div>
-            <div clasName="navbar-menu column">
+            <div className="navbar-menu column">
               <div className="navbar-end is-flex-touch">
                 <a
                   className="navbar-item is-flex-touch is-vcentered"

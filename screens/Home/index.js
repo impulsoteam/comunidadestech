@@ -5,7 +5,8 @@ import Hero from '/components/Hero/';
 import Menu from '/components/Menu/';
 import Filter from '../../components/Filter';
 
-const API_HOST = 'https://api.sheety.co/f29670ad-1584-4fc8-a946-db9474934c3a';
+// const API_HOST = 'https://www.mocky.io/v2/5d775b0f32000010d7297efe';
+const API_HOST = 'https://api.sheety.co/82fac3dc-c252-4363-adfd-d9adcf477963';
 
 export default class Home extends PureComponent {
   state = {
@@ -13,8 +14,7 @@ export default class Home extends PureComponent {
     loading: true,
     openModal: false,
     filteredList: [],
-    selectedStack: null,
-    stacks: [],
+    title: '',
   };
 
   normalize = (array) => {
@@ -22,15 +22,19 @@ export default class Home extends PureComponent {
       .filter((item) => item['status'] === 'PUBLICADO')
       .map((item, index) => ({
         id: `community-${index}`,
-        city: item['emQualCidadeDoBrasil'],
-        description: item['descrevaAComunidadeComUmaBreveFrase'],
-        isPresential: item['HáEncontrosPresenciais?'] === 'TRUE',
-        link: item['linkDaPrincipaláReaDeConteúDoDaComunidade'],
-        logo: item['linkDaMarcaDaComunidade'],
         name: item['nomeDaComunidade'],
-        primaryStack: item['principalTóPicoDaComunidade'],
-        size: item['quantidadeAproximadaDeMembros'],
-        state: item['emQualEstadoDoBrasil'],
+        city: item['cidade'],
+        state: item['estado'],
+        country: item['paíS'],
+        link: item['linkPrincipal'],
+        description: item['descriçãO'],
+        category: item['categoria'],
+        tags: item['tags'].split(','),
+        model: item['presencial,OnlineOuAmbos?'],
+        globalProgram: item['pertenceAAlgumProgramaGlobal?SeSim,Qual?'],
+        size: item['quantidadeDeMembros'],
+        logo: item['logoDaComunidade'],
+        networkID: item['seVocêéMembroDaImpulsoNetwork,InformeSeuId'],
       }));
   };
 
@@ -40,67 +44,44 @@ export default class Home extends PureComponent {
       .then((data) => {
         this.setState({ list: this.normalize(data) });
       });
-    const stacks = [];
-    for (const item of this.state.list) {
-      const index = stacks.findIndex(
-        (stack) => stack.name === item.primaryStack
-      );
-      index >= 0
-        ? (stacks[index] = {
-            name: stacks[index].name,
-            value: stacks[index].value + 1,
-          })
-        : stacks.push({
-            name: item.primaryStack,
-            value: 1,
-          });
-    }
 
     this.setState({
       loading: false,
       filteredList: this.state.list,
-      stacks,
     });
   }
-
-  handleStack = (stack) => {
-    this.setState({
-      selectedStack: stack,
-      filteredList:
-        stack === ''
-          ? this.state.list
-          : this.state.list.filter((item) => item.primaryStack === stack),
-    });
-  };
 
   handleModal = () => {
     this.setState({ openModal: !this.state.openModal });
   };
 
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    const filteredList = this.state.list.filter((item) => item[name] === value);
+    this.setState({ filteredList, title: `${name}: ${value}` });
+  };
+
+  handleResetButton = () => {
+    const filteredList = this.state.list;
+    this.setState({ filteredList });
+  };
+
   render() {
-    const { selectedStack, filteredList, stacks } = this.state;
+    const { filteredList, title, list } = this.state;
+
     return (
       <div>
         <Hero />
         <br />
         <div className="container">
           <Filter
-            list={stacks}
-            select={this.handleStack}
-            selected={selectedStack || 'Todas'}
-            selectedStack={selectedStack}
+            list={list}
+            select={this.handleChange}
+            reset={this.handleResetButton}
           />
           <div className="columns">
-            <div className="column is-one-quarter">
-              <Menu
-                list={stacks}
-                select={this.handleStack}
-                selected={selectedStack || 'Todas'}
-                selectedStack={selectedStack}
-              />
-            </div>
             <div className="column">
-              <h4 className="menu-label">{selectedStack || 'Todas'}</h4>
+              <h4 className="menu-label">{title || 'Todas'}</h4>
               <div className="columns is-multiline">
                 {filteredList.map((card) => (
                   <div className="column is-one-quarter" key={card.id}>
