@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import styles from './styles';
 
 class Filter extends Component {
+  unify = (array, object) => {
+    const item = [...new Set(array.map((x) => x[`${object}`]))].filter(
+      (x) => x
+    );
+    return item;
+  };
+
   render() {
     const { list, select, reset, filteredList } = this.props;
 
-    const unify = (array, object) => {
-      const item = [...new Set(array.map((x) => x[`${object}`]))].filter(
-        (x) => x
-      );
-      return item;
-    };
     return (
       <div className="columns filter">
         <div className="column filter-box">
@@ -25,7 +26,7 @@ class Filter extends Component {
                   <div className="select is-small">
                     <select name="category" onChange={(event) => select(event)}>
                       <option>Todas</option>
-                      {unify(list, 'category').map((item, index) => (
+                      {this.unify(list, 'category').map((item, index) => (
                         <option key={`${index}-${item}`}>{item}</option>
                       ))}
                     </select>
@@ -72,8 +73,8 @@ class Filter extends Component {
                 <div className="control has-icons-left">
                   <div className="select is-small">
                     <select name="country" onChange={(event) => select(event)}>
-                      <option>{list.country || 'Todos'}</option>
-                      {unify(list, 'country').map((item, index) => (
+                      <option>Todos</option>
+                      {this.unify(list, 'country').map((item, index) => (
                         <option key={`${index}-${item}`}>{item}</option>
                       ))}
                     </select>
@@ -90,8 +91,8 @@ class Filter extends Component {
                 <div className="control has-icons-left">
                   <div className="select is-small">
                     <select name="state" onChange={(event) => select(event)}>
-                      <option>{list.country || 'Todos'}</option>
-                      {unify(list, 'state').map((item, index) => (
+                      <option>Todos</option>
+                      {this.unify(list, 'state').map((item, index) => (
                         <option key={`${index}-${item}`}>{item}</option>
                       ))}
                     </select>
@@ -109,7 +110,7 @@ class Filter extends Component {
                   <div className="select is-small">
                     <select name="city" onChange={(event) => select(event)}>
                       <option>Todas</option>
-                      {unify(list, 'city').map((item, index) => (
+                      {this.unify(list, 'city').map((item, index) => (
                         <option key={`${index}-${item}`}>{item}</option>
                       ))}
                     </select>
