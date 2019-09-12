@@ -23,12 +23,11 @@ export default class Home extends PureComponent {
       .map((item, index) => ({
         id: `community-${index}`,
         name: item['nomeDaComunidade'],
-        location: {
-          model: item['presencial,OnlineOuAmbos?'],
-          country: item['paíS'],
-          state: item['estado'],
-          city: item['cidade'],
-        },
+
+        country: item['paíS'],
+        state: item['estado'],
+        city: item['cidade'],
+        model: item['presencial,OnlineOuAmbos?'],
         link: item['linkPrincipal'],
         description: item['descriçãO'],
         category: item['categoria'],
@@ -59,7 +58,12 @@ export default class Home extends PureComponent {
 
   handleChange = (event) => {
     const { name, value } = event.target;
-    const filteredList = this.state.list.filter((item) => item[name] === value);
+
+    console.log('meu valor', value);
+    let filteredList =
+      value === 'Todos' || value === 'Todas'
+        ? (filteredList = this.state.list)
+        : this.state.list.filter((item) => item[name] === value);
     this.setState({ filteredList, title: `${name}: ${value}` });
   };
 
@@ -70,6 +74,43 @@ export default class Home extends PureComponent {
 
   render() {
     const { filteredList, title, list } = this.state;
+    let location = {
+      Brasil: {
+        Acre: [],
+        Alagoas: [],
+        Amapá: [],
+        Amazonas: [],
+        Bahia: [],
+        Ceará: [],
+        'Distrito Federal': [],
+        'Espírito Santo': [],
+        Goiás: [],
+        Maranhão: [],
+        'Mato Grosso': [],
+        'Mato Grosso do Sul': [],
+        'Minas Gerais': [],
+        Pará: [],
+        Paraíba: [],
+        Paraná: [],
+        Pernambuco: [],
+        Piauí: [],
+        'Rio de Janeiro': [],
+        'Rio Grande do Norte': [],
+        'Rio Grande do Sul': [],
+        Rondônia: [],
+        Roraima: [],
+        'Santa Catarina': [],
+        'São Paulo': [],
+        Sergipe: [],
+        Tocantins: [],
+      },
+    };
+
+    const includeCities = list.forEach((item) => {
+      if (item.state) {
+        location['Brasil'][`${item.state}`].push(`${item.city}`);
+      }
+    });
 
     return (
       <div>
@@ -81,6 +122,7 @@ export default class Home extends PureComponent {
             select={this.handleChange}
             reset={this.handleResetButton}
             filteredList={filteredList}
+            location={location}
           />
           <div className="columns">
             <div className="column">

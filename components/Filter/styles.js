@@ -100,10 +100,6 @@ export default css`
       .select:not(.is-multiple):not(.is-loading)::after {
         border-color: ${colors.primary};
       }
-
-      select option:first-child {
-        display: none;
-      }
     }
 
     @media screen and (max-width: 1215px) {

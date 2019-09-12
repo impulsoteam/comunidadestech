@@ -10,8 +10,9 @@ class Filter extends Component {
   };
 
   render() {
-    const { list, select, reset, filteredList } = this.props;
+    const { list, select, reset, filteredList, location } = this.props;
 
+    console.log('location no filter', location);
     return (
       <div className="columns filter">
         <div className="column filter-box">
@@ -92,7 +93,7 @@ class Filter extends Component {
                   <div className="select is-small">
                     <select name="state" onChange={(event) => select(event)}>
                       <option>Todos</option>
-                      {this.unify(list, 'state').map((item, index) => (
+                      {Object.keys(location['Brasil']).map((item, index) => (
                         <option key={`${index}-${item}`}>{item}</option>
                       ))}
                     </select>
