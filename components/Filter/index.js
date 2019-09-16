@@ -14,7 +14,6 @@ class Filter extends Component {
       list,
       select,
       reset,
-      filteredList,
       location,
       state,
       tags,

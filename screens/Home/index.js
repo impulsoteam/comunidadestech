@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import styles from './styles';
 import Card from '/components/Card/';
 import Hero from '/components/Hero/';
-import Menu from '/components/Menu/';
 import Filter from '../../components/Filter';
 
 const API_HOST = 'https://www.mocky.io/v2/5d7a6029320000a9fc34ef49';
@@ -27,7 +26,6 @@ export default class Home extends PureComponent {
       .map((item, index) => ({
         id: `community-${index}`,
         name: item['nomeDaComunidade'],
-
         country: item['paíS'],
         state: item['estado'],
         city: item['cidade'],
@@ -131,6 +129,39 @@ export default class Home extends PureComponent {
     this.setState({ filteredList });
   };
 
+  location = (list) => {
+    let location = { Brasil: {} };
+
+    list.forEach((item) => {
+      if (item.country) {
+        location[item.country] = {};
+      }
+    });
+
+    list.forEach((item) => {
+      if (item.state) {
+        location[item.country][item.state] = [];
+      }
+    });
+
+    list.forEach((item) => {
+      if (item.state) {
+        location[item.country][item.state].push(`${item.city}`);
+      }
+    });
+
+    return location;
+  };
+
+  tags = (list) => {
+    let tags = [];
+    list.forEach((comunity) => {
+      tags = Array.from(new Set(tags.concat(comunity.tags)));
+    });
+
+    return tags;
+  };
+
   render() {
     const {
       filteredList,
@@ -140,29 +171,6 @@ export default class Home extends PureComponent {
       selectedCountry,
       selectedModel,
     } = this.state;
-
-    let location = { Brasil: {} };
-    let tags = [];
-
-    const includeCountry = list.forEach((item) => {
-      if (item.country) {
-        location[`${item.country}`] = {};
-      }
-    });
-    const includeStates = list.forEach((item) => {
-      if (item.state) {
-        location[`${item.country}`][`${item.state}`] = [];
-      }
-    });
-    const includeCities = list.forEach((item) => {
-      if (item.state) {
-        location[`${item.country}`][`${item.state}`].push(`${item.city}`);
-      }
-    });
-
-    const joinTags = list.forEach((comunity) => {
-      tags = Array.from(new Set(tags.concat(comunity.tags)));
-    });
 
     return (
       <div>
@@ -175,9 +183,8 @@ export default class Home extends PureComponent {
             reset={this.handleResetButton}
             formOk={this.handleForm}
             inputOk={this.handleInput}
-            filteredList={filteredList}
-            tags={tags}
-            location={location}
+            tags={this.tags(list)}
+            location={this.location(list)}
             model={selectedModel}
             country={selectedCountry}
             state={selectedState}
