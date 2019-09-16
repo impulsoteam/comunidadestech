@@ -44,6 +44,10 @@ export default css`
       text-transform: uppercase;
     }
 
+    form {
+      display: flex;
+    }
+
     .filter-options {
       align-items: stretch;
       display: flex;

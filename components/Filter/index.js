@@ -10,9 +10,20 @@ class Filter extends Component {
   };
 
   render() {
-    const { list, select, reset, filteredList, location } = this.props;
+    const {
+      list,
+      select,
+      reset,
+      filteredList,
+      location,
+      state,
+      tags,
+      country,
+      model,
+      formOk,
+      inputOk,
+    } = this.props;
 
-    console.log('location no filter', location);
     return (
       <div className="columns filter">
         <div className="column filter-box">
@@ -43,10 +54,11 @@ class Filter extends Component {
               <div className="filter-option">
                 <div className="control has-icons-left">
                   <div className="select is-small">
-                    <select>
+                    <select name="tags" onChange={(event) => select(event)}>
                       <option>Todas</option>
-                      <option>Tag 1</option>
-                      <option>Tag 2</option>
+                      {tags.sort().map((item, index) => (
+                        <option key={`${index}-${item}`}>{item}</option>
+                      ))}
                     </select>
                   </div>
                   <span className="icon is-small is-left">
@@ -57,15 +69,19 @@ class Filter extends Component {
             </div>
             <div className="filter-option-wrapper">
               <div className="filter-label">Modelo</div>
-              <div className="filter-option check">
-                <label className="checkbox">
-                  <input type="checkbox" />
-                  Presencial
-                </label>
-                <label className="checkbox">
-                  <input type="checkbox" />
-                  Remoto
-                </label>
+              <div className="filter-option">
+                <div className="control has-icons-left">
+                  <div className="select is-small">
+                    <select name="model" onChange={(event) => select(event)}>
+                      {this.unify(list, 'model').map((item, index) => (
+                        <option key={`${index}-${item}`}>{item}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <span className="icon is-small is-left">
+                    <i className="fas fa-tag"></i>
+                  </span>
+                </div>
               </div>
             </div>
             <div className="filter-option-wrapper">
@@ -73,12 +89,22 @@ class Filter extends Component {
               <div className="filter-option">
                 <div className="control has-icons-left">
                   <div className="select is-small">
-                    <select name="country" onChange={(event) => select(event)}>
-                      <option>Todos</option>
-                      {this.unify(list, 'country').map((item, index) => (
-                        <option key={`${index}-${item}`}>{item}</option>
-                      ))}
-                    </select>
+                    {(model === 'Online' && (
+                      <select disabled title="Selecione um modelo diferente">
+                        <option>Todos</option>
+                      </select>
+                    )) || (
+                      <select
+                        name="country"
+                        onChange={(event) => select(event)}
+                      >
+                        <option>Todos</option>
+                        {(model !== 'Online' &&
+                          Object.keys(location).map((item, index) => (
+                            <option key={`${index}-${item}`}>{item}</option>
+                          ))) || <option>Selecione um modelo diferente</option>}
+                      </select>
+                    )}
                   </div>
                   <span className="icon is-small is-left">
                     <i className="fas fa-globe"></i>
@@ -91,12 +117,21 @@ class Filter extends Component {
               <div className="filter-option">
                 <div className="control has-icons-left">
                   <div className="select is-small">
-                    <select name="state" onChange={(event) => select(event)}>
-                      <option>Todos</option>
-                      {Object.keys(location['Brasil']).map((item, index) => (
-                        <option key={`${index}-${item}`}>{item}</option>
-                      ))}
-                    </select>
+                    {(!location[`${country}`] && (
+                      <select disabled title="Selecione um país">
+                        <option>Todos</option>
+                      </select>
+                    )) || (
+                      <select name="state" onChange={(event) => select(event)}>
+                        <option>Todos</option>
+                        {(location[`${country}`] &&
+                          Object.keys(location[`${country}`]).map(
+                            (item, index) => (
+                              <option key={`${index}-${item}`}>{item}</option>
+                            )
+                          )) || <option>Selecione um país</option>}
+                      </select>
+                    )}
                   </div>
                   <span className="icon is-small is-left">
                     <i className="fas fa-map"></i>
@@ -109,12 +144,19 @@ class Filter extends Component {
               <div className="filter-option">
                 <div className="control has-icons-left">
                   <div className="select is-small">
-                    <select name="city" onChange={(event) => select(event)}>
-                      <option>Todas</option>
-                      {this.unify(list, 'city').map((item, index) => (
-                        <option key={`${index}-${item}`}>{item}</option>
-                      ))}
-                    </select>
+                    {(!location['Brasil'][`${state}`] && (
+                      <select disabled title="Selecione um estado">
+                        <option>Todos</option>
+                      </select>
+                    )) || (
+                      <select name="city" onChange={(event) => select(event)}>
+                        <option>Todos</option>
+                        {(location['Brasil'][`${state}`] &&
+                          location['Brasil'][`${state}`].map((item, index) => (
+                            <option key={`${index}-${item}`}>{item}</option>
+                          ))) || <option>Selecione um estado</option>}
+                      </select>
+                    )}
                   </div>
                   <span className="icon is-small is-left">
                     <i className="fas fa-map-marker-alt"></i>
@@ -125,17 +167,22 @@ class Filter extends Component {
             <div className="filter-option-wrapper filter-by-name">
               <div className="filter-label">Nome</div>
               <div className="filter-option">
-                <div className="control has-icons-left">
-                  <input
-                    className="input is-small"
-                    type="text"
-                    placeholder="Nome da comunidade"
-                  />
-                  <span className="icon is-small is-left">
-                    <i className="fas fa-check-circle"></i>
-                  </span>
-                </div>
-                <a className="button is-light is-small">OK</a>
+                <form onSubmit={formOk}>
+                  <div className="control has-icons-left">
+                    <input
+                      onChange={inputOk}
+                      className="input is-small"
+                      type="text"
+                      placeholder="Nome da comunidade"
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-check-circle"></i>
+                    </span>
+                  </div>
+                  <button className="button is-light is-small" type="submit">
+                    OK
+                  </button>
+                </form>
               </div>
             </div>
           </div>
