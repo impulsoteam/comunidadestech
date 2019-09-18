@@ -13,7 +13,6 @@ export default class Home extends PureComponent {
     loading: true,
     openModal: false,
     filteredList: [],
-    title: '',
     selectedState: '',
     selectedCountry: '',
     selectedModel: 'Ambos',
@@ -110,10 +109,7 @@ export default class Home extends PureComponent {
       name === 'state' && this.setState({ selectedState: value });
     }
 
-    this.setState({
-      filteredList,
-      title: `${name}: ${value}`,
-    });
+    this.setState({ filteredList });
   };
 
   handleForm = (event) => {
@@ -182,7 +178,6 @@ export default class Home extends PureComponent {
   render() {
     const {
       filteredList,
-      title,
       list,
       selectedState,
       selectedCountry,
@@ -214,8 +209,7 @@ export default class Home extends PureComponent {
           />
           <div className="columns">
             <div className="column">
-              <h4 className="menu-label">{title || 'Todas'}</h4>
-              <div className="columns is-multiline">
+              <div className="columns is-multiline card-wrapper">
                 {filteredList.map((card) => (
                   <div className="column is-one-quarter" key={card.id}>
                     <Card content={card} />

@@ -5,4 +5,8 @@ export default css`
   .menu-label {
     color: ${colors.dark};
   }
+
+  .card-wrapper {
+    margin-top: 20px;
+  }
 `;
