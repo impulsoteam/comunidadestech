@@ -4,8 +4,8 @@ import Card from '/components/Card/';
 import Hero from '/components/Hero/';
 import Filter from '../../components/Filter';
 
-const API_HOST = 'https://www.mocky.io/v2/5d7a6029320000a9fc34ef49';
-// const API_HOST = 'https://api.sheety.co/82fac3dc-c252-4363-adfd-d9adcf477963';
+//const API_HOST = 'https://www.mocky.io/v2/5d7a6029320000a9fc34ef49';
+const API_HOST = 'https://api.sheety.co/82fac3dc-c252-4363-adfd-d9adcf477963';
 
 export default class Home extends PureComponent {
   state = {
