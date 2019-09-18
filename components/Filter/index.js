@@ -21,6 +21,9 @@ class Filter extends Component {
       model,
       formOk,
       inputOk,
+      selectionFemale,
+      selectionMale,
+      inputValue,
     } = this.props;
 
     return (
@@ -35,10 +38,16 @@ class Filter extends Component {
               <div className="filter-option">
                 <div className="control has-icons-left">
                   <div className="select is-small">
-                    <select name="category" onChange={(event) => select(event)}>
-                      <option>Todas</option>
+                    <select
+                      value={selectionFemale}
+                      name="category"
+                      onChange={(event) => select(event)}
+                    >
+                      <option value="Todas">Todas</option>
                       {this.unify(list, 'category').map((item, index) => (
-                        <option key={`${index}-${item}`}>{item}</option>
+                        <option value={item} key={`${index}-${item}`}>
+                          {item}
+                        </option>
                       ))}
                     </select>
                   </div>
@@ -53,10 +62,16 @@ class Filter extends Component {
               <div className="filter-option">
                 <div className="control has-icons-left">
                   <div className="select is-small">
-                    <select name="tags" onChange={(event) => select(event)}>
+                    <select
+                      value={selectionFemale}
+                      name="tags"
+                      onChange={(event) => select(event)}
+                    >
                       <option>Todas</option>
                       {tags.sort().map((item, index) => (
-                        <option key={`${index}-${item}`}>{item}</option>
+                        <option value={item} key={`${index}-${item}`}>
+                          {item}
+                        </option>
                       ))}
                     </select>
                   </div>
@@ -71,9 +86,15 @@ class Filter extends Component {
               <div className="filter-option">
                 <div className="control has-icons-left">
                   <div className="select is-small">
-                    <select name="model" onChange={(event) => select(event)}>
+                    <select
+                      value={model}
+                      name="model"
+                      onChange={(event) => select(event)}
+                    >
                       {this.unify(list, 'model').map((item, index) => (
-                        <option key={`${index}-${item}`}>{item}</option>
+                        <option value={item} key={`${index}-${item}`}>
+                          {item}
+                        </option>
                       ))}
                     </select>
                   </div>
@@ -94,13 +115,16 @@ class Filter extends Component {
                       </select>
                     )) || (
                       <select
+                        value={selectionMale}
                         name="country"
                         onChange={(event) => select(event)}
                       >
                         <option>Todos</option>
                         {(model !== 'Online' &&
                           Object.keys(location).map((item, index) => (
-                            <option key={`${index}-${item}`}>{item}</option>
+                            <option value={item} key={`${index}-${item}`}>
+                              {item}
+                            </option>
                           ))) || <option>Selecione um modelo diferente</option>}
                       </select>
                     )}
@@ -173,6 +197,7 @@ class Filter extends Component {
                       className="input is-small"
                       type="text"
                       placeholder="Nome da comunidade"
+                      value={inputValue}
                     />
                     <span className="icon is-small is-left">
                       <i className="fas fa-check-circle"></i>

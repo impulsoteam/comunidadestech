@@ -18,6 +18,8 @@ export default class Home extends PureComponent {
     selectedCountry: '',
     selectedModel: 'Ambos',
     inputValue: '',
+    selectionFemale: 'Todas',
+    selectionMale: 'Todos',
   };
 
   normalize = (array) => {
@@ -64,47 +66,54 @@ export default class Home extends PureComponent {
 
   handleChange = (event) => {
     const { name, value } = event.target;
-
-    let selectedModel = '';
     let selectedCountry = '';
     let selectedState = '';
-    let filteredList =
-      value === 'Todos' || value === 'Todas'
+    let filteredList = [];
+
+    if (name === 'category') {
+      value === 'Todas'
         ? (filteredList = this.state.list)
-        : this.state.list.filter((item) => item[name] === value);
+        : (filteredList = this.state.list.filter((item) =>
+            item[name].includes(`${value}`)
+          ));
+      this.setState({ selectionFemale: value });
+    }
 
     if (name === 'tags') {
-      filteredList = this.state.list.filter((item) => {
-        return item[name].includes(`${value}`);
-      });
+      value === 'Todas'
+        ? (filteredList = this.state.list)
+        : (filteredList = this.state.list.filter((item) =>
+            item[name].includes(`${value}`)
+          ));
+      this.setState({ selectionFemale: value });
     }
 
-    if ((name === 'model') & (value === 'Ambos')) {
-      selectedModel = value;
-      filteredList = this.state.list.filter((item) => {
-        return (
-          item[name] === 'Ambos' ||
-          item[name] === 'Presencial' ||
-          item[name] === 'Online'
-        );
-      });
-      this.setState({ selectedModel });
-    } else {
-      selectedModel = value;
-      this.setState({ selectedModel });
+    if (name === 'model') {
+      value === 'Ambos'
+        ? (filteredList = this.state.list.filter((item) => {
+            return (
+              item[name] === 'Ambos' ||
+              item[name] === 'Presencial' ||
+              item[name] === 'Online'
+            );
+          }))
+        : (filteredList = this.state.list.filter((item) =>
+            item[name].includes(`${value}`)
+          ));
+      this.setState({ selectedModel: value });
     }
 
-    if (name === 'state') {
-      selectedState = value;
-      this.setState({ selectedState });
+    if (name === 'country' || name === 'state' || name === 'city') {
+      filteredList = this.state.list.filter((item) => item[name] === value);
+      name === 'country' &&
+        this.setState({ selectedCountry: value, selectionMale: value });
+      name === 'state' && this.setState({ selectedState: value });
     }
 
-    if (name === 'country') {
-      selectedCountry = value;
-      this.setState({ selectedCountry });
-    }
-
-    this.setState({ filteredList, title: `${name}: ${value}` });
+    this.setState({
+      filteredList,
+      title: `${name}: ${value}`,
+    });
   };
 
   handleForm = (event) => {
@@ -126,7 +135,15 @@ export default class Home extends PureComponent {
 
   handleResetButton = () => {
     const filteredList = this.state.list;
-    this.setState({ filteredList });
+    this.setState({
+      filteredList,
+      selectionFemale: 'Todas',
+      selectedModel: 'Ambos',
+      selectedState: '',
+      selectedCountry: '',
+      selectionMale: 'Todos',
+      inputValue: '',
+    });
   };
 
   location = (list) => {
@@ -170,6 +187,9 @@ export default class Home extends PureComponent {
       selectedState,
       selectedCountry,
       selectedModel,
+      selectionFemale,
+      selectionMale,
+      inputValue,
     } = this.state;
 
     return (
@@ -188,6 +208,9 @@ export default class Home extends PureComponent {
             model={selectedModel}
             country={selectedCountry}
             state={selectedState}
+            selectionFemale={selectionFemale}
+            selectionMale={selectionMale}
+            inputValue={inputValue}
           />
           <div className="columns">
             <div className="column">
