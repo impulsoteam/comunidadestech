@@ -6,9 +6,20 @@ You could include it into the page using either next/head or a custom _document.
 import Document, { Head, Main, NextScript } from 'next/document';
 
 export default class MyDocument extends Document {
+  setGoogleTags() {
+    return {
+      __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-143000900-1');
+      `,
+    };
+  }
+
   render() {
     return (
-      <html>
+      <html lang="pt-br">
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content="#8c43ff" />
@@ -91,13 +102,20 @@ export default class MyDocument extends Document {
             sizes="16x16"
             href="/static/favicon/favicon-16x16.png?v1"
           />
-          <link rel="manifest" href="/static/favicon/manifest.json" />
           <meta name="msapplication-TileColor" content="#ffffff" />
           <meta
             name="msapplication-TileImage"
             content="/ms-icon-144x144.png?v1"
           />
           <meta name="theme-color" content="#ffffff" />
+          <link rel="manifest" href="/static/manifest.json" />
+          <script src="/static/sw-register.js"></script>
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-143000900-1"
+          ></script>
+          <script dangerouslySetInnerHTML={this.setGoogleTags()} />
+          <script src="https://kit.fontawesome.com/e258bd240c.js"></script>
         </Head>
         <body>
           <Main />

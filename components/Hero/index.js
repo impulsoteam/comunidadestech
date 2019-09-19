@@ -20,11 +20,6 @@ class Hero extends Component {
             </div>
           </div>
         </div>
-        <div className="hero-foot has-text-centered">
-          <div className="container">
-            <img className="is-bottom" src="/static/hero.svg" />
-          </div>
-        </div>
         <style jsx>{styles}</style>
       </div>
     );

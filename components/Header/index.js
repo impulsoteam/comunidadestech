@@ -6,7 +6,7 @@ class Header extends Component {
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="container">
-          <div className="container columns is-vcentered">
+          <div className="container columns is-vcentered is-flex-mobile">
             <div className="navbar-brand column">
               <a className="navbar-item" href="/">
                 <img
@@ -16,12 +16,13 @@ class Header extends Component {
                 />
               </a>
             </div>
-            <div clasName="navbar-menu column">
-              <div className="navbar-end">
+            <div className="navbar-menu column">
+              <div className="navbar-end is-flex-touch">
                 <a
-                  className="navbar-item"
+                  className="navbar-item is-flex-touch is-vcentered"
                   href="https://github.com/universoimpulso/comunidadestech"
                   target="_blank"
+                  rel="noopener"
                 >
                   <img
                     src="/static/github.png"
@@ -36,9 +37,15 @@ class Header extends Component {
                         className="button is-primary"
                         href="https://impulsowork.typeform.com/to/Ke2sdP"
                         target="_blank"
-                        title="Cadastrar nova comunidade"
+                        rel="noopener"
+                        title="Cadastre uma comunidade"
                       >
-                        <strong>Cadastrar</strong>
+                        <strong className="is-hidden-mobile">
+                          Cadastre uma comunidade
+                        </strong>
+                        <strong className="is-hidden-tablet is-hidden-desktop">
+                          Cadastre
+                        </strong>
                       </a>
                     </p>
                   </div>

@@ -2,7 +2,11 @@ import React, { PureComponent } from 'react';
 import styles from './styles';
 import Card from '/components/Card/';
 import Hero from '/components/Hero/';
-import Menu from '/components/Menu/';
+import Filter from '../../components/Filter';
+import { throws } from 'assert';
+
+//const API_HOST = 'https://www.mocky.io/v2/5d7a6029320000a9fc34ef49';
+const API_HOST = 'https://api.sheety.co/82fac3dc-c252-4363-adfd-d9adcf477963';
 
 export default class Home extends PureComponent {
   state = {
@@ -10,8 +14,12 @@ export default class Home extends PureComponent {
     loading: true,
     openModal: false,
     filteredList: [],
-    selectedStack: null,
-    stacks: [],
+    selectedState: '',
+    selectedCountry: '',
+    selectedModel: 'Ambos',
+    inputValue: '',
+    selectionFemale: 'Todas',
+    selectionMale: 'Todos',
   };
 
   normalize = (array) => {
@@ -19,82 +27,209 @@ export default class Home extends PureComponent {
       .filter((item) => item['status'] === 'PUBLICADO')
       .map((item, index) => ({
         id: `community-${index}`,
-        city: item['EmQualCidadeDoBrasil'],
-        description: item['descrevaAComunidadeComUmaBreveFrase'],
-        isPresential: item['HáEncontrosPresenciais?'] === 'TRUE',
-        link: item['linkDaPrincipaláReaDeConteúDoDaComunidade'],
-        logo: item['linkDaMarcaDaComunidade'],
         name: item['nomeDaComunidade'],
-        primaryStack: item['principalTóPicoDaComunidade'],
-        size: item['quantidadeAproximadaDeMembros'],
-        state: item['emQualEstadoDoBrasil'],
+        country: item['paíS'],
+        state: item['estado'],
+        city: item['cidade'],
+        model: item['presencial,OnlineOuAmbos?'],
+        link: item['linkPrincipal'],
+        description: item['descriçãO'],
+        category: item['categoria'],
+        tags: item['tags'].toLowerCase().split(', '),
+        globalProgram: item['pertenceAAlgumProgramaGlobal?SeSim,Qual?'],
+        size: item['quantidadeDeMembros'],
+        logo: item['logoDaComunidade'],
+        networkID: item['seVocêéMembroDaImpulsoNetwork,InformeSeuId'],
       }));
   };
 
   async componentDidMount() {
-    await fetch('https://api.sheety.co/7e9e78e3-6e36-47da-b0c8-3c39943cef1b')
+    await fetch(API_HOST)
       .then((response) => response.json())
       .then((data) => {
         this.setState({ list: this.normalize(data) });
       });
-    const stacks = [];
-    for (const item of this.state.list) {
-      const index = stacks.findIndex(
-        (stack) => stack.name === item.primaryStack
-      );
-      index >= 0
-        ? (stacks[index] = {
-            name: stacks[index].name,
-            value: stacks[index].value + 1,
-          })
-        : stacks.push({
-            name: item.primaryStack,
-            value: 1,
-          });
-    }
 
     this.setState({
       loading: false,
       filteredList: this.state.list,
-      stacks,
+      selectedState: '',
+      selectedCountry: '',
+      selectedModel: 'Ambos',
+      inputValue: '',
     });
   }
-
-  handleStack = (stack) => {
-    this.setState({
-      selectedStack: stack,
-      filteredList:
-        stack === ''
-          ? this.state.list
-          : this.state.list.filter((item) => item.primaryStack === stack),
-    });
-  };
 
   handleModal = () => {
     this.setState({ openModal: !this.state.openModal });
   };
 
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    let selectedCountry = '';
+    let selectedState = '';
+    let filteredList = [];
+
+    if (name === 'category') {
+      value === 'Todas'
+        ? (filteredList = this.state.list)
+        : (filteredList = this.state.list.filter((item) =>
+            item[name].includes(`${value}`)
+          ));
+      this.setState({ selectionFemale: value });
+    }
+
+    if (name === 'tags') {
+      value === 'Todas'
+        ? (filteredList = this.state.list)
+        : (filteredList = this.state.list.filter((item) =>
+            item[name].includes(`${value}`)
+          ));
+      this.setState({ selectionFemale: value });
+    }
+
+    if (name === 'model') {
+      value === 'Ambos'
+        ? (filteredList = this.state.list.filter((item) => {
+            return (
+              item[name] === 'Ambos' ||
+              item[name] === 'Presencial' ||
+              item[name] === 'Online'
+            );
+          }))
+        : (filteredList = this.state.list.filter((item) =>
+            item[name].includes(`${value}`)
+          ));
+      this.setState({ selectedModel: value, selectionFemale: 'Todas' });
+    }
+
+    if (name === 'country' || name === 'state' || name === 'city') {
+      filteredList = this.state.list.filter((item) => item[name] === value);
+      name === 'country' &&
+        this.setState({
+          selectedCountry: value,
+          selectionMale: value,
+          selectionFemale: 'Todas',
+        });
+      name === 'state' && this.setState({ selectedState: value });
+    }
+
+    this.setState({ filteredList });
+  };
+
+  handleForm = (event) => {
+    event.preventDefault();
+    let filteredList = this.state.list.filter((item) => {
+      return item['name'].includes(this.state.inputValue);
+    });
+    this.setState({
+      filteredList,
+    });
+  };
+
+  handleInput = (event) => {
+    const { value } = event.target;
+    let inputValue = '';
+    inputValue = value;
+    this.setState({ inputValue });
+  };
+
+  handleInputFocus = () => {
+    this.setState({
+      filteredList: this.state.list,
+      selectionFemale: 'Todas',
+      selectedModel: 'Ambos',
+      selectedState: '',
+      selectedCountry: '',
+      selectionMale: 'Todos',
+      inputValue: '',
+    });
+  };
+
+  handleResetButton = () => {
+    this.setState({
+      filteredList: this.state.list,
+      selectionFemale: 'Todas',
+      selectedModel: 'Ambos',
+      selectedState: '',
+      selectedCountry: '',
+      selectionMale: 'Todos',
+      inputValue: '',
+    });
+  };
+
+  location = (list) => {
+    let location = { Brasil: {} };
+
+    list.forEach((item) => {
+      if (item.country) {
+        location[item.country] = {};
+      }
+    });
+
+    list.forEach((item) => {
+      if (item.state) {
+        location[item.country][item.state] = [];
+      }
+    });
+
+    list.forEach((item) => {
+      if (item.state) {
+        location[item.country][item.state].push(`${item.city}`);
+      }
+    });
+
+    return location;
+  };
+
+  tags = (list) => {
+    let tags = [];
+    list.forEach((comunity) => {
+      tags = Array.from(new Set(tags.concat(comunity.tags)));
+    });
+
+    return tags;
+  };
+
   render() {
-    const { selectedStack, filteredList, stacks } = this.state;
+    const {
+      filteredList,
+      list,
+      selectedState,
+      selectedCountry,
+      selectedModel,
+      selectionFemale,
+      selectionMale,
+      inputValue,
+    } = this.state;
+
     return (
       <div>
         <Hero />
         <br />
         <div className="container">
+          <Filter
+            list={list}
+            select={this.handleChange}
+            reset={this.handleResetButton}
+            formOk={this.handleForm}
+            inputOk={this.handleInput}
+            tags={this.tags(list)}
+            location={this.location(list)}
+            model={selectedModel}
+            country={selectedCountry}
+            state={selectedState}
+            selectionFemale={selectionFemale}
+            selectionMale={selectionMale}
+            inputValue={inputValue}
+            focus={this.handleInputFocus}
+          />
           <div className="columns">
-            <div className="column is-one-quarter">
-              <Menu
-                list={stacks}
-                select={this.handleStack}
-                selected={selectedStack || 'Todas'}
-              />
-            </div>
             <div className="column">
-              <h4 className="menu-label">{selectedStack}</h4>
-              <div className="columns is-multiline">
+              <div className="columns is-multiline card-wrapper">
                 {filteredList.map((card) => (
-                  <div className="column is-one-quarter">
-                    <Card />
+                  <div className="column is-one-quarter" key={card.id}>
+                    <Card content={card} />
                   </div>
                 ))}
               </div>
