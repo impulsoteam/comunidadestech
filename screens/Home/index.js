@@ -3,6 +3,7 @@ import styles from './styles';
 import Card from '/components/Card/';
 import Hero from '/components/Hero/';
 import Filter from '../../components/Filter';
+import { throws } from 'assert';
 
 //const API_HOST = 'https://www.mocky.io/v2/5d7a6029320000a9fc34ef49';
 const API_HOST = 'https://api.sheety.co/82fac3dc-c252-4363-adfd-d9adcf477963';
@@ -99,13 +100,17 @@ export default class Home extends PureComponent {
         : (filteredList = this.state.list.filter((item) =>
             item[name].includes(`${value}`)
           ));
-      this.setState({ selectedModel: value });
+      this.setState({ selectedModel: value, selectionFemale: 'Todas' });
     }
 
     if (name === 'country' || name === 'state' || name === 'city') {
       filteredList = this.state.list.filter((item) => item[name] === value);
       name === 'country' &&
-        this.setState({ selectedCountry: value, selectionMale: value });
+        this.setState({
+          selectedCountry: value,
+          selectionMale: value,
+          selectionFemale: 'Todas',
+        });
       name === 'state' && this.setState({ selectedState: value });
     }
 
@@ -129,10 +134,21 @@ export default class Home extends PureComponent {
     this.setState({ inputValue });
   };
 
-  handleResetButton = () => {
-    const filteredList = this.state.list;
+  handleInputFocus = () => {
     this.setState({
-      filteredList,
+      filteredList: this.state.list,
+      selectionFemale: 'Todas',
+      selectedModel: 'Ambos',
+      selectedState: '',
+      selectedCountry: '',
+      selectionMale: 'Todos',
+      inputValue: '',
+    });
+  };
+
+  handleResetButton = () => {
+    this.setState({
+      filteredList: this.state.list,
       selectionFemale: 'Todas',
       selectedModel: 'Ambos',
       selectedState: '',
@@ -206,6 +222,7 @@ export default class Home extends PureComponent {
             selectionFemale={selectionFemale}
             selectionMale={selectionMale}
             inputValue={inputValue}
+            focus={this.handleInputFocus}
           />
           <div className="columns">
             <div className="column">

@@ -24,6 +24,7 @@ class Filter extends Component {
       selectionFemale,
       selectionMale,
       inputValue,
+      focus,
     } = this.props;
 
     return (
@@ -194,6 +195,7 @@ class Filter extends Component {
                   <div className="control has-icons-left">
                     <input
                       onChange={inputOk}
+                      onFocus={focus}
                       className="input is-small"
                       type="text"
                       placeholder="Nome da comunidade"
