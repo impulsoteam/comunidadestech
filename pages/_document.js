@@ -115,6 +115,7 @@ export default class MyDocument extends Document {
             src="https://www.googletagmanager.com/gtag/js?id=UA-143000900-1"
           ></script>
           <script dangerouslySetInnerHTML={this.setGoogleTags()} />
+          <script src="https://kit.fontawesome.com/e258bd240c.js"></script>
         </Head>
         <body>
           <Main />
