@@ -5,7 +5,7 @@
   "background_color": "#FFFFFF",
   "display": "standalone",
   "scope": "/",
-  "start_url": "",
+  "start_url": "/",
   "icons": [
     {
       "src": "/static/favicon/android-icon-36x36.png",
