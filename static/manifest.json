@@ -4,8 +4,8 @@
   "theme_color": "#8C43FF",
   "background_color": "#FFFFFF",
   "display": "standalone",
-  "Scope": "/",
-  "start_url": "",
+  "scope": "/",
+  "start_url": "/",
   "icons": [
     {
       "src": "/static/favicon/android-icon-36x36.png",
@@ -35,6 +35,11 @@
     {
       "src": "/static/favicon/android-icon-192x192.png",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/favicon/android-icon-512x512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
