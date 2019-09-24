@@ -3,6 +3,7 @@ import styles from './styles';
 import Card from '/components/Card/';
 import Hero from '/components/Hero/';
 import Filter from '../../components/Filter';
+import Counter from '../../components/Counter';
 import { throws } from 'assert';
 
 //const API_HOST = 'https://www.mocky.io/v2/5d7a6029320000a9fc34ef49';
@@ -206,6 +207,7 @@ export default class Home extends PureComponent {
     return (
       <div>
         <Hero />
+        <Counter list={list} />
         <br />
         <div className="container">
           <Filter
