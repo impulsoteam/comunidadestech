@@ -2,24 +2,6 @@ import React, { Component } from 'react';
 import styles from './styles';
 
 class Counter extends Component {
-  countCity = (list) => {
-    let counter = 0;
-    list.map((item) => {
-      if (item.city) {
-        counter++;
-      }
-    });
-    return counter;
-  };
-
-  countMembers = (list) => {
-    let counter = 0;
-    list.map((item) => {
-      counter = counter + item.size;
-    });
-    return counter;
-  };
-
   render() {
     const { list } = this.props;
     return (
@@ -41,8 +23,9 @@ class Counter extends Component {
           <i className="fas fa-map-marked-alt"></i>
           <div className="counter-info">
             <h2 className="is-size-1-desktop is-size-2-tablet is-size-3-mobile">
-              {this.countCity(list)
-                .toString()
+              {list
+                .filter((item) => item.city)
+                .length.toString()
                 .padStart(2, '0')}
             </h2>
             <h5>
@@ -56,7 +39,7 @@ class Counter extends Component {
           <i className="fas fa-users"></i>
           <div className="counter-info">
             <h2 className="is-size-1-desktop is-size-2-tablet is-size-3-mobile">
-              {this.countMembers(list)}
+              {Object.values(list).reduce((total, { size }) => total + size, 0)}
             </h2>
             <h5>
               <span>Membros</span>
