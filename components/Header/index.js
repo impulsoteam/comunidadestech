@@ -35,7 +35,7 @@ class Header extends Component {
                     <p className="control">
                       <a
                         className="button is-primary"
-                        href="https://impulsowork.typeform.com/to/Ke2sdP"
+                        href="https://impulsowork.typeform.com/to/uy9Pf9"
                         target="_blank"
                         rel="noopener"
                         title="Cadastre uma comunidade"
