@@ -92,11 +92,9 @@ class Filter extends Component {
                       name="model"
                       onChange={(event) => select(event)}
                     >
-                      {this.unify(list, 'model').map((item, index) => (
-                        <option value={item} key={`${index}-${item}`}>
-                          {item}
-                        </option>
-                      ))}
+                      <option value="Ambos">Ambos</option>
+                      <option value="Presencial">Presencial</option>
+                      <option value="Online">Online</option>
                     </select>
                   </div>
                   <span className="icon is-small is-left">
