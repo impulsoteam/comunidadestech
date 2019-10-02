@@ -6,7 +6,15 @@ class Card extends Component {
     const { content } = this.props;
     return (
       <div className="card">
-        <a href={content.link || '/'} target="_blank" rel="noopener">
+        <a
+          href={
+            (!content.link.startsWith('http')
+              ? `http://${content.link}`
+              : content.link) || '/'
+          }
+          target="_blank"
+          rel="noopener"
+        >
           <div className="card-content">
             <div className="media">
               <div className="media-left">
