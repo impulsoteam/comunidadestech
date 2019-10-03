@@ -17,27 +17,9 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: yarn build
-  deploy:
-    docker:
-      - image: circleci/node:10.15.1
-    steps:
-      - checkout
-      - run:
-          name: Install netlify-cli
-          command: sudo yarn global add netlify-cli
-      - run:
-          name: Deploy to Netlify
-          command: netlify deploy --dir=./next -p
 
 workflows:
   version: 2
   build_deploy:
     jobs:
       - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - master
