@@ -18,18 +18,6 @@ class Header extends Component {
             </div>
             <div className="navbar-menu column">
               <div className="navbar-end is-flex-touch">
-                <a
-                  className="navbar-item is-flex-touch is-vcentered"
-                  href="https://github.com/universoimpulso/comunidadestech"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <img
-                    src="/static/github.png"
-                    alt="Github"
-                    className="github  is-vcentered"
-                  />
-                </a>
                 <div className="navbar-item">
                   <div className="field is-grouped is-grouped-multiline">
                     <p className="control">
