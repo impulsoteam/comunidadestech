@@ -27,7 +27,7 @@ jobs:
           command: sudo yarn global add netlify-cli
       - run:
           name: Deploy to Netlify
-          command: netlify deploy --dir=./public -p
+          command: netlify deploy --dir=./next -p
 
 workflows:
   version: 2
