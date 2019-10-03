@@ -21,4 +21,12 @@ export default css`
   .github {
     height: 32px;
   }
+
+  .navbar-menu {
+    box-shadow: none;
+  }
+
+  .navbar-end {
+    justify-content: flex-end;
+  }
 `;

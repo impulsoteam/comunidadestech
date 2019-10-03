@@ -3,10 +3,10 @@ import styles from './styles';
 import Card from '/components/Card/';
 import Hero from '/components/Hero/';
 import Filter from '../../components/Filter';
+import Counter from '../../components/Counter';
 import { throws } from 'assert';
 
-//const API_HOST = 'https://www.mocky.io/v2/5d7a6029320000a9fc34ef49';
-const API_HOST = 'https://api.sheety.co/82fac3dc-c252-4363-adfd-d9adcf477963';
+const API_HOST = 'https://api.sheety.co/6ae2d0d2-5f62-4e74-afb7-1696bca96d98';
 
 export default class Home extends PureComponent {
   state = {
@@ -31,12 +31,13 @@ export default class Home extends PureComponent {
         country: item['paíS'],
         state: item['estado'],
         city: item['cidade'],
-        model: item['presencial,OnlineOuAmbos?'],
+        model: item['aComunidadeéPresencial,OnlineOuAmbos?'],
         link: item['linkPrincipal'],
         description: item['descriçãO'],
         category: item['categoria'],
-        tags: item['tags'].toLowerCase().split(', '),
-        globalProgram: item['pertenceAAlgumProgramaGlobal?SeSim,Qual?'],
+        tags: item['tags'].split(', '),
+        isGlobalProgram: item['pertenceAAlgumProgramaGlobal?'],
+        globalProgram: item['qualProgramaGlobalSuaComunidadePertence?'],
         size: item['quantidadeDeMembros'],
         logo: item['logoDaComunidade'],
         networkID: item['seVocêéMembroDaImpulsoNetwork,InformeSeuId'],
@@ -206,6 +207,7 @@ export default class Home extends PureComponent {
     return (
       <div>
         <Hero />
+        <Counter list={list} />
         <br />
         <div className="container">
           <Filter

@@ -9,7 +9,7 @@ class Hero extends Component {
           <div className="container">
             <div className="columns is-centered">
               <div className="column has-text-centered">
-                <h1 className="title is-spaced is-size-1-desktop is-size-2-tablet is-size-3-mobile">
+                <h1 className="title is-size-1-desktop is-size-2-tablet is-size-3-mobile">
                   Comunidades.tech
                 </h1>
                 <h2 className="subtitle is-size-4-desktop">

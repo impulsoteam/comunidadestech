@@ -18,24 +18,12 @@ class Header extends Component {
             </div>
             <div className="navbar-menu column">
               <div className="navbar-end is-flex-touch">
-                <a
-                  className="navbar-item is-flex-touch is-vcentered"
-                  href="https://github.com/universoimpulso/comunidadestech"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <img
-                    src="/static/github.png"
-                    alt="Github"
-                    className="github  is-vcentered"
-                  />
-                </a>
                 <div className="navbar-item">
                   <div className="field is-grouped is-grouped-multiline">
                     <p className="control">
                       <a
                         className="button is-primary"
-                        href="https://impulsowork.typeform.com/to/Ke2sdP"
+                        href="https://impulsowork.typeform.com/to/uy9Pf9"
                         target="_blank"
                         rel="noopener"
                         title="Cadastre uma comunidade"
