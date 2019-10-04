@@ -69,11 +69,14 @@ class Filter extends Component {
                       onChange={(event) => select(event)}
                     >
                       <option>Todas</option>
-                      {tags.sort().map((item, index) => (
-                        <option value={item} key={`${index}-${item}`}>
-                          {item}
-                        </option>
-                      ))}
+                      {tags.sort().map(
+                        (tag, index) =>
+                          tag.length <= 35 && (
+                            <option value={tag} key={`${index}-${tag}`}>
+                              {tag}
+                            </option>
+                          )
+                      )}
                     </select>
                   </div>
                   <span className="icon is-small is-left">

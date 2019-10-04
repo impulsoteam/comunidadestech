@@ -40,7 +40,6 @@ class Card extends Component {
                 )}
               </div>
             </div>
-
             <div className="content">
               <p className="description">{content.description}</p>
               <div className="control">
@@ -53,11 +52,14 @@ class Card extends Component {
                 <span className="tag is-dark">{content.category}</span>
               </div>
               <div className="tags">
-                {content.tags.map((tag, index) => (
-                  <span key={index} className="tag is-primary">
-                    {tag}
-                  </span>
-                ))}
+                {content.tags.map(
+                  (tag, index) =>
+                    tag.length <= 35 && (
+                      <span key={index} className="tag is-primary">
+                        {tag}
+                      </span>
+                    )
+                )}
               </div>
             </div>
           </div>
