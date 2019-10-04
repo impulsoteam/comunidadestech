@@ -54,7 +54,7 @@ class Card extends Component {
               <div className="tags">
                 {content.tags.map(
                   (tag, index) =>
-                    tag.length <= 35 && (
+                    tag.length <= 20 && (
                       <span key={index} className="tag is-primary">
                         {tag}
                       </span>

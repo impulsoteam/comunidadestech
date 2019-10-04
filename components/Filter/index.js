@@ -71,7 +71,7 @@ class Filter extends Component {
                       <option>Todas</option>
                       {tags.sort().map(
                         (tag, index) =>
-                          tag.length <= 35 && (
+                          tag.length <= 20 && (
                             <option value={tag} key={`${index}-${tag}`}>
                               {tag}
                             </option>
