@@ -17,6 +17,10 @@ export default css`
     }
   }
 
+  .image {
+    overflow: hidden;
+  }
+
   .control {
     margin-bottom: 4px;
   }

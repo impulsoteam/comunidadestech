@@ -19,7 +19,14 @@ class Card extends Component {
             <div className="media">
               <div className="media-left">
                 <figure className="image is-32x32">
-                  <img src={content.logo} alt={content.name} />
+                  {content.logo ? (
+                    <img src={content.logo} alt={content.name} />
+                  ) : (
+                    <img
+                      src="../../static/ctech-small-logo.png"
+                      alt={content.name}
+                    />
+                  )}
                 </figure>
               </div>
               <div className="media-content">
