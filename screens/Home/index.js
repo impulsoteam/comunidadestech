@@ -204,6 +204,8 @@ export default class Home extends PureComponent {
       inputValue,
     } = this.state;
 
+    filteredList.sort((a, b) => (a.name > b.name ? 1 : -1));
+
     return (
       <div>
         <Hero />
