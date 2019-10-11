@@ -177,9 +177,11 @@ class Filter extends Component {
                       <select name="city" onChange={(event) => select(event)}>
                         <option>Todos</option>
                         {(location['Brasil'][`${state}`] &&
-                          location['Brasil'][`${state}`].map((item, index) => (
-                            <option key={`${index}-${item}`}>{item}</option>
-                          ))) || <option>Selecione um estado</option>}
+                          [...new Set(location['Brasil'][`${state}`])].map(
+                            (item, index) => (
+                              <option key={`${index}-${item}`}>{item}</option>
+                            )
+                          )) || <option>Selecione um estado</option>}
                       </select>
                     )}
                   </div>
