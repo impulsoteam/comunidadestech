@@ -180,13 +180,10 @@ export default class Home extends PureComponent {
     });
 
     list.forEach((item) => {
-      if (item.state) {
-        if (item.city !== null) {
-          location[item.country][item.state].push(`${item.city}`);
-        }
+      if (item.state && item.city !== null) {
+        location[item.country][item.state].push(`${item.city}`);
       }
     });
-    console.log(location);
     return location;
   };
 

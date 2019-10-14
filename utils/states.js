@@ -1,4 +1,4 @@
-export const ESTADOS = {
+export const STATES = {
   AC: 'Acre',
   AL: 'Alagoas',
   AP: 'Amapá',
