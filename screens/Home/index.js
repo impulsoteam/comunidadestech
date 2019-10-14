@@ -6,8 +6,8 @@ import Filter from '../../components/Filter';
 import Counter from '../../components/Counter';
 import { throws } from 'assert';
 
-const API_HOST = 'https://api.sheety.co/6ae2d0d2-5f62-4e74-afb7-1696bca96d98';
-//const API_HOST = 'http://www.mocky.io/v2/5da0b6a43000007000f8a069';
+//const API_HOST = 'https://api.sheety.co/6ae2d0d2-5f62-4e74-afb7-1696bca96d98';
+const API_HOST = 'http://www.mocky.io/v2/5da0c5f13000005600f8a0ca';
 
 export default class Home extends PureComponent {
   state = {
@@ -181,7 +181,9 @@ export default class Home extends PureComponent {
 
     list.forEach((item) => {
       if (item.state) {
-        location[item.country][item.state].push(`${item.city}`);
+        if (item.city !== null) {
+          location[item.country][item.state].push(`${item.city}`);
+        }
       }
     });
     console.log(location);

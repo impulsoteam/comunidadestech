@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './styles';
+import { ESTADOS } from '../../utils/states';
 
 class Filter extends Component {
   unify = (array, object) => {
@@ -150,11 +151,13 @@ class Filter extends Component {
                       <select name="state" onChange={(event) => select(event)}>
                         <option>Todos</option>
                         {(location[`${country}`] &&
-                          Object.keys(location[`${country}`]).map(
-                            (item, index) => (
-                              <option key={`${index}-${item}`}>{item}</option>
-                            )
-                          )) || <option>Selecione um país</option>}
+                          Object.keys(location[`${country}`])
+                            .sort()
+                            .map((item, index) => (
+                              <option key={`${index}-${item}`} value={item}>
+                                {ESTADOS[item]}
+                              </option>
+                            ))) || <option>Selecione um país</option>}
                       </select>
                     )}
                   </div>
