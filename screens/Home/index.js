@@ -106,6 +106,10 @@ export default class Home extends PureComponent {
 
     if (name === 'country' || name === 'state' || name === 'city') {
       filteredList = this.state.list.filter((item) => item[name] === value);
+
+      if (value === 'Todas' || value === 'Todos')
+        filteredList = this.state.list;
+
       name === 'country' &&
         this.setState({
           selectedCountry: value,
@@ -175,11 +179,10 @@ export default class Home extends PureComponent {
     });
 
     list.forEach((item) => {
-      if (item.state) {
+      if (item.state && item.city !== null) {
         location[item.country][item.state].push(`${item.city}`);
       }
     });
-
     return location;
   };
 
