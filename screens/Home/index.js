@@ -76,7 +76,10 @@ export default class Home extends PureComponent {
 
     this.setState({ searchURL: currentParams });
 
-    if (window.location.href.match(urlRegex) && window.location.href.match(urlRegex)[0].substring(0, 2) == '?=') {
+    if (
+      window.location.href.match(urlRegex) &&
+      window.location.href.match(urlRegex)[0].substring(0, 2) == '?='
+    ) {
       let filteredList = this.state.list.filter((item) => {
         return item['name'].includes(currentParams);
       });
@@ -249,7 +252,6 @@ export default class Home extends PureComponent {
             list={list}
             select={this.handleChange}
             reset={this.handleResetButton}
-            formOk={this.handleForm}
             inputOk={this.handleInput}
             tags={this.tags(list)}
             location={this.location(list)}
