@@ -39,6 +39,14 @@ class Filter extends Component {
     }
   }
 
+  paramsHandler = () => {
+    this.setState({
+      currentUrl: [],
+      selectionFilter: '',
+      params: [],
+    });
+  };
+
   render() {
     const {
       list,
@@ -76,7 +84,10 @@ class Filter extends Component {
                           : selectionFemale
                       }
                       name="category"
-                      onChange={(event) => select(event)}
+                      onChange={(event) => {
+                        select(event);
+                        this.paramsHandler();
+                      }}
                     >
                       <option value="Todas">Todas</option>
                       {this.unify(list, 'category').map((item, index) => (
@@ -104,7 +115,10 @@ class Filter extends Component {
                           : selectionFemale
                       }
                       name="tags"
-                      onChange={(event) => select(event)}
+                      onChange={(event) => {
+                        select(event);
+                        this.paramsHandler();
+                      }}
                     >
                       <option>Todas</option>
                       {tags.sort().map(
@@ -135,7 +149,10 @@ class Filter extends Component {
                           : model
                       }
                       name="model"
-                      onChange={(event) => select(event)}
+                      onChange={(event) => {
+                        select(event);
+                        this.paramsHandler();
+                      }}
                     >
                       <option value="Ambos">Ambos</option>
                       <option value="Presencial">Presencial</option>
