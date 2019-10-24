@@ -16,6 +16,7 @@ export default class Home extends PureComponent {
     loading: true,
     openModal: false,
     filteredList: [],
+    selectedCity: '',
     selectedState: '',
     selectedCountry: '',
     selectedModel: 'Ambos',
@@ -57,19 +58,43 @@ export default class Home extends PureComponent {
     this.setState({
       loading: false,
       filteredList: this.state.list,
-      selectedState: '',
-      selectedCountry: '',
-      selectedModel: 'Ambos',
-      inputValue: '',
     });
 
     const param = Object.keys(Router.router.query)[0];
     const value = Router.router.query[[param]];
+    const stateParam = Object.keys(Router.router.query)[1];
+    const stateValue = Router.router.query[[stateParam]];
+    const cityParam = Object.keys(Router.router.query)[2];
+    const cityValue = Router.router.query[[cityParam]];
+
+    console.log('é city', cityParam);
+    console.log('qual city', cityValue);
     if (param && value) {
-      const filteredList = this.state.list.filter((item) =>
-        item[param].includes(`${value}`)
-      );
-      this.setState({ filteredList });
+      if (param === 'country') {
+        this.setState({
+          selectedCountry: value,
+          selectionMale: value,
+          selectionFemale: 'Todas',
+        });
+        if (stateParam) {
+          const filteredList = this.state.list.filter(
+            (item) => item['state'] === stateValue
+          );
+          this.setState({ selectedState: stateValue, filteredList });
+
+          if (cityParam) {
+            const filteredList = this.state.list.filter(
+              (item) => item['city'] === cityValue
+            );
+            this.setState({ selectedCity: cityValue, filteredList });
+          }
+        }
+      } else {
+        const filteredList = this.state.list.filter((item) =>
+          item[param].includes(`${value}`)
+        );
+        this.setState({ filteredList });
+      }
     }
     let currentURL = window.location.href.match(urlRegex);
     let currentParams = currentURL ? pairsRegex.exec(currentURL)[2] : '';
@@ -152,6 +177,20 @@ export default class Home extends PureComponent {
           selectionFemale: 'Todas',
         });
       name === 'state' && this.setState({ selectedState: value });
+
+      const hrefCountry = name === 'country' ? `/?${name}=${value}` : '';
+      const hrefState =
+        name === 'state'
+          ? `/?country=${this.state.selectedCountry}&state=${value}`
+          : '';
+      const hrefCity =
+        name === 'city'
+          ? `/?country=${this.state.selectedCountry}&state=${this.state.selectedState}&city=${value}`
+          : '';
+      const href = hrefCountry + hrefState + hrefCity;
+      console.log(href);
+      const as = href;
+      Router.push(href, as, { shallow: true });
     }
 
     this.setState({ filteredList });
@@ -178,6 +217,7 @@ export default class Home extends PureComponent {
       selectionFemale: 'Todas',
       selectedModel: 'Ambos',
       selectedState: '',
+      selectedCity: '',
       selectedCountry: '',
       selectionMale: 'Todos',
       inputValue: '',
@@ -190,6 +230,7 @@ export default class Home extends PureComponent {
       selectionFemale: 'Todas',
       selectedModel: 'Ambos',
       selectedState: '',
+      selectedCity: '',
       selectedCountry: '',
       selectionMale: 'Todos',
       inputValue: '',
@@ -232,6 +273,7 @@ export default class Home extends PureComponent {
     const {
       filteredList,
       list,
+      selectedCity,
       selectedState,
       selectedCountry,
       selectedModel,
@@ -258,6 +300,7 @@ export default class Home extends PureComponent {
             model={selectedModel}
             country={selectedCountry}
             state={selectedState}
+            city={selectedCity}
             selectionFemale={selectionFemale}
             selectionMale={selectionMale}
             inputValue={inputValue}

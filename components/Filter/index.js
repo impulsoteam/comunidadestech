@@ -52,6 +52,7 @@ class Filter extends Component {
       select,
       reset,
       location,
+      city,
       state,
       tags,
       country,
@@ -204,7 +205,11 @@ class Filter extends Component {
                         <option>Todos</option>
                       </select>
                     )) || (
-                      <select name="state" onChange={(event) => select(event)}>
+                      <select
+                        name="state"
+                        value={state ? state : selectionMale}
+                        onChange={(event) => select(event)}
+                      >
                         <option>Todos</option>
                         {(location[`${country}`] &&
                           Object.keys(location[`${country}`])
@@ -233,7 +238,11 @@ class Filter extends Component {
                         <option>Todos</option>
                       </select>
                     )) || (
-                      <select name="city" onChange={(event) => select(event)}>
+                      <select
+                        name="city"
+                        value={city ? city : selectionMale}
+                        onChange={(event) => select(event)}
+                      >
                         <option>Todos</option>
                         {(location['Brasil'][`${state}`] &&
                           [...new Set(location['Brasil'][`${state}`])].map(
