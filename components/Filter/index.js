@@ -23,8 +23,9 @@ class Filter extends Component {
     this.setState({
       currentUrl: [localCurrentUrl],
     });
+    console.log(this.state.currentUrl);
 
-    if (this.state.currentUrl.length > 1) {
+    if (this.state.currentUrl[0]) {
       let localParams = [];
       this.state.currentUrl.map((param) => {
         const pair = pairsRegex.exec(param);
@@ -128,7 +129,11 @@ class Filter extends Component {
                 <div className="control has-icons-left">
                   <div className="select is-small">
                     <select
-                      value={model}
+                      value={
+                        this.state.selectionFilter === 'model'
+                          ? this.state.params[0][1]
+                          : model
+                      }
                       name="model"
                       onChange={(event) => select(event)}
                     >

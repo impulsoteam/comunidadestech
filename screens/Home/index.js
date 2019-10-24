@@ -117,6 +117,9 @@ export default class Home extends PureComponent {
         : (filteredList = this.state.list.filter((item) =>
             item[name].includes(`${value}`)
           ));
+      const href = `/?${name}=${value}`;
+      const as = href;
+      Router.push(href, as, { shallow: true });
       this.setState({ selectedModel: value, selectionFemale: 'Todas' });
     }
 
