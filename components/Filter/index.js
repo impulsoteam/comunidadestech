@@ -24,7 +24,7 @@ class Filter extends Component {
       currentUrl: [localCurrentUrl],
     });
 
-    if (this.state.currentUrl.length > 0) {
+    if (this.state.currentUrl.length > 1) {
       let localParams = [];
       this.state.currentUrl.map((param) => {
         const pair = pairsRegex.exec(param);
