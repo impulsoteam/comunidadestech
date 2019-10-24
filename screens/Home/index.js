@@ -6,6 +6,7 @@ import Filter from '../../components/Filter';
 import Counter from '../../components/Counter';
 import { throws } from 'assert';
 import Router, { useRouter } from 'next/router';
+import { urlRegex, pairsRegex } from '../../utils/urlRegex';
 
 const API_HOST = 'https://api.sheety.co/6ae2d0d2-5f62-4e74-afb7-1696bca96d98';
 
@@ -21,6 +22,7 @@ export default class Home extends PureComponent {
     inputValue: '',
     selectionFemale: 'Todas',
     selectionMale: 'Todos',
+    searchURL: '',
   };
 
   normalize = (array) => {
@@ -68,6 +70,17 @@ export default class Home extends PureComponent {
         item[param].includes(`${value}`)
       );
       this.setState({ filteredList });
+    }
+    let currentURL = window.location.href.match(urlRegex);
+    let currentParams = currentURL ? pairsRegex.exec(currentURL)[2] : '';
+
+    this.setState({ searchURL: currentParams });
+
+    if (window.location.href.match(urlRegex)[0].substring(0, 2) == '?=') {
+      let filteredList = this.state.list.filter((item) => {
+        return item['name'].includes(currentParams);
+      });
+      this.setState({ filteredList, inputValue: currentParams });
     }
   }
 
@@ -155,7 +168,15 @@ export default class Home extends PureComponent {
     const { value } = event.target;
     let inputValue = '';
     inputValue = value;
-    this.setState({ inputValue });
+    const href = `/?${name}=${value}`;
+    const as = href;
+    Router.push(href, as, { shallow: true });
+
+    let filteredList = this.state.list.filter((item) => {
+      return item['name'].includes(this.state.inputValue);
+    });
+
+    this.setState({ inputValue, filteredList });
   };
 
   handleInputFocus = () => {

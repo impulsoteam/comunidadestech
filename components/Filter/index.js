@@ -23,7 +23,6 @@ class Filter extends Component {
     this.setState({
       currentUrl: [localCurrentUrl],
     });
-    console.log(this.state.currentUrl);
 
     if (this.state.currentUrl[0]) {
       let localParams = [];
