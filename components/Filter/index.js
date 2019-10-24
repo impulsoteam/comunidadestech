@@ -1,14 +1,42 @@
 import React, { Component } from 'react';
 import styles from './styles';
 import { STATES } from '../../utils/states';
+import { urlRegex, pairsRegex } from '../../utils/urlRegex';
 
 class Filter extends Component {
+  state = {
+    currentUrl: [],
+    selectionFilter: '',
+    params: [],
+  };
+
   unify = (array, object) => {
     const item = [...new Set(array.map((x) => x[`${object}`]))].filter(
       (x) => x
     );
     return item;
   };
+
+  async componentDidMount() {
+    const localCurrentUrl = await window.location.href.match(urlRegex);
+
+    this.setState({
+      currentUrl: [localCurrentUrl],
+    });
+
+    if (this.state.currentUrl.length > 0) {
+      let localParams = [];
+      this.state.currentUrl.map((param) => {
+        const pair = pairsRegex.exec(param);
+        pair.shift();
+        localParams.push(pair);
+      });
+      this.setState({
+        params: localParams,
+        selectionFilter: localParams[0][0],
+      });
+    }
+  }
 
   render() {
     const {
@@ -41,7 +69,11 @@ class Filter extends Component {
                 <div className="control has-icons-left">
                   <div className="select is-small">
                     <select
-                      value={selectionFemale}
+                      value={
+                        this.state.selectionFilter === 'category'
+                          ? this.state.params[0][1]
+                          : selectionFemale
+                      }
                       name="category"
                       onChange={(event) => select(event)}
                     >
@@ -65,7 +97,11 @@ class Filter extends Component {
                 <div className="control has-icons-left">
                   <div className="select is-small">
                     <select
-                      value={selectionFemale}
+                      value={
+                        this.state.selectionFilter === 'tags'
+                          ? this.state.params[0][1]
+                          : selectionFemale
+                      }
                       name="tags"
                       onChange={(event) => select(event)}
                     >

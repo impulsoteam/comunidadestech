@@ -5,6 +5,7 @@ import Hero from '/components/Hero/';
 import Filter from '../../components/Filter';
 import Counter from '../../components/Counter';
 import { throws } from 'assert';
+import Router, { useRouter } from 'next/router';
 
 const API_HOST = 'https://api.sheety.co/6ae2d0d2-5f62-4e74-afb7-1696bca96d98';
 
@@ -59,6 +60,15 @@ export default class Home extends PureComponent {
       selectedModel: 'Ambos',
       inputValue: '',
     });
+
+    const param = Object.keys(Router.router.query)[0];
+    const value = Router.router.query[[param]];
+    if (param && value) {
+      const filteredList = this.state.list.filter((item) =>
+        item[param].includes(`${value}`)
+      );
+      this.setState({ filteredList });
+    }
   }
 
   handleModal = () => {
@@ -77,6 +87,9 @@ export default class Home extends PureComponent {
         : (filteredList = this.state.list.filter((item) =>
             item[name].includes(`${value}`)
           ));
+      const href = `/?${name}=${value}`;
+      const as = href;
+      Router.push(href, as, { shallow: true });
       this.setState({ selectionFemale: value });
     }
 
@@ -86,6 +99,9 @@ export default class Home extends PureComponent {
         : (filteredList = this.state.list.filter((item) =>
             item[name].includes(`${value}`)
           ));
+      const href = `/?${name}=${value}`;
+      const as = href;
+      Router.push(href, as, { shallow: true });
       this.setState({ selectionFemale: value });
     }
 
