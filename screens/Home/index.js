@@ -67,8 +67,6 @@ export default class Home extends PureComponent {
     const cityParam = Object.keys(Router.router.query)[2];
     const cityValue = Router.router.query[[cityParam]];
 
-    console.log('é city', cityParam);
-    console.log('qual city', cityValue);
     if (param && value) {
       if (param === 'country') {
         this.setState({
@@ -188,7 +186,6 @@ export default class Home extends PureComponent {
           ? `/?country=${this.state.selectedCountry}&state=${this.state.selectedState}&city=${value}`
           : '';
       const href = hrefCountry + hrefState + hrefCity;
-      console.log(href);
       const as = href;
       Router.push(href, as, { shallow: true });
     }
