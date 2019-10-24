@@ -76,7 +76,7 @@ export default class Home extends PureComponent {
 
     this.setState({ searchURL: currentParams });
 
-    if (window.location.href.match(urlRegex)[0].substring(0, 2) == '?=') {
+    if (window.location.href.match(urlRegex) && window.location.href.match(urlRegex)[0].substring(0, 2) == '?=') {
       let filteredList = this.state.list.filter((item) => {
         return item['name'].includes(currentParams);
       });
@@ -152,16 +152,6 @@ export default class Home extends PureComponent {
     }
 
     this.setState({ filteredList });
-  };
-
-  handleForm = (event) => {
-    event.preventDefault();
-    let filteredList = this.state.list.filter((item) => {
-      return item['name'].includes(this.state.inputValue);
-    });
-    this.setState({
-      filteredList,
-    });
   };
 
   handleInput = (event) => {
