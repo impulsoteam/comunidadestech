@@ -20,6 +20,7 @@ export default class Home extends PureComponent {
     inputValue: '',
     selectionFemale: 'Todas',
     selectionMale: 'Todos',
+    searchName: '',
   };
 
   normalize = (array) => {
@@ -78,7 +79,7 @@ export default class Home extends PureComponent {
         : (filteredList = this.state.list.filter((item) =>
             item[name].includes(`${value}`)
           ));
-      this.setState({ selectionFemale: value });
+      this.setState({ selectionFemale: value, inputValue: '' });
     }
 
     if (name === 'tags') {
@@ -87,7 +88,7 @@ export default class Home extends PureComponent {
         : (filteredList = this.state.list.filter((item) =>
             item[name].includes(`${value}`)
           ));
-      this.setState({ selectionFemale: value });
+      this.setState({ selectionFemale: value, inputValue: '' });
     }
 
     if (name === 'model') {
@@ -102,7 +103,11 @@ export default class Home extends PureComponent {
         : (filteredList = this.state.list.filter((item) =>
             item[name].includes(`${value}`)
           ));
-      this.setState({ selectedModel: value, selectionFemale: 'Todas' });
+      this.setState({
+        selectedModel: value,
+        selectionFemale: 'Todas',
+        inputValue: '',
+      });
     }
 
     if (name === 'country' || name === 'state' || name === 'city') {
@@ -117,10 +122,11 @@ export default class Home extends PureComponent {
           selectionMale: value,
           selectionFemale: 'Todas',
         });
-      name === 'state' && this.setState({ selectedState: value });
+      name === 'state' &&
+        this.setState({ selectedState: value, inputValue: '' });
     }
 
-    this.setState({ filteredList });
+    this.setState({ filteredList, inputValue: '' });
   };
 
   handleForm = (event) => {
@@ -147,6 +153,7 @@ export default class Home extends PureComponent {
   };
 
   handleInputFocus = () => {
+    const name = this.inputValue;
     this.setState({
       filteredList: this.state.list,
       selectionFemale: 'Todas',
@@ -154,7 +161,7 @@ export default class Home extends PureComponent {
       selectedState: '',
       selectedCountry: '',
       selectionMale: 'Todos',
-      inputValue: '',
+      inputValue: name,
     });
   };
 
