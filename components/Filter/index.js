@@ -20,7 +20,6 @@ class Filter extends Component {
       tags,
       country,
       model,
-      formOk,
       inputOk,
       selectionFemale,
       selectionMale,
@@ -197,7 +196,7 @@ class Filter extends Component {
             <div className="filter-option-wrapper filter-by-name">
               <div className="filter-label">Nome</div>
               <div className="filter-option">
-                <form onSubmit={formOk}>
+                <form>
                   <div className="control has-icons-left">
                     <input
                       onChange={inputOk}
@@ -211,9 +210,6 @@ class Filter extends Component {
                       <i className="fas fa-check-circle"></i>
                     </span>
                   </div>
-                  <button className="button is-light is-small" type="submit">
-                    OK
-                  </button>
                 </form>
               </div>
             </div>
