@@ -132,7 +132,7 @@ export default class Home extends PureComponent {
   handleInput = (event) => {
     const { value } = event.target;
     let inputValue = '';
-    inputValue = value;
+    inputValue = value.toLowerCase();
     let filteredList = this.state.list.filter((item) => {
       return item['nameSearch'].includes(this.state.inputValue);
     });
@@ -140,6 +140,7 @@ export default class Home extends PureComponent {
       filteredList,
     });
     this.setState({ inputValue });
+    console.log(this.state.inputValue);
   };
 
   handleInputFocus = () => {
