@@ -140,7 +140,6 @@ export default class Home extends PureComponent {
       filteredList,
     });
     this.setState({ inputValue });
-    console.log(this.state.inputValue);
   };
 
   handleInputFocus = () => {
