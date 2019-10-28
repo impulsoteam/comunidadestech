@@ -41,6 +41,7 @@ export default class Home extends PureComponent {
         size: item['quantidadeDeMembros'],
         logo: item['logoDaComunidade'],
         networkID: item['seVocêéMembroDaImpulsoNetwork,InformeSeuId'],
+        nameSearch: item['nomeDaComunidade'].toLowerCase(),
       }));
   };
 
@@ -125,7 +126,7 @@ export default class Home extends PureComponent {
   handleForm = (event) => {
     event.preventDefault();
     let filteredList = this.state.list.filter((item) => {
-      return item['name'].includes(this.state.inputValue);
+      return item['nameSearch'].includes(this.state.inputValue);
     });
     this.setState({
       filteredList,
@@ -136,6 +137,12 @@ export default class Home extends PureComponent {
     const { value } = event.target;
     let inputValue = '';
     inputValue = value;
+    let filteredList = this.state.list.filter((item) => {
+      return item['nameSearch'].includes(this.state.inputValue);
+    });
+    this.setState({
+      filteredList,
+    });
     this.setState({ inputValue });
   };
 
