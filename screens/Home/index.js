@@ -129,16 +129,6 @@ export default class Home extends PureComponent {
     this.setState({ filteredList, inputValue: '' });
   };
 
-  handleForm = (event) => {
-    event.preventDefault();
-    let filteredList = this.state.list.filter((item) => {
-      return item['nameSearch'].includes(this.state.inputValue);
-    });
-    this.setState({
-      filteredList,
-    });
-  };
-
   handleInput = (event) => {
     const { value } = event.target;
     let inputValue = '';
@@ -233,7 +223,6 @@ export default class Home extends PureComponent {
             list={list}
             select={this.handleChange}
             reset={this.handleResetButton}
-            formOk={this.handleForm}
             inputOk={this.handleInput}
             tags={this.tags(list)}
             location={this.location(list)}
