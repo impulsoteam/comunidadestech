@@ -3,9 +3,12 @@ import { colors } from '/utils/variables';
 
 export default css`
   .description {
+    display: -webkit-box;
     font-family: 'Raleway', sans-serif;
-    height: 36px;
     overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 
   .card {
@@ -48,6 +51,53 @@ export default css`
 
     .tag {
       font-size: 10px;
+    }
+
+    .btn-tooltip {
+      border: none;
+      cursor: pointer;
+    }
+
+    .tooltip {
+      background-color: #fbfbfb;
+      border-radius: 5px;
+      box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+      display: none;
+      font-size: 1.25em;
+      left: 0;
+      padding: 20px;
+      position: absolute;
+      right: 0;
+      width: 300px;
+      z-index: 2000;
+    }
+
+
+    .open-tooltip:hover {
+      .tooltip {
+        display: block;
+      }
+
+      .btn-tooltip:after {
+        border: .75rem solid transparent;
+        border-bottom-color: #fbfbfb;
+        border-top: none;
+        content: '';
+        filter: drop-shadow(0 -0.0625rem 0.0625rem rgba(10, 10, 10, .1));
+        height: 0;
+        margin-bottom: -23px;
+        position: absolute;
+        width: 0;
+        z-index: 3000;
+      }
+    }
+
+    .title-tooltip {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      min-height: 36px;
+      line-height: 1.125;
+      max-height: 36px;
     }
   }
 `;
