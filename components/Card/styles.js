@@ -97,7 +97,6 @@ export default css`
       font-weight: 600;
       min-height: 36px;
       line-height: 1.125;
-      max-height: 36px;
     }
   }
 `;
