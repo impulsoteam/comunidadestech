@@ -23,10 +23,10 @@ class Counter extends Component {
           <i className="fas fa-map-marked-alt"></i>
           <div className="counter-info">
             <h2 className="is-size-1-desktop is-size-2-tablet is-size-3-mobile">
-              {list
-                .filter((item) => item.city)
-                .length.toString()
-                .padStart(2, '0')}
+              {
+                [...new Set(list.map((item) => item.city).filter(Boolean))]
+                  .length
+              }
             </h2>
             <h5>
               <span>Cidades</span>
