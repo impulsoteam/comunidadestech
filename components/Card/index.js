@@ -54,9 +54,9 @@ class Card extends Component {
               </div>
               <div className="tags">
                 {content.tags.slice(0, 5).map(
-                  (tag, index) =>
+                  (tag, tag_element_index) =>
                     tag.length <= 20 && (
-                      <span key={index} className="tag is-primary">
+                      <span key={tag_element_index} className="tag is-primary">
                         {tag}
                       </span>
                     )
@@ -74,9 +74,9 @@ class Card extends Component {
                     </div>
 
                     { content.tags.map(
-                      (tag, index) =>
+                      (tag, tag_item_index) =>
                         tag.length <= 20 && (
-                          <span key={index} className="tag is-primary">
+                          <span key={tag_item_index} className="tag is-primary">
                             {tag}
                           </span>
                         )
