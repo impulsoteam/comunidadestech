@@ -1,11 +1,12 @@
 import css from 'styled-jsx/css';
+import { fonts } from '/utils/variables';
 
 export default css`
   .title {
     font-weight: 700;
   }
   .subtitle {
-    font-family: 'Raleway', sans-serif;
+    font-family: ${fonts.raleway};
     font-size: 20px !important;
     font-weight: 300;
     margin: 0 auto 20px;

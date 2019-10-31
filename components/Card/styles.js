@@ -1,10 +1,11 @@
 import css from 'styled-jsx/css';
 import { colors } from '/utils/variables';
+import { fonts } from '/utils/variables';
 
 export default css`
   .description {
     display: -webkit-box;
-    font-family: 'Raleway', sans-serif;
+    font-family: ${fonts.raleway};
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
@@ -59,7 +60,7 @@ export default css`
     }
 
     .tooltip {
-      background-color: #fbfbfb;
+      background-color: ${colors.softCloud};
       border-radius: 5px;
       box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
       display: none;
@@ -80,7 +81,7 @@ export default css`
 
       .btn-tooltip:after {
         border: .75rem solid transparent;
-        border-bottom-color: #fbfbfb;
+        border-bottom-color: ${colors.softCloud};
         border-top: none;
         content: '';
         filter: drop-shadow(0 -0.0625rem 0.0625rem rgba(10, 10, 10, .1));
@@ -93,7 +94,7 @@ export default css`
     }
 
     .title-tooltip {
-      font-family: 'Raleway', sans-serif;
+      font-family: ${fonts.raleway};
       font-weight: 600;
       min-height: 36px;
       line-height: 1.125;
