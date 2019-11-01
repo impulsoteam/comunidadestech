@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
+import { LinkedIn } from 'react-linkedin-login-oauth2';
+
+import { linkedinLogin } from '../../services/auth';
 import styles from './styles';
 
 class Header extends Component {
+  handleSuccess = async ({ code }) => {
+    await linkedinLogin(code);
+  };
+
+  handleFailure = (error) => {
+    console.log(error);
+  };
   render() {
+    const { user = {} } = this.props;
+    console.log('header', this.props);
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="container">
@@ -20,7 +32,47 @@ class Header extends Component {
               <div className="navbar-end is-flex-touch">
                 <div className="navbar-item">
                   <div className="field is-grouped is-grouped-multiline">
-                    <p className="control">
+                    {user.name ? (
+                      <>
+                        <button>
+                          <a href={'/'}>Home</a>
+                        </button>
+                        <button>
+                          <a href={'/dashboard'}>Dashboard </a>
+                        </button>
+                        <button>
+                          <a href={'/cadastro'}>Cadastro </a>
+                        </button>
+                        <button>
+                          <a>logout </a>
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button>
+                          <a
+                            // href={'/cadastro'}
+                            onClick={() => console.log(this.props)}
+                          >
+                            Cadastro{' '}
+                          </a>
+                        </button>
+                        <LinkedIn
+                          clientId="771l7h8iwbwuay"
+                          onFailure={this.handleFailure}
+                          onSuccess={this.handleSuccess}
+                          redirectUri="http://localhost:3000/linkedin"
+                          scope="r_emailaddress r_liteprofile"
+                          renderElement={({ onClick, disabled }) => (
+                            <button onClick={onClick} disabled={disabled}>
+                              login
+                            </button>
+                          )}
+                        />
+                      </>
+                    )}
+
+                    {/* <p className="control">
                       <a
                         className="button is-primary"
                         href="https://impulsowork.typeform.com/to/uy9Pf9"
@@ -35,7 +87,7 @@ class Header extends Component {
                           Cadastre
                         </strong>
                       </a>
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>

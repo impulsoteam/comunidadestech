@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import HomeScreen from 'screens/Home';
 import Header from 'components/Header/';
 import Footer from 'components/Footer/';
+import { authInitialProps } from '../services/auth';
 
-class Index extends Component {
-  render() {
-    return (
-      <>
-        <Header />
-        <HomeScreen />
-        <Footer />
-      </>
-    );
-  }
+export default function Index(props) {
+  console.log('index', props);
+  return (
+    <div {...props}>
+      <Header />
+      <HomeScreen />
+      <Footer />
+    </div>
+  );
 }
 
-export default Index;
+Index.getInitialProps = authInitialProps();

@@ -4,12 +4,13 @@
   "description": "A página de todas as comunidades de tecnologia do Brasil",
   "license": "MIT",
   "scripts": {
-    "dev": "next",
+    "dev": "nodemon server/index.js",
     "build": "next build",
     "start": "next start",
     "export": "next export",
     "deploy": "npm run build && npm run export",
-    "prettier": "prettier --write '**/*.js{x,}'"
+    "prettier": "prettier --write '**/*.js{x,}'",
+    "test": "jest --watch"
   },
   "husky": {
     "hooks": {
@@ -18,19 +19,35 @@
   },
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
+    "axios": "^0.19.0",
     "bulma": "^0.7.5",
-    "next": "^8.1.0",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "mongoose": "^5.7.7",
+    "next": "8.1.0",
     "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-linkedin-login-oauth2": "^1.0.7",
     "styled-jsx-plugin-sass": "^1.0.0"
   },
   "devDependencies": {
+    "@sucrase/jest-plugin": "^2.0.0",
+    "@types/jest": "^24.0.21",
+    "babel-jest": "^24.9.0",
     "babel-plugin-module-resolver": "^3.2.0",
+    "factory-girl": "^5.0.4",
+    "faker": "^4.1.0",
     "husky": "^2.7.0",
+    "jest": "^24.9.0",
     "next-compose-plugins": "^2.2.0",
     "next-images": "^1.1.2",
-    "prettier": "^1.18.2"
+    "node-mocks-http": "^1.8.0",
+    "nodemon": "^1.19.4",
+    "prettier": "^1.18.2",
+    "sucrase": "^3.10.1",
+    "supertest": "^4.0.2"
   }
 }

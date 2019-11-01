@@ -4,20 +4,26 @@ The file will be served from /_next/static/style.css
 You could include it into the page using either next/head or a custom _document.js.
 */
 import Document, { Head, Main, NextScript } from 'next/document';
-
+import { getServerSideToken, getUserScript } from '../services/auth';
 export default class MyDocument extends Document {
-  setGoogleTags() {
-    return {
-      __html: `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-143000900-1');
-      `,
-    };
+  static async getInitialProps(cxt) {
+    const props = await Document.getInitialProps(cxt);
+    const userData = await getServerSideToken(cxt.req);
+    return { ...props, ...userData };
   }
+  // setGoogleTags() {
+  //   return {
+  //     __html: `
+  //       window.dataLayer = window.dataLayer || [];
+  //       function gtag(){dataLayer.push(arguments);}
+  //       gtag('js', new Date());
+  //       gtag('config', 'UA-143000900-1');
+  //     `,
+  //   };
+  // }
 
   render() {
+    const { user = { a: 123 } } = this.props;
     return (
       <html lang="pt-br">
         <Head>
@@ -114,11 +120,12 @@ export default class MyDocument extends Document {
             async
             src="https://www.googletagmanager.com/gtag/js?id=UA-143000900-1"
           ></script>
-          <script dangerouslySetInnerHTML={this.setGoogleTags()} />
+          {/* <script dangerouslySetInnerHTML={this.setGoogleTags()} /> */}
           <script src="https://kit.fontawesome.com/e258bd240c.js"></script>
         </Head>
         <body>
           <Main />
+          <script dangerouslySetInnerHTML={{ __html: getUserScript(user) }} />
           <NextScript />
         </body>
       </html>
