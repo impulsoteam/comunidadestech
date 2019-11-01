@@ -1,6 +1,5 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import { Dropdown } from 'semantic-ui-react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import * as Yup from 'yup';
