@@ -62,7 +62,7 @@ const SignupSchema = Yup.object().shape({
   rocketId: Yup.string(),
 });
 
-export const ValidationSchemaExample = () => {
+export const RegistrationForm = () => {
   return (
     <div>
       <h1>Signup</h1>

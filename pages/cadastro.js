@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from 'components/Header/';
 import Footer from 'components/Footer/';
-import { ValidationSchemaExample } from 'components/RegistrationForm';
+import { RegistrationForm } from 'components/RegistrationForm';
 
 const Cadastro = () => (
   <>
     <Header />
-    <ValidationSchemaExample />
+    <RegistrationForm />
     <Footer />
   </>
 );
