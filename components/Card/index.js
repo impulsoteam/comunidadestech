@@ -73,7 +73,7 @@ class Card extends Component {
                       Tags:
                     </div>
 
-                    { content.tags.map(
+                    { content.tags.splice(5).map(
                       (tag, tag_item_index) =>
                         tag.length <= 20 && (
                           <span key={tag_item_index} className="tag is-primary">
