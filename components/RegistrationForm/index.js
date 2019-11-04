@@ -3,6 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import * as Yup from 'yup';
+import styles from './styles';
 
 import { CITYANDSTATES } from '../../utils/cityAndStates';
 import { CATEGORIES } from '../../utils/comunityCategories';
@@ -65,7 +66,19 @@ const SignupSchema = Yup.object().shape({
 export const RegistrationForm = () => {
   return (
     <div className="container">
-      <h1>Cadastro</h1>
+      <div className="hero-body">
+        <div className="columns is-centered">
+          <div className="column has-text-centered">
+            <h1 className="title is-size-1-desktop is-size-2-tablet is-size-3-mobile">
+              Cadastre sua comunidade
+            </h1>
+            <h2 className="subtitle is-size-4-desktop">
+              Preencha o formulário e tenha sua comunidade publicada no nosso
+              diretório!
+            </h2>
+          </div>
+        </div>
+      </div>
       <Formik
         initialValues={{
           comunityName: '',
@@ -76,7 +89,7 @@ export const RegistrationForm = () => {
           city: '',
           url: 'https://',
           description: '',
-          category: 'Desenvolvimento de software',
+          category: '',
           tags: [],
           globalProgramParticipant: 'nao',
           globalProgramName: '',
@@ -90,72 +103,42 @@ export const RegistrationForm = () => {
         }}
       >
         {({ errors, touched, values, setFieldValue }) => {
-          console.log(values);
           const handleChange = (selectedOption) => {
             const selected =
               selectedOption && selectedOption.map(({ value }) => value);
-            values.tags = selected;
+            setFieldValue('tags', selected);
           };
 
           const handleStringChange = (selectedOption, data) => {
-            console.log(data, ': ', selectedOption.value);
             setFieldValue(`${data}`, selectedOption.value);
           };
 
           return (
             <Form>
-              <div class="columns">
-                <div class="column">
-                  <label htmlFor="comunityName">Nome da comunidade</label>
-
-                  <Field name="comunityName" className="input" />
-                  {errors.comunityName && touched.comunityName ? (
-                    <div>{errors.comunityName}</div>
-                  ) : null}
-
-                  <label htmlFor="model">
-                    A comunidade é presencial, online ou ambos?
-                  </label>
-
-                  <Select
-                    name="model"
-                    closeMenuOnSelect={true}
-                    components={animatedComponents}
-                    placeholder="Clique para selecionar"
-                    options={[
-                      { label: 'Presencial', value: 'Presencial' },
-                      { label: 'Online', value: 'Online' },
-                      { label: 'Ambos', value: 'Ambos' },
-                    ]}
-                    onChange={(selectedOption, data) =>
-                      handleStringChange(
-                        selectedOption,
-                        data.name,
-                        setFieldValue
-                      )
-                    }
-                  />
-                  {errors.model && touched.model ? (
-                    <div>{errors.model}</div>
-                  ) : null}
-
-                  <label htmlFor="country">País</label>
-
-                  {values.model === 'Online' || values.model === '' ? (
-                    <Select
-                      isDisabled
-                      name="country"
-                      placeholder="Não aplica à sua seleção"
+              <div className="columns">
+                <div className="column">
+                  <label>
+                    Nome da comunidade
+                    <Field
+                      name="comunityName"
+                      className="input"
+                      placeholder="Digite o nome da sua comunidade"
                     />
-                  ) : (
+                    {errors.comunityName && touched.comunityName ? (
+                      <div className="form-error">{errors.comunityName}</div>
+                    ) : null}
+                  </label>
+                  <label>
+                    A comunidade é presencial, online ou ambos?
                     <Select
-                      name="country"
+                      name="model"
                       closeMenuOnSelect={true}
                       components={animatedComponents}
                       placeholder="Clique para selecionar"
                       options={[
-                        { label: 'Brasil', value: 'Brasil' },
-                        { label: 'Outro', value: 'Online' },
+                        { label: 'Presencial', value: 'Presencial' },
+                        { label: 'Online', value: 'Online' },
+                        { label: 'Ambos', value: 'Ambos' },
                       ]}
                       onChange={(selectedOption, data) =>
                         handleStringChange(
@@ -165,167 +148,243 @@ export const RegistrationForm = () => {
                         )
                       }
                     />
-                  )}
-                  {values.country === 'Outro' && (
-                    <>
-                      <span>Qual?</span>
-                      <Field name="otherCountry" />
-                      {errors.otherCountry && touched.otherCountry ? (
-                        <div>{errors.otherCountry}</div>
-                      ) : null}
-                    </>
-                  )}
-
-                  <label htmlFor="state">Estado</label>
-
-                  {values.country === 'Brasil' && values.model !== 'Online' ? (
-                    <Select
-                      name="state"
-                      closeMenuOnSelect={true}
-                      components={animatedComponents}
-                      placeholder="Clique para selecionar"
-                      options={statesOption}
-                      onChange={(selectedOption, data) =>
-                        handleStringChange(
-                          selectedOption,
-                          data.name,
-                          setFieldValue
-                        )
-                      }
-                    />
-                  ) : (
-                    <Select placeholder="Não aplica à sua seleção" isDisabled />
-                  )}
-                  <label htmlFor="city">Cidade</label>
-                  {values.country === 'Brasil' &&
-                  values.model !== 'Online' &&
-                  values.state ? (
-                    <Select
-                      name="city"
-                      closeMenuOnSelect={true}
-                      components={animatedComponents}
-                      placeholder="Clique para selecionar"
-                      options={cityOption(CITYANDSTATES, values.state)}
-                      onChange={(selectedOption, data) =>
-                        handleStringChange(
-                          selectedOption,
-                          data.name,
-                          setFieldValue
-                        )
-                      }
-                    />
-                  ) : (
-                    <Select placeholder="Não aplica à sua seleção" isDisabled />
-                  )}
-                  <label htmlFor="url">Link da comunidade</label>
-                  <Field name="url" className="input" />
-                  {errors.url && touched.url ? <div>{errors.url}</div> : null}
-                  <label htmlFor="description">Descrição</label>
-                  <Field
-                    name="description"
-                    component="textarea"
-                    className="textarea"
-                    rows="2"
-                  />
-                  {errors.description && touched.description ? (
-                    <div>{errors.description}</div>
-                  ) : null}
-                </div>
-                <div class="column">
-                  <label htmlFor="category">Categoria</label>
-                  <Select
-                    name="category"
-                    closeMenuOnSelect={true}
-                    components={animatedComponents}
-                    placeholder="Clique para selecionar"
-                    options={CATEGORIES}
-                  />
-                  <label htmlFor="comunityType">Tipo</label>
-                  <Select
-                    name="comunityType"
-                    closeMenuOnSelect={true}
-                    components={animatedComponents}
-                    placeholder="Clique para selecionar"
-                    options={[
-                      { label: 'Podcast', value: 'Podcast' },
-                      {
-                        label: 'Grupo do Facebook',
-                        value: 'Grupo do Facebook',
-                      },
-                      { label: 'Whatsapp', value: 'Whatsapp' },
-                      { label: 'Meetup', value: 'Meetup' },
-                      { label: 'Discord', value: 'Discord' },
-                      { label: 'Slack', value: 'Slack' },
-                    ]}
-                    onChange={(selectedOption, data) =>
-                      handleStringChange(selectedOption, data.name)
-                    }
-                  />
-                  {errors.comunityType && touched.comunityType ? (
-                    <div>{errors.comunityType}</div>
-                  ) : null}
-                  <label htmlFor="tags">Tags</label>
-                  <Select
-                    name="tags"
-                    closeMenuOnSelect={false}
-                    components={animatedComponents}
-                    placeholder="Clique para selecionar"
-                    isMulti
-                    options={TAGS}
-                    onChange={handleChange}
-                  />
-                  {errors.tags && touched.tags ? (
-                    <div>{errors.tags}</div>
-                  ) : null}
-                  <label htmlFor="globalProgramParticipant">
-                    Pertence a algum programa global?
+                    {errors.model && touched.model ? (
+                      <div className="form-error">{errors.model}</div>
+                    ) : null}
                   </label>
-                  <Select
-                    name="globalProgramParticipant"
-                    closeMenuOnSelect={true}
-                    components={animatedComponents}
-                    placeholder="Clique para selecionar"
-                    options={[
-                      { label: 'Sim', value: 'Sim' },
-                      { label: 'Não', value: 'Nao' },
-                    ]}
-                    onChange={(selectedOption, data) =>
-                      handleStringChange(selectedOption, data.name)
-                    }
-                  />
+                  <label>
+                    País
+                    {values.model === 'Online' || values.model === '' ? (
+                      <Select
+                        isDisabled
+                        name="country"
+                        placeholder="Não aplica à sua seleção"
+                      />
+                    ) : (
+                      <Select
+                        name="country"
+                        closeMenuOnSelect={true}
+                        components={animatedComponents}
+                        placeholder="Clique para selecionar"
+                        options={[
+                          { label: 'Brasil', value: 'Brasil' },
+                          { label: 'Outro', value: 'Outro' },
+                        ]}
+                        onChange={(selectedOption, data) =>
+                          handleStringChange(
+                            selectedOption,
+                            data.name,
+                            setFieldValue
+                          )
+                        }
+                      />
+                    )}
+                    {values.country === 'Outro' && (
+                      <label>
+                        Qual?
+                        <Field name="otherCountry" className="input" />
+                        {errors.otherCountry && touched.otherCountry ? (
+                          <div>{errors.otherCountry}</div>
+                        ) : null}
+                      </label>
+                    )}
+                  </label>
+                  <label>
+                    Estado
+                    {values.country === 'Brasil' &&
+                    values.model !== 'Online' ? (
+                      <Select
+                        name="state"
+                        closeMenuOnSelect={true}
+                        components={animatedComponents}
+                        placeholder="Clique para selecionar"
+                        options={statesOption}
+                        onChange={(selectedOption, data) =>
+                          handleStringChange(
+                            selectedOption,
+                            data.name,
+                            setFieldValue
+                          )
+                        }
+                      />
+                    ) : (
+                      <Select
+                        placeholder="Não aplica à sua seleção"
+                        isDisabled
+                      />
+                    )}
+                  </label>
+                  <label>
+                    Cidade
+                    {values.country === 'Brasil' &&
+                    values.model !== 'Online' &&
+                    values.state ? (
+                      <Select
+                        name="city"
+                        closeMenuOnSelect={true}
+                        components={animatedComponents}
+                        placeholder="Clique para selecionar"
+                        options={cityOption(CITYANDSTATES, values.state)}
+                        onChange={(selectedOption, data) =>
+                          handleStringChange(
+                            selectedOption,
+                            data.name,
+                            setFieldValue
+                          )
+                        }
+                      />
+                    ) : (
+                      <Select
+                        placeholder="Não aplica à sua seleção"
+                        isDisabled
+                      />
+                    )}
+                  </label>
+                  <label>
+                    Link da comunidade
+                    <Field name="url" className="input" />
+                    {errors.url && touched.url ? (
+                      <div className="form-error">{errors.url}</div>
+                    ) : null}
+                  </label>
+                  <label>
+                    Descrição
+                    <Field
+                      name="description"
+                      component="textarea"
+                      className="textarea"
+                      rows="2"
+                    />
+                    {errors.description && touched.description ? (
+                      <div className="form-error">{errors.description}</div>
+                    ) : null}
+                  </label>
+                </div>
+                <div className="column">
+                  <label>
+                    Categoria
+                    <Select
+                      name="category"
+                      closeMenuOnSelect={true}
+                      components={animatedComponents}
+                      placeholder="Clique para selecionar"
+                      options={CATEGORIES}
+                      onChange={(selectedOption, data) =>
+                        handleStringChange(
+                          selectedOption,
+                          data.name,
+                          setFieldValue
+                        )
+                      }
+                    />
+                    {errors.category && touched.category ? (
+                      <div className="form-error">{errors.category}</div>
+                    ) : null}
+                  </label>
+                  <label>
+                    Tipo
+                    <Select
+                      name="comunityType"
+                      closeMenuOnSelect={true}
+                      components={animatedComponents}
+                      placeholder="Clique para selecionar"
+                      options={[
+                        { label: 'Podcast', value: 'Podcast' },
+                        {
+                          label: 'Grupo do Facebook',
+                          value: 'Grupo do Facebook',
+                        },
+                        { label: 'Whatsapp', value: 'Whatsapp' },
+                        { label: 'Meetup', value: 'Meetup' },
+                        { label: 'Discord', value: 'Discord' },
+                        { label: 'Slack', value: 'Slack' },
+                      ]}
+                      onChange={(selectedOption, data) =>
+                        handleStringChange(selectedOption, data.name)
+                      }
+                    />
+                    {errors.comunityType && touched.comunityType ? (
+                      <div className="form-error">{errors.comunityType}</div>
+                    ) : null}
+                  </label>
+                  <label>
+                    Tags
+                    <Select
+                      name="tags"
+                      closeMenuOnSelect={false}
+                      components={animatedComponents}
+                      placeholder="Clique para selecionar"
+                      isMulti
+                      options={TAGS}
+                      onChange={handleChange}
+                    />
+                    {errors.tags && touched.tags ? (
+                      <div className="form-error">{errors.tags}</div>
+                    ) : null}
+                  </label>
+                  <label>
+                    Pertence a algum programa global?
+                    <Select
+                      name="globalProgramParticipant"
+                      closeMenuOnSelect={true}
+                      components={animatedComponents}
+                      placeholder="Clique para selecionar"
+                      options={[
+                        { label: 'Sim', value: 'Sim' },
+                        { label: 'Não', value: 'Nao' },
+                      ]}
+                      onChange={(selectedOption, data) =>
+                        handleStringChange(selectedOption, data.name)
+                      }
+                    />
+                  </label>
                   {values.globalProgramParticipant === 'Sim' && (
-                    <>
-                      <span>Qual?</span>
-                      <Field name="globalProgramName" />
+                    <label>
+                      Qual?
+                      <Field name="globalProgramName" className="input" />
                       {errors.globalProgramName && touched.globalProgramName ? (
                         <div>{errors.globalProgramName}</div>
                       ) : null}
-                    </>
+                    </label>
                   )}
-                  <label htmlFor="members">Quantidade de Membros</label>
-                  <Field name="members" className="input" />
-                  {errors.members && touched.members ? (
-                    <div>{errors.members}</div>
-                  ) : null}
-                  <label htmlFor="logo">Logo da comunidade</label>
-                  <Field name="logo" className="input" />
-                  {errors.logo && touched.logo ? (
-                    <div>{errors.logo}</div>
-                  ) : null}
-                  <label htmlFor="rocketId">
-                    Se você é membro da Impulso Network, informe seu id
+                  <label>
+                    Quantidade de Membros
+                    <Field name="members" className="input" />
+                    {errors.members && touched.members ? (
+                      <div className="form-error">{errors.members}</div>
+                    ) : null}
                   </label>
-                  <Field name="rocketId" className="input" />
-                  {errors.rocketId && touched.rocketId ? (
-                    <div>{errors.rocketId}</div>
-                  ) : null}
-                  <button type="submit">Submit</button>
+                  <label>
+                    Logo da comunidade
+                    <Field name="logo" className="input" />
+                    {errors.logo && touched.logo ? (
+                      <div className="form-error">{errors.logo}</div>
+                    ) : null}
+                  </label>
+                  <label>
+                    Se você é membro da Impulso Network, informe seu id
+                    <Field name="rocketId" className="input" />
+                    {errors.rocketId && touched.rocketId ? (
+                      <div className="form-error"> {errors.rocketId}</div>
+                    ) : null}
+                  </label>
+                </div>
+              </div>
+              <div className="columns">
+                <div className="column is-half is-offset-one-quarter">
+                  <button
+                    className="button is-primary  is-fullwidth is-large"
+                    type="submit"
+                  >
+                    Enviar
+                  </button>
                 </div>
               </div>
             </Form>
           );
         }}
       </Formik>
+      <style jsx>{styles}</style>
     </div>
   );
 };
