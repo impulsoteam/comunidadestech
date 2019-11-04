@@ -43,7 +43,7 @@ const SignupSchema = Yup.object().shape({
   state: Yup.string(),
   city: Yup.string(),
   url: Yup.string()
-    .url('Link inválido')
+    .url('Link inválido. Exemplo: http://site.com')
     .required('Item obrigatório'),
   description: Yup.string().required('Item obrigatório'),
   comunityType: Yup.string().required('Item obrigatório'),
