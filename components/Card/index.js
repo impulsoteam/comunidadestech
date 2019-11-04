@@ -6,16 +6,16 @@ class Card extends Component {
     const { content } = this.props;
     return (
       <div className="card">
-        <a
-          href={
-            (!content.link.startsWith('http')
-              ? `http://${content.link}`
-              : content.link) || '/'
-          }
-          target="_blank"
-          rel="noopener"
-        >
-          <div className="card-content">
+        <div className="card-content">
+          <a
+            href={
+              (!content.link.startsWith('http')
+                ? `http://${content.link}`
+                : content.link) || '/'
+            }
+            target="_blank"
+            rel="noopener"
+          >
             <div className="media">
               <div className="media-left">
                 <figure className="image is-32x32">
@@ -40,6 +40,7 @@ class Card extends Component {
                 )}
               </div>
             </div>
+          </a>
             <div className="content">
               <p className="description">{content.description}</p>
               <div className="control">
@@ -52,18 +53,39 @@ class Card extends Component {
                 <span className="tag is-dark">{content.category}</span>
               </div>
               <div className="tags">
-                {content.tags.map(
-                  (tag, index) =>
+                {content.tags.slice(0, 5).map(
+                  (tag, tag_element_index) =>
                     tag.length <= 20 && (
-                      <span key={index} className="tag is-primary">
+                      <span key={tag_element_index} className="tag is-primary">
                         {tag}
                       </span>
                     )
                 )}
+                <div className="open-tooltip">
+                  {content.tags.length > 5 && (
+                    <button type="button" className="tag btn-tooltip">
+                        <i className="fas fa-plus"></i>
+                        &nbsp;Tags
+                    </button>
+                  )}
+                  <span className="tooltip">
+                    <div className="title-tooltip">
+                      Tags:
+                    </div>
+
+                    { content.tags.splice(5).map(
+                      (tag, tag_item_index) =>
+                        tag.length <= 20 && (
+                          <span key={tag_item_index} className="tag is-primary">
+                            {tag}
+                          </span>
+                        )
+                    )}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-        </a>
         <style jsx>{styles}</style>
       </div>
     );
