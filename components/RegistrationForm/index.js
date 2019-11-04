@@ -61,6 +61,9 @@ const SignupSchema = Yup.object().shape({
     'Deve ser um endereço de uma imagem JPG ou PNG'
   ),
   rocketId: Yup.string(),
+  comunityOwner: Yup.string()
+    .email('Endereço de email inválido')
+    .required('Item obrigatório'),
 });
 
 export const RegistrationForm = () => {
@@ -253,7 +256,7 @@ export const RegistrationForm = () => {
                       name="description"
                       component="textarea"
                       className="textarea"
-                      rows="2"
+                      rows="4"
                     />
                     {errors.description && touched.description ? (
                       <div className="form-error">{errors.description}</div>
@@ -366,6 +369,13 @@ export const RegistrationForm = () => {
                     <Field name="rocketId" className="input" />
                     {errors.rocketId && touched.rocketId ? (
                       <div className="form-error"> {errors.rocketId}</div>
+                    ) : null}
+                  </label>
+                  <label>
+                    Informe o email do líder da comunidade:
+                    <Field name="comunityOwner" className="input" />
+                    {errors.comunityOwner && touched.comunityOwner ? (
+                      <div className="form-error"> {errors.comunityOwner}</div>
                     ) : null}
                   </label>
                 </div>
