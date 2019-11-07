@@ -1,13 +1,49 @@
 import React, { Component } from 'react';
 import styles from './styles';
 import { STATES } from '../../utils/states';
+import { urlRegex, pairsRegex } from '../../utils/urlRegex';
 
 class Filter extends Component {
+  state = {
+    currentUrl: [],
+    selectionFilter: '',
+    params: [],
+  };
+
   unify = (array, object) => {
     const item = [...new Set(array.map((x) => x[`${object}`]))].filter(
       (x) => x
     );
     return item;
+  };
+
+  async componentDidMount() {
+    const localCurrentUrl = await window.location.href.match(urlRegex);
+
+    this.setState({
+      currentUrl: [localCurrentUrl],
+    });
+
+    if (this.state.currentUrl[0]) {
+      let localParams = [];
+      this.state.currentUrl.map((param) => {
+        const pair = pairsRegex.exec(param);
+        pair.shift();
+        localParams.push(pair);
+      });
+      this.setState({
+        params: localParams,
+        selectionFilter: localParams[0][0],
+      });
+    }
+  }
+
+  paramsHandler = () => {
+    this.setState({
+      currentUrl: [],
+      selectionFilter: '',
+      params: [],
+    });
   };
 
   render() {
@@ -16,6 +52,7 @@ class Filter extends Component {
       select,
       reset,
       location,
+      city,
       state,
       tags,
       country,
@@ -40,9 +77,16 @@ class Filter extends Component {
                 <div className="control has-icons-left">
                   <div className="select is-small">
                     <select
-                      value={selectionFemale}
+                      value={
+                        this.state.selectionFilter === 'category'
+                          ? this.state.params[0][1]
+                          : selectionFemale
+                      }
                       name="category"
-                      onChange={(event) => select(event)}
+                      onChange={(event) => {
+                        select(event);
+                        this.paramsHandler();
+                      }}
                     >
                       <option value="Todas">Todas</option>
                       {this.unify(list, 'category').map((item, index) => (
@@ -64,9 +108,16 @@ class Filter extends Component {
                 <div className="control has-icons-left">
                   <div className="select is-small">
                     <select
-                      value={selectionFemale}
+                      value={
+                        this.state.selectionFilter === 'tags'
+                          ? this.state.params[0][1]
+                          : selectionFemale
+                      }
                       name="tags"
-                      onChange={(event) => select(event)}
+                      onChange={(event) => {
+                        select(event);
+                        this.paramsHandler();
+                      }}
                     >
                       <option>Todas</option>
                       {tags.sort().map(
@@ -91,9 +142,16 @@ class Filter extends Component {
                 <div className="control has-icons-left">
                   <div className="select is-small">
                     <select
-                      value={model}
+                      value={
+                        this.state.selectionFilter === 'model'
+                          ? this.state.params[0][1]
+                          : model
+                      }
                       name="model"
-                      onChange={(event) => select(event)}
+                      onChange={(event) => {
+                        select(event);
+                        this.paramsHandler();
+                      }}
                     >
                       <option value="Ambos">Ambos</option>
                       <option value="Presencial">Presencial</option>
@@ -147,7 +205,11 @@ class Filter extends Component {
                         <option>Todos</option>
                       </select>
                     )) || (
-                      <select name="state" onChange={(event) => select(event)}>
+                      <select
+                        name="state"
+                        value={state ? state : selectionMale}
+                        onChange={(event) => select(event)}
+                      >
                         <option>Todos</option>
                         {(location[`${country}`] &&
                           Object.keys(location[`${country}`])
@@ -176,7 +238,11 @@ class Filter extends Component {
                         <option>Todos</option>
                       </select>
                     )) || (
-                      <select name="city" onChange={(event) => select(event)}>
+                      <select
+                        name="city"
+                        value={city ? city : selectionMale}
+                        onChange={(event) => select(event)}
+                      >
                         <option>Todos</option>
                         {(location['Brasil'][`${state}`] &&
                           [...new Set(location['Brasil'][`${state}`])].map(

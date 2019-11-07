@@ -5,6 +5,8 @@ import Hero from '/components/Hero/';
 import Filter from '../../components/Filter';
 import Counter from '../../components/Counter';
 import { throws } from 'assert';
+import Router, { useRouter } from 'next/router';
+import { urlRegex, pairsRegex } from '../../utils/urlRegex';
 
 const API_HOST = 'https://api.sheety.co/6ae2d0d2-5f62-4e74-afb7-1696bca96d98';
 
@@ -14,13 +16,16 @@ export default class Home extends PureComponent {
     loading: true,
     openModal: false,
     filteredList: [],
+    selectedCity: '',
     selectedState: '',
     selectedCountry: '',
     selectedModel: 'Ambos',
     inputValue: '',
     selectionFemale: 'Todas',
     selectionMale: 'Todos',
+    searchURL: '',
     searchName: '',
+
   };
 
   normalize = (array) => {
@@ -56,11 +61,56 @@ export default class Home extends PureComponent {
     this.setState({
       loading: false,
       filteredList: this.state.list,
-      selectedState: '',
-      selectedCountry: '',
-      selectedModel: 'Ambos',
-      inputValue: '',
     });
+
+    const param = Object.keys(Router.router.query)[0];
+    const value = Router.router.query[[param]];
+    const stateParam = Object.keys(Router.router.query)[1];
+    const stateValue = Router.router.query[[stateParam]];
+    const cityParam = Object.keys(Router.router.query)[2];
+    const cityValue = Router.router.query[[cityParam]];
+
+    if (param && value) {
+      if (param === 'country') {
+        this.setState({
+          selectedCountry: value,
+          selectionMale: value,
+          selectionFemale: 'Todas',
+        });
+        if (stateParam) {
+          const filteredList = this.state.list.filter(
+            (item) => item['state'] === stateValue
+          );
+          this.setState({ selectedState: stateValue, filteredList });
+
+          if (cityParam) {
+            const filteredList = this.state.list.filter(
+              (item) => item['city'] === cityValue
+            );
+            this.setState({ selectedCity: cityValue, filteredList });
+          }
+        }
+      } else {
+        const filteredList = this.state.list.filter((item) =>
+          item[param].includes(`${value}`)
+        );
+        this.setState({ filteredList });
+      }
+    }
+    let currentURL = window.location.href.match(urlRegex);
+    let currentParams = currentURL ? pairsRegex.exec(currentURL)[2] : '';
+
+    this.setState({ searchURL: currentParams });
+
+    if (
+      window.location.href.match(urlRegex) &&
+      window.location.href.match(urlRegex)[0].substring(0, 2) == '?='
+    ) {
+      let filteredList = this.state.list.filter((item) => {
+        return item['name'].includes(currentParams);
+      });
+      this.setState({ filteredList, inputValue: currentParams });
+    }
   }
 
   handleModal = () => {
@@ -79,7 +129,10 @@ export default class Home extends PureComponent {
         : (filteredList = this.state.list.filter((item) =>
             item[name].includes(`${value}`)
           ));
-      this.setState({ selectionFemale: value, inputValue: '' });
+      const href = `/?${name}=${value}`;
+      const as = href;
+      Router.push(href, as, { shallow: true });
+      this.setState({ selectionFemale: value });
     }
 
     if (name === 'tags') {
@@ -88,7 +141,12 @@ export default class Home extends PureComponent {
         : (filteredList = this.state.list.filter((item) =>
             item[name].includes(`${value}`)
           ));
+      const href = `/?${name}=${value}`;
+      const as = href;
+      Router.push(href, as, { shallow: true });
+      this.setState({ selectionFemale: value });
       this.setState({ selectionFemale: value, inputValue: '' });
+
     }
 
     if (name === 'model') {
@@ -103,11 +161,15 @@ export default class Home extends PureComponent {
         : (filteredList = this.state.list.filter((item) =>
             item[name].includes(`${value}`)
           ));
+      const href = `/?${name}=${value}`;
+      const as = href;
+      Router.push(href, as, { shallow: true });
       this.setState({
         selectedModel: value,
         selectionFemale: 'Todas',
         inputValue: '',
       });
+
     }
 
     if (name === 'country' || name === 'state' || name === 'city') {
@@ -124,6 +186,20 @@ export default class Home extends PureComponent {
         });
       name === 'state' &&
         this.setState({ selectedState: value, inputValue: '' });
+
+      const hrefCountry = name === 'country' ? `/?${name}=${value}` : '';
+      const hrefState =
+        name === 'state'
+          ? `/?country=${this.state.selectedCountry}&state=${value}`
+          : '';
+      const hrefCity =
+        name === 'city'
+          ? `/?country=${this.state.selectedCountry}&state=${this.state.selectedState}&city=${value}`
+          : '';
+      const href = hrefCountry + hrefState + hrefCity;
+      const as = href;
+      Router.push(href, as, { shallow: true });
+
     }
 
     this.setState({ filteredList, inputValue: '' });
@@ -133,13 +209,17 @@ export default class Home extends PureComponent {
     const { value } = event.target;
     let inputValue = '';
     inputValue = value.toLowerCase();
+    
+    const href = `/?${name}=${value}`;
+    const as = href;
+    Router.push(href, as, { shallow: true });
+
     let filteredList = this.state.list.filter((item) => {
       return item['nameSearch'].includes(this.state.inputValue);
     });
-    this.setState({
-      filteredList,
-    });
-    this.setState({ inputValue });
+
+    this.setState({ inputValue, filteredList });
+
   };
 
   handleInputFocus = () => {
@@ -149,6 +229,7 @@ export default class Home extends PureComponent {
       selectionFemale: 'Todas',
       selectedModel: 'Ambos',
       selectedState: '',
+      selectedCity: '',
       selectedCountry: '',
       selectionMale: 'Todos',
       inputValue: name,
@@ -161,6 +242,7 @@ export default class Home extends PureComponent {
       selectionFemale: 'Todas',
       selectedModel: 'Ambos',
       selectedState: '',
+      selectedCity: '',
       selectedCountry: '',
       selectionMale: 'Todos',
       inputValue: '',
@@ -203,6 +285,7 @@ export default class Home extends PureComponent {
     const {
       filteredList,
       list,
+      selectedCity,
       selectedState,
       selectedCountry,
       selectedModel,
@@ -229,6 +312,7 @@ export default class Home extends PureComponent {
             model={selectedModel}
             country={selectedCountry}
             state={selectedState}
+            city={selectedCity}
             selectionFemale={selectionFemale}
             selectionMale={selectionMale}
             inputValue={inputValue}
