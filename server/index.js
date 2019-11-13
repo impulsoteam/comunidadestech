@@ -1,7 +1,13 @@
+import bodyParser from 'body-parser';
 import express from 'express';
 import next from 'next';
+import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import cookieParser from 'cookie-parser';
+import passport from 'passport';
+
+import PassportConfig from './helpers/auth/passport';
+
+dotenv.config();
 
 import 'express-async-errors';
 
@@ -26,18 +32,21 @@ app
   .prepare()
   .then(() => {
     const server = express();
+    server.use(bodyParser.json());
+    server.use(passport.initialize());
+    server.use(passport.session());
+    PassportConfig.google();
+    PassportConfig.linkedin();
 
-    server.use(express.json());
-    server.use(cookieParser(COOKIE_SECRET));
     server.use('/api/v1', routes);
-    server.use((error, req, res, next) => res.status(500).json(error));
+    // server.use((error, req, res, next) => res.status(500).json(error));
     server.get('*', (req, res) => {
       return handle(req, res);
     });
 
     server.listen(port, (err) => {
       if (err) throw err;
-      console.log('> Ready on http://localhost:3000');
+      console.log(`> Ready on http://localhost:${port}`);
     });
   })
   .catch((ex) => {

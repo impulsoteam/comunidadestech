@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
-import { LinkedIn } from 'react-linkedin-login-oauth2';
+import GoogleLogin from 'react-google-login';
 
-import { linkedinLogin } from '../../services/auth';
 import styles from './styles';
 
 class Header extends Component {
-  handleSuccess = async ({ code }) => {
-    await linkedinLogin(code);
+  handleSuccess = async (code) => {
+    console.log('handleSuccess', code);
   };
 
   handleFailure = (error) => {
     console.log(error);
   };
+
   render() {
     const { user = {} } = this.props;
-    console.log('header', this.props);
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="container">
@@ -49,26 +48,17 @@ class Header extends Component {
                       </>
                     ) : (
                       <>
-                        <button>
-                          <a
-                            // href={'/cadastro'}
-                            onClick={() => console.log(this.props)}
-                          >
-                            Cadastro{' '}
-                          </a>
-                        </button>
-                        <LinkedIn
-                          clientId="771l7h8iwbwuay"
-                          onFailure={this.handleFailure}
-                          onSuccess={this.handleSuccess}
-                          redirectUri="http://localhost:3000/linkedin"
-                          scope="r_emailaddress r_liteprofile"
-                          renderElement={({ onClick, disabled }) => (
-                            <button onClick={onClick} disabled={disabled}>
-                              login
-                            </button>
-                          )}
+                        <GoogleLogin
+                          clientId={process.env.GOOGLE_CLIENT_ID}
+                          buttonText="Login"
+                          onSuccess={(response) => this.handleSuccess(response)}
+                          onFailure={(response) => this.handleFailure(response)}
                         />
+                        <a
+                          href={`https://www.linkedin.com/oauth/v2/authorization?client_id=${process.env.LINKEDIN_API_KEY}&client_secret=${process.env.LINKEDIN_SECRET_KEY}&redirect_uri=${process.env.LINKEDIN_CALLBACK_URL}&response_type=code&scope=r_liteprofile%20r_emailaddress%20w_member_social`}
+                        >
+                          Login Linkedin
+                        </a>
                       </>
                     )}
 

@@ -1,18 +1,24 @@
 import React from 'react';
+import Cookies from 'js-cookie';
 import HomeScreen from 'screens/Home';
 import Header from 'components/Header/';
 import Footer from 'components/Footer/';
-import { authInitialProps } from '../services/auth';
 
-export default function Index(props) {
-  console.log('index', props);
-  return (
-    <div {...props}>
-      <Header />
-      <HomeScreen />
-      <Footer />
-    </div>
-  );
+export default class Index extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      token: Cookies.get('ctech_token'),
+    };
+  }
+
+  render() {
+    return (
+      <div {...this.props}>
+        <Header token={this.state.token} />
+        <HomeScreen />
+        <Footer />
+      </div>
+    );
+  }
 }
-
-Index.getInitialProps = authInitialProps();

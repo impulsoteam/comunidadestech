@@ -13,6 +13,12 @@ const nextConfig = {
       '/': { page: '/' },
     };
   },
+  env: {
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    LINKEDIN_API_KEY: process.env.LINKEDIN_API_KEY,
+    LINKEDIN_SECRET_KEY: process.env.LINKEDIN_SECRET_KEY,
+    LINKEDIN_CALLBACK_URL: process.env.LINKEDIN_CALLBACK_URL,
+  },
 };
 
 module.exports = withPlugins([withSass, withImages, withCSS], nextConfig);

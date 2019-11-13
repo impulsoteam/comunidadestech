@@ -4,12 +4,10 @@ The file will be served from /_next/static/style.css
 You could include it into the page using either next/head or a custom _document.js.
 */
 import Document, { Head, Main, NextScript } from 'next/document';
-import { getServerSideToken, getUserScript } from '../services/auth';
 export default class MyDocument extends Document {
   static async getInitialProps(cxt) {
     const props = await Document.getInitialProps(cxt);
-    const userData = await getServerSideToken(cxt.req);
-    return { ...props, ...userData };
+    return { ...props };
   }
   // setGoogleTags() {
   //   return {
@@ -125,7 +123,6 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
-          <script dangerouslySetInnerHTML={{ __html: getUserScript(user) }} />
           <NextScript />
         </body>
       </html>
