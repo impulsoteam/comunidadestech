@@ -12,7 +12,7 @@ class ComunityCard extends Component {
             </a>
           </div>
           <div className="columns is-2 is-variable">
-            <div className="column is-one-quarter">
+            <div className="column is-one-quarter-mobile is-one-quarter ">
               <figure className="image">
                 <img src="https://via.placeholder.com/204" />
               </figure>

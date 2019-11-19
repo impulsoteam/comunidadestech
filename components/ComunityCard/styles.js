@@ -3,6 +3,11 @@ import css from 'styled-jsx/css';
 export default css`
   .container {
     max-width: 936px;
+
+    @media screen and (max-width: 1023px) {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
   }
 
   .head {
@@ -16,6 +21,10 @@ export default css`
     border-bottom: 2px solid #f5f5f5;
     margin-top: 40px;
     padding-bottom: 40px;
+  }
+
+  .image {
+    min-width: 150px;
   }
 
   .back-button {
@@ -58,5 +67,10 @@ export default css`
   .button {
     align-self: flex-end;
     margin-top: auto;
+
+    @media screen and (max-width: 768px) {
+      align-self: flex-start;
+      margin-top: 20px;
+    }
   }
 `;
