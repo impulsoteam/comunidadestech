@@ -1,4 +1,5 @@
 import css from 'styled-jsx/css';
+import { colors } from '/utils/variables';
 
 export default css`
   .container {
@@ -11,14 +12,14 @@ export default css`
   }
 
   .head {
-    background-color: #ffffff;
+    background-color: ${colors.white};
     border-radius: 6px;
     box-shadow: 0 2px 26px 0 rgba(10, 10, 10, 0.1);
     margin-top: -120px;
   }
 
   .description {
-    border-bottom: 2px solid #f5f5f5;
+    border-bottom: 2px solid ${colors.softCloud};
     margin-top: 40px;
     padding-bottom: 40px;
   }
@@ -57,7 +58,7 @@ export default css`
     display: flex;
 
     i {
-      color: #8c43ff;
+      color: ${colors.primary};
       margin-right: 8px;
       text-align: center;
       width: 20px;
