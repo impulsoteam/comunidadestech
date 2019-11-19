@@ -25,7 +25,6 @@ export default class Home extends PureComponent {
     selectionMale: 'Todos',
     searchURL: '',
     searchName: '',
-
   };
 
   normalize = (array) => {
@@ -146,7 +145,6 @@ export default class Home extends PureComponent {
       Router.push(href, as, { shallow: true });
       this.setState({ selectionFemale: value });
       this.setState({ selectionFemale: value, inputValue: '' });
-
     }
 
     if (name === 'model') {
@@ -169,7 +167,6 @@ export default class Home extends PureComponent {
         selectionFemale: 'Todas',
         inputValue: '',
       });
-
     }
 
     if (name === 'country' || name === 'state' || name === 'city') {
@@ -199,7 +196,6 @@ export default class Home extends PureComponent {
       const href = hrefCountry + hrefState + hrefCity;
       const as = href;
       Router.push(href, as, { shallow: true });
-
     }
 
     this.setState({ filteredList, inputValue: '' });
@@ -209,7 +205,7 @@ export default class Home extends PureComponent {
     const { value } = event.target;
     let inputValue = '';
     inputValue = value.toLowerCase();
-    
+
     const href = `/?${name}=${value}`;
     const as = href;
     Router.push(href, as, { shallow: true });
@@ -219,7 +215,6 @@ export default class Home extends PureComponent {
     });
 
     this.setState({ inputValue, filteredList });
-
   };
 
   handleInputFocus = () => {
