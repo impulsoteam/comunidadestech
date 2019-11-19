@@ -9,6 +9,7 @@ const API_HOST = 'https://api.sheety.co/6ae2d0d2-5f62-4e74-afb7-1696bca96d98';
 export default class Comunity extends PureComponent {
   state = {
     list: [],
+    filteredList: [],
   };
 
   normalize = (array) => {
@@ -40,14 +41,17 @@ export default class Comunity extends PureComponent {
       .then((data) => {
         this.setState({ list: this.normalize(data) });
       });
+
+    const filteredList = this.state.list.filter((item) => {
+      return item.city == 'Uberlândia';
+    });
+
+    filteredList.sort((a, b) => (a.name > b.name ? 1 : -1));
+    this.setState({ filteredList: filteredList });
   }
 
   render() {
-    const { list } = this.state;
-    list.sort((a, b) => (a.name > b.name ? 1 : -1));
-    const filteredList = list.filter((item) => {
-      return item.city == 'Uberlândia';
-    });
+    const { filteredList } = this.state;
 
     return (
       <div>
