@@ -10,7 +10,7 @@ class Header extends Component {
             <div className="navbar-brand column">
               <a className="navbar-item" href="/">
                 <img
-                  src="/static/logo.svg"
+                  src="/static/ctech-logo.svg"
                   alt="comunidades.tech"
                   className="logo"
                 />
