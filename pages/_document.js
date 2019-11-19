@@ -9,19 +9,18 @@ export default class MyDocument extends Document {
     const props = await Document.getInitialProps(cxt);
     return { ...props };
   }
-  // setGoogleTags() {
-  //   return {
-  //     __html: `
-  //       window.dataLayer = window.dataLayer || [];
-  //       function gtag(){dataLayer.push(arguments);}
-  //       gtag('js', new Date());
-  //       gtag('config', 'UA-143000900-1');
-  //     `,
-  //   };
-  // }
+  setGoogleTags() {
+    return {
+      __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-143000900-1');
+      `,
+    };
+  }
 
   render() {
-    const { user = { a: 123 } } = this.props;
     return (
       <html lang="pt-br">
         <Head>
@@ -118,7 +117,7 @@ export default class MyDocument extends Document {
             async
             src="https://www.googletagmanager.com/gtag/js?id=UA-143000900-1"
           ></script>
-          {/* <script dangerouslySetInnerHTML={this.setGoogleTags()} /> */}
+          <script dangerouslySetInnerHTML={this.setGoogleTags()} />
           <script src="https://kit.fontawesome.com/e258bd240c.js"></script>
         </Head>
         <body>

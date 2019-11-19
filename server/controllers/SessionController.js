@@ -1,10 +1,4 @@
 import jwt from 'jsonwebtoken';
-import UserController from './UserController';
-const COOKIE_OPTIONS = {
-  httpOnly: true,
-  secure: !process.env.NODE_ENV !== 'production',
-  signed: true,
-};
 class SessionController {
   login(req, res, next) {
     if (!req.user) {
@@ -33,13 +27,17 @@ class SessionController {
         expiresIn: '7 days',
       }
     );
-    // res.setHeader('x-auth-token', token);
-    res.cookie('ctech_token', token);
+
+    res.cookie(
+      'ctech_token',
+      JSON.stringify({
+        token,
+        name: user.name,
+        avatar: user.avatar,
+        email: user.email,
+      })
+    );
     res.redirect('/');
-    // return res.status(200).json({
-    //   user: user,
-    //   token: token,
-    // }).redirect('/dashboard');
   }
 
   checkToken(req, res, next) {

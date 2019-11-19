@@ -29,6 +29,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.7",
     "next": "8.1.0",
+    "next-cookies": "^2.0.1",
     "node-sass": "^4.12.0",
     "passport": "^0.4.0",
     "passport-google-token": "^0.1.2",
