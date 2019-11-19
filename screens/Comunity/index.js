@@ -47,7 +47,7 @@ export default class Comunity extends PureComponent {
     });
 
     filteredList.sort((a, b) => (a.name > b.name ? 1 : -1));
-    this.setState({ filteredList: filteredList });
+    this.setState({ filteredList });
   }
 
   render() {
