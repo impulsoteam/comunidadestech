@@ -11,6 +11,24 @@ class CommunityController {
     }
   }
 
+  async update(req, res) {
+    try {
+      const community = await Community.update(req.body);
+      return res.json(community);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  }
+
+  async delete(req, res) {
+    try {
+      const response = await Community.deleteOne(req._id);
+      return res.json(response);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  }
+
   async getAllPublished(req, res) {
     try {
       const communities = await Community.aggregate([
