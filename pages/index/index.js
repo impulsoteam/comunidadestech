@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import styles from './styles';
+import { api, setHeader } from '../../utils/axios';
 import Card from '/components/Card/';
 import Hero from '/components/Hero/';
 import Filter from '../../components/Filter';
@@ -7,6 +8,7 @@ import Counter from '../../components/Counter';
 import { throws } from 'assert';
 import Router, { useRouter } from 'next/router';
 import { urlRegex, pairsRegex } from '../../utils/urlRegex';
+import Axios from 'axios';
 
 const API_HOST = 'https://api.sheety.co/6ae2d0d2-5f62-4e74-afb7-1696bca96d98';
 
@@ -51,6 +53,9 @@ export default class Home extends PureComponent {
   };
 
   async componentDidMount() {
+    setHeader(this.props.token);
+    const { data } = await api.get('/community/getAll');
+    console.log('index', data);
     await fetch(API_HOST)
       .then((response) => response.json())
       .then((data) => {
@@ -290,7 +295,6 @@ export default class Home extends PureComponent {
     } = this.state;
 
     filteredList.sort((a, b) => (a.name > b.name ? 1 : -1));
-
     return (
       <div>
         <Hero />

@@ -1,56 +1,69 @@
 import mongoose from 'mongoose';
 
-const creatorData = {
-  creatorEmail: {
-    type: String,
-    required: true,
-  },
-  creatorRocketId: {
-    type: String,
-    required: true,
-  },
-  ownerEmail: {
-    type: String,
-    required: true,
-  },
-};
-
-const validateLocation = () => [
+const validateCountry = () => [
   this.model === 'presential' || this.model === 'both' ? true : false,
   '',
 ];
-const location = {
-  city: {
+const validateLocation = () => [this.country === 'Brasil', ''];
+
+const creator = {
+  name: {
     type: String,
-    required: validateLocation,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  rocketChat: {
+    type: String,
+  },
+};
+
+const location = {
+  country: {
+    type: String,
+    required: validateCountry,
   },
   state: {
     type: String,
     required: validateLocation,
   },
-  country: {
+  city: {
     type: String,
     required: validateLocation,
   },
 };
+const globalProgram = {
+  isParticipant: {
+    type: Boolean,
+    required: true,
+  },
+  name: {
+    type: String,
+  },
+};
+
 const communitySchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
     },
-    model: {
+    logo: {
       type: String,
-      enum: ['online', 'presential', 'both'],
       required: true,
     },
-    location,
-    creatorData,
     url: {
       type: String,
       required: true,
     },
+
     description: {
+      type: String,
+      required: true,
+    },
+    type: {
       type: String,
       required: true,
     },
@@ -62,24 +75,26 @@ const communitySchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
-    globalProgramParticipant: {
-      type: Boolean,
-      required: true,
-    },
-    globalProgramName: {
-      type: String,
-    },
     members: {
       type: Number,
       required: true,
     },
-    logo: {
+    model: {
+      type: String,
+      enum: ['online', 'presential', 'both'],
+      required: true,
+    },
+    location,
+    globalProgram,
+    owner: {
       type: String,
       required: true,
     },
+    creator,
     published: {
       type: Boolean,
       required: true,
+      default: false,
     },
   },
   {
