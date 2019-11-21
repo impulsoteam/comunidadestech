@@ -52,7 +52,6 @@ export default class Comunity extends PureComponent {
 
   render() {
     const { filteredList } = this.state;
-
     return (
       <div>
         <ComunityHero />

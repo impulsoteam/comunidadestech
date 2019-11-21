@@ -20,14 +20,13 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, token } = this.props;
-    console.log(this.props);
     return (
       <Container>
         <Head>
           <title>Comunidades.tech</title>
         </Head>
-        <Header token={token} logout={this.logout} />
-        <Component {...pageProps} />
+        <Header token={token} />
+        <Component token={token} {...pageProps} />
         <Footer />
       </Container>
     );

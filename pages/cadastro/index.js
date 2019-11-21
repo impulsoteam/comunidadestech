@@ -1,11 +1,13 @@
 import React, { PureComponent } from 'react';
 import { Formik, Form, Field } from 'formik';
+import { api, setHeader } from '../../utils/axios';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import * as Yup from 'yup';
 import styles from './styles';
 
 import { CITYANDSTATES } from '../../utils/cityAndStates';
+import countries from '../../utils/countries';
 import { CATEGORIES } from '../../utils/comunityCategories';
 import { TAGS } from '../../utils/comunityTags';
 
@@ -33,40 +35,54 @@ const cityOption = (CITYANDSTATES, selectedState) => {
 const animatedComponents = makeAnimated();
 
 const SignupSchema = Yup.object().shape({
-  comunityName: Yup.string()
+  name: Yup.string()
     .min(2, 'Muito curto!')
     .max(30, 'Muito longo!')
-    .required('Item obrigatório'),
-  model: Yup.string().required('Item obrigatório'),
-  country: Yup.string(),
-  otheCountry: Yup.string(),
-  state: Yup.string(),
-  city: Yup.string(),
-  url: Yup.string()
-    .url('Link inválido. Exemplo: http://site.com')
-    .required('Item obrigatório'),
-  description: Yup.string().required('Item obrigatório'),
-  comunityType: Yup.string().required('Item obrigatório'),
-  category: Yup.string().required('Item obrigatório'),
-  tags: Yup.array()
-    .required('Selecione pelo menos uma tag')
-    .typeError('Selecione pelo menos uma tag'),
-  globalProgramParticipant: Yup.string().required('Item obrigatório'),
-  globalProgramName: Yup.string(),
-  members: Yup.number()
-    .typeError('Valor deve ser em número')
     .required('Item obrigatório'),
   logo: Yup.string().matches(
     /^(http(s)?:\/\/|www\.).*(\.jpg|\.jpeg|\.png)$/,
     'Deve ser um endereço de uma imagem JPG ou PNG'
   ),
-  rocketId: Yup.string(),
-  comunityOwner: Yup.string()
+  url: Yup.string()
+    .url('Link inválido. Exemplo: http://site.com')
+    .required('Item obrigatório'),
+  description: Yup.string().required('Item obrigatório'),
+  type: Yup.string().required('Item obrigatório'),
+  category: Yup.string().required('Item obrigatório'),
+  tags: Yup.array()
+    .required('Selecione pelo menos uma tag')
+    .typeError('Selecione pelo menos uma tag'),
+
+  members: Yup.number()
+    .typeError('Valor deve ser em número')
+    .required('Item obrigatório'),
+  model: Yup.string().required('Item obrigatório'),
+  location: Yup.object().shape({
+    country: Yup.string(),
+    state: Yup.string(),
+    city: Yup.string(),
+  }),
+  globalProgram: Yup.object().shape({
+    isParticipant: Yup.string().required('Item obrigatório'),
+    name: Yup.string(),
+  }),
+  creator: Yup.object().shape({
+    rocketChat: Yup.string(),
+  }),
+  owner: Yup.string()
     .email('Endereço de email inválido')
     .required('Item obrigatório'),
 });
 
-export default class Comunity extends PureComponent {
+export default class Register extends PureComponent {
+  async postCommunity(community) {
+    const { name, email } = this.props.token;
+    community.creator.name = name;
+    community.creator.email = email;
+    setHeader(this.props.token);
+    const { data } = await api.post('/community/store', community);
+    console.log('response', data);
+  }
   render() {
     return (
       <div className="container">
@@ -85,24 +101,32 @@ export default class Comunity extends PureComponent {
         </div>
         <Formik
           initialValues={{
-            comunityName: '',
-            model: '',
-            country: '',
-            otherCountry: '',
-            state: '',
-            city: '',
+            name: '',
+            logo: '',
             url: 'https://',
             description: '',
+            type: '',
             category: '',
             tags: [],
-            globalProgramParticipant: 'nao',
-            globalProgramName: '',
-            rocketId: '',
-            comunityType: '',
+            members: 0,
+            model: '',
+            location: {
+              country: '',
+              state: '',
+              city: '',
+            },
+            globalProgram: {
+              isParticipant: false,
+              name: '',
+            },
+            owner: '',
+            creator: {
+              rocketChat: '',
+            },
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
-            // same shape as initial values
+            this.postCommunity(values);
             console.log('enviado', values);
           }}
         >
@@ -124,12 +148,12 @@ export default class Comunity extends PureComponent {
                     <label>
                       Nome da comunidade
                       <Field
-                        name="comunityName"
+                        name="name"
                         className="input"
                         placeholder="Digite o nome da sua comunidade"
                       />
-                      {errors.comunityName && touched.comunityName ? (
-                        <div className="form-error">{errors.comunityName}</div>
+                      {errors.name && touched.name ? (
+                        <div className="form-error">{errors.name}</div>
                       ) : null}
                     </label>
                     <label>
@@ -140,9 +164,9 @@ export default class Comunity extends PureComponent {
                         components={animatedComponents}
                         placeholder="Clique para selecionar"
                         options={[
-                          { label: 'Presencial', value: 'Presencial' },
-                          { label: 'Online', value: 'Online' },
-                          { label: 'Ambos', value: 'Ambos' },
+                          { label: 'Presencial', value: 'presential' },
+                          { label: 'Online', value: 'online' },
+                          { label: 'Ambos', value: 'both' },
                         ]}
                         onChange={(selectedOption, data) =>
                           handleStringChange(
@@ -161,19 +185,16 @@ export default class Comunity extends PureComponent {
                       {values.model === 'Online' || values.model === '' ? (
                         <Select
                           isDisabled
-                          name="country"
+                          name="location.country"
                           placeholder="Não aplica à sua seleção"
                         />
                       ) : (
                         <Select
-                          name="country"
+                          name="location.country"
                           closeMenuOnSelect={true}
                           components={animatedComponents}
                           placeholder="Clique para selecionar"
-                          options={[
-                            { label: 'Brasil', value: 'Brasil' },
-                            { label: 'Outro', value: 'Outro' },
-                          ]}
+                          options={countries}
                           onChange={(selectedOption, data) =>
                             handleStringChange(
                               selectedOption,
@@ -183,10 +204,10 @@ export default class Comunity extends PureComponent {
                           }
                         />
                       )}
-                      {values.country === 'Outro' && (
+                      {values.location.country === 'Outro' && (
                         <label>
                           Qual?
-                          <Field name="otherCountry" className="input" />
+                          <Field name="location.country" className="input" />
                           {errors.otherCountry && touched.otherCountry ? (
                             <div>{errors.otherCountry}</div>
                           ) : null}
@@ -195,10 +216,10 @@ export default class Comunity extends PureComponent {
                     </label>
                     <label>
                       Estado
-                      {values.country === 'Brasil' &&
-                      values.model !== 'Online' ? (
+                      {values.location.country === 'Brasil' &&
+                      values.model !== 'online' ? (
                         <Select
-                          name="state"
+                          name="location.state"
                           closeMenuOnSelect={true}
                           components={animatedComponents}
                           placeholder="Clique para selecionar"
@@ -220,15 +241,18 @@ export default class Comunity extends PureComponent {
                     </label>
                     <label>
                       Cidade
-                      {values.country === 'Brasil' &&
-                      values.model !== 'Online' &&
-                      values.state ? (
+                      {values.location.country === 'Brasil' &&
+                      values.model !== 'online' &&
+                      values.location.state ? (
                         <Select
-                          name="city"
+                          name="location.city"
                           closeMenuOnSelect={true}
                           components={animatedComponents}
                           placeholder="Clique para selecionar"
-                          options={cityOption(CITYANDSTATES, values.state)}
+                          options={cityOption(
+                            CITYANDSTATES,
+                            values.location.state
+                          )}
                           onChange={(selectedOption, data) =>
                             handleStringChange(
                               selectedOption,
@@ -288,7 +312,7 @@ export default class Comunity extends PureComponent {
                     <label>
                       Tipo
                       <Select
-                        name="comunityType"
+                        name="type"
                         closeMenuOnSelect={true}
                         components={animatedComponents}
                         placeholder="Clique para selecionar"
@@ -307,8 +331,8 @@ export default class Comunity extends PureComponent {
                           handleStringChange(selectedOption, data.name)
                         }
                       />
-                      {errors.comunityType && touched.comunityType ? (
-                        <div className="form-error">{errors.comunityType}</div>
+                      {errors.type && touched.type ? (
+                        <div className="form-error">{errors.type}</div>
                       ) : null}
                     </label>
                     <label>
@@ -329,26 +353,28 @@ export default class Comunity extends PureComponent {
                     <label>
                       Pertence a algum programa global?
                       <Select
-                        name="globalProgramParticipant"
+                        name="globalProgram.isParticipant"
                         closeMenuOnSelect={true}
                         components={animatedComponents}
                         placeholder="Clique para selecionar"
                         options={[
-                          { label: 'Sim', value: 'Sim' },
-                          { label: 'Não', value: 'Nao' },
+                          { label: 'Sim', value: true },
+                          { label: 'Não', value: false },
                         ]}
                         onChange={(selectedOption, data) =>
                           handleStringChange(selectedOption, data.name)
                         }
                       />
                     </label>
-                    {values.globalProgramParticipant === 'Sim' && (
+                    {values.globalProgram.isParticipant && (
                       <label>
                         Qual?
-                        <Field name="globalProgramName" className="input" />
-                        {errors.globalProgramName &&
-                        touched.globalProgramName ? (
-                          <div>{errors.globalProgramName}</div>
+                        <Field name="globalProgram.name" className="input" />
+                        {errors.globalProgram &&
+                        errors.globalProgram.name &&
+                        touched.globalProgram &&
+                        touched.globalProgram.name ? (
+                          <div>{errors.globalProgram.name}</div>
                         ) : null}
                       </label>
                     )}
@@ -368,19 +394,21 @@ export default class Comunity extends PureComponent {
                     </label>
                     <label>
                       Se você é membro da Impulso Network, informe seu id
-                      <Field name="rocketId" className="input" />
-                      {errors.rocketId && touched.rocketId ? (
-                        <div className="form-error"> {errors.rocketId}</div>
+                      <Field name="creator.rocketChat" className="input" />
+                      {errors.creator &&
+                      errors.creator.rocketChat &&
+                      touched.creator &&
+                      touched.creator.rocketChat ? (
+                        <div className="form-error">
+                          {errors.creator.rocketChat}
+                        </div>
                       ) : null}
                     </label>
                     <label>
                       Informe o email do líder da comunidade:
-                      <Field name="comunityOwner" className="input" />
-                      {errors.comunityOwner && touched.comunityOwner ? (
-                        <div className="form-error">
-                          {' '}
-                          {errors.comunityOwner}
-                        </div>
+                      <Field name="owner" className="input" />
+                      {errors.owner && touched.owner ? (
+                        <div className="form-error"> {errors.owner}</div>
                       ) : null}
                     </label>
                   </div>
