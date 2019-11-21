@@ -29,7 +29,7 @@ class ComunityCard extends Component {
                 {logo ? (
                   <img src={logo} alt={name} />
                 ) : (
-                  <img src="../../static/ctech-small-logo.png" alt={name} />
+                  <img src="../../static/logo.svg" alt={name} />
                 )}
               </figure>
             </div>

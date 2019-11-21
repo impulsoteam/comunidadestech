@@ -69,11 +69,15 @@ const Comunity = () => {
               <ComunityCard
                 name={comunity.name}
                 state={comunity.location.state}
-                city={comunity.location.city}
+                city={
+                  comunity.location.city === 'legacy'
+                    ? null
+                    : comunity.location.city
+                }
                 size={comunity.members}
                 category={comunity.category}
                 description={comunity.description}
-                logo={comunity.logo}
+                logo={comunity.logo === 'legacy' ? null : comunity.logo}
                 tags={comunity.tags}
                 link={comunity.url}
               />

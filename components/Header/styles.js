@@ -29,4 +29,40 @@ export default css`
   .navbar-end {
     justify-content: flex-end;
   }
+
+  .top-menu {
+    display: flex;
+    align-items: center;
+
+    .control > .button {
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 20px;
+      }
+    }
+  }
+
+  .profile-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+
+    p {
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 1.1;
+    }
+
+    button {
+      max-height: 18px;
+      margin-top: 3px;
+    }
+  }
 `;

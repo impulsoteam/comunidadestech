@@ -38,35 +38,36 @@ class Header extends Component {
 
     return (
       <>
-        <p>Ola{name}</p>
-        <button>
-          <a href={'/'}>Home</a>
-        </button>
-        <button>
-          <a href={'/cadastro'}>Cadastro </a>
-        </button>
-        <button>
-          <a href={'/comunidade'}>Comunidade </a>
-        </button>
-        <p className="control">
-          <a
-            className="button is-primary"
-            href="https://impulsowork.typeform.com/to/uy9Pf9"
-            target="_blank"
-            rel="noopener"
-            title="Cadastre uma comunidade"
-          >
-            <strong className="is-hidden-mobile">
-              Cadastre uma comunidade
-            </strong>
-            <strong className="is-hidden-tablet is-hidden-desktop">
-              Cadastre
-            </strong>
-          </a>
-        </p>
-        <button onClick={this.logout}>
-          <a>logout </a>
-        </button>
+        <div className="top-menu">
+          <p className="control">
+            <a className="button is-primary" href={'/'} title="Home">
+              <strong>Home</strong>
+            </a>
+            <a
+              className="button is-primary"
+              href={'/cadastro'}
+              title="Cadastre uma comunidade"
+            >
+              <strong className="is-hidden-mobile">
+                Cadastre uma comunidade
+              </strong>
+              <strong className="is-hidden-tablet is-hidden-desktop">
+                Cadastre
+              </strong>
+            </a>
+          </p>
+          <div className="profile-wrapper">
+            <img src={avatar} />
+            <p>{name.split(' ')[0]}</p>
+            <button
+              className="button is-primary is-small"
+              onClick={this.logout}
+            >
+              <strong>Logout</strong>
+            </button>
+          </div>
+        </div>
+        <style jsx>{styles}</style>
       </>
     );
   };
@@ -79,7 +80,7 @@ class Header extends Component {
             <div className="navbar-brand column">
               <a className="navbar-item" href="/">
                 <img
-                  src="/static/logo.svg"
+                  src="/static/ctech-logo.svg"
                   alt="comunidades.tech"
                   className="logo"
                 />
