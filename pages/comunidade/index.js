@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { api } from '../../utils/axios';
 import { useRouter } from 'next/router';
 import styles from './styles';
 import ComunityHero from '../../components/ComunityHero';
 import ComunityCard from '../../components/ComunityCard';
 import Card from '/components/Card/';
-
-const API_HOST = 'https://api.sheety.co/6ae2d0d2-5f62-4e74-afb7-1696bca96d98';
 
 const Comunity = () => {
   const [list, setList] = useState([]);
@@ -15,26 +13,26 @@ const Comunity = () => {
   const router = useRouter();
 
   const normalize = (array) => {
-    return array
-      .filter((item) => item['status'] === 'PUBLICADO')
-      .map((item, index) => ({
-        id: `community-${index}`,
-        name: item['nomeDaComunidade'],
-        country: item['paíS'],
-        state: item['estado'],
-        city: item['cidade'],
-        model: item['aComunidadeéPresencial,OnlineOuAmbos?'],
-        link: item['linkPrincipal'],
-        description: item['descriçãO'],
-        category: item['categoria'],
-        tags: item['tags'].split(', '),
-        isGlobalProgram: item['pertenceAAlgumProgramaGlobal?'],
-        globalProgram: item['qualProgramaGlobalSuaComunidadePertence?'],
-        size: item['quantidadeDeMembros'],
-        logo: item['logoDaComunidade'],
-        networkID: item['seVocêéMembroDaImpulsoNetwork,InformeSeuId'],
-        nameSearch: item['nomeDaComunidade'].toLowerCase(),
-      }));
+    return array.map((item, index) => ({
+      id: `community-${index}`,
+      name: item.name,
+      country:
+        item.location.country !== 'legacy' ? item.location.country : null,
+      state: item.location.state !== 'legacy' ? item.location.state : null,
+      city: item.location.city !== 'legacy' ? item.location.city : null,
+      model:
+        (item.model === 'both' && 'Ambos') ||
+        (item.model === 'presential' && 'Presencial') ||
+        (item.model === 'online' && 'Online'),
+      link: item.url,
+      description: item.description,
+      category: item.category,
+      tags: item.tags,
+      isGlobalProgram: item.globalProgram.isParticipant,
+      size: item.members,
+      logo: item.logo !== 'legacy' ? item.logo : null,
+      nameSearch: item.name.toLowerCase(),
+    }));
   };
 
   const filterCity = (array, city) => {
@@ -51,11 +49,11 @@ const Comunity = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(API_HOST);
-      filterComunity(normalize(result.data), router.query.name)
-        ? setComunity(filterComunity(normalize(result.data), router.query.name))
+      const { data } = await api.get('/community/getAll');
+      filterComunity(normalize(data), router.query.name)
+        ? setComunity(filterComunity(normalize(data), router.query.name))
         : setComunity(null);
-      setList(normalize(result.data));
+      setList(normalize(data));
     };
     fetchData();
   }, []);
@@ -64,7 +62,6 @@ const Comunity = () => {
     comunity && setFilteredList(filterCity(list, comunity.city));
   }, [list, comunity]);
 
-  console.log(filteredList);
   return (
     <>
       {comunity ? (
