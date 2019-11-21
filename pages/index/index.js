@@ -5,12 +5,8 @@ import Card from '/components/Card/';
 import Hero from '/components/Hero/';
 import Filter from '../../components/Filter';
 import Counter from '../../components/Counter';
-import { throws } from 'assert';
-import Router, { useRouter } from 'next/router';
+import Router from 'next/router';
 import { urlRegex, pairsRegex } from '../../utils/urlRegex';
-import Axios from 'axios';
-
-const API_HOST = 'https://api.sheety.co/6ae2d0d2-5f62-4e74-afb7-1696bca96d98';
 
 export default class Home extends PureComponent {
   state = {
@@ -30,38 +26,33 @@ export default class Home extends PureComponent {
   };
 
   normalize = (array) => {
-    return array
-      .filter((item) => item['status'] === 'PUBLICADO')
-      .map((item, index) => ({
-        id: `community-${index}`,
-        name: item['nomeDaComunidade'],
-        country: item['paíS'],
-        state: item['estado'],
-        city: item['cidade'],
-        model: item['aComunidadeéPresencial,OnlineOuAmbos?'],
-        link: item['linkPrincipal'],
-        description: item['descriçãO'],
-        category: item['categoria'],
-        tags: item['tags'].split(', '),
-        isGlobalProgram: item['pertenceAAlgumProgramaGlobal?'],
-        globalProgram: item['qualProgramaGlobalSuaComunidadePertence?'],
-        size: item['quantidadeDeMembros'],
-        logo: item['logoDaComunidade'],
-        networkID: item['seVocêéMembroDaImpulsoNetwork,InformeSeuId'],
-        nameSearch: item['nomeDaComunidade'].toLowerCase(),
-      }));
+    return array.map((item, index) => ({
+      id: `community-${index}`,
+      name: item.name,
+      country:
+        item.location.country !== 'legacy' ? item.location.country : null,
+      state: item.location.state !== 'legacy' ? item.location.state : null,
+      city: item.location.city !== 'legacy' ? item.location.city : null,
+      model:
+        (item.model === 'both' && 'Ambos') ||
+        (item.model === 'presential' && 'Presencial') ||
+        (item.model === 'online' && 'Online'),
+      link: item.url,
+      description: item.description,
+      category: item.category,
+      tags: item.tags,
+      isGlobalProgram: item.globalProgram.isParticipant,
+      size: item.members,
+      logo: item.logo !== 'legacy' ? item.logo : null,
+      nameSearch: item.name.toLowerCase(),
+    }));
   };
 
   async componentDidMount() {
     setHeader(this.props.token);
     const { data } = await api.get('/community/getAll');
-    console.log('index', data);
-    await fetch(API_HOST)
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ list: this.normalize(data) });
-      });
 
+    this.setState({ list: this.normalize(data) });
     this.setState({
       loading: false,
       filteredList: this.state.list,

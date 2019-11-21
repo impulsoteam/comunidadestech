@@ -16,5 +16,4 @@ router.get('/getByName', CommunityController.getByName);
 router.use(SessionController.checkToken);
 
 router.post('/store', CommunityController.store);
-
 export default router;

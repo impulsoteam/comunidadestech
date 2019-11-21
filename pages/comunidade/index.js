@@ -1,77 +1,106 @@
-import React, { PureComponent } from 'react';
+import React, { useState, useEffect } from 'react';
+import { api } from '../../utils/axios';
+import { useRouter } from 'next/router';
 import styles from './styles';
 import ComunityHero from '../../components/ComunityHero';
 import ComunityCard from '../../components/ComunityCard';
 import Card from '/components/Card/';
 
-const API_HOST = 'https://api.sheety.co/6ae2d0d2-5f62-4e74-afb7-1696bca96d98';
+const Comunity = () => {
+  const [list, setList] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
+  const [comunity, setComunity] = useState([]);
+  const router = useRouter();
 
-export default class Comunity extends PureComponent {
-  state = {
-    list: [],
-    filteredList: [],
+  const normalize = (array) => {
+    return array.map((item, index) => ({
+      id: `community-${index}`,
+      name: item.name,
+      country:
+        item.location.country !== 'legacy' ? item.location.country : null,
+      state: item.location.state !== 'legacy' ? item.location.state : null,
+      city: item.location.city !== 'legacy' ? item.location.city : null,
+      model:
+        (item.model === 'both' && 'Ambos') ||
+        (item.model === 'presential' && 'Presencial') ||
+        (item.model === 'online' && 'Online'),
+      link: item.url,
+      description: item.description,
+      category: item.category,
+      tags: item.tags,
+      isGlobalProgram: item.globalProgram.isParticipant,
+      size: item.members,
+      logo: item.logo !== 'legacy' ? item.logo : null,
+      nameSearch: item.name.toLowerCase(),
+    }));
   };
 
-  normalize = (array) => {
-    return array
-      .filter((item) => item['status'] === 'PUBLICADO')
-      .map((item, index) => ({
-        id: `community-${index}`,
-        name: item['nomeDaComunidade'],
-        country: item['paíS'],
-        state: item['estado'],
-        city: item['cidade'],
-        model: item['aComunidadeéPresencial,OnlineOuAmbos?'],
-        link: item['linkPrincipal'],
-        description: item['descriçãO'],
-        category: item['categoria'],
-        tags: item['tags'].split(', '),
-        isGlobalProgram: item['pertenceAAlgumProgramaGlobal?'],
-        globalProgram: item['qualProgramaGlobalSuaComunidadePertence?'],
-        size: item['quantidadeDeMembros'],
-        logo: item['logoDaComunidade'],
-        networkID: item['seVocêéMembroDaImpulsoNetwork,InformeSeuId'],
-        nameSearch: item['nomeDaComunidade'].toLowerCase(),
-      }));
-  };
-
-  async componentDidMount() {
-    await fetch(API_HOST)
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ list: this.normalize(data) });
-      });
-
-    const filteredList = this.state.list.filter((item) => {
-      return item.city == 'Uberlândia';
+  const filterCity = (array, city) => {
+    const list = array.filter((item) => {
+      return item.city == city;
     });
+    list.sort((a, b) => (a.name > b.name ? 1 : -1));
+    return list;
+  };
 
-    filteredList.sort((a, b) => (a.name > b.name ? 1 : -1));
-    this.setState({ filteredList });
-  }
+  const filterComunity = (array, name) => {
+    return array.find((item) => item.name === name);
+  };
 
-  render() {
-    const { filteredList } = this.state;
-    return (
-      <div>
-        <ComunityHero />
-        <ComunityCard />
-        <div className="container related">
-          <div className="columns">
-            <div className="column isfull">
-              <h3 className="title is-5">COMUNIDADES RELACIONADAS</h3>
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await api.get('/community/getAll');
+      filterComunity(normalize(data), router.query.name)
+        ? setComunity(filterComunity(normalize(data), router.query.name))
+        : setComunity(null);
+      setList(normalize(data));
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    comunity && setFilteredList(filterCity(list, comunity.city));
+  }, [list, comunity]);
+
+  return (
+    <>
+      {comunity ? (
+        <div>
+          <ComunityHero />
+          <ComunityCard
+            name={comunity.name}
+            state={comunity.state}
+            city={comunity.city}
+            size={comunity.size}
+            category={comunity.category}
+            description={comunity.description}
+            logo={comunity.logo}
+            tags={comunity.tags}
+            link={comunity.link}
+          />
+          <div className="container related">
+            <div className="columns">
+              <div className="column isfull">
+                <h3 className="title is-5">COMUNIDADES RELACIONADAS</h3>
+              </div>
+            </div>
+            <div className="columns is-2 is-variable is-multiline">
+              {filteredList.slice(0, 3).map((card) => (
+                <div className="column is-one-third" key={card.id}>
+                  <Card content={card} />
+                </div>
+              ))}
             </div>
           </div>
-          <div className="columns is-2 is-variable is-multiline">
-            {filteredList.slice(0, 3).map((card) => (
-              <div className="column is-one-third" key={card.id}>
-                <Card content={card} />
-              </div>
-            ))}
-          </div>
+          <style jsx>{styles}</style>
         </div>
-        <style jsx>{styles}</style>
-      </div>
-    );
-  }
-}
+      ) : (
+        <div className="container">
+          <h1>404 - Comunidade não existe!</h1>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default Comunity;
