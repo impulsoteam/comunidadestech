@@ -7,15 +7,7 @@ class Card extends Component {
     return (
       <div className="card">
         <div className="card-content">
-          <a
-            href={
-              (!content.link.startsWith('http')
-                ? `http://${content.link}`
-                : content.link) || '/'
-            }
-            target="_blank"
-            rel="noopener"
-          >
+          <a href={`/comunidade?name=${content.name}`}>
             <div className="media">
               <div className="media-left">
                 <figure className="image is-32x32">

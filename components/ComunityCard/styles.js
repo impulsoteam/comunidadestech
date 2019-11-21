@@ -65,6 +65,10 @@ export default css`
     }
   }
 
+  .tags > div {
+    width: 100%;
+  }
+
   .button {
     align-self: flex-end;
     margin-top: auto;

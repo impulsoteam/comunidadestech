@@ -1,4 +1,6 @@
-import React, { PureComponent } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 import styles from './styles';
 import ComunityHero from '../../components/ComunityHero';
 import ComunityCard from '../../components/ComunityCard';
@@ -6,13 +8,13 @@ import Card from '/components/Card/';
 
 const API_HOST = 'https://api.sheety.co/6ae2d0d2-5f62-4e74-afb7-1696bca96d98';
 
-export default class Comunity extends PureComponent {
-  state = {
-    list: [],
-    filteredList: [],
-  };
+const Comunity = () => {
+  const [list, setList] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
+  const [comunity, setComunity] = useState([]);
+  const router = useRouter();
 
-  normalize = (array) => {
+  const normalize = (array) => {
     return array
       .filter((item) => item['status'] === 'PUBLICADO')
       .map((item, index) => ({
@@ -35,43 +37,73 @@ export default class Comunity extends PureComponent {
       }));
   };
 
-  async componentDidMount() {
-    await fetch(API_HOST)
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ list: this.normalize(data) });
-      });
-
-    const filteredList = this.state.list.filter((item) => {
-      return item.city == 'Uberlândia';
+  const filterCity = (array, city) => {
+    const list = array.filter((item) => {
+      return item.city == city;
     });
+    list.sort((a, b) => (a.name > b.name ? 1 : -1));
+    return list;
+  };
 
-    filteredList.sort((a, b) => (a.name > b.name ? 1 : -1));
-    this.setState({ filteredList });
-  }
+  const filterComunity = (array, name) => {
+    return array.find((item) => item.name === name);
+  };
 
-  render() {
-    const { filteredList } = this.state;
-    return (
-      <div>
-        <ComunityHero />
-        <ComunityCard />
-        <div className="container related">
-          <div className="columns">
-            <div className="column isfull">
-              <h3 className="title is-5">COMUNIDADES RELACIONADAS</h3>
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(API_HOST);
+      filterComunity(normalize(result.data), router.query.name)
+        ? setComunity(filterComunity(normalize(result.data), router.query.name))
+        : setComunity(null);
+      setList(normalize(result.data));
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    comunity && setFilteredList(filterCity(list, comunity.city));
+  }, [list, comunity]);
+
+  console.log(filteredList);
+  return (
+    <>
+      {comunity ? (
+        <div>
+          <ComunityHero />
+          <ComunityCard
+            name={comunity.name}
+            state={comunity.state}
+            city={comunity.city}
+            size={comunity.size}
+            category={comunity.category}
+            description={comunity.description}
+            logo={comunity.logo}
+            tags={comunity.tags}
+            link={comunity.link}
+          />
+          <div className="container related">
+            <div className="columns">
+              <div className="column isfull">
+                <h3 className="title is-5">COMUNIDADES RELACIONADAS</h3>
+              </div>
+            </div>
+            <div className="columns is-2 is-variable is-multiline">
+              {filteredList.slice(0, 3).map((card) => (
+                <div className="column is-one-third" key={card.id}>
+                  <Card content={card} />
+                </div>
+              ))}
             </div>
           </div>
-          <div className="columns is-2 is-variable is-multiline">
-            {filteredList.slice(0, 3).map((card) => (
-              <div className="column is-one-third" key={card.id}>
-                <Card content={card} />
-              </div>
-            ))}
-          </div>
+          <style jsx>{styles}</style>
         </div>
-        <style jsx>{styles}</style>
-      </div>
-    );
-  }
-}
+      ) : (
+        <div className="container">
+          <h1>404 - Comunidade não existe!</h1>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default Comunity;
