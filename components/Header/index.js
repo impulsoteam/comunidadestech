@@ -22,16 +22,17 @@ class Header extends Component {
     if (!token)
       return (
         <>
-          <GoogleLogin
+          {/* <GoogleLogin
             clientId={process.env.GOOGLE_CLIENT_ID}
             buttonText="Login"
             onSuccess={(response) => this.handleSuccess(response)}
             onFailure={(response) => this.handleFailure(response)}
-          />
+          /> */}
           <a
+            className="button is-primary"
             href={`https://www.linkedin.com/oauth/v2/authorization?client_id=${process.env.LINKEDIN_API_KEY}&client_secret=${process.env.LINKEDIN_SECRET_KEY}&redirect_uri=${process.env.LINKEDIN_CALLBACK_URL}&response_type=code&scope=r_liteprofile%20r_emailaddress%20w_member_social`}
           >
-            Login Linkedin
+            <strong>Login Linkedin</strong>
           </a>
         </>
       );
