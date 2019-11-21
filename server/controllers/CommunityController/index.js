@@ -27,7 +27,7 @@ class CommunityController {
     try {
       const { name } = req.query;
 
-      const community = await Community.findOne({ name: 'olkdj' });
+      const community = await Community.findOne({ name });
 
       if (!community)
         return res
