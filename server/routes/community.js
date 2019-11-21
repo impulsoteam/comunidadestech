@@ -9,7 +9,12 @@ router.get('/', (req, res) => {
     message: 'Hello World',
   });
 });
+
+router.get('/getAllPublished', CommunityController.getAllPublished);
+router.get('/getByName', CommunityController.getByName);
+
 router.use(SessionController.checkToken);
+
 router.post('/store', CommunityController.store);
-router.get('/getAll', CommunityController.getAll);
+
 export default router;

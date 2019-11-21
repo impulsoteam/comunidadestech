@@ -4,7 +4,10 @@ const validateCountry = () => [
   this.model === 'presential' || this.model === 'both' ? true : false,
   '',
 ];
-const validateLocation = () => [this.country === 'Brasil', ''];
+const validateLocation = () => [
+  this.location && this.location.country === 'Brasil',
+  '',
+];
 
 const creator = {
   name: {
