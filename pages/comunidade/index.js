@@ -115,4 +115,13 @@ const Comunity = () => {
   );
 };
 
+Comunity.getInitialProps = async (ctx) => {
+  if (!ctx.query.name) {
+    ctx.res.writeHead(302, {
+      Location: '/',
+    });
+    ctx.res.end();
+  }
+};
+
 export default Comunity;

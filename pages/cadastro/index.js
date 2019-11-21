@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import Router from 'next/router';
+import cookies from 'next-cookies';
 import { Formik, Form, Field } from 'formik';
 import { api, setHeader } from '../../utils/axios';
 import Select from 'react-select';
@@ -432,3 +434,13 @@ export default class Register extends PureComponent {
     );
   }
 }
+
+Register.getInitialProps = async (ctx) => {
+  const { token } = cookies(ctx).ctech_token || {};
+  if (!token) {
+    ctx.res.writeHead(302, {
+      Location: '/',
+    });
+    ctx.res.end();
+  }
+};
