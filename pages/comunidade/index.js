@@ -8,7 +8,7 @@ import Card from '/components/Card/';
 
 const Comunity = () => {
   const [list, setList] = useState([]);
-  const [filteredList, setFilteredList] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [comunity, setComunity] = useState([]);
   const router = useRouter();
 
@@ -49,54 +49,62 @@ const Comunity = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await api.get('/community/getAll');
-      filterComunity(normalize(data), router.query.name)
-        ? setComunity(filterComunity(normalize(data), router.query.name))
-        : setComunity(null);
-      setList(normalize(data));
+      const { data } = await api.get(
+        `community/getByName?name=${router.query.name}`
+      );
+      setComunity(data.community ? data.community : null);
+      setList(data.related ? normalize(data.related) : null);
+      setLoading(false);
     };
     fetchData();
   }, []);
 
-  useEffect(() => {
-    comunity && setFilteredList(filterCity(list, comunity.city));
-  }, [list, comunity]);
-
   return (
     <>
-      {comunity ? (
-        <div>
-          <ComunityHero />
-          <ComunityCard
-            name={comunity.name}
-            state={comunity.state}
-            city={comunity.city}
-            size={comunity.size}
-            category={comunity.category}
-            description={comunity.description}
-            logo={comunity.logo}
-            tags={comunity.tags}
-            link={comunity.link}
-          />
-          <div className="container related">
-            <div className="columns">
-              <div className="column isfull">
-                <h3 className="title is-5">COMUNIDADES RELACIONADAS</h3>
+      {!loading ? (
+        <>
+          {comunity ? (
+            <div>
+              <ComunityHero />
+              <ComunityCard
+                name={comunity.name}
+                state={comunity.location.state}
+                city={comunity.location.city}
+                size={comunity.members}
+                category={comunity.category}
+                description={comunity.description}
+                logo={comunity.logo}
+                tags={comunity.tags}
+                link={comunity.url}
+              />
+              <div className="container related">
+                <div className="columns">
+                  <div className="column isfull">
+                    <h3 className="title is-5">COMUNIDADES RELACIONADAS</h3>
+                  </div>
+                </div>
+                <div className="columns is-2 is-variable is-multiline">
+                  {list.map((card) => (
+                    <div className="column is-one-third" key={card.id}>
+                      <Card content={card} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <style jsx>{styles}</style>
+            </div>
+          ) : (
+            <div>
+              <ComunityHero />
+              <div className="container">
+                <h2>Essa comunidade não existe!</h2>
               </div>
             </div>
-            <div className="columns is-2 is-variable is-multiline">
-              {filteredList.slice(0, 3).map((card) => (
-                <div className="column is-one-third" key={card.id}>
-                  <Card content={card} />
-                </div>
-              ))}
-            </div>
-          </div>
-          <style jsx>{styles}</style>
-        </div>
+          )}
+        </>
       ) : (
-        <div className="container">
-          <h1>404 - Comunidade não existe!</h1>
+        <div>
+          <ComunityHero />
         </div>
       )}
     </>

@@ -30,9 +30,7 @@ class CommunityController {
       const community = await Community.findOne({ name });
 
       if (!community)
-        return res
-          .status(400)
-          .json({ message: 'Community name does not exists' });
+        return res.json({ message: 'Community name does not exists' });
 
       const related = await Utils.getRelated({
         name,
