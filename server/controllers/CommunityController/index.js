@@ -32,7 +32,7 @@ class CommunityController {
   async getAllPublished(req, res) {
     try {
       const communities = await Community.aggregate([
-        { $match: { published: false } },
+        { $match: { published: true } },
       ]);
 
       return res.json(communities);
