@@ -42,22 +42,22 @@ class SessionController {
 
   checkToken(req, res, next) {
     try {
-      let token = req.headers['authorization'];
-      token = token.slice(7, token.length);
-      if (token) {
-        jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
-          if (err) {
-            return this.handleError(res);
-          } else {
-            req.decoded = decoded;
-            next();
-          }
-        });
-      } else {
-        return this.handleError(res);
+      const authHeader = req.headers.authorization;
+      if (!authHeader) {
+        return res.status(400).json({ error: 'Token not provided' });
       }
+      const [, token] = authHeader.split(' ');
+
+      jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
+        if (err) {
+          return res.status(401).json({ error: 'invalid token' });
+        } else {
+          req.decoded = decoded;
+          next();
+        }
+      });
     } catch (err) {
-      return this.handleError(res);
+      return res.status(500).json({ error: 'Unable to decoded token' });
     }
   }
 

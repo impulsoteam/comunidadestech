@@ -6,19 +6,10 @@ import User from '../../server/models/user';
 
 factory.define('Community', Community, () => ({
   name: faker.name.title(),
-  model: faker.random.arrayElement(['presential', 'both']),
-  creatorData: {
-    creatorEmail: faker.internet.email(),
-    creatorRocketId: faker.internet.userName(),
-    ownerEmail: faker.internet.email(),
-  },
-  location: {
-    city: faker.address.city(),
-    state: faker.address.state(),
-    country: faker.address.country(),
-  },
+  logo: faker.image.avatar(),
   url: faker.internet.url(),
   description: faker.lorem.sentence(),
+  type: faker.hacker.adjective(),
   category: faker.commerce.department(),
   tags: [
     faker.lorem.word(),
@@ -27,11 +18,21 @@ factory.define('Community', Community, () => ({
     faker.lorem.word(),
     faker.lorem.word(),
   ],
-  globalProgramParticipant: true,
-  globalProgramName: faker.company.companyName(),
   members: faker.random.number(),
-  logo: faker.image.avatar(),
-  published: faker.random.boolean(),
+  model: faker.random.arrayElement(['presential', 'both']),
+  location: {
+    city: faker.address.city(),
+    state: faker.address.state(),
+    country: faker.address.country(),
+  },
+  globalProgram: {
+    isParticipant: true,
+    name: faker.company.companyName(),
+  },
+  owner: faker.internet.email(),
+  creator: {
+    rocketChat: faker.internet.userName(),
+  },
 }));
 
 factory.define('User', User, () => ({

@@ -1,10 +1,20 @@
 import Community from '../../models/community';
+import User from '../../models/user';
 import Utils from './Utils';
 
 class CommunityController {
   async store(req, res) {
     try {
-      const community = await Community.create(req.body);
+      const { decoded, body } = req;
+      const { name, email } = await User.findOne({ _id: decoded.id });
+
+      if (!name || !email)
+        return res.status(400).json({ message: 'Missing user data' });
+
+      body.creator.name = name;
+      body.creator.email = email;
+
+      const community = await Community.create(body);
       return res.status(201).json(community);
     } catch (error) {
       return res.status(400).json(error);
