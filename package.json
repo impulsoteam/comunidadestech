@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon server/index.js",
     "build": "next build",
-    "start": "node server/index.js -p $PORT",
+    "start": "node server/index.js",
+    "heroku-postbuild": "next build"
     "export": "next export",
     "deploy": "npm run build && npm run export",
     "prettier": "prettier --write '**/*.js{x,}'",
