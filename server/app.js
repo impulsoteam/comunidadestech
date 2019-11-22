@@ -8,8 +8,6 @@ import PassportConfig from './helpers/auth/passport';
 
 dotenv.config();
 
-import 'express-async-errors';
-
 import routes from './routes';
 
 mongoose.set('useCreateIndex', true);
