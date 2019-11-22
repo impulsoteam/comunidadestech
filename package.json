@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon server/index.js",
     "build": "next build",
-    "start": "node server/index.js",
+    "start": "node ./server/index.js -p $PORT",
     "heroku-postbuild": "next build",
     "export": "next export",
     "deploy": "npm run build && npm run export",
