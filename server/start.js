@@ -1,6 +1,2 @@
-require('@babel/register')({
-  presets: ['@babel/preset-env'],
-  ignore: ['node_modules', '.next'],
-});
-
+require = require('esm')(module /*, options*/);
 module.exports = require('./app.js');
