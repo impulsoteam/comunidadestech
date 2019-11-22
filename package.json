@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node ./server/start.js",
     "build": "next build",
-    "start": "node ./server/start.js -p $PORT",
+    "start": "node -r esm ./server/start.js -p $PORT",
     "heroku-postbuild": "next build",
     "export": "next export",
     "deploy": "npm run build && npm run export",
