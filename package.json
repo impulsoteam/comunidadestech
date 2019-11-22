@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon server/index.js",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start": "NODE_ENV=production node server/index.js",
     "export": "next export",
     "deploy": "npm run build && npm run export",
     "prettier": "prettier --write '**/*.js{x,}'",
