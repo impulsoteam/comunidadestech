@@ -4,10 +4,9 @@
   "description": "A página de todas as comunidades de tecnologia do Brasil",
   "license": "MIT",
   "scripts": {
-    "dev": "node ./server/start.js",
+    "dev": "nodemon ./app.js",
     "build": "next build",
     "start": "node -r esm ./server/start.js -p $PORT",
-    "heroku-postbuild": "next build",
     "export": "next export",
     "deploy": "npm run build && npm run export",
     "prettier": "prettier --write '**/*.js{x,}'",
@@ -19,16 +18,12 @@
     }
   },
   "dependencies": {
-    "@babel/preset-env": "^7.7.1",
-    "@babel/register": "^7.7.0",
     "@zeit/next-sass": "^1.0.1",
     "axios": "^0.19.0",
-    "body-parser": "^1.19.0",
     "bulma": "^0.7.5",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
-    "express-async-errors": "^3.1.1",
     "formik": "^2.0.3",
     "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
