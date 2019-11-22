@@ -4,7 +4,7 @@
   "description": "A página de todas as comunidades de tecnologia do Brasil",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon server/app.js",
+    "dev": "node ./server/start.js",
     "build": "next build",
     "start": "node ./server/start.js -p $PORT",
     "heroku-postbuild": "next build",
@@ -19,6 +19,7 @@
     }
   },
   "dependencies": {
+    "@babel/preset-env": "^7.7.1",
     "@babel/register": "^7.7.0",
     "@zeit/next-sass": "^1.0.1",
     "axios": "^0.19.0",
