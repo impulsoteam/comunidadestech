@@ -4,7 +4,7 @@
   "description": "A página de todas as comunidades de tecnologia do Brasil",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon ./app.js",
+    "dev": "nodemon ./server/app.js",
     "build": "next build",
     "start": "node -r esm ./server/start.js -p $PORT",
     "export": "next export",
