@@ -409,7 +409,7 @@ const CommunityForm = ({ service, initialValues, token }) => {
                   >
                     Enviar
                   </button>
-                  {token.isModerator && (
+                  {/* {token.isModerator && (
                     <button
                       onClick={() => setFieldValue('status', 'published')}
                       className="button is-primary  is-fullwidth is-large"
@@ -417,7 +417,7 @@ const CommunityForm = ({ service, initialValues, token }) => {
                     >
                       Enviar e publicar
                     </button>
-                  )}
+                  )} */}
                 </div>
               </div>
             </Form>
