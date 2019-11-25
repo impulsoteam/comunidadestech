@@ -5,7 +5,6 @@ import makeAnimated from 'react-select/animated';
 import * as Yup from 'yup';
 import styles from './styles';
 
-import loader from '../../static/comunidades-tech-loader.gif';
 import { CITYANDSTATES } from '../../utils/cityAndStates';
 import countries from '../../utils/countries';
 import { CATEGORIES } from '../../utils/comunityCategories';
@@ -407,7 +406,13 @@ const CommunityForm = ({ service, initialValues, token }) => {
                     className="button is-primary  is-fullwidth is-large"
                     type="submit"
                   >
-                    {loading ? <img src={loader} /> : 'enviar'}
+                    {loading ? (
+                      <span>
+                        <i className="fa fa-spinner fa-spin"></i> enviar
+                      </span>
+                    ) : (
+                      'enviar'
+                    )}
                   </button>
                   {/* {token.isModerator && (
                     <button

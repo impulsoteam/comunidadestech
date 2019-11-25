@@ -7,7 +7,6 @@ import ComunityCard from '../../components/ComunityCard';
 import Card from '../../components/Card';
 import loader from '../../static/comunidades-tech-loader.gif';
 
-
 const Comunity = ({ token }) => {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,6 +15,20 @@ const Comunity = ({ token }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      const postCommunity = async (community) => {
+        setTimeout(async () => {
+          const { name, email } = token;
+          community.creator.name = name;
+          community.creator.email = email;
+          setHeader(token);
+          await api.post('/community/store', community);
+          toast.success(
+            `😎 Comunidade cadastrada com sucesso!\n
+        Em breve ela será publicada.`
+          );
+          Router.push('/');
+        }, 10000);
+      };
       const { data } = await api.get(`community/name/${router.query.name}`);
       setComunity(data.community);
       setList(data.related);
