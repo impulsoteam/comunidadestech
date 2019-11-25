@@ -10,6 +10,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    isModerator: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
     avatar: {
       type: String,
       required: true,
