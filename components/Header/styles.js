@@ -63,6 +63,10 @@ export default css`
     button {
       max-height: 18px;
       margin-top: 3px;
+
+      strong {
+        line-height: 0;
+      }
     }
   }
 `;
