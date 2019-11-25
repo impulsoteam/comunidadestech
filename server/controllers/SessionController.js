@@ -32,9 +32,11 @@ class SessionController {
       'ctech_token',
       JSON.stringify({
         token,
+        _id: user._id,
         name: user.name,
         avatar: user.avatar,
         email: user.email,
+        isModerator: user.isModerator,
       })
     );
     res.redirect('/');

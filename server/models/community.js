@@ -1,15 +1,25 @@
 import mongoose from 'mongoose';
 
-const validateCountry = () => [
-  this.model === 'presential' || this.model === 'both' ? true : false,
-  '',
-];
-const validateLocation = () => [
-  this.location && this.location.country === 'Brasil',
-  '',
-];
+export const modelTypes = ['online', 'presential', 'both'];
+export const statusTypes = ['awaitingPublication', 'published', 'archived'];
+
+function validateCountry() {
+  return !(this.model === 'online');
+}
+
+function validateLocation() {
+  const isOnline = this.model === 'online';
+  const isBrazilian =
+    this.location && this.location.country === 'Brasil' ? true : false;
+  return !isOnline && isBrazilian;
+}
 
 const creator = {
+  _id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
   name: {
     type: String,
     required: true,
@@ -84,7 +94,7 @@ const communitySchema = new mongoose.Schema(
     },
     model: {
       type: String,
-      enum: ['online', 'presential', 'both'],
+      enum: modelTypes,
       required: true,
     },
     location,
@@ -94,10 +104,11 @@ const communitySchema = new mongoose.Schema(
       required: true,
     },
     creator,
-    published: {
-      type: Boolean,
+    status: {
+      type: String,
+      enum: statusTypes,
       required: true,
-      default: false,
+      default: 'awaitingPublication',
     },
   },
   {

@@ -44,9 +44,16 @@ class Header extends Component {
             <a className="button is-primary" href={'/'} title="Home">
               <strong>Home</strong>
             </a>
+            {/* <a
+              className="button is-primary"
+              href={'/dashboard'}
+              title="Dashboard"
+            >
+              <strong>Dashboard</strong>
+            </a> */}
             <a
               className="button is-primary"
-              href={'/cadastro'}
+              href={'/cadastrar'}
               title="Cadastre uma comunidade"
             >
               <strong className="is-hidden-mobile">

@@ -4,16 +4,14 @@ import SessionController from '../controllers/SessionController';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.json({
-    message: 'Hello World',
-  });
-});
-
-router.get('/getAllPublished', CommunityController.getAllPublished);
-router.get('/getByName', CommunityController.getByName);
+router.get('/status/:status', CommunityController.getByStatus);
+router.get('/name/:name', CommunityController.getByName);
 
 router.use(SessionController.checkToken);
 
+router.get('/owner', CommunityController.getByOwner);
 router.post('/store', CommunityController.store);
+router.delete('/:_id', CommunityController.delete);
+router.put('/:_id', CommunityController.update);
+
 export default router;

@@ -7,3 +7,11 @@ export const connect = async () => {
     useUnifiedTopology: true,
   });
 };
+
+export const errorMessages = {
+  withoutName: 'Community validation failed: name: Path `name` is required.',
+  withoutCountry:
+    'Community validation failed: location.country: Path `location.country` is required.',
+  withoutCityAndState:
+    'Community validation failed: location.city: Path `location.city` is required., location.state: Path `location.state` is required.',
+};
