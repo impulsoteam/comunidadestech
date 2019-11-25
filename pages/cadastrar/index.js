@@ -34,6 +34,10 @@ export default class Register extends PureComponent {
                 Preencha o formulário e tenha sua comunidade publicada no nosso
                 diretório!
               </h2>
+            </div>
+          </div>
+          <div className="columns is-centered">
+            <div className="column">
               <CommunityForm
                 token={this.props.token}
                 service={this.postCommunity}

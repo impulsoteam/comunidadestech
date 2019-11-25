@@ -44,13 +44,13 @@ class Header extends Component {
             <a className="button is-primary" href={'/'} title="Home">
               <strong>Home</strong>
             </a>
-            <a
+            {/* <a
               className="button is-primary"
               href={'/dashboard'}
               title="Dashboard"
             >
               <strong>Dashboard</strong>
-            </a>
+            </a> */}
             <a
               className="button is-primary"
               href={'/cadastrar'}
