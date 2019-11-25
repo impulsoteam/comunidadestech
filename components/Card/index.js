@@ -4,6 +4,7 @@ import styles from './styles';
 class Card extends Component {
   render() {
     const { content } = this.props;
+    console.log(content);
     return (
       <div className="card">
         <div className="card-content">
@@ -38,7 +39,7 @@ class Card extends Component {
             <div className="control">
               <div className="tags has-addons">
                 <span className="tag is-dark">membros</span>
-                <span className="tag is-primary">{content.members}</span>
+                <span className="tag is-primary">{content.size}</span>
               </div>
             </div>
             <div className="control">
