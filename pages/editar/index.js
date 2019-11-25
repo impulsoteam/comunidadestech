@@ -20,10 +20,8 @@ const EditCommunity = ({ token }) => {
     fetchData();
   }, []);
   const editCommunity = async (community) => {
-    console.log('editando', community);
     setHeader(token);
     const { data } = await api.put(`/community/${comminuty._id}`, community);
-    console.log('response', data);
   };
 
   return (

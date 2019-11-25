@@ -3,7 +3,7 @@ import cookies from 'next-cookies';
 
 import styles from './styles';
 import { api, setHeader } from '../../utils/axios';
-import TestCard from '/components/testCard/';
+import Card from '../../components/Card';
 
 const Dashboard = ({ token }) => {
   const [loading, setLoading] = useState(true);
@@ -36,7 +36,7 @@ const Dashboard = ({ token }) => {
               <div className="columns is-multiline card-wrapper">
                 {myCommunities.map((card) => (
                   <div className="column is-one-quarter" key={card.id}>
-                    <TestCard withOptions content={card} />
+                    <Card withOptions content={card} />
                   </div>
                 ))}
               </div>
@@ -53,7 +53,7 @@ const Dashboard = ({ token }) => {
               <div className="columns is-multiline card-wrapper">
                 {pendingCommunities.map((card) => (
                   <div className="column is-one-quarter" key={card.id}>
-                    <TestCard withOptions content={card} />
+                    <Card withOptions content={card} />
                   </div>
                 ))}
               </div>

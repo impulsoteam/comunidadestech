@@ -15,13 +15,11 @@ const initialValues = {
 };
 export default class Register extends PureComponent {
   postCommunity = async (community) => {
-    console.log(community);
     const { name, email } = this.props.token;
     community.creator.name = name;
     community.creator.email = email;
     setHeader(this.props.token);
     const { data } = await api.post('/community/store', community);
-    console.log('response', data);
   };
   render() {
     return (

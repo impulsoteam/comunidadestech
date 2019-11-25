@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import styles from './styles';
 import ComunityHero from '../../components/ComunityHero';
 import ComunityCard from '../../components/ComunityCard';
-import TestCard from '/components/testCard/';
+import Card from '../../components/Card';
 
 const Comunity = ({ token }) => {
   const [list, setList] = useState([]);
@@ -64,7 +64,7 @@ const Comunity = ({ token }) => {
                 <div className="columns is-2 is-variable is-multiline">
                   {list.map((card) => (
                     <div className="column is-one-third" key={card.id}>
-                      <TestCard content={card} />
+                      <Card content={card} />
                     </div>
                   ))}
                 </div>

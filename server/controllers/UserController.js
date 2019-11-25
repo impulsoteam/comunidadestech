@@ -3,7 +3,6 @@ import User from '../models/user';
 
 class UserController {
   async findOrCreate(accessToken, profile, service) {
-    console.log(accessToken, profile, service);
     let response;
     await User.findOne(
       {
