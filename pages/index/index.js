@@ -50,8 +50,7 @@ export default class Home extends PureComponent {
 
   async componentDidMount() {
     setHeader(this.props.token);
-    const { data } = await api.get('/community/getAllPublished');
-
+    const { data } = await api.get('/community/status/published');
     this.setState({ list: this.normalize(data) });
     this.setState({
       loading: false,

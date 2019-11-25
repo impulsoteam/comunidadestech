@@ -1,11 +1,12 @@
 import Community from '../../models/community';
 
 class Utils {
-  async getRelated({ name, category, city }) {
+  async getRelated({ name, category, city, state }) {
     try {
       let relatedByCity = [];
+      let relatedByState = [];
       let relatedByCategory = [];
-      const max = 3;
+      const max = 6;
 
       if (city) {
         relatedByCity = await Community.aggregate([
@@ -15,22 +16,42 @@ class Utils {
               'location.city': city,
             },
           },
-          { $limit: 3 },
+          { $limit: max },
         ]);
       }
 
-      if (relatedByCity.length > max) {
-        relatedByCategory = await Community.aggregate([
+      if (state && relatedByCity.length < max) {
+        relatedByState = await Community.aggregate([
           {
             $match: {
               name: { $ne: name },
-              category,
+              'location.city': { $ne: city },
+              'location.state': state,
             },
           },
           { $limit: max - (relatedByCity && relatedByCity.length) || 0 },
         ]);
       }
-      return [...relatedByCity, ...relatedByCategory];
+
+      const relatedByLocation = [...relatedByCity, ...relatedByState];
+
+      if (relatedByLocation.length < max) {
+        relatedByCategory = await Community.aggregate([
+          {
+            $match: {
+              name: { $ne: name },
+              'location.city': { $ne: city },
+              'location.state': { $ne: state },
+              category,
+            },
+          },
+          {
+            $limit: max - (relatedByLocation && relatedByLocation.length) || 0,
+          },
+        ]);
+      }
+
+      return [...relatedByLocation, ...relatedByCategory];
     } catch (error) {
       return error;
     }

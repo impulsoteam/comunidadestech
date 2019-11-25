@@ -4,62 +4,32 @@ import { useRouter } from 'next/router';
 import styles from './styles';
 import ComunityHero from '../../components/ComunityHero';
 import ComunityCard from '../../components/ComunityCard';
-import Card from '/components/Card/';
+import Card from '../../components/Card';
 import loader from '../../static/comunidades-tech-loader.gif';
 
-const Comunity = () => {
+
+const Comunity = ({ token }) => {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [comunity, setComunity] = useState([]);
   const router = useRouter();
 
-  const normalize = (array) => {
-    return array.map((item, index) => ({
-      id: `community-${index}`,
-      name: item.name,
-      country:
-        item.location.country !== 'legacy' ? item.location.country : null,
-      state: item.location.state !== 'legacy' ? item.location.state : null,
-      city: item.location.city !== 'legacy' ? item.location.city : null,
-      model:
-        (item.model === 'both' && 'Ambos') ||
-        (item.model === 'presential' && 'Presencial') ||
-        (item.model === 'online' && 'Online'),
-      link: item.url,
-      description: item.description,
-      category: item.category,
-      tags: item.tags,
-      isGlobalProgram: item.globalProgram.isParticipant,
-      size: item.members,
-      logo: item.logo !== 'legacy' ? item.logo : null,
-      nameSearch: item.name.toLowerCase(),
-    }));
-  };
-
-  const filterCity = (array, city) => {
-    const list = array.filter((item) => {
-      return item.city == city;
-    });
-    list.sort((a, b) => (a.name > b.name ? 1 : -1));
-    return list;
-  };
-
-  const filterComunity = (array, name) => {
-    return array.find((item) => item.name === name);
-  };
-
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await api.get(
-        `community/getByName?name=${router.query.name}`
-      );
-      setComunity(data.community ? data.community : null);
-      setList(data.related ? normalize(data.related) : null);
+      const { data } = await api.get(`community/name/${router.query.name}`);
+      setComunity(data.community);
+      setList(data.related);
       setLoading(false);
     };
     fetchData();
   }, []);
-
+  const checkCredentials = () => {
+    const { isModerator, _id } = token;
+    const { creator } = comunity;
+    if (isModerator) return true;
+    if (creator._id && creator._id === _id) return true;
+    return false;
+  };
   return (
     <>
       {!loading ? (
@@ -68,6 +38,9 @@ const Comunity = () => {
             <div>
               <ComunityHero />
               <ComunityCard
+                community={comunity}
+                canModify={checkCredentials()}
+                _id={comunity._id}
                 name={comunity.name}
                 state={comunity.location.state}
                 city={
@@ -81,6 +54,8 @@ const Comunity = () => {
                 logo={comunity.logo === 'legacy' ? null : comunity.logo}
                 tags={comunity.tags}
                 link={comunity.url}
+                token={token}
+                status={comunity.status}
               />
               <div className="container related">
                 <div className="columns">

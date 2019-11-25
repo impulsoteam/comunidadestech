@@ -32,6 +32,9 @@ factory.define('Community', Community, () => ({
   owner: faker.internet.email(),
   creator: {
     rocketChat: faker.internet.userName(),
+    _id: '5dd960c16d45e34e0b15e99e',
+    name: faker.name.findName(),
+    email: faker.internet.email(),
   },
 }));
 

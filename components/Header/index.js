@@ -18,7 +18,7 @@ class Header extends Component {
     Cookies.remove('ctech_token');
     Router.push('/');
   };
-  generateButtons = ({ name, avatar, email, token }) => {
+  generateButtons = ({ name, avatar, email, token, isModerator }) => {
     if (!token)
       return (
         <>
@@ -44,9 +44,18 @@ class Header extends Component {
             <a className="button is-primary" href={'/'} title="Home">
               <strong>Home</strong>
             </a>
+            {isModerator && (
+              <a
+                className="button is-primary"
+                href={'/dashboard'}
+                title="Dashboard"
+              >
+                <strong>Dashboard</strong>
+              </a>
+            )}
             <a
               className="button is-primary"
-              href={'/cadastro'}
+              href={'/cadastrar'}
               title="Cadastre uma comunidade"
             >
               <strong className="is-hidden-mobile">

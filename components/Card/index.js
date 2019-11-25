@@ -4,6 +4,7 @@ import styles from './styles';
 class Card extends Component {
   render() {
     const { content } = this.props;
+    console.log(content);
     return (
       <div className="card">
         <div className="card-content">
