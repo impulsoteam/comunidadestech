@@ -1,11 +1,12 @@
 import css from 'styled-jsx/css';
+import { fonts, colors } from '/utils/variables';
 
 export default css`
   .title {
     font-weight: 700;
   }
   .subtitle {
-    font-family: 'Raleway', sans-serif;
+    font-family: ${fonts.raleway};
     font-size: 20px !important;
     font-weight: 300;
     margin: 0 auto 20px;
@@ -20,12 +21,12 @@ export default css`
     position: relative;
 
     .input {
-      background: red;
+      background: ${colors.chestnutRose};
     }
 
     .form-error {
       font-size: 10px;
-      color: red;
+      color: ${colors.chestnutRose};
       line-height: 1;
       position: absolute;
       bottom: -12px;

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import cookies from 'next-cookies';
 import { api, setHeader } from '../../utils/axios';
 
-import styles from './styles';
+import styles from '../cadastrar/styles';
 import CommunityForm from '../../components/CommunityForm';
 
 const EditCommunity = ({ token }) => {
