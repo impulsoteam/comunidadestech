@@ -41,6 +41,7 @@
     "react-dom": "^16.8.6",
     "react-google-login": "^5.0.7",
     "react-select": "^3.0.8",
+    "react-toastify": "^5.4.1",
     "styled-jsx-plugin-sass": "^1.0.0",
     "yup": "^0.27.0"
   },

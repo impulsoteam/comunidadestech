@@ -1,19 +1,17 @@
-import React from 'react';
-import Router from 'next/router';
-import { Formik, Form, Field, validateYupSchema } from 'formik';
+import React, { useState } from 'react';
+import { Formik, Form, Field } from 'formik';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import * as Yup from 'yup';
 import styles from './styles';
-import cookies from 'next-cookies';
 
+import loader from '../../static/comunidades-tech-loader.gif';
 import { CITYANDSTATES } from '../../utils/cityAndStates';
 import countries from '../../utils/countries';
 import { CATEGORIES } from '../../utils/comunityCategories';
 import { TAGS } from '../../utils/comunityTags';
 
 const CommunityForm = ({ service, initialValues, token }) => {
-  console.log(initialValues);
   const SignupSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, 'Muito curto!')
@@ -95,18 +93,19 @@ const CommunityForm = ({ service, initialValues, token }) => {
   };
 
   const animatedComponents = makeAnimated();
-  // const [publish, setPublish] = useState(false);
+  const [loading, setLoading] = useState(false);
   return (
     <>
       <Formik
         initialValues={initialValues}
         validationSchema={SignupSchema}
         onSubmit={(values) => {
+          setLoading(true);
           service(values);
           console.log('enviado', values);
         }}
       >
-        {({ errors, touched, values, setFieldValue }) => {
+        {({ errors, touched, values, isSubmitting, setFieldValue }) => {
           const handleChange = (selectedOption) => {
             const selected =
               selectedOption && selectedOption.map(({ value }) => value);
@@ -404,10 +403,11 @@ const CommunityForm = ({ service, initialValues, token }) => {
               <div className="columns">
                 <div className="column is-half is-offset-one-quarter">
                   <button
+                    disabled={loading}
                     className="button is-primary  is-fullwidth is-large"
                     type="submit"
                   >
-                    Enviar
+                    {loading ? <img src={loader} /> : 'enviar'}
                   </button>
                   {/* {token.isModerator && (
                     <button
