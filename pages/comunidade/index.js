@@ -5,6 +5,7 @@ import styles from './styles';
 import ComunityHero from '../../components/ComunityHero';
 import ComunityCard from '../../components/ComunityCard';
 import Card from '/components/Card/';
+import loader from '../../static/comunidades-tech-loader.gif';
 
 const Comunity = () => {
   const [list, setList] = useState([]);
@@ -109,6 +110,10 @@ const Comunity = () => {
       ) : (
         <div>
           <ComunityHero />
+          <img
+            src={loader}
+            style={{ maxWidth: '100px', display: 'block', margin: '30px auto' }}
+          />
         </div>
       )}
     </>

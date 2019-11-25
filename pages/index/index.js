@@ -7,7 +7,7 @@ import Filter from '../../components/Filter';
 import Counter from '../../components/Counter';
 import Router from 'next/router';
 import { urlRegex, pairsRegex } from '../../utils/urlRegex';
-
+import loader from '../../static/comunidades-tech-loader.gif';
 export default class Home extends PureComponent {
   state = {
     list: [],
@@ -283,45 +283,61 @@ export default class Home extends PureComponent {
       selectionFemale,
       selectionMale,
       inputValue,
+      loading,
     } = this.state;
 
     filteredList.sort((a, b) => (a.name > b.name ? 1 : -1));
     return (
-      <div>
-        <Hero />
-        <Counter list={list} />
-        <br />
-        <div className="container">
-          <Filter
-            list={list}
-            select={this.handleChange}
-            reset={this.handleResetButton}
-            inputOk={this.handleInput}
-            tags={this.tags(list)}
-            location={this.location(list)}
-            model={selectedModel}
-            country={selectedCountry}
-            state={selectedState}
-            city={selectedCity}
-            selectionFemale={selectionFemale}
-            selectionMale={selectionMale}
-            inputValue={inputValue}
-            focus={this.handleInputFocus}
-          />
-          <div className="columns">
-            <div className="column">
-              <div className="columns is-multiline card-wrapper">
-                {filteredList.map((card) => (
-                  <div className="column is-one-quarter" key={card.id}>
-                    <Card content={card} />
+      <>
+        {!loading ? (
+          <div>
+            <Hero />
+            <Counter list={list} />
+            <br />
+            <div className="container">
+              <Filter
+                list={list}
+                select={this.handleChange}
+                reset={this.handleResetButton}
+                inputOk={this.handleInput}
+                tags={this.tags(list)}
+                location={this.location(list)}
+                model={selectedModel}
+                country={selectedCountry}
+                state={selectedState}
+                city={selectedCity}
+                selectionFemale={selectionFemale}
+                selectionMale={selectionMale}
+                inputValue={inputValue}
+                focus={this.handleInputFocus}
+              />
+              <div className="columns">
+                <div className="column">
+                  <div className="columns is-multiline card-wrapper">
+                    {filteredList.map((card) => (
+                      <div className="column is-one-quarter" key={card.id}>
+                        <Card content={card} />
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
+              <style jsx>{styles}</style>
             </div>
           </div>
-          <style jsx>{styles}</style>
-        </div>
-      </div>
+        ) : (
+          <div>
+            <img
+              src={loader}
+              style={{
+                maxWidth: '100px',
+                display: 'block',
+                margin: '30px auto',
+              }}
+            />
+          </div>
+        )}
+      </>
     );
   }
 }
