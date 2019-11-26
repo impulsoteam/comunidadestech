@@ -24,6 +24,7 @@ class PassportConfig {
             profile,
             'google'
           );
+          console.log(user);
           return done(null, user);
         }
       )

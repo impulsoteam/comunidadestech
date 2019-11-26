@@ -16,9 +16,7 @@ router.get(
       'https://www.googleapis.com/auth/plus.login',
       'https://www.googleapis.com/auth/userinfo.email',
     ],
-  }),
-  SessionController.login,
-  SessionController.createToken
+  })
 );
 router.get(
   '/google_oauth2/callback',
