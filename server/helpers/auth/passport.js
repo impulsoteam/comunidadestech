@@ -12,7 +12,8 @@ class PassportConfig {
         {
           clientID: GOOGLE_CLIENT_ID,
           clientSecret: GOOGLE_SECRET,
-          callbackURL: 'https://comunidades.tech/auth/google_oauth2/callback',
+          callbackURL:
+            'https://staging-comunidadestech.herokuapp.com/auth/google_oauth2/callback',
         },
         async (accessToken, refreshToken, profile, done) => {
           console.log({ accessToken, refreshToken, profile, done });
