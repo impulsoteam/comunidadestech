@@ -40,11 +40,12 @@ class PassportConfig {
           scope: ['r_emailaddress', 'r_liteprofile'],
         },
         async (accessToken, refreshToken, profile, done) => {
-          const user = await UserController.findOrCreate(
-            accessToken,
-            profile,
-            'linkedin'
-          );
+          console.log(accessToken, refreshToken, profile, done);
+          // const user = await UserController.findOrCreate(
+          //   accessToken,
+          //   profile,
+          //   'linkedin'
+          // );
           done(null, user);
         }
       )
