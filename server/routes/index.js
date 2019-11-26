@@ -10,5 +10,5 @@ router.get('/', (req, res) => {
 });
 
 router.use('/community', communityRoutes);
-router.use('/session', sessionRoutes);
+
 export default router;

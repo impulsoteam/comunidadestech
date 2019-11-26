@@ -9,9 +9,17 @@ router.get('/', (req, res) => {
   });
 });
 
-router.post(
+router.get(
   '/google',
-  passport.authenticate('google-token', { session: false }),
+  passport.authenticate('google', {
+    scope: ['https://www.googleapis.com/auth/plus.login'],
+  }),
+  SessionController.login,
+  SessionController.createToken
+);
+router.get(
+  '/google_oauth2/callback',
+  passport.authenticate('google', { failureRedirect: '/' }),
   SessionController.login,
   SessionController.createToken
 );
