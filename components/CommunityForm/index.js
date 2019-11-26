@@ -5,7 +5,6 @@ import makeAnimated from 'react-select/animated';
 import * as Yup from 'yup';
 import styles from './styles';
 
-import { render } from 'react-dom';
 import MaskedInput from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
