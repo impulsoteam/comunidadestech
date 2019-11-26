@@ -40,4 +40,9 @@ export default css`
   .container {
     margin-bottom: 50px;
   }
+
+  .required-form {
+    font-size: 12px;
+    font-weight: bold;
+  }
 `;
