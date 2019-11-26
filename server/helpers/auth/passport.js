@@ -10,8 +10,11 @@ class PassportConfig {
     passport.use(
       new GoogleStrategy(
         {
-          clientID: '1024966559021.apps.googleusercontent.com',
-          clientSecret: 'wtkkmgsVbPPGFGek1QrN3FBR',
+          clientID:
+            '1024966559021-bovn18d9jnes1n4vals14pmu5ffmed6q.apps.googleusercontent.com',
+          clientSecret: '6AKPjk3HFajdP0zTJweoN3k3',
+          // clientID: '1024966559021.apps.googleusercontent.com',
+          // clientSecret: 'wtkkmgsVbPPGFGek1QrN3FBR',
           // clientID: GOOGLE_CLIENT_ID,
           // clientSecret: GOOGLE_SECRET,
           callbackURL:
