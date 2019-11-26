@@ -108,9 +108,12 @@ const ComunityCard = ({
               </div>
               <div>
                 {tags
-                  ? tags.map((tag) => (
-                      <span className="tag is-primary">{tag}</span>
-                    ))
+                  ? tags.map(
+                      (tag) =>
+                        tag.length <= 20 && (
+                          <span className="tag is-primary">{tag}</span>
+                        )
+                    )
                   : null}
               </div>
             </div>

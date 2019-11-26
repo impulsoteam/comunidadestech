@@ -11,13 +11,13 @@ class Card extends Component {
             <div className="media">
               <div className="media-left">
                 <figure className="image is-32x32">
-                  {content.logo ? (
-                    <img src={content.logo} alt={content.name} />
-                  ) : (
+                  {!content.logo || content.logo === 'legacy' ? (
                     <img
                       src="../../static/ctech-small-logo.png"
                       alt={content.name}
                     />
+                  ) : (
+                    <img src={content.logo} alt={content.name} />
                   )}
                 </figure>
               </div>
@@ -38,7 +38,7 @@ class Card extends Component {
             <div className="control">
               <div className="tags has-addons">
                 <span className="tag is-dark">membros</span>
-                <span className="tag is-primary">{content.size}</span>
+                <span className="tag is-primary">{content.members}</span>
               </div>
             </div>
             <div className="control">

@@ -12,6 +12,7 @@ class Utils {
         relatedByCity = await Community.aggregate([
           {
             $match: {
+              status: 'published',
               name: { $ne: name },
               'location.city': city,
             },
@@ -24,6 +25,7 @@ class Utils {
         relatedByState = await Community.aggregate([
           {
             $match: {
+              status: 'published',
               name: { $ne: name },
               'location.city': { $ne: city },
               'location.state': state,
@@ -39,6 +41,7 @@ class Utils {
         relatedByCategory = await Community.aggregate([
           {
             $match: {
+              status: 'published',
               name: { $ne: name },
               'location.city': { $ne: city },
               'location.state': { $ne: state },
