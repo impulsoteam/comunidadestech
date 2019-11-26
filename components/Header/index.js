@@ -41,7 +41,11 @@ class Header extends Component {
       <>
         <div className="top-menu">
           <p className="control">
-            <a className="button is-primary" href={'/'} title="Home">
+            <a
+              className="button is-primary is-hidden-mobile"
+              href={'/'}
+              title="Home"
+            >
               <strong>Home</strong>
             </a>
             {isModerator && (
@@ -58,17 +62,15 @@ class Header extends Component {
               href={'/cadastrar'}
               title="Cadastre uma comunidade"
             >
-              <strong className="is-hidden-mobile">
+              <strong className="is-hidden-touch">
                 Cadastre uma comunidade
               </strong>
-              <strong className="is-hidden-tablet is-hidden-desktop">
-                Cadastre
-              </strong>
+              <strong className="is-hidden-desktop">Cadastre</strong>
             </a>
           </p>
           <div className="profile-wrapper">
             <img src={avatar} />
-            <p>{name.split(' ')[0]}</p>
+            <p className="is-hidden-mobile">{name.split(' ')[0]}</p>
             <button
               className="button is-primary is-small"
               onClick={this.logout}
@@ -92,7 +94,12 @@ class Header extends Component {
                 <img
                   src="/static/ctech-logo.svg"
                   alt="comunidades.tech"
-                  className="logo"
+                  className="logo is-hidden-mobile"
+                />
+                <img
+                  src="/static/logo.svg"
+                  alt="comunidades.tech"
+                  className="logo is-hidden-tablet is-hidden-desktop"
                 />
               </a>
             </div>
