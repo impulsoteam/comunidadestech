@@ -1,6 +1,6 @@
 import passport from 'passport';
 import LinkedIn from 'passport-linkedin-oauth2';
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+import GoogleStrategy from 'passport-google-oauth';
 
 import UserController from '../../controllers/UserController';
 
@@ -12,15 +12,13 @@ class PassportConfig {
       GOOGLE_CALLBACK_URL,
     } = process.env;
     passport.use(
-      new GoogleStrategy(
+      new GoogleStrategy.OAuth2Strategy(
         {
           clientID: GOOGLE_CLIENT_ID,
           clientSecret: GOOGLE_SECRET,
           callbackURL: GOOGLE_CALLBACK_URL,
         },
         async (accessToken, refreshToken, profile, done) => {
-          console.log({ accessToken, refreshToken, profile, done });
-          return;
           const user = await UserController.findOrCreate(
             accessToken,
             profile,

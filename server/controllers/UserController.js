@@ -38,6 +38,7 @@ class UserController {
         }
       }
     );
+    console.log(response);
     return response;
   }
 }
