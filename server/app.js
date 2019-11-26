@@ -28,15 +28,8 @@ app
   .then(() => {
     const server = express();
     server.use((req, res, next) => {
-      const hostname =
-        req.hostname === 'comunidades.tech'
-          ? 'www.comunidades.tech'
-          : req.hostname;
-      if (
-        req.headers['x-forwarded-proto'] === 'http' ||
-        req.hostname === 'comunidades.tech'
-      ) {
-        res.redirect(301, `https://${hostname}${req.url}`);
+      if (req.headers['x-forwarded-proto'] === 'http') {
+        res.redirect(301, `https://${req.hostname}${req.url}`);
         return;
       }
 
