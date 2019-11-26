@@ -23,6 +23,10 @@ export default css`
 
   .image {
     overflow: hidden;
+
+    img {
+      height: 100%;
+    }
   }
 
   .control {

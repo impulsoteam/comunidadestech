@@ -20,4 +20,8 @@ export default css`
       width: 650px;
     }
   }
+
+  a {
+    color: initial;
+  }
 `;

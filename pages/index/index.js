@@ -1,15 +1,13 @@
 import React, { PureComponent } from 'react';
 import styles from './styles';
+import { api, setHeader } from '../../utils/axios';
 import Card from '/components/Card/';
 import Hero from '/components/Hero/';
 import Filter from '../../components/Filter';
 import Counter from '../../components/Counter';
-import { throws } from 'assert';
-import Router, { useRouter } from 'next/router';
+import Router from 'next/router';
 import { urlRegex, pairsRegex } from '../../utils/urlRegex';
-
-const API_HOST = 'https://api.sheety.co/6ae2d0d2-5f62-4e74-afb7-1696bca96d98';
-
+import loader from '../../static/comunidades-tech-loader.gif';
 export default class Home extends PureComponent {
   state = {
     list: [],
@@ -25,39 +23,35 @@ export default class Home extends PureComponent {
     selectionMale: 'Todos',
     searchURL: '',
     searchName: '',
-
   };
 
   normalize = (array) => {
-    return array
-      .filter((item) => item['status'] === 'PUBLICADO')
-      .map((item, index) => ({
-        id: `community-${index}`,
-        name: item['nomeDaComunidade'],
-        country: item['paíS'],
-        state: item['estado'],
-        city: item['cidade'],
-        model: item['aComunidadeéPresencial,OnlineOuAmbos?'],
-        link: item['linkPrincipal'],
-        description: item['descriçãO'],
-        category: item['categoria'],
-        tags: item['tags'].split(', '),
-        isGlobalProgram: item['pertenceAAlgumProgramaGlobal?'],
-        globalProgram: item['qualProgramaGlobalSuaComunidadePertence?'],
-        size: item['quantidadeDeMembros'],
-        logo: item['logoDaComunidade'],
-        networkID: item['seVocêéMembroDaImpulsoNetwork,InformeSeuId'],
-        nameSearch: item['nomeDaComunidade'].toLowerCase(),
-      }));
+    return array.map((item, index) => ({
+      id: `community-${index}`,
+      name: item.name,
+      country:
+        item.location.country !== 'legacy' ? item.location.country : null,
+      state: item.location.state !== 'legacy' ? item.location.state : null,
+      city: item.location.city !== 'legacy' ? item.location.city : null,
+      model:
+        (item.model === 'both' && 'Ambos') ||
+        (item.model === 'presential' && 'Presencial') ||
+        (item.model === 'online' && 'Online'),
+      link: item.url,
+      description: item.description,
+      category: item.category,
+      tags: item.tags,
+      isGlobalProgram: item.globalProgram.isParticipant,
+      members: item.members,
+      logo: item.logo !== 'legacy' ? item.logo : null,
+      nameSearch: item.name.toLowerCase(),
+    }));
   };
 
   async componentDidMount() {
-    await fetch(API_HOST)
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ list: this.normalize(data) });
-      });
-
+    setHeader(this.props.token);
+    const { data } = await api.get('/community/status/published');
+    this.setState({ list: this.normalize(data) });
     this.setState({
       loading: false,
       filteredList: this.state.list,
@@ -146,7 +140,6 @@ export default class Home extends PureComponent {
       Router.push(href, as, { shallow: true });
       this.setState({ selectionFemale: value });
       this.setState({ selectionFemale: value, inputValue: '' });
-
     }
 
     if (name === 'model') {
@@ -169,7 +162,6 @@ export default class Home extends PureComponent {
         selectionFemale: 'Todas',
         inputValue: '',
       });
-
     }
 
     if (name === 'country' || name === 'state' || name === 'city') {
@@ -199,7 +191,6 @@ export default class Home extends PureComponent {
       const href = hrefCountry + hrefState + hrefCity;
       const as = href;
       Router.push(href, as, { shallow: true });
-
     }
 
     this.setState({ filteredList, inputValue: '' });
@@ -209,7 +200,7 @@ export default class Home extends PureComponent {
     const { value } = event.target;
     let inputValue = '';
     inputValue = value.toLowerCase();
-    
+
     const href = `/?${name}=${value}`;
     const as = href;
     Router.push(href, as, { shallow: true });
@@ -219,7 +210,6 @@ export default class Home extends PureComponent {
     });
 
     this.setState({ inputValue, filteredList });
-
   };
 
   handleInputFocus = () => {
@@ -292,46 +282,61 @@ export default class Home extends PureComponent {
       selectionFemale,
       selectionMale,
       inputValue,
+      loading,
     } = this.state;
 
     filteredList.sort((a, b) => (a.name > b.name ? 1 : -1));
-
     return (
-      <div>
-        <Hero />
-        <Counter list={list} />
-        <br />
-        <div className="container">
-          <Filter
-            list={list}
-            select={this.handleChange}
-            reset={this.handleResetButton}
-            inputOk={this.handleInput}
-            tags={this.tags(list)}
-            location={this.location(list)}
-            model={selectedModel}
-            country={selectedCountry}
-            state={selectedState}
-            city={selectedCity}
-            selectionFemale={selectionFemale}
-            selectionMale={selectionMale}
-            inputValue={inputValue}
-            focus={this.handleInputFocus}
-          />
-          <div className="columns">
-            <div className="column">
-              <div className="columns is-multiline card-wrapper">
-                {filteredList.map((card) => (
-                  <div className="column is-one-quarter" key={card.id}>
-                    <Card content={card} />
+      <>
+        {!loading ? (
+          <div>
+            <Hero />
+            <Counter list={list} />
+            <br />
+            <div className="container">
+              <Filter
+                list={list}
+                select={this.handleChange}
+                reset={this.handleResetButton}
+                inputOk={this.handleInput}
+                tags={this.tags(list)}
+                location={this.location(list)}
+                model={selectedModel}
+                country={selectedCountry}
+                state={selectedState}
+                city={selectedCity}
+                selectionFemale={selectionFemale}
+                selectionMale={selectionMale}
+                inputValue={inputValue}
+                focus={this.handleInputFocus}
+              />
+              <div className="columns">
+                <div className="column">
+                  <div className="columns is-multiline card-wrapper">
+                    {filteredList.map((card) => (
+                      <div className="column is-one-quarter" key={card.id}>
+                        <Card content={card} />
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
+              <style jsx>{styles}</style>
             </div>
           </div>
-          <style jsx>{styles}</style>
-        </div>
-      </div>
+        ) : (
+          <div>
+            <img
+              src={loader}
+              style={{
+                maxWidth: '100px',
+                display: 'block',
+                margin: '30px auto',
+              }}
+            />
+          </div>
+        )}
+      </>
     );
   }
 }

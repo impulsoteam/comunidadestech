@@ -14,7 +14,13 @@ export default class Footer extends PureComponent {
           <div className="content has-text-centered">
             <p>
               <strong>Comunidades.tech</strong> é um projeto open source
-              desenvolvido pela comunidade da <strong>Impulso.Network</strong>.
+              desenvolvido pela comunidade da{' '}
+              <strong>
+                <a href="https://impulso.link/comunidades-tech" target="_blank">
+                  Impulso.Network
+                </a>
+              </strong>
+              .
             </p>
           </div>
         </footer>
