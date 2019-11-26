@@ -4,6 +4,7 @@ import styles from './styles';
 class Card extends Component {
   render() {
     const { content } = this.props;
+    console.log('content', content);
     return (
       <div className="card">
         <div className="card-content">
@@ -11,13 +12,13 @@ class Card extends Component {
             <div className="media">
               <div className="media-left">
                 <figure className="image is-32x32">
-                  {content.logo ? (
-                    <img src={content.logo} alt={content.name} />
-                  ) : (
+                  {!content.logo || content.logo === 'legacy' ? (
                     <img
                       src="../../static/ctech-small-logo.png"
                       alt={content.name}
                     />
+                  ) : (
+                    <img src={content.logo} alt={content.name} />
                   )}
                 </figure>
               </div>
