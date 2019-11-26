@@ -10,8 +10,10 @@ class PassportConfig {
     passport.use(
       new GoogleStrategy(
         {
-          clientID: GOOGLE_CLIENT_ID,
-          clientSecret: GOOGLE_SECRET,
+          clientID: '1024966559021.apps.googleusercontent.com',
+          clientSecret: 'wtkkmgsVbPPGFGek1QrN3FBR',
+          // clientID: GOOGLE_CLIENT_ID,
+          // clientSecret: GOOGLE_SECRET,
           callbackURL:
             'https://staging-comunidadestech.herokuapp.com/auth/google_oauth2/callback',
         },
