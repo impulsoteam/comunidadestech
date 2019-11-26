@@ -42,30 +42,50 @@ class Header extends Component {
         <div className="top-menu">
           <p className="control">
             <a
-              className="button is-primary is-hidden-mobile"
+              className="button is-primary is-hidden-touch"
+              href={'/'}
+              title="Home"
+            >
+              <strong>Home</strong>
+            </a>
+            <a
+              className="button is-primary is-hidden-desktop is-small is-hidden-mobile"
               href={'/'}
               title="Home"
             >
               <strong>Home</strong>
             </a>
             {isModerator && (
-              <a
-                className="button is-primary"
-                href={'/dashboard'}
-                title="Dashboard"
-              >
-                <strong>Dashboard</strong>
-              </a>
+              <>
+                <a
+                  className="button is-primary is-hidden-touch"
+                  href={'/dashboard'}
+                  title="Dashboard"
+                >
+                  <strong>Dashboard</strong>
+                </a>
+                <a
+                  className="button is-primary is-hidden-desktop is-small"
+                  href={'/dashboard'}
+                  title="Dashboard"
+                >
+                  <strong>Dashboard</strong>
+                </a>
+              </>
             )}
             <a
-              className="button is-primary"
+              className="button is-primary is-hidden-touch"
               href={'/cadastrar'}
               title="Cadastre uma comunidade"
             >
-              <strong className="is-hidden-touch">
-                Cadastre uma comunidade
-              </strong>
-              <strong className="is-hidden-desktop">Cadastre</strong>
+              <strong>Cadastre uma comunidade</strong>
+            </a>
+            <a
+              className="button is-primary is-hidden-desktop is-small"
+              href={'/cadastrar'}
+              title="Cadastre uma comunidade"
+            >
+              <strong>Cadastre</strong>
             </a>
           </p>
           <div className="profile-wrapper">

@@ -1,6 +1,11 @@
 import css from 'styled-jsx/css';
 
 export default css`
+  .navbar-brand {
+    @media screen and (max-width: 768px) {
+      padding: 0;
+    }
+  }
   .navbar {
     padding: 1.2rem 0;
     box-shadow: none;
@@ -8,6 +13,10 @@ export default css`
   }
   .navbar-item {
     min-width: 80px;
+
+    @media screen and (max-width: 768px) {
+      padding: 0;
+    }
   }
   .logo {
     min-height: 48px;
@@ -39,6 +48,14 @@ export default css`
 
       &:last-child {
         margin-right: 20px;
+      }
+
+      @media screen and (max-width: 768px) {
+        margin-right: 3px;
+
+        &:last-child {
+          margin-right: 8px;
+        }
       }
     }
   }
