@@ -43,6 +43,8 @@ const Comunity = ({ token }) => {
     if (creator._id && creator._id === _id) return true;
     return false;
   };
+
+  console.log('comuni', comunity);
   return (
     <>
       {!loading ? (
