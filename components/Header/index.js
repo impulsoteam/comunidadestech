@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 import Router from 'next/router';
-import GoogleLogin from 'react-google-login';
 
 import styles from './styles';
 
@@ -22,13 +21,6 @@ class Header extends Component {
     if (!token)
       return (
         <>
-          {/* <GoogleLogin
-            clientId={process.env.GOOGLE_CLIENT_ID}
-            buttonText="Login"
-            onSuccess={(response) => this.handleSuccess(response)}
-            onFailure={(response) => this.handleFailure(response)}
-            cookiePolicy={'single_host_origin'}
-          /> */}
           <a
             className="button is-primary"
             href={`https://www.linkedin.com/oauth/v2/authorization?client_id=${process.env.LINKEDIN_API_KEY}&client_secret=${process.env.LINKEDIN_SECRET_KEY}&redirect_uri=${process.env.LINKEDIN_CALLBACK_URL}&response_type=code&scope=r_liteprofile%20r_emailaddress%20w_member_social`}

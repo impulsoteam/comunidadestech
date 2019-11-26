@@ -12,10 +12,11 @@ router.get('/', (req, res) => {
 router.get(
   '/google',
   passport.authenticate('google', {
-    scope: ['https://www.googleapis.com/auth/plus.login'],
-  }),
-  SessionController.login,
-  SessionController.createToken
+    scope: [
+      'https://www.googleapis.com/auth/plus.login',
+      'https://www.googleapis.com/auth/userinfo.email',
+    ],
+  })
 );
 router.get(
   '/google_oauth2/callback',

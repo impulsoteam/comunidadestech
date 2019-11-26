@@ -1,24 +1,22 @@
 import passport from 'passport';
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-// import GoogleToken from 'passport-google-token';
 import LinkedIn from 'passport-linkedin-oauth2';
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
 import UserController from '../../controllers/UserController';
 
 class PassportConfig {
   google() {
-    const { GOOGLE_CLIENT_ID, GOOGLE_SECRET } = process.env;
+    const {
+      GOOGLE_CLIENT_ID,
+      GOOGLE_SECRET,
+      GOOGLE_CALLBACK_URL,
+    } = process.env;
     passport.use(
       new GoogleStrategy(
         {
-          clientID:
-            '1024966559021-bovn18d9jnes1n4vals14pmu5ffmed6q.apps.googleusercontent.com',
-          clientSecret: '6AKPjk3HFajdP0zTJweoN3k3',
-          // clientID: '1024966559021.apps.googleusercontent.com',
-          // clientSecret: 'wtkkmgsVbPPGFGek1QrN3FBR',
-          // clientID: GOOGLE_CLIENT_ID,
-          // clientSecret: GOOGLE_SECRET,
-          callbackURL:
-            'https://staging-comunidadestech.herokuapp.com/auth/google_oauth2/callback',
+          clientID: GOOGLE_CLIENT_ID,
+          clientSecret: GOOGLE_SECRET,
+          callbackURL: GOOGLE_CALLBACK_URL,
         },
         async (accessToken, refreshToken, profile, done) => {
           console.log({ accessToken, refreshToken, profile, done });

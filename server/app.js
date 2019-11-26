@@ -33,8 +33,8 @@ app
     server.use(passport.session());
     PassportConfig.google();
     PassportConfig.linkedin();
-
     server.use('/auth', sessionRoutes);
+
     server.use('/api/v1', routes);
     server.get('*', (req, res) => {
       return handle(req, res);
