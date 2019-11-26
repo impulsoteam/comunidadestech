@@ -5,6 +5,10 @@ import makeAnimated from 'react-select/animated';
 import * as Yup from 'yup';
 import styles from './styles';
 
+import { render } from 'react-dom';
+import MaskedInput from 'react-text-mask';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+
 import { CITYANDSTATES } from '../../utils/cityAndStates';
 import countries from '../../utils/countries';
 import { CATEGORIES } from '../../utils/comunityCategories';
@@ -93,12 +97,20 @@ const CommunityForm = ({ service, initialValues, token }) => {
 
   const animatedComponents = makeAnimated();
   const [loading, setLoading] = useState(false);
+
+  const numberMask = createNumberMask({
+    prefix: '',
+    includeThousandsSeparator: true,
+    thousandsSeparatorSymbol: '.',
+    integerLimit: 6,
+  });
   return (
     <>
       <Formik
         initialValues={initialValues}
         validationSchema={SignupSchema}
         onSubmit={(values) => {
+          values.members = parseInt(values.members.replace('.', ''));
           setLoading(true);
           service(values);
           console.log('enviado', values);
@@ -120,7 +132,7 @@ const CommunityForm = ({ service, initialValues, token }) => {
               <div className="columns">
                 <div className="column">
                   <label>
-                    Nome da comunidade
+                    Nome da comunidade *
                     <Field
                       name="name"
                       className="input"
@@ -131,7 +143,7 @@ const CommunityForm = ({ service, initialValues, token }) => {
                     ) : null}
                   </label>
                   <label>
-                    A comunidade é presencial, online ou ambos?
+                    A comunidade é presencial, online ou ambos? *
                     <Select
                       name="model"
                       defaultValue={modelOptions.filter(
@@ -250,14 +262,14 @@ const CommunityForm = ({ service, initialValues, token }) => {
                     )}
                   </label>
                   <label>
-                    Link da comunidade
+                    Link da comunidade *
                     <Field name="url" className="input" />
                     {errors.url && touched.url ? (
                       <div className="form-error">{errors.url}</div>
                     ) : null}
                   </label>
                   <label>
-                    Descrição
+                    Descrição *
                     <Field
                       name="description"
                       component="textarea"
@@ -271,7 +283,7 @@ const CommunityForm = ({ service, initialValues, token }) => {
                 </div>
                 <div className="column">
                   <label>
-                    Categoria
+                    Categoria *
                     <Select
                       name="category"
                       defaultValue={CATEGORIES.filter(
@@ -294,7 +306,7 @@ const CommunityForm = ({ service, initialValues, token }) => {
                     ) : null}
                   </label>
                   <label>
-                    Tipo
+                    Tipo *
                     <Select
                       name="type"
                       defaultValue={communityTypes.filter(
@@ -313,7 +325,7 @@ const CommunityForm = ({ service, initialValues, token }) => {
                     ) : null}
                   </label>
                   <label>
-                    Tags
+                    Tags *
                     <Select
                       name="tags"
                       defaultValue={values.tags.map((tag) => ({
@@ -350,7 +362,7 @@ const CommunityForm = ({ service, initialValues, token }) => {
                   </label>
                   {values.globalProgram.isParticipant && (
                     <label>
-                      Qual?
+                      Qual? *
                       <Field
                         name="globalProgram.name"
                         defaultValue={values.globalProgram.name}
@@ -365,21 +377,30 @@ const CommunityForm = ({ service, initialValues, token }) => {
                     </label>
                   )}
                   <label>
-                    Quantidade de Membros
-                    <Field name="members" className="input" />
+                    Quantidade de Membros *
+                    <Field name="members" type="number">
+                      {({ field }) => (
+                        <MaskedInput
+                          {...field}
+                          mask={numberMask}
+                          className="input"
+                        />
+                      )}
+                    </Field>
                     {errors.members && touched.members ? (
                       <div className="form-error">{errors.members}</div>
                     ) : null}
                   </label>
                   <label>
-                    Logo da comunidade
+                    Link da Logo da comunidade
                     <Field name="logo" className="input" />
                     {errors.logo && touched.logo ? (
                       <div className="form-error">{errors.logo}</div>
                     ) : null}
                   </label>
                   <label>
-                    Se você é membro da Impulso Network, informe seu id
+                    Se você é membro da Impulso Network, informe seu nome de
+                    usuário
                     <Field name="creator.rocketChat" className="input" />
                     {errors.creator &&
                     errors.creator.rocketChat &&
@@ -391,7 +412,7 @@ const CommunityForm = ({ service, initialValues, token }) => {
                     ) : null}
                   </label>
                   <label>
-                    Informe o email do líder da comunidade:
+                    Informe o email do líder da comunidade *
                     <Field name="owner" className="input" />
                     {errors.owner && touched.owner ? (
                       <div className="form-error"> {errors.owner}</div>
@@ -399,6 +420,7 @@ const CommunityForm = ({ service, initialValues, token }) => {
                   </label>
                 </div>
               </div>
+              <p className="required-form">* Itens obrigatórios</p>
               <div className="columns">
                 <div className="column is-half is-offset-one-quarter">
                   <button
@@ -429,6 +451,7 @@ const CommunityForm = ({ service, initialValues, token }) => {
           );
         }}
       </Formik>
+
       <style jsx>{styles}</style>
     </>
   );

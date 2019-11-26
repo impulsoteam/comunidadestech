@@ -39,7 +39,7 @@ const RegisterCommunity = ({ token }) => {
               Cadastre sua comunidade
             </h1>
             <h2 className="subtitle is-size-4-desktop">
-              Preencha o formulário e tenha sua comunidade publicada no nosso
+              Preencha o formulário e tenha sua comunidade publicada em nosso
               diretório!
             </h2>
           </div>

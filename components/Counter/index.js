@@ -39,7 +39,9 @@ class Counter extends Component {
           <i className="fas fa-users"></i>
           <div className="counter-info">
             <h2 className="is-size-1-desktop is-size-2-tablet is-size-3-mobile">
-              {Object.values(list).reduce((total, { size }) => total + size, 0)}
+              {Object.values(list)
+                .reduce((total, { size }) => total + size, 0)
+                .toLocaleString('pt-BR')}
             </h2>
             <h5>
               <span>Membros</span>
