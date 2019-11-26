@@ -42,7 +42,7 @@ export default class Home extends PureComponent {
       category: item.category,
       tags: item.tags,
       isGlobalProgram: item.globalProgram.isParticipant,
-      size: item.members,
+      members: item.members,
       logo: item.logo !== 'legacy' ? item.logo : null,
       nameSearch: item.name.toLowerCase(),
     }));

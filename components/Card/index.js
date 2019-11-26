@@ -38,7 +38,7 @@ class Card extends Component {
             <div className="control">
               <div className="tags has-addons">
                 <span className="tag is-dark">membros</span>
-                <span className="tag is-primary">{content.size}</span>
+                <span className="tag is-primary">{content.members}</span>
               </div>
             </div>
             <div className="control">
