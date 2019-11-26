@@ -24,7 +24,7 @@ class PassportConfig {
             profile,
             'google'
           );
-          done(null, user);
+          return done(null, user);
         }
       )
     );
@@ -51,7 +51,7 @@ class PassportConfig {
             profile,
             'linkedin'
           );
-          done(null, user);
+          return done(null, user);
         }
       )
     );
