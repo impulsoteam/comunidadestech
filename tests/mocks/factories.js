@@ -5,7 +5,7 @@ import Community from '../../server/models/community';
 import User from '../../server/models/user';
 
 factory.define('Community', Community, () => ({
-  name: faker.name.title(),
+  name: faker.name.findName(),
   logo: faker.image.avatar(),
   url: faker.internet.url(),
   description: faker.lorem.sentence(),
@@ -40,7 +40,15 @@ factory.define('Community', Community, () => ({
 
 factory.define('User', User, () => ({
   name: faker.name.findName(),
+  email: faker.internet.email(),
   avatar: faker.image.avatar(),
-  linkedinId: faker.internet.password(),
+  linkedinProvider: {
+    id: faker.internet.password(),
+    token: faker.internet.password(),
+  },
+  googleProvider: {
+    id: faker.internet.password(),
+    token: faker.internet.password(),
+  },
 }));
 export default factory;

@@ -9,13 +9,6 @@ import { api, setHeader } from '../../utils/axios';
 import styles from './styles';
 import CommunityForm from '../../components/CommunityForm';
 
-const initialValues = {
-  url: 'https://',
-  location: {},
-  globalProgram: {},
-  creator: {},
-  tags: [],
-};
 const RegisterCommunity = ({ credentials }) => {
   const sendNotification = () => {
     toast.configure();
@@ -25,10 +18,22 @@ const RegisterCommunity = ({ credentials }) => {
     );
   };
 
+  const getInitialValues = () => {
+    const { _id, name, email } = credentials;
+    return {
+      url: 'https://',
+      location: {},
+      globalProgram: {},
+      creator: {
+        _id,
+        name,
+        email,
+      },
+      tags: [],
+    };
+  };
+
   const postCommunity = async (community) => {
-    const { name, email } = credentials;
-    community.creator.name = name;
-    community.creator.email = email;
     setHeader(credentials);
     await api.post('/community/store', community);
     sendNotification();
@@ -54,7 +59,7 @@ const RegisterCommunity = ({ credentials }) => {
             <CommunityForm
               credentials={credentials}
               service={postCommunity}
-              initialValues={initialValues}
+              initialValues={getInitialValues()}
             />
           </div>
         </div>

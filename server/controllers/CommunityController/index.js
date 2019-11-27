@@ -6,12 +6,19 @@ class CommunityController {
   async store(req, res) {
     try {
       const { decoded, body } = req;
-      const { _id, name, email } = await User.findOne({ _id: decoded.id });
-      if (!name || !email)
-        return res.status(400).json({ message: 'User not found' });
-      body.creator._id = _id;
-      body.creator.name = name;
-      body.creator.email = email;
+      const user = await User.findOne({ _id: decoded.id });
+
+      if (!user) return res.status(400).json({ message: 'User not found' });
+
+      const { _id, name, email } = body.creator;
+      if (
+        JSON.stringify(_id) !== JSON.stringify(user._id) ||
+        name !== user.name ||
+        email !== user.email
+      )
+        return res
+          .status(400)
+          .json({ message: 'Creator values does not match with credentials' });
 
       const community = await Community.create(body);
       return res.status(201).json(community);

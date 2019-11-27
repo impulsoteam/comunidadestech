@@ -1,6 +1,6 @@
 import express from 'express';
 import communityRoutes from './community';
-import sessionRoutes from './session';
+
 const router = express.Router();
 
 router.get('/', (req, res) => {

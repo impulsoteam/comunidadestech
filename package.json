@@ -53,9 +53,9 @@
     "faker": "^4.1.0",
     "husky": "^2.7.0",
     "jest": "^24.9.0",
-    "node-mocks-http": "^1.8.0",
     "nodemon": "^1.19.4",
     "prettier": "^1.18.2",
+    "set-cookie-parser": "^2.4.0",
     "sucrase": "^3.10.1",
     "supertest": "^4.0.2"
   }
