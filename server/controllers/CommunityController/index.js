@@ -38,7 +38,6 @@ class CommunityController {
         message: `Community removed by ${isOwner ? 'owner' : 'moderator'}`,
       });
     } catch (error) {
-      console.log(error);
       return res.status(500).json(error);
     }
   }
@@ -59,7 +58,6 @@ class CommunityController {
         return res.json(updatedCommunity);
       }
     } catch (error) {
-      console.log(error);
       return res.status(500).json(error);
     }
   }
@@ -77,7 +75,6 @@ class CommunityController {
 
       return res.json(communities);
     } catch (error) {
-      console.log(error);
       return res.status(500).json(error);
     }
   }
@@ -104,7 +101,6 @@ class CommunityController {
         related,
       });
     } catch (error) {
-      console.log(error);
       return res.status(500).json(error);
     }
   }
@@ -116,7 +112,6 @@ class CommunityController {
 
       return res.json(communities);
     } catch (error) {
-      console.log(error);
       return res.status(500).json(error);
     }
   }

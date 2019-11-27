@@ -13,6 +13,7 @@ router.get(
     ],
   })
 );
+
 router.get(
   '/google_oauth2/callback',
   passport.authenticate('google', { session: false }),
