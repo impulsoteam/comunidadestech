@@ -17,16 +17,21 @@ const initialValues = {
   tags: [],
 };
 const RegisterCommunity = ({ credentials }) => {
+  const sendNotification = () => {
+    toast.configure();
+    toast.success(
+      `Comunidade cadastrada com sucesso!\n
+    Em breve ela será publicada.`
+    );
+  };
+
   const postCommunity = async (community) => {
     const { name, email } = credentials;
     community.creator.name = name;
     community.creator.email = email;
     setHeader(credentials);
     await api.post('/community/store', community);
-    toast.success(
-      `Comunidade cadastrada com sucesso!\n
-      Em breve ela será publicada.`
-    );
+    sendNotification();
     Router.push('/');
   };
 

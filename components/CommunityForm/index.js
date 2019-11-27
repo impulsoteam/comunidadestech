@@ -101,7 +101,6 @@ const CommunityForm = ({ service, initialValues }) => {
         onSubmit={(values) => {
           setLoading(true);
           service(values);
-          console.log('enviado', values);
         }}
       >
         {({ errors, touched, values, isSubmitting, setFieldValue }) => {
