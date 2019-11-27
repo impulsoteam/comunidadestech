@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import passport from 'passport';
 
+import sessionRoutes from './routes/session';
 import PassportConfig from './helpers/auth/passport';
 
 dotenv.config();
@@ -45,6 +46,7 @@ app
     server.use(passport.session());
     PassportConfig.google();
     PassportConfig.linkedin();
+    server.use('/auth', sessionRoutes);
 
     server.use('/api/v1', routes);
     server.get('*', (req, res) => {

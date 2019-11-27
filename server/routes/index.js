@@ -1,6 +1,6 @@
 import express from 'express';
 import communityRoutes from './community';
-import sessionRoutes from './session';
+
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -10,5 +10,5 @@ router.get('/', (req, res) => {
 });
 
 router.use('/community', communityRoutes);
-router.use('/session', sessionRoutes);
+
 export default router;

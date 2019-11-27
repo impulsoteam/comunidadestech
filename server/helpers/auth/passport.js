@@ -1,16 +1,22 @@
 import passport from 'passport';
-import GoogleToken from 'passport-google-token';
 import LinkedIn from 'passport-linkedin-oauth2';
+import GoogleStrategy from 'passport-google-oauth';
+
 import UserController from '../../controllers/UserController';
 
 class PassportConfig {
   google() {
-    const { GOOGLE_CLIENT_ID, GOOGLE_SECRET } = process.env;
+    const {
+      GOOGLE_CLIENT_ID,
+      GOOGLE_SECRET,
+      GOOGLE_CALLBACK_URL,
+    } = process.env;
     passport.use(
-      new GoogleToken.Strategy(
+      new GoogleStrategy.OAuth2Strategy(
         {
           clientID: GOOGLE_CLIENT_ID,
           clientSecret: GOOGLE_SECRET,
+          callbackURL: GOOGLE_CALLBACK_URL,
         },
         async (accessToken, refreshToken, profile, done) => {
           const user = await UserController.findOrCreate(
@@ -18,7 +24,7 @@ class PassportConfig {
             profile,
             'google'
           );
-          done(null, user);
+          return done(null, user);
         }
       )
     );
@@ -45,7 +51,7 @@ class PassportConfig {
             profile,
             'linkedin'
           );
-          done(null, user);
+          return done(null, user);
         }
       )
     );

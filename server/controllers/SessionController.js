@@ -1,26 +1,13 @@
 import jwt from 'jsonwebtoken';
 class SessionController {
-  login(req, res, next) {
-    if (!req.user) {
-      return this.handleError(res);
-    }
-
-    req.auth = {
-      id: req.user.id,
-    };
-
-    next();
-  }
-
-  createToken(req, res, next) {
-    const { auth, user } = req;
-    if (!auth) {
-      return this.handleError(res);
-    }
+  login(req, res) {
+    const { user } = req;
+    if (!user)
+      return res.status(500).json({ message: 'Error while authenticating' });
 
     const token = jwt.sign(
       {
-        id: auth.id,
+        id: user.id,
       },
       process.env.JWT_SECRET_KEY,
       {
@@ -29,7 +16,7 @@ class SessionController {
     );
 
     res.cookie(
-      'ctech_token',
+      'ctech_credentials',
       JSON.stringify({
         token,
         _id: user._id,
@@ -61,12 +48,6 @@ class SessionController {
     } catch (err) {
       return res.status(500).json({ error: 'Unable to decoded token' });
     }
-  }
-
-  handleError(res) {
-    return res.status(403).json({
-      error: 'User Not Authenticated.',
-    });
   }
 }
 

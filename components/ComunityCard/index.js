@@ -3,7 +3,7 @@ import Router from 'next/router';
 import { api, setHeader } from '../../utils/axios';
 import styles from './styles';
 
-const ComunityCard = ({
+const CommunityCard = ({
   _id,
   name,
   city,
@@ -15,17 +15,17 @@ const ComunityCard = ({
   tags,
   link,
   canModify,
-  token,
+  credentials,
   status,
 }) => {
   const deleteCommunity = async () => {
-    setHeader(token);
+    setHeader(credentials);
     await api.delete(`/community/${_id}`);
     Router.push('/');
   };
 
   const publishCommunity = async () => {
-    setHeader(token);
+    setHeader(credentials);
     const { data } = await api.put(`/community/${_id}`, {
       status: 'published',
     });
@@ -86,7 +86,7 @@ const ComunityCard = ({
                 </button>
               </>
             )}
-            {status === 'awaitingPublication' && token.isModerator && (
+            {status === 'awaitingPublication' && credentials.isModerator && (
               <>
                 <button
                   onClick={publishCommunity}
@@ -128,4 +128,4 @@ const ComunityCard = ({
   );
 };
 
-export default ComunityCard;
+export default CommunityCard;

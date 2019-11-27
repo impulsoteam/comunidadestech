@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './styles';
 
-class ComunityHero extends Component {
+class CommunityHero extends Component {
   render() {
     return (
       <>
@@ -16,4 +16,4 @@ class ComunityHero extends Component {
   }
 }
 
-export default ComunityHero;
+export default CommunityHero;

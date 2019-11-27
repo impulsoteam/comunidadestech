@@ -9,24 +9,34 @@ import { api, setHeader } from '../../utils/axios';
 import styles from './styles';
 import CommunityForm from '../../components/CommunityForm';
 
-const initialValues = {
-  url: 'https://',
-  location: {},
-  globalProgram: {},
-  creator: {},
-  tags: [],
-};
-const RegisterCommunity = ({ token }) => {
-  const postCommunity = async (community) => {
-    const { name, email } = token;
-    community.creator.name = name;
-    community.creator.email = email;
-    setHeader(token);
-    await api.post('/community/store', community);
+const RegisterCommunity = ({ credentials }) => {
+  const sendNotification = () => {
+    toast.configure();
     toast.success(
       `Comunidade cadastrada com sucesso!\n
-      Em breve ela será publicada.`
+    Em breve ela será publicada.`
     );
+  };
+
+  const getInitialValues = () => {
+    const { _id, name, email } = credentials;
+    return {
+      url: 'https://',
+      location: {},
+      globalProgram: {},
+      creator: {
+        _id,
+        name,
+        email,
+      },
+      tags: [],
+    };
+  };
+
+  const postCommunity = async (community) => {
+    setHeader(credentials);
+    await api.post('/community/store', community);
+    sendNotification();
     Router.push('/');
   };
 
@@ -47,9 +57,9 @@ const RegisterCommunity = ({ token }) => {
         <div className="columns is-centered">
           <div className="column">
             <CommunityForm
-              token={token}
+              credentials={credentials}
               service={postCommunity}
-              initialValues={initialValues}
+              initialValues={getInitialValues()}
             />
           </div>
         </div>
@@ -61,8 +71,8 @@ const RegisterCommunity = ({ token }) => {
 };
 
 RegisterCommunity.getInitialProps = async (ctx) => {
-  const { token } = cookies(ctx).ctech_token || {};
-  if (!token) {
+  const credentials = cookies(ctx).ctech_credentials || {};
+  if (!credentials.token) {
     ctx.res.writeHead(302, {
       Location: '/',
     });

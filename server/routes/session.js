@@ -3,24 +3,27 @@ import passport from 'passport';
 import SessionController from '../controllers/SessionController';
 
 const router = express.Router();
-router.get('/', (req, res) => {
-  res.json({
-    message: 'Hello World',
-  });
-});
 
-router.post(
+router.get(
   '/google',
-  passport.authenticate('google-token', { session: false }),
-  SessionController.login,
-  SessionController.createToken
+  passport.authenticate('google', {
+    scope: [
+      'https://www.googleapis.com/auth/plus.login',
+      'https://www.googleapis.com/auth/userinfo.email',
+    ],
+  })
+);
+
+router.get(
+  '/google_oauth2/callback',
+  passport.authenticate('google', { session: false }),
+  SessionController.login
 );
 
 router.get(
   '/linkedin',
   passport.authenticate('linkedin-token', { session: false }),
-  SessionController.login,
-  SessionController.createToken
+  SessionController.login
 );
 
 export default router;

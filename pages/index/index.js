@@ -49,7 +49,7 @@ export default class Home extends PureComponent {
   };
 
   async componentDidMount() {
-    setHeader(this.props.token);
+    setHeader(this.props.credentials);
     const { data } = await api.get('/community/status/published');
     this.setState({ list: this.normalize(data) });
     this.setState({
@@ -264,8 +264,8 @@ export default class Home extends PureComponent {
 
   tags = (list) => {
     let tags = [];
-    list.forEach((comunity) => {
-      tags = Array.from(new Set(tags.concat(comunity.tags)));
+    list.forEach((community) => {
+      tags = Array.from(new Set(tags.concat(community.tags)));
     });
 
     return tags;
