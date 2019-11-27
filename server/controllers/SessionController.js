@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 class SessionController {
   login(req, res, next) {
-    console.log(req);
     if (!req.user) {
       return this.handleError(res);
     }

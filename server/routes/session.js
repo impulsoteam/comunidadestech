@@ -20,7 +20,7 @@ router.get(
 );
 router.get(
   '/google_oauth2/callback',
-  passport.authenticate('google', { failureRedirect: '/' }),
+  passport.authenticate('google', { failureRedirect: '/', session: false }),
   SessionController.login,
   SessionController.createToken
 );
