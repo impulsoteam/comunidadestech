@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { api } from '../../utils/axios';
 import { useRouter } from 'next/router';
 import styles from './styles';
-import CommunityHero from '../../components/CommunityHero';
-import CommunityCard from '../../components/CommunityCard';
+import CommunityHero from '../../components/ComunityHero';
+import CommunityCard from '../../components/ComunityCard';
 import Card from '../../components/Card';
 import loader from '../../static/comunidades-tech-loader.gif';
 
