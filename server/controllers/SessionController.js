@@ -29,7 +29,7 @@ class SessionController {
     );
 
     res.cookie(
-      'ctech_token',
+      'ctech_credentials',
       JSON.stringify({
         token,
         _id: user._id,

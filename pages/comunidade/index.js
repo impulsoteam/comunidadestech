@@ -2,75 +2,61 @@ import React, { useState, useEffect } from 'react';
 import { api } from '../../utils/axios';
 import { useRouter } from 'next/router';
 import styles from './styles';
-import ComunityHero from '../../components/ComunityHero';
-import ComunityCard from '../../components/ComunityCard';
+import CommunityHero from '../../components/CommunityHero';
+import CommunityCard from '../../components/CommunityCard';
 import Card from '../../components/Card';
 import loader from '../../static/comunidades-tech-loader.gif';
 
-const Comunity = ({ token }) => {
-  const [list, setList] = useState([]);
+const Community = ({ credentials }) => {
+  const [related, setRelated] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [comunity, setComunity] = useState([]);
+  const [community, setCommunity] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
-      const postCommunity = async (community) => {
-        setTimeout(async () => {
-          const { name, email } = token;
-          community.creator.name = name;
-          community.creator.email = email;
-          setHeader(token);
-          await api.post('/community/store', community);
-          toast.success(
-            `😎 Comunidade cadastrada com sucesso!\n
-        Em breve ela será publicada.`
-          );
-          Router.push('/');
-        }, 10000);
-      };
       const { data } = await api.get(`community/name/${router.query.name}`);
-      setComunity(data.community);
-      setList(data.related);
+      setCommunity(data.community);
+      setRelated(data.related);
       setLoading(false);
     };
     fetchData();
   }, []);
+
   const checkCredentials = () => {
-    const { isModerator, _id } = token;
-    const { creator } = comunity;
+    const { isModerator, _id } = credentials;
+    const { creator } = community;
     if (isModerator) return true;
     if (creator._id && creator._id === _id) return true;
     return false;
   };
 
-  console.log('comuni', comunity);
   return (
     <>
       {!loading ? (
         <>
-          {comunity ? (
+          {community ? (
             <div>
-              <ComunityHero />
-              <ComunityCard
-                community={comunity}
+              <CommunityHero />
+              <CommunityCard
+                community={community}
                 canModify={checkCredentials()}
-                _id={comunity._id}
-                name={comunity.name}
-                state={comunity.location.state}
+                _id={community._id}
+                name={community.name}
+                state={community.location.state}
                 city={
-                  comunity.location.city === 'legacy'
+                  community.location.city === 'legacy'
                     ? null
-                    : comunity.location.city
+                    : community.location.city
                 }
-                size={comunity.members}
-                category={comunity.category}
-                description={comunity.description}
-                logo={comunity.logo === 'legacy' ? null : comunity.logo}
-                tags={comunity.tags}
-                link={comunity.url}
-                token={token}
-                status={comunity.status}
+                size={community.members}
+                category={community.category}
+                description={community.description}
+                logo={community.logo === 'legacy' ? null : community.logo}
+                tags={community.tags}
+                link={community.url}
+                credentials={credentials}
+                status={community.status}
               />
               <div className="container related">
                 <div className="columns">
@@ -79,7 +65,7 @@ const Comunity = ({ token }) => {
                   </div>
                 </div>
                 <div className="columns is-2 is-variable is-multiline">
-                  {list.map((card) => (
+                  {related.map((card) => (
                     <div className="column is-one-third" key={card.id}>
                       <Card content={card} />
                     </div>
@@ -90,7 +76,7 @@ const Comunity = ({ token }) => {
             </div>
           ) : (
             <div>
-              <ComunityHero />
+              <CommunityHero />
               <div className="container">
                 <h2>Essa comunidade não existe!</h2>
               </div>
@@ -99,7 +85,7 @@ const Comunity = ({ token }) => {
         </>
       ) : (
         <div>
-          <ComunityHero />
+          <CommunityHero />
           <img
             src={loader}
             style={{ maxWidth: '100px', display: 'block', margin: '30px auto' }}
@@ -110,7 +96,7 @@ const Comunity = ({ token }) => {
   );
 };
 
-Comunity.getInitialProps = async (ctx) => {
+Community.getInitialProps = async (ctx) => {
   if (!ctx.query.name) {
     ctx.res.writeHead(302, {
       Location: '/',
@@ -119,4 +105,4 @@ Comunity.getInitialProps = async (ctx) => {
   }
 };
 
-export default Comunity;
+export default Community;

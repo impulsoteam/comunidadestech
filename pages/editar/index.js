@@ -6,22 +6,22 @@ import { api, setHeader } from '../../utils/axios';
 import styles from '../cadastrar/styles';
 import CommunityForm from '../../components/CommunityForm';
 
-const EditCommunity = ({ token }) => {
+const EditCommunity = ({ credentials }) => {
   const [loading, setLoading] = useState(true);
-  const [community, setComunity] = useState([]);
+  const [community, setCommunity] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await api.get(`community/name/${router.query.name}`);
-      setComunity(data.community);
+      setCommunity(data.community);
       setLoading(false);
     };
     fetchData();
   }, []);
   const editCommunity = async (community) => {
-    setHeader(token);
-    const { data } = await api.put(`/community/${comminuty._id}`, community);
+    setHeader(credentials);
+    const { data } = await api.put(`/community/${community._id}`, community);
   };
 
   return (
@@ -35,7 +35,7 @@ const EditCommunity = ({ token }) => {
             <h2 className="subtitle is-size-4-desktop">textoaquitextoqui</h2>
             {!loading && (
               <CommunityForm
-                token={token}
+                credentials={credentials}
                 service={editCommunity}
                 initialValues={community}
               />
@@ -50,9 +50,9 @@ const EditCommunity = ({ token }) => {
 };
 
 EditCommunity.getInitialProps = async (ctx) => {
-  const { token } = cookies(ctx).ctech_token || {};
+  const credentials = cookies(ctx).ctech_credentials || {};
 
-  if (!token) {
+  if (!credentials.token) {
     ctx.res.writeHead(302, {
       Location: '/',
     });

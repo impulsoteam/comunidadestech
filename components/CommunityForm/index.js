@@ -7,10 +7,10 @@ import styles from './styles';
 
 import { CITYANDSTATES } from '../../utils/cityAndStates';
 import countries from '../../utils/countries';
-import { CATEGORIES } from '../../utils/comunityCategories';
-import { TAGS } from '../../utils/comunityTags';
+import { CATEGORIES } from '../../utils/communityCategories';
+import { TAGS } from '../../utils/communityTags';
 
-const CommunityForm = ({ service, initialValues, token }) => {
+const CommunityForm = ({ service, initialValues }) => {
   const SignupSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, 'Muito curto!')
@@ -414,15 +414,6 @@ const CommunityForm = ({ service, initialValues, token }) => {
                       'enviar'
                     )}
                   </button>
-                  {/* {token.isModerator && (
-                    <button
-                      onClick={() => setFieldValue('status', 'published')}
-                      className="button is-primary  is-fullwidth is-large"
-                      type="submit"
-                    >
-                      Enviar e publicar
-                    </button>
-                  )} */}
                 </div>
               </div>
             </Form>
@@ -433,10 +424,5 @@ const CommunityForm = ({ service, initialValues, token }) => {
     </>
   );
 };
-
-// CommunityForm.getInitialProps = async (ctx) => {
-//   const { token } = cookies(ctx).ctech_token || {};
-//   return { ...token };
-// };
 
 export default CommunityForm;

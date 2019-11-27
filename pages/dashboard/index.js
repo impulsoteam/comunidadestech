@@ -5,26 +5,26 @@ import styles from './styles';
 import { api, setHeader } from '../../utils/axios';
 import Card from '../../components/Card';
 
-const Dashboard = ({ token }) => {
+const Dashboard = ({ credentials }) => {
   const [loading, setLoading] = useState(true);
   const [myCommunities, setMyCommunities] = useState([]);
   const [pendingCommunities, setPendingCommunities] = useState([]);
 
   useEffect(() => {
     const fetchMyCommunities = async () => {
-      setHeader(token);
+      setHeader(credentials);
       const { data } = await api.get(`/community/owner`);
       setMyCommunities(data);
       setLoading(false);
     };
     const fetchPendingCommunities = async () => {
-      setHeader(token);
+      setHeader(credentials);
       const { data } = await api.get(`/community/status/awaitingPublication`);
       setPendingCommunities(data);
       setLoading(false);
     };
     fetchMyCommunities();
-    token.isModerator && fetchPendingCommunities();
+    credentials.isModerator && fetchPendingCommunities();
   }, []);
   return (
     <>
@@ -67,8 +67,8 @@ const Dashboard = ({ token }) => {
 };
 
 Dashboard.getInitialProps = async (ctx) => {
-  const { token } = cookies(ctx).ctech_token || {};
-  if (!token) {
+  const credentials = cookies(ctx).ctech_credentials || {};
+  if (!credentials.token) {
     ctx.res.writeHead(302, {
       Location: '/',
     });

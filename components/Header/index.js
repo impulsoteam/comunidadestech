@@ -5,19 +5,11 @@ import Router from 'next/router';
 import styles from './styles';
 
 class Header extends Component {
-  handleSuccess = async (code) => {
-    console.log('handleSuccess', code);
-  };
-
-  handleFailure = (error) => {
-    console.log(error);
-  };
-
   logout = () => {
-    Cookies.remove('ctech_token');
+    Cookies.remove('ctech_credentials');
     Router.push('/');
   };
-  generateButtons = ({ name, avatar, email, token, isModerator }) => {
+  generateButtons = ({ name, avatar, token, isModerator }) => {
     if (!token)
       return (
         <>
@@ -96,7 +88,7 @@ class Header extends Component {
               <div className="navbar-end is-flex-touch">
                 <div className="navbar-item">
                   <div className="field is-grouped is-grouped-multiline">
-                    {this.generateButtons(this.props.token)}
+                    {this.generateButtons(this.props.credentials)}
                   </div>
                 </div>
               </div>

@@ -16,12 +16,12 @@ const initialValues = {
   creator: {},
   tags: [],
 };
-const RegisterCommunity = ({ token }) => {
+const RegisterCommunity = ({ credentials }) => {
   const postCommunity = async (community) => {
-    const { name, email } = token;
+    const { name, email } = credentials;
     community.creator.name = name;
     community.creator.email = email;
-    setHeader(token);
+    setHeader(credentials);
     await api.post('/community/store', community);
     toast.success(
       `Comunidade cadastrada com sucesso!\n
@@ -47,7 +47,7 @@ const RegisterCommunity = ({ token }) => {
         <div className="columns is-centered">
           <div className="column">
             <CommunityForm
-              token={token}
+              credentials={credentials}
               service={postCommunity}
               initialValues={initialValues}
             />
@@ -61,8 +61,8 @@ const RegisterCommunity = ({ token }) => {
 };
 
 RegisterCommunity.getInitialProps = async (ctx) => {
-  const { token } = cookies(ctx).ctech_token || {};
-  if (!token) {
+  const credentials = cookies(ctx).ctech_credentials || {};
+  if (!credentials.token) {
     ctx.res.writeHead(302, {
       Location: '/',
     });
