@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Router from 'next/router';
+import { toast } from 'react-toastify';
+import 'react-toastify/scss/main.scss';
 import { useRouter } from 'next/router';
 import cookies from 'next-cookies';
 import { api, setHeader } from '../../utils/axios';
@@ -19,9 +22,20 @@ const EditCommunity = ({ credentials }) => {
     };
     fetchData();
   }, []);
+
+  const sendNotification = () => {
+    toast.configure();
+    toast.success(
+      `Comunidade editada com sucesso!\n
+    Em breve ela será republicada.`
+    );
+  };
+
   const editCommunity = async (community) => {
     setHeader(credentials);
-    const { data } = await api.put(`/community/${community._id}`, community);
+    await api.put(`/community/update/${community._id}`, community);
+    sendNotification();
+    Router.push('/');
   };
 
   return (

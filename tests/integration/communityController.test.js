@@ -155,10 +155,10 @@ describe('CommunityController.delete', () => {
   });
 });
 
-describe('CommunityController.update', () => {
+describe('CommunityController.publish', () => {
   const request = (_id, token, data) => {
     return supertest(app)
-      .put(`/community/${_id}`)
+      .put(`/community/publish/${_id}`)
       .send(data)
       .set('Authorization', `Bearer ${token}`);
   };
@@ -182,6 +182,101 @@ describe('CommunityController.update', () => {
     expect(body.message).toBe(
       'User does not have credentials to published this community'
     );
+  });
+});
+
+describe('CommunityController.update', () => {
+  const request = (_id, token, data) => {
+    return supertest(app)
+      .put(`/community/update/${_id}`)
+      .send(data)
+      .set('Authorization', `Bearer ${token}`);
+  };
+
+  it('User should be able to update their own community', async () => {
+    const community = await factory.create('Community', {
+      creator: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+    });
+
+    const newCommunity = await factory.attrs('Community', {
+      _id: community._id,
+      creator: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+    });
+    const { statusCode, body } = await request(
+      community._id,
+      user.token,
+      newCommunity
+    );
+    expect(statusCode).toBe(200);
+
+    expect(JSON.stringify(body._id)).toBe(JSON.stringify(community._id));
+    expect(body.name !== community.name).toBe(true);
+    expect(body.name).toBe(newCommunity.name);
+    expect(body.status).toBe('awaitingPublication');
+  });
+
+  it('Moderator should be able to update any community', async () => {
+    const community = await factory.create('Community', {
+      creator: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+    });
+
+    const newCommunity = await factory.attrs('Community', {
+      _id: community._id,
+      creator: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+    });
+    const { statusCode, body } = await request(
+      community._id,
+      moderator.token,
+      newCommunity
+    );
+    expect(statusCode).toBe(200);
+    expect(JSON.stringify(body._id)).toBe(JSON.stringify(community._id));
+    expect(body.name !== community.name).toBe(true);
+    expect(body.name).toBe(newCommunity.name);
+    expect(body.status).toBe('awaitingPublication');
+  });
+
+  it('User should not be able to update other communities', async () => {
+    const community = await factory.create('Community', {
+      creator: {
+        _id: moderator._id,
+        name: moderator.name,
+        email: moderator.email,
+      },
+    });
+
+    const newCommunity = await factory.attrs('Community', {
+      _id: community._id,
+      creator: {
+        _id: moderator._id,
+        name: moderator.name,
+        email: moderator.email,
+      },
+    });
+    const { statusCode, body } = await request(
+      community._id,
+      user.token,
+      newCommunity
+    );
+    expect(statusCode).toBe(403);
+
+    expect(body.message).toBe('User cannot update this community');
   });
 });
 

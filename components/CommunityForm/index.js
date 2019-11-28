@@ -2,98 +2,22 @@ import React, { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import * as Yup from 'yup';
 import styles from './styles';
-
 import MaskedInput from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
-import { CITYANDSTATES } from '../../utils/cityAndStates';
-import countries from '../../utils/countries';
-import { CATEGORIES } from '../../utils/communityCategories';
-import { TAGS } from '../../utils/communityTags';
+import { countries, states, cities } from './location';
+import {
+  SignupSchema,
+  CATEGORIES,
+  TAGS,
+  TYPES,
+  MODEL,
+  GLOBAL_PROGRAM,
+} from './utils';
 
 const CommunityForm = ({ service, initialValues }) => {
-  const SignupSchema = Yup.object().shape({
-    name: Yup.string()
-      .min(2, 'Muito curto!')
-      .max(30, 'Muito longo!')
-      .required('Item obrigatório'),
-    logo: Yup.string().matches(
-      /^(http(s)?:\/\/|www\.).*(\.jpg|\.jpeg|\.png)$/,
-      'Deve ser um endereço de uma imagem JPG ou PNG'
-    ),
-    url: Yup.string()
-      .url('Link inválido. Exemplo: http://site.com')
-      .required('Item obrigatório'),
-    description: Yup.string().required('Item obrigatório'),
-    type: Yup.string().required('Item obrigatório'),
-    category: Yup.string().required('Item obrigatório'),
-    tags: Yup.array()
-      .required('Selecione pelo menos uma tag')
-      .typeError('Selecione pelo menos uma tag'),
-
-    members: Yup.number()
-      .typeError('Valor deve ser em número')
-      .required('Item obrigatório'),
-    model: Yup.string().required('Item obrigatório'),
-    location: Yup.object().shape({
-      country: Yup.string(),
-      state: Yup.string(),
-      city: Yup.string(),
-    }),
-    globalProgram: Yup.object().shape({
-      isParticipant: Yup.string().required('Item obrigatório'),
-      name: Yup.string(),
-    }),
-    creator: Yup.object().shape({
-      rocketChat: Yup.string(),
-    }),
-    owner: Yup.string()
-      .email('Endereço de email inválido')
-      .required('Item obrigatório'),
-  });
-  const modelOptions = [
-    { label: 'Presencial', value: 'presential' },
-    { label: 'Online', value: 'online' },
-    { label: 'Ambos', value: 'both' },
-  ];
-  const communityTypes = [
-    { label: 'Podcast', value: 'Podcast' },
-    {
-      label: 'Grupo do Facebook',
-      value: 'Grupo do Facebook',
-    },
-    { label: 'Whatsapp', value: 'Whatsapp' },
-    { label: 'Meetup', value: 'Meetup' },
-    { label: 'Discord', value: 'Discord' },
-    { label: 'Slack', value: 'Slack' },
-  ];
-  const globalProgramOptions = [
-    { label: 'Sim', value: true },
-    { label: 'Não', value: false },
-  ];
-  const statesOption = CITYANDSTATES.map((state) => {
-    const states = {};
-
-    states.label = state.nome;
-    states.value = state.nome;
-
-    return states;
-  });
-
-  const cityOption = (CITYANDSTATES, selectedState) => {
-    const cities = CITYANDSTATES.filter(
-      (state) => state.nome === selectedState
-    )[0].cidades.map((city) => {
-      const tempCities = {};
-      tempCities.label = city;
-      tempCities.value = city;
-      return tempCities;
-    });
-    return cities;
-  };
-
+  const getCities = (state) => cities.filter((city) => city.state === state);
   const animatedComponents = makeAnimated();
   const [loading, setLoading] = useState(false);
 
@@ -103,18 +27,18 @@ const CommunityForm = ({ service, initialValues }) => {
     thousandsSeparatorSymbol: '.',
     integerLimit: 6,
   });
+
   return (
     <>
       <Formik
         initialValues={initialValues}
         validationSchema={SignupSchema}
         onSubmit={(values) => {
-          values.members = parseInt(values.members.replace('.', ''));
           setLoading(true);
           service(values);
         }}
       >
-        {({ errors, touched, values, isSubmitting, setFieldValue }) => {
+        {({ errors, touched, values, setFieldValue }) => {
           const handleChange = (selectedOption) => {
             const selected =
               selectedOption && selectedOption.map(({ value }) => value);
@@ -144,13 +68,13 @@ const CommunityForm = ({ service, initialValues }) => {
                     A comunidade é presencial, online ou ambos? *
                     <Select
                       name="model"
-                      defaultValue={modelOptions.filter(
+                      defaultValue={MODEL.filter(
                         (value) => value.value === values.model
                       )}
                       closeMenuOnSelect={true}
                       components={animatedComponents}
                       placeholder="Clique para selecionar"
-                      options={modelOptions}
+                      options={MODEL}
                       onChange={(selectedOption, data) =>
                         handleStringChange(
                           selectedOption,
@@ -174,7 +98,7 @@ const CommunityForm = ({ service, initialValues }) => {
                     ) : (
                       <Select
                         defaultValue={countries.filter(
-                          (value) => value.value === values.location.country
+                          (country) => country.value === values.location.country
                         )}
                         name="location.country"
                         closeMenuOnSelect={true}
@@ -206,13 +130,13 @@ const CommunityForm = ({ service, initialValues }) => {
                     values.model !== 'online' ? (
                       <Select
                         name="location.state"
-                        defaultValue={statesOption.filter(
-                          (value) => value.value === values.location.state
+                        defaultValue={states.filter(
+                          (state) => state.label === values.location.state
                         )}
                         closeMenuOnSelect={true}
                         components={animatedComponents}
                         placeholder="Clique para selecionar"
-                        options={statesOption}
+                        options={states}
                         onChange={(selectedOption, data) =>
                           handleStringChange(
                             selectedOption,
@@ -234,16 +158,14 @@ const CommunityForm = ({ service, initialValues }) => {
                     values.model !== 'online' &&
                     values.location.state ? (
                       <Select
-                        //todo
                         name="location.city"
-                        // defaultValue={}
+                        defaultValue={cities.filter(
+                          (city) => city.label === values.location.city
+                        )}
                         closeMenuOnSelect={true}
                         components={animatedComponents}
                         placeholder="Clique para selecionar"
-                        options={cityOption(
-                          CITYANDSTATES,
-                          values.location.state
-                        )}
+                        options={getCities(values.location.state)}
                         onChange={(selectedOption, data) =>
                           handleStringChange(
                             selectedOption,
@@ -307,13 +229,13 @@ const CommunityForm = ({ service, initialValues }) => {
                     Tipo *
                     <Select
                       name="type"
-                      defaultValue={communityTypes.filter(
+                      defaultValue={TYPES.filter(
                         (type) => type.value === values.type
                       )}
                       closeMenuOnSelect={true}
                       components={animatedComponents}
                       placeholder="Clique para selecionar"
-                      options={communityTypes}
+                      options={TYPES}
                       onChange={(selectedOption, data) =>
                         handleStringChange(selectedOption, data.name)
                       }
@@ -344,7 +266,7 @@ const CommunityForm = ({ service, initialValues }) => {
                   <label>
                     Pertence a algum programa global?
                     <Select
-                      defaultValue={globalProgramOptions.filter(
+                      defaultValue={GLOBAL_PROGRAM.filter(
                         (option) =>
                           option.value === values.globalProgram.isParticipant
                       )}
@@ -352,7 +274,7 @@ const CommunityForm = ({ service, initialValues }) => {
                       closeMenuOnSelect={true}
                       components={animatedComponents}
                       placeholder="Clique para selecionar"
-                      options={globalProgramOptions}
+                      options={GLOBAL_PROGRAM}
                       onChange={(selectedOption, data) =>
                         handleStringChange(selectedOption, data.name)
                       }
