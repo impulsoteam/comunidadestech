@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/scss/main.scss';
 import Router from 'next/router';
 import { api, setHeader } from '../../utils/axios';
 import styles from './styles';
@@ -18,17 +20,29 @@ const CommunityCard = ({
   credentials,
   status,
 }) => {
+  const sendNotification = (type) => {
+    const types = {
+      delete: 'Comunidade deletada com sucesso!',
+      publish: 'Comunidade publicada com sucesso!',
+    };
+    toast.configure();
+    toast.success(types[type]);
+  };
+
   const deleteCommunity = async () => {
     setHeader(credentials);
     await api.delete(`/community/${_id}`);
+    sendNotification('delete');
     Router.push('/');
   };
 
   const publishCommunity = async () => {
     setHeader(credentials);
-    const { data } = await api.put(`/community/${_id}`, {
+    await api.put(`/community/publish/${_id}`, {
       status: 'published',
     });
+    sendNotification('publish');
+    Router.push(`/`);
   };
 
   return (
