@@ -49,21 +49,47 @@ class CommunityController {
     }
   }
 
-  async update(req, res) {
+  async publish(req, res) {
     try {
-      const { body, params, decoded } = req;
+      const { body: community, params, decoded } = req;
       const { isModerator } = await User.findOne({ _id: decoded.id });
 
-      if (!isModerator && body.status)
+      if (!isModerator)
         return res.status(403).json({
           message: 'User does not have credentials to published this community',
         });
 
-      const { ok } = await Community.updateOne({ _id: params._id }, body);
-      if (ok === 1) {
-        const updatedCommunity = await Community.findOne({ _id: params._id });
-        return res.json(updatedCommunity);
-      }
+      const publishedCommunity = await Community.findOneAndUpdate(
+        { _id: params._id },
+        { $set: { status: community.status } },
+        { returnOriginal: false }
+      );
+
+      return res.json(publishedCommunity);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  }
+
+  async update(req, res) {
+    try {
+      const { body: community, params, decoded } = req;
+      const { _id, isModerator } = await User.findOne({ _id: decoded.id });
+      const isOwner =
+        JSON.stringify(community.creator._id) === JSON.stringify(_id);
+
+      if (!isModerator && !isOwner)
+        return res.status(403).json({
+          message: 'User cannot update this community',
+        });
+
+      community.status = 'awaitingPublication';
+      const updatedCommunity = await Community.findOneAndUpdate(
+        { _id: params._id },
+        community,
+        { returnOriginal: false }
+      );
+      return res.json(updatedCommunity);
     } catch (error) {
       return res.status(500).json(error);
     }
