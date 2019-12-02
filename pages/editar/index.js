@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import { toast } from 'react-toastify';
 import 'react-toastify/scss/main.scss';
+import 'react-toastify/dist/ReactToastify.minimal.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
 import cookies from 'next-cookies';
 import { api, setHeader } from '../../utils/axios';
@@ -9,7 +11,7 @@ import { api, setHeader } from '../../utils/axios';
 import styles from '../cadastrar/styles';
 import CommunityForm from '../../components/CommunityForm';
 
-const EditCommunity = ({ credentials }) => {
+const EditCommunity = ({ credentials, notify }) => {
   const [loading, setLoading] = useState(true);
   const [community, setCommunity] = useState([]);
   const router = useRouter();
@@ -36,6 +38,7 @@ const EditCommunity = ({ credentials }) => {
     setHeader(credentials);
     await api.put(`/community/update/${community._id}`, community);
     sendNotification();
+    notify();
     Router.push('/');
   };
 
