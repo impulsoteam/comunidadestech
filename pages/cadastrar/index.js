@@ -37,10 +37,10 @@ const RegisterCommunity = ({ credentials }) => {
     setLoading(true);
     setHeader(credentials);
     await api.post('/community/store', community);
+    sendNotification();
     setTimeout(() => {
-      sendNotification();
+      Router.push('/');
     }, 500);
-    Router.push('/');
   };
 
   return (
