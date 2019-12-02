@@ -47,19 +47,6 @@ const CommunityForm = ({ service, initialValues, loading }) => {
         return (
           <Form>
             <div className="columns">
-              <pre
-                style={{
-                  background: '#f6f8fa',
-                  fontSize: '.65rem',
-                  padding: '.5rem',
-                }}
-              >
-                {JSON.stringify(
-                  { values, initialValues, errors, touched },
-                  null,
-                  2
-                )}
-              </pre>
               <div className="column">
                 <label>
                   Nome da comunidade *
