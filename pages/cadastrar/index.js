@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/scss/main.scss';
 
@@ -10,6 +10,7 @@ import styles from './styles';
 import CommunityForm from '../../components/CommunityForm';
 
 const RegisterCommunity = ({ credentials }) => {
+  const [loading, setLoading] = useState(false);
   const sendNotification = () => {
     toast.configure();
     toast.success(
@@ -29,11 +30,11 @@ const RegisterCommunity = ({ credentials }) => {
         name,
         email,
       },
-      tags: [],
     };
   };
 
   const postCommunity = async (community) => {
+    setLoading(true);
     setHeader(credentials);
     await api.post('/community/store', community);
     sendNotification();
@@ -59,6 +60,7 @@ const RegisterCommunity = ({ credentials }) => {
             <CommunityForm
               credentials={credentials}
               service={postCommunity}
+              loading={loading}
               initialValues={getInitialValues()}
             />
           </div>

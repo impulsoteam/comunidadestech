@@ -5,10 +5,12 @@ export const SignupSchema = Yup.object().shape({
     .min(2, 'Muito curto!')
     .max(30, 'Muito longo!')
     .required('Item obrigatório'),
-  logo: Yup.string().matches(
-    /^(http(s)?:\/\/|www\.).*(\.jpg|\.jpeg|\.png)$/,
-    'Deve ser um endereço de uma imagem JPG ou PNG'
-  ),
+  logo: Yup.string()
+    .required('Item obrigatório')
+    .matches(
+      /^(http(s)?:\/\/|www\.).*(\.jpg|\.jpeg|\.png)$/,
+      'Deve ser um endereço de uma imagem JPG ou PNG'
+    ),
   url: Yup.string()
     .url('Link inválido. Exemplo: http://site.com')
     .required('Item obrigatório'),
@@ -30,7 +32,9 @@ export const SignupSchema = Yup.object().shape({
   }),
   globalProgram: Yup.object().shape({
     isParticipant: Yup.string().required('Item obrigatório'),
-    name: Yup.string(),
+    name: Yup.string()
+      .min(2, 'Muito curto!')
+      .max(30, 'Muito longo!'),
   }),
   creator: Yup.object().shape({
     rocketChat: Yup.string(),

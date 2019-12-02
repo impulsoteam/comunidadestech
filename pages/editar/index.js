@@ -32,6 +32,7 @@ const EditCommunity = ({ credentials }) => {
   };
 
   const editCommunity = async (community) => {
+    setLoading(true);
     setHeader(credentials);
     await api.put(`/community/update/${community._id}`, community);
     sendNotification();
@@ -46,10 +47,10 @@ const EditCommunity = ({ credentials }) => {
             <h1 className="title is-size-1-desktop is-size-2-tablet is-size-3-mobile">
               Edite sua comunidade
             </h1>
-            <h2 className="subtitle is-size-4-desktop">textoaquitextoqui</h2>
             {!loading && (
               <CommunityForm
                 credentials={credentials}
+                loading={loading}
                 service={editCommunity}
                 initialValues={community}
               />
