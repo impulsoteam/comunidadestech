@@ -14,14 +14,31 @@ const RegisterCommunity = ({ credentials }) => {
   const getInitialValues = () => {
     const { _id, name, email } = credentials;
     return {
+      name: '',
+      model: '',
+      location: {
+        country: '',
+        state: '',
+        city: '',
+      },
       url: 'https://',
-      location: {},
-      globalProgram: {},
+      description: '',
+      category: '',
+      type: '',
+      tags: '',
+      globalProgram: {
+        isParticipant: '',
+        name: '',
+      },
+      members: '',
+      logo: '',
       creator: {
         _id,
         name,
         email,
+        rocketChat: '',
       },
+      owner: '',
     };
   };
 
