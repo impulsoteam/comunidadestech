@@ -18,7 +18,7 @@ export default css`
     margin-top: 20px;
     font-weight: 600;
     position: relative;
-
+    text-align: left;
     .input {
       background: red;
     }

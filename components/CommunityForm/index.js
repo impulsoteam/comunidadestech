@@ -119,7 +119,7 @@ const CommunityForm = ({ service, initialValues, loading }) => {
                     <Select
                       name="location.state"
                       defaultValue={states.filter(
-                        (state) => state.label === values.location.state
+                        (state) => state.value === values.location.state
                       )}
                       closeMenuOnSelect={true}
                       components={animatedComponents}
