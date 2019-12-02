@@ -4,7 +4,8 @@ const withImages = require('next-images');
 const withCSS = require('@zeit/next-css');
 if (typeof require !== 'undefined') {
   require.extensions['.less'] = () => {};
-  require.extensions['.css'] = (file) => {};
+  require.extensions['.sass'] = () => {};
+  require.extensions['.css'] = () => {};
   require.extensions['.png'] = () => {};
 }
 const nextConfig = {

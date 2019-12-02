@@ -3,6 +3,7 @@ import Head from 'next/head';
 import cookies from 'next-cookies';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/scss/main.scss';
+import 'react-toastify/dist/ReactToastify.minimal.css';
 import React from 'react';
 import { withRouter } from 'next/router';
 import 'styles/styles.scss';
