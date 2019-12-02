@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import 'react-toastify/scss/main.scss';
 
 import Router from 'next/router';
 import cookies from 'next-cookies';
@@ -9,14 +8,10 @@ import { api, setHeader } from '../../utils/axios';
 import styles from './styles';
 import CommunityForm from '../../components/CommunityForm';
 
-const RegisterCommunity = ({ credentials }) => {
+const RegisterCommunity = ({ credentials, notify }) => {
   const [loading, setLoading] = useState(false);
   const sendNotification = () => {
     toast.configure();
-    toast.success(
-      `Comunidade cadastrada com sucesso!\n
-    Em breve ela será publicada.`
-    );
   };
 
   const getInitialValues = () => {
@@ -37,10 +32,13 @@ const RegisterCommunity = ({ credentials }) => {
     setLoading(true);
     setHeader(credentials);
     await api.post('/community/store', community);
-    sendNotification();
-    setTimeout(() => {
-      Router.push('/');
-    }, 500);
+    // sendNotification();
+    toast.success(
+      `Comunidade cadastrada com sucesso!\n
+    Em breve ela será publicada.`
+    );
+    notify();
+    Router.push('/');
   };
 
   return (

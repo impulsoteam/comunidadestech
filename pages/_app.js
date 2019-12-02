@@ -1,6 +1,8 @@
 import App, { Container } from 'next/app';
 import Head from 'next/head';
 import cookies from 'next-cookies';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/scss/main.scss';
 import React from 'react';
 import { withRouter } from 'next/router';
 import 'styles/styles.scss';
@@ -17,16 +19,21 @@ class MyApp extends App {
     }
     return { pageProps, credentials };
   }
-
+  notify = () => toast('Wow so easy !');
   render() {
     const { Component, pageProps, credentials } = this.props;
     return (
       <Container>
+        <ToastContainer />
         <Head>
           <title>Comunidades.tech</title>
         </Head>
         <Header credentials={credentials} />
-        <Component credentials={credentials} {...pageProps} />
+        <Component
+          credentials={credentials}
+          {...pageProps}
+          notify={this.notify}
+        />
         <Footer />
       </Container>
     );
