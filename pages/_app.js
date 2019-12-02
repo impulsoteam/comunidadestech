@@ -1,6 +1,8 @@
 import App, { Container } from 'next/app';
 import Head from 'next/head';
 import cookies from 'next-cookies';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import React from 'react';
 import { withRouter } from 'next/router';
 import 'styles/styles.scss';
@@ -22,6 +24,7 @@ class MyApp extends App {
     const { Component, pageProps, credentials } = this.props;
     return (
       <Container>
+        <ToastContainer />
         <Head>
           <title>Comunidades.tech</title>
         </Head>

@@ -27,42 +27,41 @@ const Dashboard = ({ credentials }) => {
     credentials.isModerator && fetchPendingCommunities();
   }, []);
   return (
-    <>
+    <div className="container head">
       {!loading && (
-        <>
-          <div className="columns">
-            <div className="column">
-              <h1>minhas comunidades</h1>
-              <div className="columns is-multiline card-wrapper">
-                {myCommunities.map((card) => (
-                  <div className="column is-one-quarter" key={card.id}>
-                    <Card withOptions content={card} />
-                  </div>
-                ))}
-              </div>
+        <div className="columns">
+          <div className="column">
+            <h2 className="title has-text-weight-bold is-size-2-desktop is-size-2-tablet is-size-3-mobile">
+              minhas comunidades
+            </h2>
+            <div className="columns is-multiline card-wrapper">
+              {myCommunities.map((card) => (
+                <div className="column is-one-quarter" key={card.id}>
+                  <Card withOptions content={card} />
+                </div>
+              ))}
             </div>
           </div>
-          <style jsx>{styles}</style>
-        </>
+        </div>
       )}
       {pendingCommunities.length > 0 && (
-        <>
-          <div className="columns">
-            <div className="column">
-              <h1>comunidades pendentes</h1>
-              <div className="columns is-multiline card-wrapper">
-                {pendingCommunities.map((card) => (
-                  <div className="column is-one-quarter" key={card.id}>
-                    <Card withOptions content={card} />
-                  </div>
-                ))}
-              </div>
+        <div className="columns">
+          <div className="column">
+            <h2 className="title has-text-weight-bold is-size-2-desktop is-size-2-tablet is-size-3-mobile">
+              comunidades pendentes
+            </h2>
+            <div className="columns is-multiline card-wrapper">
+              {pendingCommunities.map((card) => (
+                <div className="column is-one-quarter" key={card.id}>
+                  <Card withOptions content={card} />
+                </div>
+              ))}
             </div>
           </div>
-          <style jsx>{styles}</style>
-        </>
+        </div>
       )}
-    </>
+      <style jsx>{styles}</style>
+    </div>
   );
 };
 

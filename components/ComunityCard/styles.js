@@ -64,7 +64,18 @@ export default css`
       width: 20px;
     }
   }
+  .options {
+    align-items: inherit;
+    align-self: end;
+    display: flex;
+    justify-content: end;
+    margin-top: 12px;
+    width: 50%;
 
+    button {
+      margin-left: 4px;
+    }
+  }
   .tags > div {
     width: 100%;
   }
