@@ -25,10 +25,30 @@ export const SignupSchema = Yup.object().shape({
     .typeError('Valor deve ser em número')
     .required('Item obrigatório'),
   model: Yup.string().required('Item obrigatório'),
-  location: Yup.object().shape({
-    country: Yup.string(),
-    state: Yup.string(),
-    city: Yup.string(),
+  location: Yup.object().when('model', {
+    is: (model) => model !== 'online',
+    then: Yup.object({
+      country: Yup.string().required(
+        'Campo obrigatório para este tipo de modalidade'
+      ),
+      state: Yup.string().when('country', {
+        is: (country) => country === 'Brasil',
+        then: Yup.string().required(
+          'Campo obrigatório quando Brasil está selecionado '
+        ),
+      }),
+      city: Yup.string().when('country', {
+        is: (country) => country === 'Brasil',
+        then: Yup.string().required(
+          'Campo obrigatório quando Brasil está selecionado '
+        ),
+      }),
+    }),
+    otherwise: Yup.object({
+      country: Yup.string(),
+      state: Yup.string(),
+      city: Yup.string(),
+    }),
   }),
   globalProgram: Yup.object().shape({
     isParticipant: Yup.string().required('Item obrigatório'),

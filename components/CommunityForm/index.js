@@ -33,7 +33,7 @@ const CommunityForm = ({ service, initialValues, loading }) => {
       validationSchema={SignupSchema}
       onSubmit={(values) => service(values)}
     >
-      {({ values, setFieldValue, setFieldTouched }) => {
+      {({ errors, touched, values, setFieldValue, setFieldTouched }) => {
         const handleChange = (selectedOption) => {
           const selected =
             selectedOption && selectedOption.map(({ value }) => value);
@@ -47,6 +47,19 @@ const CommunityForm = ({ service, initialValues, loading }) => {
         return (
           <Form>
             <div className="columns">
+              <pre
+                style={{
+                  background: '#f6f8fa',
+                  fontSize: '.65rem',
+                  padding: '.5rem',
+                }}
+              >
+                {JSON.stringify(
+                  { values, initialValues, errors, touched },
+                  null,
+                  2
+                )}
+              </pre>
               <div className="column">
                 <label>
                   Nome da comunidade *
@@ -85,32 +98,27 @@ const CommunityForm = ({ service, initialValues, loading }) => {
                 </label>
                 <label>
                   País
-                  {values.model === 'Online' || values.model === '' ? (
-                    <Select
-                      isDisabled
-                      name="location.country"
-                      placeholder="Não aplica à sua seleção"
-                    />
-                  ) : (
-                    <Select
-                      defaultValue={countries.filter(
-                        (country) => country.value === values.location.country
-                      )}
-                      name="location.country"
-                      closeMenuOnSelect={true}
-                      components={animatedComponents}
-                      placeholder="Clique para selecionar"
-                      options={countries}
-                      onBlur={() => setFieldTouched('location.country', true)}
-                      onChange={(selectedOption, data) =>
-                        handleStringChange(
-                          selectedOption,
-                          data.name,
-                          setFieldValue
-                        )
-                      }
-                    />
-                  )}
+                  <Select
+                    defaultValue={countries.filter(
+                      (country) => country.value === values.location.country
+                    )}
+                    name="location.country"
+                    closeMenuOnSelect={true}
+                    components={animatedComponents}
+                    placeholder="Clique para selecionar"
+                    options={countries}
+                    onBlur={() => setFieldTouched('location.country', true)}
+                    onChange={(selectedOption, data) =>
+                      handleStringChange(
+                        selectedOption,
+                        data.name,
+                        setFieldValue
+                      )
+                    }
+                  />
+                  <ErrorMessage name="location.country">
+                    {(msg) => <div className="form-error">{msg}</div>}
+                  </ErrorMessage>
                 </label>
                 <label>
                   Estado
@@ -137,6 +145,9 @@ const CommunityForm = ({ service, initialValues, loading }) => {
                   ) : (
                     <Select placeholder="Não aplica à sua seleção" isDisabled />
                   )}
+                  <ErrorMessage name="location.state">
+                    {(msg) => <div className="form-error">{msg}</div>}
+                  </ErrorMessage>
                 </label>
                 <label>
                   Cidade
@@ -164,6 +175,9 @@ const CommunityForm = ({ service, initialValues, loading }) => {
                   ) : (
                     <Select placeholder="Não aplica à sua seleção" isDisabled />
                   )}
+                  <ErrorMessage name="location.city">
+                    {(msg) => <div className="form-error">{msg}</div>}
+                  </ErrorMessage>
                 </label>
                 <label>
                   Link da comunidade *
