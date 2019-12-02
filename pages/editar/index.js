@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
 import cookies from 'next-cookies';
 import { api, setHeader } from '../../utils/axios';
@@ -9,7 +8,7 @@ import { api, setHeader } from '../../utils/axios';
 import styles from '../cadastrar/styles';
 import CommunityForm from '../../components/CommunityForm';
 
-const EditCommunity = ({ credentials, notify }) => {
+const EditCommunity = ({ credentials }) => {
   const [loading, setLoading] = useState(true);
   const [community, setCommunity] = useState([]);
   const router = useRouter();
@@ -23,20 +22,14 @@ const EditCommunity = ({ credentials, notify }) => {
     fetchData();
   }, []);
 
-  const sendNotification = () => {
-    toast.configure();
-    toast.success(
-      `Comunidade editada com sucesso!\n
-    Em breve ela será republicada.`
-    );
-  };
-
   const editCommunity = async (community) => {
     setLoading(true);
     setHeader(credentials);
     await api.put(`/community/update/${community._id}`, community);
-    sendNotification();
-    notify();
+    toast.success(
+      `Comunidade editada com sucesso!\n
+    Em breve ela será republicada.`
+    );
     Router.push('/');
   };
 

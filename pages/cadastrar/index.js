@@ -8,11 +8,8 @@ import { api, setHeader } from '../../utils/axios';
 import styles from './styles';
 import CommunityForm from '../../components/CommunityForm';
 
-const RegisterCommunity = ({ credentials, notify }) => {
+const RegisterCommunity = ({ credentials }) => {
   const [loading, setLoading] = useState(false);
-  const sendNotification = () => {
-    toast.configure();
-  };
 
   const getInitialValues = () => {
     const { _id, name, email } = credentials;
@@ -32,12 +29,10 @@ const RegisterCommunity = ({ credentials, notify }) => {
     setLoading(true);
     setHeader(credentials);
     await api.post('/community/store', community);
-    // sendNotification();
     toast.success(
       `Comunidade cadastrada com sucesso!\n
     Em breve ela será publicada.`
     );
-    notify();
     Router.push('/');
   };
 

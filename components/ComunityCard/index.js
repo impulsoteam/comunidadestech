@@ -1,6 +1,5 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import 'react-toastify/scss/main.scss';
 import Router from 'next/router';
 import { api, setHeader } from '../../utils/axios';
 import styles from './styles';
@@ -25,7 +24,6 @@ const CommunityCard = ({ canModify, community, credentials }) => {
       delete: 'Comunidade deletada com sucesso!',
       publish: 'Comunidade publicada com sucesso!',
     };
-    toast.configure();
     toast.success(types[type]);
   };
 
