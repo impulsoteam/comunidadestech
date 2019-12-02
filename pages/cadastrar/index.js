@@ -37,7 +37,9 @@ const RegisterCommunity = ({ credentials }) => {
     setLoading(true);
     setHeader(credentials);
     await api.post('/community/store', community);
-    sendNotification();
+    setTimeout(() => {
+      sendNotification();
+    }, 500);
     Router.push('/');
   };
 
