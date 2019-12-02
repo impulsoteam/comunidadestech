@@ -33,7 +33,7 @@ const CommunityForm = ({ service, initialValues, loading }) => {
       validationSchema={SignupSchema}
       onSubmit={(values) => service(values)}
     >
-      {({ errors, touched, values, setFieldValue, setFieldTouched }) => {
+      {({ values, setFieldValue, setFieldTouched }) => {
         const handleChange = (selectedOption) => {
           const selected =
             selectedOption && selectedOption.map(({ value }) => value);
