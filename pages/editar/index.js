@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import { toast } from 'react-toastify';
-import 'react-toastify/scss/main.scss';
-import 'react-toastify/dist/ReactToastify.minimal.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
 import cookies from 'next-cookies';
