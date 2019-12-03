@@ -17,6 +17,7 @@ import {
 } from './utils';
 
 const CommunityForm = ({ service, initialValues, loading }) => {
+  console.log(initialValues);
   const getCities = (state) => cities.filter((city) => city.state === state);
   const animatedComponents = makeAnimated();
 
@@ -235,8 +236,9 @@ const CommunityForm = ({ service, initialValues, loading }) => {
                   Tags *
                   <Select
                     name="tags"
-                    defaultValue={TYPES.filter(
-                      (type) => type.value === values.type
+                    defaultValue={TAGS.map(
+                      (type, index) =>
+                        values.tags.includes(type.value) && TAGS[index]
                     )}
                     closeMenuOnSelect={false}
                     components={animatedComponents}
