@@ -128,8 +128,8 @@ class Filter extends Component {
                       }}
                     >
                       <option value="all">Ambos</option>
-                      <option value="Presencial">Presencial</option>
-                      <option value="Online">Online</option>
+                      <option value="presential">Presencial</option>
+                      <option value="online">Online</option>
                     </select>
                   </div>
                   <span className="icon is-small is-left">

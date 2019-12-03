@@ -28,28 +28,8 @@ export default class Home extends PureComponent {
   };
 
   normalize = (array) => {
-    return array
-      .map((item, index) => ({
-        id: `community-${index}`,
-        name: item.name,
-        country:
-          item.location.country !== 'legacy' ? item.location.country : null,
-        state: item.location.state !== 'legacy' ? item.location.state : null,
-        city: item.location.city !== 'legacy' ? item.location.city : null,
-        model:
-          (item.model === 'both' && 'Ambos') ||
-          (item.model === 'presential' && 'Presencial') ||
-          (item.model === 'online' && 'Online'),
-        link: item.url,
-        description: item.description,
-        category: item.category,
-        tags: item.tags,
-        isGlobalProgram: item.globalProgram.isParticipant,
-        members: item.members,
-        logo: item.logo !== 'legacy' ? item.logo : null,
-        nameSearch: item.name.toLowerCase(),
-      }))
-      .sort((a, b) => (a.name > b.name ? 1 : -1));
+    array.map((item) => (item.nameSearch = item.name.toLowerCase()));
+    return array.sort((a, b) => (a.name > b.name ? 1 : -1));
   };
 
   async componentDidMount() {
@@ -124,20 +104,22 @@ export default class Home extends PureComponent {
     let location = { Brasil: {} };
 
     list.forEach((item) => {
-      if (item.country) {
-        location[item.country] = {};
+      if (item.location.country) {
+        location[item.location.country] = {};
       }
     });
 
     list.forEach((item) => {
-      if (item.state) {
-        location[item.country][item.state] = [];
+      if (item.location.state) {
+        location[item.location.country][item.location.state] = [];
       }
     });
 
     list.forEach((item) => {
-      if (item.state && item.city !== null) {
-        location[item.country][item.state].push(`${item.city}`);
+      if (item.location.state && item.location.city !== null) {
+        location[item.location.country][item.location.state].push(
+          item.location.city
+        );
       }
     });
     return location;

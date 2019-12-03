@@ -4,9 +4,9 @@ export const paramFilter = (array, filter) => {
       (item.category === filter.category || filter.category === '') &&
       (item.tags.includes(filter.tags) || filter.tags === '') &&
       (item.model === filter.model || filter.model === '') &&
-      (item.country === filter.country || filter.country === '') &&
-      (item.state === filter.state || filter.state === '') &&
-      (item.city === filter.city || filter.city === '') &&
+      (item.location.country === filter.country || filter.country === '') &&
+      (item.location.state === filter.state || filter.state === '') &&
+      (item.location.city === filter.city || filter.city === '') &&
       (item.nameSearch.includes(filter.nameSearch) || filter.nameSearch === '')
     )
       return item;
