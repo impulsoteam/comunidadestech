@@ -27,16 +27,11 @@ export default class Home extends PureComponent {
     searchName: '',
   };
 
-  // normalize = (array) => {
-  //   array.map((item) => (item.nameSearch = item.name.toLowerCase()));
-  //   return array.sort((a, b) => (a.name > b.name ? 1 : -1));
-  // };
-
   async componentDidMount() {
     setHeader(this.props.credentials);
     const { data } = await api.get('/community/status/published');
     this.setState({ list: normalize(data) });
-    console.log(this.state.list);
+
     const route = Router.router.query;
     let newFilter = this.state.multipleFilter;
     for (const prop in route) {
