@@ -7,7 +7,7 @@ import Filter from '../../components/Filter';
 import Counter from '../../components/Counter';
 import Router from 'next/router';
 import loader from '../../static/comunidades-tech-loader.gif';
-import { paramFilter } from '../../utils/index';
+import { paramFilter, normalize } from '../../utils/index';
 export default class Home extends PureComponent {
   state = {
     list: [],
@@ -27,16 +27,16 @@ export default class Home extends PureComponent {
     searchName: '',
   };
 
-  normalize = (array) => {
-    array.map((item) => (item.nameSearch = item.name.toLowerCase()));
-    return array.sort((a, b) => (a.name > b.name ? 1 : -1));
-  };
+  // normalize = (array) => {
+  //   array.map((item) => (item.nameSearch = item.name.toLowerCase()));
+  //   return array.sort((a, b) => (a.name > b.name ? 1 : -1));
+  // };
 
   async componentDidMount() {
     setHeader(this.props.credentials);
     const { data } = await api.get('/community/status/published');
-    this.setState({ list: this.normalize(data) });
-
+    this.setState({ list: normalize(data) });
+    console.log(this.state.list);
     const route = Router.router.query;
     let newFilter = this.state.multipleFilter;
     for (const prop in route) {

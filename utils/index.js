@@ -13,3 +13,8 @@ export const paramFilter = (array, filter) => {
   });
   return newArray.filter((value) => value);
 };
+
+export const normalize = (array) => {
+  array.map((item) => (item.nameSearch = item.name.toLowerCase()));
+  return array.sort((a, b) => (a.name > b.name ? 1 : -1));
+};
