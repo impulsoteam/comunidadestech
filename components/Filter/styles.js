@@ -3,6 +3,9 @@ import { colors } from '/utils/variables';
 
 export default css`
   .filter {
+    margin-left: -2.5rem;
+    margin-right: -2.5rem;
+
     .filter-box {
       box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1),
         0 0 0 1px rgba(10, 10, 10, 0.1);
@@ -14,7 +17,11 @@ export default css`
       align-items: center;
       background-color: whitesmoke;
       display: flex;
-      padding: 0.75rem;
+      padding: 0;
+
+      .filter-label {
+        transform: rotate(-90deg);
+      }
     }
 
     .filter-label {
@@ -119,6 +126,10 @@ export default css`
 
         .filter-title {
           border-bottom: solid 2px #e6e6e6;
+
+          .filter-label {
+            transform: rotate(0deg);
+          }
         }
 
         .reset-title {
@@ -126,29 +137,36 @@ export default css`
           border-bottom-left-radius: 4px;
         }
 
-        .filter-options .filter-option-wrapper:first-of-type {
-          border-left: none;
+        .filter-options {
+          flex-wrap: wrap;
+
+          .filter-option-wrapper:first-of-type,
+          .filter-option-wrapper:nth-of-type(5) {
+            border-left: none;
+          }
+          .filter-option-wrapper:nth-of-type(-n + 7) {
+            flex-basis: 25%;
+            border-bottom: solid 2px #e6e6e6;
+          }
+
+          .filter-option-wrapper:last-of-type {
+            flex-basis: 50%;
+            border-bottom: solid 2px #e6e6e6;
+            border-left: none;
+          }
         }
       }
     }
     @media screen and (max-width: 1023px) {
-      .filter-options {
-        flex-wrap: wrap;
-
-        .filter-option-wrapper:nth-of-type(-n + 6) {
-          flex-basis: 25%;
-          border-bottom: solid 2px #e6e6e6;
-        }
-
-        .filter-option-wrapper:last-of-type {
-          flex-basis: 50%;
-          border-bottom: solid 2px #e6e6e6;
-        }
-      }
     }
     @media screen and (max-width: 769px) {
-      .filter-options .filter-option-wrapper:nth-of-type(-n + 6) {
-        flex-basis: 50%;
+      .filter-box {
+        .filter-options .filter-option-wrapper:nth-of-type(-n + 4) {
+          flex-basis: 50%;
+        }
+        .filter-options .filter-option-wrapper:nth-of-type(n + 5) {
+          flex-basis: 100%;
+        }
       }
     }
   }

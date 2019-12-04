@@ -36,8 +36,16 @@ class Filter extends Component {
   };
 
   render() {
-    const { list, select, reset, location, tags, multipleFilter } = this.props;
-
+    const {
+      list,
+      select,
+      reset,
+      location,
+      tags,
+      multipleFilter,
+      types,
+    } = this.props;
+    console.log(types);
     return (
       <div className="columns filter">
         <div className="column filter-box">
@@ -72,6 +80,40 @@ class Filter extends Component {
                   </div>
                   <span className="icon is-small is-left">
                     <i className="fas fa-list"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="filter-option-wrapper">
+              <div className="filter-label">Tipo</div>
+              <div className="filter-option">
+                <div className="control has-icons-left">
+                  <div className="select is-small">
+                    <select
+                      value={
+                        this.state.url.type
+                          ? this.state.url.type
+                          : multipleFilter.type
+                      }
+                      name="type"
+                      onChange={(event) => {
+                        select(event);
+                        this.paramsHandler(event);
+                      }}
+                    >
+                      <option value="all">Todos</option>
+                      {types.sort().map(
+                        (type, index) =>
+                          type.length <= 20 && (
+                            <option value={type} key={`${index}-${type}`}>
+                              {type}
+                            </option>
+                          )
+                      )}
+                    </select>
+                  </div>
+                  <span className="icon is-small is-left">
+                    <i className="fas fa-tag"></i>
                   </span>
                 </div>
               </div>

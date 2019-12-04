@@ -21,16 +21,12 @@ export default class Home extends PureComponent {
       state: '',
       city: '',
       nameSearch: '',
+      type: '',
     },
     filteredMulti: [],
     searchURL: '',
     searchName: '',
   };
-
-  // normalize = (array) => {
-  //   array.map((item) => (item.nameSearch = item.name.toLowerCase()));
-  //   return array.sort((a, b) => (a.name > b.name ? 1 : -1));
-  // };
 
   async componentDidMount() {
     setHeader(this.props.credentials);
@@ -96,6 +92,7 @@ export default class Home extends PureComponent {
         state: '',
         city: '',
         nameSearch: '',
+        type: '',
       },
     });
   };
@@ -134,9 +131,17 @@ export default class Home extends PureComponent {
     return tags;
   };
 
+  types = (list) => {
+    let types = [];
+    list.forEach((item) => {
+      item.type !== 'legacy' && types.push(item.type);
+    });
+
+    return [...new Set(types)];
+  };
+
   render() {
     const { list, loading, filteredMulti, multipleFilter } = this.state;
-
     return (
       <>
         {!loading ? (
@@ -152,6 +157,7 @@ export default class Home extends PureComponent {
                 tags={this.tags(list)}
                 location={this.location(list)}
                 multipleFilter={multipleFilter}
+                types={this.types(list)}
               />
               <div className="columns">
                 <div className="column">

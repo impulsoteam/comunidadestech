@@ -34,17 +34,27 @@ class Card extends Component {
             </div>
           </a>
           <div className="content">
-            <p className="description">{content.description}</p>
+            <p className="description">
+              {content.description <= 85
+                ? content.description
+                : content.description.substring(0, 85).concat('...')}
+            </p>
             <div className="control">
-              <div className="tags has-addons">
+              <div className="tags has-addons is-inline-block">
                 <span className="tag is-dark">membros</span>
                 <span className="tag is-primary">{content.members}</span>
               </div>
+              {content.type !== 'legacy' && (
+                <div className="tags has-addons is-inline-block">
+                  <span className="tag is-dark">tipo</span>
+                  <span className="tag is-primary">{content.type}</span>
+                </div>
+              )}
             </div>
             <div className="control">
               <span className="tag is-dark">{content.category}</span>
             </div>
-            <div className="tags">
+            <div className="tags comunity-tags">
               {content.tags.slice(0, 5).map(
                 (tag, tag_element_index) =>
                   tag.length <= 20 && (
