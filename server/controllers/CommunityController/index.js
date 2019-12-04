@@ -94,6 +94,15 @@ class CommunityController {
       return res.status(500).json(error);
     }
   }
+  async checkName(req, res) {
+    try {
+      const { name } = req.params;
+      const alreadyExists = await Community.findOne({ name });
+      return res.json(!!alreadyExists);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  }
 
   async getByStatus(req, res) {
     try {

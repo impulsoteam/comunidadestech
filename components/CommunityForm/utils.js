@@ -64,6 +64,10 @@ export const SignupSchema = Yup.object().shape({
     .required('Item obrigatório'),
 });
 
+export const errorMessages = {
+  nameAlreadyExists: 'Comunidade já cadastrada',
+};
+
 export const CATEGORIES = [
   {
     label: 'Desenvolvimento de software',

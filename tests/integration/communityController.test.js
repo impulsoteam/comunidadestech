@@ -280,6 +280,34 @@ describe('CommunityController.update', () => {
   });
 });
 
+describe('CommunityController.checkName', () => {
+  it('Should return `true`', async () => {
+    const { name } = await factory.create('Community');
+
+    const { statusCode, body } = await supertest(app)
+      .get(`/community/checkName/${name}`)
+      .set('Authorization', `Bearer ${user.token}`);
+
+    expect(statusCode).toBe(200);
+    expect(body).toBe(true);
+  });
+  it('Should return `false`', async () => {
+    const { statusCode, body } = await supertest(app)
+      .get(`/community/checkName/jestTest85426`)
+      .set('Authorization', `Bearer ${user.token}`);
+
+    expect(statusCode).toBe(200);
+    expect(body).toBe(false);
+  });
+  it('Should return 404 status', async () => {
+    const { statusCode } = await supertest(app)
+      .get(`/community/checkName/`)
+      .set('Authorization', `Bearer ${user.token}`);
+
+    expect(statusCode).toBe(404);
+  });
+});
+
 describe('CommunityController.getByStatus', () => {
   it('Should return array of `published` communities', async () => {
     await factory.createMany('Community', 50, {
