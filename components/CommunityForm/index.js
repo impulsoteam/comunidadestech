@@ -2,13 +2,15 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import styles from './styles';
 import MaskedInput from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
+import { api, setHeader } from '../../utils/axios';
+import styles from './styles';
 import { countries, states, cities } from './location';
 import {
   SignupSchema,
+  errorMessages,
   CATEGORIES,
   TAGS,
   TYPES,
@@ -16,7 +18,7 @@ import {
   GLOBAL_PROGRAM,
 } from './utils';
 
-const CommunityForm = ({ service, initialValues, loading }) => {
+const CommunityForm = ({ service, initialValues, loading, credentials }) => {
   const getCities = (state) => cities.filter((city) => city.state === state);
   const animatedComponents = makeAnimated();
 
@@ -33,7 +35,17 @@ const CommunityForm = ({ service, initialValues, loading }) => {
       validationSchema={SignupSchema}
       onSubmit={(values) => service(values)}
     >
-      {({ values, setFieldValue, setFieldTouched }) => {
+      {({ values, setFieldValue, setFieldTouched, errors, touched }) => {
+        const { nameAlreadyExists } = errorMessages;
+
+        const checkName = async (name) => {
+          if (!name || name === initialValues.name) return;
+          setHeader(credentials);
+          const { data } = await api.get(`/community/checkName/${name}`);
+
+          return data ? nameAlreadyExists : null;
+        };
+
         const handleChange = (selectedOption) => {
           const selected =
             selectedOption && selectedOption.map(({ value }) => value);
@@ -52,9 +64,13 @@ const CommunityForm = ({ service, initialValues, loading }) => {
                   Nome da comunidade *
                   <Field
                     name="name"
+                    validate={checkName}
                     className="input"
                     placeholder="Digite o nome da sua comunidade"
                   />
+                  {errors.name === nameAlreadyExists && !touched.name && (
+                    <div className="form-error">{errors.name}</div>
+                  )}
                   <ErrorMessage name="name">
                     {(msg) => <div className="form-error">{msg}</div>}
                   </ErrorMessage>
@@ -349,6 +365,11 @@ const CommunityForm = ({ service, initialValues, loading }) => {
       }}
     </Formik>
   );
+};
+
+CommunityForm.getInitialProps = async (ctx) => {
+  const credentials = cookies(ctx).ctech_credentials || {};
+  return { ...credentials };
 };
 
 export default CommunityForm;
