@@ -57,6 +57,7 @@ const Community = ({ credentials }) => {
                 link={community.url}
                 credentials={credentials}
                 status={community.status}
+                type={community.type}
               />
               <div className="container related">
                 <div className="columns">

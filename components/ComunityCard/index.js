@@ -17,6 +17,7 @@ const CommunityCard = ({
   canModify,
   credentials,
   status,
+  type,
 }) => {
   const deleteCommunity = async () => {
     setHeader(credentials);
@@ -106,6 +107,12 @@ const CommunityCard = ({
               <div>
                 <span className="tag is-dark">{category}</span>
               </div>
+              {type !== 'legacy' && (
+                <div className="tags has-addons">
+                  <span className="tag is-dark">tipo</span>
+                  <span className="tag is-primary">{type}</span>
+                </div>
+              )}
               <div>
                 {tags
                   ? tags.map(
