@@ -13,15 +13,7 @@ export default class Home extends PureComponent {
     list: [],
     loading: true,
     openModal: false,
-    multipleFilter: {
-      category: '',
-      tags: '',
-      model: '',
-      country: '',
-      state: '',
-      city: '',
-      nameSearch: '',
-    },
+    multipleFilter: {},
     filteredMulti: [],
     searchURL: '',
     searchName: '',
@@ -83,15 +75,7 @@ export default class Home extends PureComponent {
 
     this.setState({
       filteredMulti: this.state.list,
-      multipleFilter: {
-        category: '',
-        tags: '',
-        model: '',
-        country: '',
-        state: '',
-        city: '',
-        nameSearch: '',
-      },
+      multipleFilter: {},
     });
   };
 
@@ -99,24 +83,22 @@ export default class Home extends PureComponent {
     let location = { Brasil: {} };
 
     list.forEach((item) => {
-      if (item.location.country) {
-        location[item.location.country] = {};
-      }
+      item.location.country && (location[item.location.country] = {});
     });
 
     list.forEach((item) => {
-      if (item.location.state) {
-        location[item.location.country][item.location.state] = [];
-      }
+      item.location.state &&
+        (location[item.location.country][item.location.state] = []);
     });
 
     list.forEach((item) => {
-      if (item.location.state && item.location.city !== null) {
+      item.location.state &&
+        item.location.city !== null &&
         location[item.location.country][item.location.state].push(
           item.location.city
         );
-      }
     });
+
     return location;
   };
 
@@ -131,7 +113,7 @@ export default class Home extends PureComponent {
 
   render() {
     const { list, loading, filteredMulti, multipleFilter } = this.state;
-
+    console.log(list);
     return (
       <>
         {!loading ? (
