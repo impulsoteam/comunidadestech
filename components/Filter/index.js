@@ -37,7 +37,7 @@ class Filter extends Component {
 
   render() {
     const { list, select, reset, location, tags, multipleFilter } = this.props;
-    console.log("minha location", location);
+
     return (
       <div className="columns filter">
         <div className="column filter-box">

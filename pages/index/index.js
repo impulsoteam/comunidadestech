@@ -113,7 +113,7 @@ export default class Home extends PureComponent {
 
   render() {
     const { list, loading, filteredMulti, multipleFilter } = this.state;
-    console.log(list);
+
     return (
       <>
         {!loading ? (
