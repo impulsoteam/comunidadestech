@@ -251,8 +251,8 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                   Tags *
                   <Select
                     name="tags"
-                    defaultValue={TYPES.filter(
-                      (type) => type.value === values.type
+                    defaultValue={TAGS.filter((type) =>
+                      values.tags.includes(type.value)
                     )}
                     closeMenuOnSelect={false}
                     components={animatedComponents}
