@@ -23,9 +23,9 @@ class Card extends Component {
               </div>
               <div className="media-content">
                 <p className="title is-6">{content.name}</p>
-                {content.city ? (
+                {content.location.city ? (
                   <p className="subtitle is-7">
-                    {content.city}, {content.state}
+                    {content.location.city}, {content.location.state}
                   </p>
                 ) : (
                   <p className="subtitle is-7">Remota</p>

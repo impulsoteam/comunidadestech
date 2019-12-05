@@ -24,8 +24,11 @@ class Counter extends Component {
           <div className="counter-info">
             <h2 className="is-size-1-desktop is-size-2-tablet is-size-3-mobile">
               {
-                [...new Set(list.map((item) => item.city).filter(Boolean))]
-                  .length
+                [
+                  ...new Set(
+                    list.map((item) => item.location.city).filter(Boolean)
+                  ),
+                ].length
               }
             </h2>
             <h5>
