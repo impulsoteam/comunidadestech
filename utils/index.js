@@ -1,18 +1,18 @@
 export const paramFilter = (array, filter) => {
-  const newArray = array.map((item) => {
-    if (
-      (item.category === filter.category || filter.category === '') &&
-      (item.tags.includes(filter.tags) || filter.tags === '') &&
-      (item.model === filter.model || filter.model === '') &&
-      (item.type.includes(filter.type) || filter.type === '') &&
-      (item.location.country === filter.country || filter.country === '') &&
-      (item.location.state === filter.state || filter.state === '') &&
-      (item.location.city === filter.city || filter.city === '') &&
-      (item.nameSearch.includes(filter.nameSearch) || filter.nameSearch === '')
-    )
-      return item;
+  Object.keys(filter).forEach((key) => !filter[key] && delete filter[key]);
+  const keys = Object.keys(filter);
+  let filtered = array.filter((item) => {
+    for (const key of keys) {
+      if (item[key] && !item[key].includes(filter[key])) return false;
+      if (
+        Object.keys(array[0].location).includes(key) &&
+        filter[key] !== item.location[key]
+      )
+        return false;
+    }
+    return true;
   });
-  return newArray.filter((value) => value);
+  return filtered;
 };
 
 export const normalize = (array) => {
