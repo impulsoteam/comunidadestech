@@ -7,6 +7,7 @@ import UserController from '../server/controllers/UserController';
 
 export const connect = async () => {
   return mongoose.connect(process.env.MONGODB_TEST_URI, {
+    useFindAndModify: false,
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,

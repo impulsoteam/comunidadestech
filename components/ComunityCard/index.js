@@ -1,35 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { toast } from 'react-toastify';
 import Router from 'next/router';
 import { api, setHeader } from '../../utils/axios';
 import styles from './styles';
 
-const CommunityCard = ({
-  _id,
-  name,
-  city,
-  state,
-  size,
-  category,
-  description,
-  logo,
-  tags,
-  link,
-  canModify,
-  credentials,
-  status,
-  type,
-}) => {
+const CommunityCard = ({ canModify, community, credentials }) => {
+  const {
+    _id,
+    name,
+    city,
+    state,
+    members,
+    category,
+    description,
+    logo,
+    tags,
+    url,
+    status,
+    type,
+  } = community;
+
+  const sendNotification = (type) => {
+    const types = {
+      delete: 'Comunidade deletada com sucesso!',
+      publish: 'Comunidade publicada com sucesso!',
+    };
+    toast.success(types[type]);
+  };
+
   const deleteCommunity = async () => {
     setHeader(credentials);
     await api.delete(`/community/${_id}`);
+    sendNotification('delete');
     Router.push('/');
   };
 
   const publishCommunity = async () => {
     setHeader(credentials);
-    const { data } = await api.put(`/community/${_id}`, {
+    await api.put(`/community/publish/${_id}`, {
       status: 'published',
     });
+    sendNotification('publish');
+    Router.push(`/`);
   };
 
   return (
@@ -66,37 +78,39 @@ const CommunityCard = ({
             </p>
             <p className="info">
               <i className="fas fa-users"></i>
-              <span>{size} Membros</span>
+              <span>{members} Membros</span>
             </p>
-            <a href={link} className="button is-primary has-text-weight-bold">
+            <a href={url} className="button is-primary has-text-weight-bold">
               Participar da Comunidade
             </a>
-            {canModify && (
-              <>
-                <a
-                  href={`/editar?name=${name}`}
-                  className="button is-primary has-text-weight-bold"
-                >
-                  editar
-                </a>
-                <button
-                  onClick={deleteCommunity}
-                  className="button is-primary has-text-weight-bold"
-                >
-                  deletar
-                </button>
-              </>
-            )}
-            {status === 'awaitingPublication' && credentials.isModerator && (
-              <>
-                <button
-                  onClick={publishCommunity}
-                  className="button is-primary has-text-weight-bold"
-                >
-                  publicar
-                </button>
-              </>
-            )}
+            <div className="options">
+              {canModify && (
+                <>
+                  <a
+                    href={`/editar?name=${name}`}
+                    className="button is-primary has-text-weight-bold"
+                  >
+                    Editar
+                  </a>
+                  <button
+                    onClick={deleteCommunity}
+                    className="button is-primary has-text-weight-bold"
+                  >
+                    Deletar
+                  </button>
+                </>
+              )}
+              {status === 'awaitingPublication' && credentials.isModerator && (
+                <>
+                  <button
+                    onClick={publishCommunity}
+                    className="button is-primary has-text-weight-bold"
+                  >
+                    Publicar
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

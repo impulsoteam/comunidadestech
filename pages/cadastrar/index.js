@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import 'react-toastify/scss/main.scss';
 
 import Router from 'next/router';
 import cookies from 'next-cookies';
@@ -10,33 +9,47 @@ import styles from './styles';
 import CommunityForm from '../../components/CommunityForm';
 
 const RegisterCommunity = ({ credentials }) => {
-  const sendNotification = () => {
-    toast.configure();
-    toast.success(
-      `Comunidade cadastrada com sucesso!\n
-    Em breve ela será publicada.`
-    );
-  };
+  const [loading, setLoading] = useState(false);
 
   const getInitialValues = () => {
     const { _id, name, email } = credentials;
     return {
+      name: '',
+      model: '',
+      location: {
+        country: '',
+        state: '',
+        city: '',
+      },
       url: 'https://',
-      location: {},
-      globalProgram: {},
+      description: '',
+      category: '',
+      type: '',
+      tags: '',
+      globalProgram: {
+        isParticipant: '',
+        name: '',
+      },
+      members: '',
+      logo: '',
       creator: {
         _id,
         name,
         email,
+        rocketChat: '',
       },
-      tags: [],
+      owner: '',
     };
   };
 
   const postCommunity = async (community) => {
+    setLoading(true);
     setHeader(credentials);
     await api.post('/community/store', community);
-    sendNotification();
+    toast.success(
+      `Comunidade cadastrada com sucesso!\n
+    Em breve ela será publicada.`
+    );
     Router.push('/');
   };
 
@@ -59,6 +72,7 @@ const RegisterCommunity = ({ credentials }) => {
             <CommunityForm
               credentials={credentials}
               service={postCommunity}
+              loading={loading}
               initialValues={getInitialValues()}
             />
           </div>

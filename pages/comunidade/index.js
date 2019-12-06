@@ -39,24 +39,9 @@ const Community = ({ credentials }) => {
             <div>
               <CommunityHero />
               <CommunityCard
-                community={community}
                 canModify={checkCredentials()}
-                _id={community._id}
-                name={community.name}
-                state={community.location.state}
-                city={
-                  community.location.city === 'legacy'
-                    ? null
-                    : community.location.city
-                }
-                size={community.members}
-                category={community.category}
-                description={community.description}
-                logo={community.logo === 'legacy' ? null : community.logo}
-                tags={community.tags}
-                link={community.url}
+                community={community}
                 credentials={credentials}
-                status={community.status}
                 type={community.type}
               />
               <div className="container related">
