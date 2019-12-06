@@ -42,6 +42,7 @@ const Community = ({ credentials }) => {
                 canModify={checkCredentials()}
                 community={community}
                 credentials={credentials}
+                type={community.type}
               />
               <div className="container related">
                 <div className="columns">

@@ -4,12 +4,7 @@ import { fonts } from '/utils/variables';
 
 export default css`
   .description {
-    display: -webkit-box;
     font-family: ${fonts.raleway};
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
   }
 
   .card {
@@ -30,7 +25,29 @@ export default css`
   }
 
   .control {
-    margin-bottom: 4px;
+    font-size: 12px;
+
+    .has-addons {
+      margin-bottom: 0;
+
+      :not(:last-child) {
+        margin-right: 5px;
+      }
+    }
+
+    .tag {
+      margin-bottom: 5px;
+    }
+  }
+
+  .tags:not(.has-addons) {
+    .tag {
+      margin: 0 5px 5px 0;
+    }
+  }
+
+  .comunity-tags {
+    margin-top: 5px;
   }
 
   .card .media:not(:last-child) {
@@ -66,7 +83,8 @@ export default css`
     .tooltip {
       background-color: ${colors.softCloud};
       border-radius: 5px;
-      box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+      box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1),
+        0 0 0 1px rgba(10, 10, 10, 0.1);
       display: none;
       font-size: 1.25em;
       left: 0;
@@ -77,18 +95,17 @@ export default css`
       z-index: 2000;
     }
 
-
     .open-tooltip:hover {
       .tooltip {
         display: block;
       }
 
       .btn-tooltip:after {
-        border: .75rem solid transparent;
+        border: 0.75rem solid transparent;
         border-bottom-color: ${colors.softCloud};
         border-top: none;
         content: '';
-        filter: drop-shadow(0 -0.0625rem 0.0625rem rgba(10, 10, 10, .1));
+        filter: drop-shadow(0 -0.0625rem 0.0625rem rgba(10, 10, 10, 0.1));
         height: 0;
         margin-bottom: -23px;
         position: absolute;

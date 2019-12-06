@@ -79,41 +79,41 @@ export default class Home extends PureComponent {
     });
   };
 
-  location = (list) => {
-    let location = { Brasil: {} };
+  getPropertyList = (list) => {
+    const propertyList = {
+      tags: [],
+      types: [],
+      locations: {},
+    };
+    let { types, locations } = propertyList;
 
     list.forEach((item) => {
-      item.location.country && (location[item.location.country] = {});
+      item.type !== 'legacy' &&
+        !types.includes(item.type) &&
+        types.push(item.type);
+      propertyList.tags = Array.from(
+        new Set(propertyList.tags.concat(item.tags))
+      );
+      item.location.country && (locations[item.location.country] = {});
     });
 
     list.forEach((item) => {
       item.location.state &&
-        (location[item.location.country][item.location.state] = []);
+        (locations[item.location.country][item.location.state] = []);
     });
 
     list.forEach((item) => {
       item.location.state &&
         item.location.city !== null &&
-        location[item.location.country][item.location.state].push(
+        locations[item.location.country][item.location.state].push(
           item.location.city
         );
     });
-
-    return location;
-  };
-
-  tags = (list) => {
-    let tags = [];
-    list.forEach((community) => {
-      tags = Array.from(new Set(tags.concat(community.tags)));
-    });
-
-    return tags;
+    return propertyList;
   };
 
   render() {
     const { list, loading, filteredMulti, multipleFilter } = this.state;
-
     return (
       <>
         {!loading ? (
@@ -126,9 +126,8 @@ export default class Home extends PureComponent {
                 list={list}
                 select={this.handleChange}
                 reset={this.handleResetButton}
-                tags={this.tags(list)}
-                location={this.location(list)}
                 multipleFilter={multipleFilter}
+                propertyList={this.getPropertyList(list)}
               />
               <div className="columns">
                 <div className="column">
