@@ -36,16 +36,7 @@ class Filter extends Component {
   };
 
   render() {
-    const {
-      list,
-      select,
-      reset,
-      location,
-      tags,
-      multipleFilter,
-      types,
-    } = this.props;
-    console.log(types);
+    const { list, select, reset, multipleFilter, propertyList } = this.props;
     return (
       <div className="columns filter">
         <div className="column filter-box">
@@ -102,7 +93,7 @@ class Filter extends Component {
                       }}
                     >
                       <option value="all">Todos</option>
-                      {types.sort().map(
+                      {propertyList.types.sort().map(
                         (type, index) =>
                           type.length <= 20 && (
                             <option value={type} key={`${index}-${type}`}>
@@ -136,7 +127,7 @@ class Filter extends Component {
                       }}
                     >
                       <option value="all">Todas</option>
-                      {tags.sort().map(
+                      {propertyList.tags.sort().map(
                         (tag, index) =>
                           tag.length <= 20 && (
                             <option value={tag} key={`${index}-${tag}`}>
@@ -204,11 +195,13 @@ class Filter extends Component {
                       >
                         <option value="all">Todos</option>
                         {(multipleFilter.model !== 'Online' &&
-                          Object.keys(location).map((item, index) => (
-                            <option value={item} key={`${index}-${item}`}>
-                              {item}
-                            </option>
-                          ))) || <option>Selecione um modelo diferente</option>}
+                          Object.keys(propertyList.locations).map(
+                            (item, index) => (
+                              <option value={item} key={`${index}-${item}`}>
+                                {item}
+                              </option>
+                            )
+                          )) || <option>Selecione um modelo diferente</option>}
                       </select>
                     )}
                   </div>
@@ -223,7 +216,7 @@ class Filter extends Component {
               <div className="filter-option">
                 <div className="control has-icons-left">
                   <div className="select is-small">
-                    {(!location[multipleFilter.country] && (
+                    {(!propertyList.locations[multipleFilter.country] && (
                       <select disabled title="Selecione um país">
                         <option value="all">Todos</option>
                       </select>
@@ -241,8 +234,10 @@ class Filter extends Component {
                         }}
                       >
                         <option value="all">Todos</option>
-                        {(location[multipleFilter.country] &&
-                          Object.keys(location[multipleFilter.country])
+                        {(propertyList.locations[multipleFilter.country] &&
+                          Object.keys(
+                            propertyList.locations[multipleFilter.country]
+                          )
                             .sort()
                             .map((item, index) => (
                               <option key={`${index}-${item}`} value={item}>
@@ -263,7 +258,9 @@ class Filter extends Component {
               <div className="filter-option">
                 <div className="control has-icons-left">
                   <div className="select is-small">
-                    {(!location['Brasil'][multipleFilter.state] && (
+                    {(!propertyList.locations['Brasil'][
+                      multipleFilter.state
+                    ] && (
                       <select disabled title="Selecione um estado">
                         <option value="all">Todos</option>
                       </select>
@@ -281,10 +278,14 @@ class Filter extends Component {
                         }}
                       >
                         <option value="all">Todos</option>
-                        {(location['Brasil'][multipleFilter.state] &&
+                        {(propertyList.locations['Brasil'][
+                          multipleFilter.state
+                        ] &&
                           [
                             ...new Set(
-                              location['Brasil'][multipleFilter.state]
+                              propertyList.locations['Brasil'][
+                                multipleFilter.state
+                              ]
                             ),
                           ].map((item, index) => (
                             <option key={`${index}-${item}`}>{item}</option>
