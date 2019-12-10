@@ -97,7 +97,10 @@ class CommunityController {
   async checkName(req, res) {
     try {
       const { name } = req.params;
-      const alreadyExists = await Community.findOne({ name });
+      const alreadyExists = await Community.findOne({ name }).collation({
+        locale: 'pt',
+        strength: 1,
+      });
       return res.json(!!alreadyExists);
     } catch (error) {
       return res.status(500).json(error);
