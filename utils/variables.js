@@ -1,4 +1,5 @@
 export const colors = {
+  alto: '#dbdbdb',
   chestnutRose: '#D26060',
   dark: '#363636',
   primary: '#8c43ff',

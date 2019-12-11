@@ -8,9 +8,8 @@ export default css`
   .subtitle {
     font-family: ${fonts.raleway};
     font-size: 20px !important;
-    font-weight: 300;
     margin: 0 auto 20px;
-    max-width: 400px;
+    max-width: 448px;
   }
 
   label {

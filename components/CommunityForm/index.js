@@ -4,6 +4,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import MaskedInput from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import { reactSelectStyle } from './reactSelectStyle';
 
 import { api, setHeader } from '../../utils/axios';
 import styles from './styles';
@@ -59,15 +60,18 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
         return (
           <Form>
             <div className="columns">
-              <div className="column">
+              <div className="column is-4 is-offset-4">
                 <label>
                   Nome da comunidade *
-                  <Field
-                    name="name"
-                    validate={checkName}
-                    className="input"
-                    placeholder="Digite o nome da sua comunidade"
-                  />
+                  <div className="input-wrapper">
+                    <i className="fas fa-users fa-fw"></i>
+                    <Field
+                      name="name"
+                      validate={checkName}
+                      className="input is-medium"
+                      placeholder="Digite o nome da sua comunidade"
+                    />
+                  </div>
                   {errors.name === nameAlreadyExists && !touched.name && (
                     <div className="form-error">{errors.name}</div>
                   )}
@@ -76,137 +80,32 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                   </ErrorMessage>
                 </label>
                 <label>
-                  A comunidade é presencial, online ou ambos? *
+                  Tipo *
                   <Select
-                    name="model"
-                    defaultValue={MODEL.filter(
-                      (value) => value.value === values.model
+                    name="type"
+                    icon="\f075"
+                    defaultValue={TYPES.filter(
+                      (type) => type.value === values.type
                     )}
                     closeMenuOnSelect={true}
                     components={animatedComponents}
                     placeholder="Clique para selecionar"
-                    options={MODEL}
-                    onBlur={() => setFieldTouched('model', true)}
+                    options={TYPES}
+                    onBlur={() => setFieldTouched('type', true)}
                     onChange={(selectedOption, data) =>
-                      handleStringChange(
-                        selectedOption,
-                        data.name,
-                        setFieldValue
-                      )
+                      handleStringChange(selectedOption, data.name)
                     }
+                    styles={reactSelectStyle}
                   />
-                  <ErrorMessage name="model">
+                  <ErrorMessage name="type">
                     {(msg) => <div className="form-error">{msg}</div>}
                   </ErrorMessage>
                 </label>
-                <label>
-                  País
-                  <Select
-                    defaultValue={countries.filter(
-                      (country) => country.value === values.location.country
-                    )}
-                    name="location.country"
-                    closeMenuOnSelect={true}
-                    components={animatedComponents}
-                    placeholder="Clique para selecionar"
-                    options={countries}
-                    onBlur={() => setFieldTouched('location.country', true)}
-                    onChange={(selectedOption, data) =>
-                      handleStringChange(
-                        selectedOption,
-                        data.name,
-                        setFieldValue
-                      )
-                    }
-                  />
-                  <ErrorMessage name="location.country">
-                    {(msg) => <div className="form-error">{msg}</div>}
-                  </ErrorMessage>
-                </label>
-                <label>
-                  Estado
-                  {values.location.country === 'Brasil' &&
-                  values.model !== 'online' ? (
-                    <Select
-                      name="location.state"
-                      defaultValue={states.filter(
-                        (state) => state.value === values.location.state
-                      )}
-                      closeMenuOnSelect={true}
-                      components={animatedComponents}
-                      placeholder="Clique para selecionar"
-                      options={states}
-                      onBlur={() => setFieldTouched('location.state', true)}
-                      onChange={(selectedOption, data) =>
-                        handleStringChange(
-                          selectedOption,
-                          data.name,
-                          setFieldValue
-                        )
-                      }
-                    />
-                  ) : (
-                    <Select placeholder="Não aplica à sua seleção" isDisabled />
-                  )}
-                  <ErrorMessage name="location.state">
-                    {(msg) => <div className="form-error">{msg}</div>}
-                  </ErrorMessage>
-                </label>
-                <label>
-                  Cidade
-                  {values.location.country === 'Brasil' &&
-                  values.model !== 'online' &&
-                  values.location.state ? (
-                    <Select
-                      name="location.city"
-                      defaultValue={cities.filter(
-                        (city) => city.label === values.location.city
-                      )}
-                      closeMenuOnSelect={true}
-                      components={animatedComponents}
-                      placeholder="Clique para selecionar"
-                      options={getCities(values.location.state)}
-                      onBlur={() => setFieldTouched('location.city', true)}
-                      onChange={(selectedOption, data) =>
-                        handleStringChange(
-                          selectedOption,
-                          data.name,
-                          setFieldValue
-                        )
-                      }
-                    />
-                  ) : (
-                    <Select placeholder="Não aplica à sua seleção" isDisabled />
-                  )}
-                  <ErrorMessage name="location.city">
-                    {(msg) => <div className="form-error">{msg}</div>}
-                  </ErrorMessage>
-                </label>
-                <label>
-                  Link da comunidade *
-                  <Field name="url" className="input" />
-                  <ErrorMessage name="url">
-                    {(msg) => <div className="form-error">{msg}</div>}
-                  </ErrorMessage>
-                </label>
-                <label>
-                  Descrição *
-                  <Field
-                    name="description"
-                    component="textarea"
-                    className="textarea"
-                    rows="4"
-                  />
-                  <ErrorMessage name="description">
-                    {(msg) => <div className="form-error">{msg}</div>}
-                  </ErrorMessage>
-                </label>
-              </div>
-              <div className="column">
                 <label>
                   Categoria *
                   <Select
                     name="category"
+                    icon="\f03a"
                     defaultValue={CATEGORIES.filter(
                       (category) => category.value === values.category
                     )}
@@ -222,28 +121,9 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                         setFieldValue
                       )
                     }
+                    styles={reactSelectStyle}
                   />
                   <ErrorMessage name="category">
-                    {(msg) => <div className="form-error">{msg}</div>}
-                  </ErrorMessage>
-                </label>
-                <label>
-                  Tipo *
-                  <Select
-                    name="type"
-                    defaultValue={TYPES.filter(
-                      (type) => type.value === values.type
-                    )}
-                    closeMenuOnSelect={true}
-                    components={animatedComponents}
-                    placeholder="Clique para selecionar"
-                    options={TYPES}
-                    onBlur={() => setFieldTouched('type', true)}
-                    onChange={(selectedOption, data) =>
-                      handleStringChange(selectedOption, data.name)
-                    }
-                  />
-                  <ErrorMessage name="type">
                     {(msg) => <div className="form-error">{msg}</div>}
                   </ErrorMessage>
                 </label>
@@ -251,6 +131,7 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                   Tags *
                   <Select
                     name="tags"
+                    icon="\f02b"
                     defaultValue={TAGS.filter((type) =>
                       values.tags.includes(type.value)
                     )}
@@ -261,89 +142,270 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                     options={TAGS}
                     onBlur={() => setFieldTouched('tags', true)}
                     onChange={handleChange}
+                    styles={reactSelectStyle}
                   />
                   <ErrorMessage name="tags">
                     {(msg) => <div className="form-error">{msg}</div>}
                   </ErrorMessage>
                 </label>
-                <label>
-                  Pertence a algum programa global?
-                  <Select
-                    defaultValue={GLOBAL_PROGRAM.filter(
-                      (option) =>
-                        option.value === values.globalProgram.isParticipant
-                    )}
-                    name="globalProgram.isParticipant"
-                    closeMenuOnSelect={true}
-                    components={animatedComponents}
-                    placeholder="Clique para selecionar"
-                    options={GLOBAL_PROGRAM}
-                    onBlur={() =>
-                      setFieldTouched('globalProgram.isParticipant', true)
-                    }
-                    onChange={(selectedOption, data) =>
-                      handleStringChange(selectedOption, data.name)
-                    }
-                  />
+                <fieldset>
+                  <legend>Pertence a algum programa global?</legend>
+                  <div className="radio-group">
+                    {GLOBAL_PROGRAM.map((item) => (
+                      <div className="radio-item" key={item.label}>
+                        <input
+                          type="radio"
+                          name="globalProgram.isParticipant"
+                          value={item.value}
+                          checked={
+                            item.value === values.globalProgram.isParticipant
+                          }
+                          id={item.value.toString()}
+                          onChange={() =>
+                            setFieldValue(
+                              'globalProgram.isParticipant',
+                              item.value
+                            )
+                          }
+                        />
+                        <label
+                          htmlFor={item.value.toString()}
+                          className="radio-label"
+                        >
+                          {item.label}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
                   <ErrorMessage name="globalProgram.isParticipant">
                     {(msg) => <div className="form-error">{msg}</div>}
                   </ErrorMessage>
-                </label>
+                </fieldset>
                 {values.globalProgram.isParticipant && (
                   <label>
                     Qual? *
-                    <Field
-                      name="globalProgram.name"
-                      defaultValue={values.globalProgram.name}
-                      className="input"
-                    />
+                    <div className="input-wrapper">
+                      <i className="fas fa-users fa-fw"></i>
+                      <Field
+                        name="globalProgram.name"
+                        defaultValue={values.globalProgram.name}
+                        className="input"
+                        placeholder="Digite o nome do programa"
+                      />
+                    </div>
                     <ErrorMessage name="globalProgram.name">
                       {(msg) => <div className="form-error">{msg}</div>}
                     </ErrorMessage>
                   </label>
                 )}
+                <fieldset>
+                  <legend>A comunidade é presencial, online ou ambos? *</legend>
+                  <div className="radio-group">
+                    {MODEL.map((item) => (
+                      <div className="radio-item" key={item.label}>
+                        <input
+                          type="radio"
+                          name="model"
+                          value={item.value}
+                          checked={item.value === values.model}
+                          id={item.value}
+                          onChange={() => setFieldValue('model', item.value)}
+                        />
+                        <label htmlFor={item.value} className="radio-label">
+                          {item.label}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                  <ErrorMessage name="model">
+                    {(msg) => <div className="form-error">{msg}</div>}
+                  </ErrorMessage>
+                </fieldset>
+                <label>
+                  País
+                  <Select
+                    defaultValue={countries.filter(
+                      (country) => country.value === values.location.country
+                    )}
+                    name="location.country"
+                    icon="\f0ac"
+                    closeMenuOnSelect={true}
+                    components={animatedComponents}
+                    placeholder="Clique para selecionar"
+                    options={countries}
+                    onBlur={() => setFieldTouched('location.country', true)}
+                    onChange={(selectedOption, data) =>
+                      handleStringChange(
+                        selectedOption,
+                        data.name,
+                        setFieldValue
+                      )
+                    }
+                    styles={reactSelectStyle}
+                  />
+                  <ErrorMessage name="location.country">
+                    {(msg) => <div className="form-error">{msg}</div>}
+                  </ErrorMessage>
+                </label>
+                <label>
+                  Estado
+                  {values.location.country === 'Brasil' &&
+                  values.model !== 'online' ? (
+                    <Select
+                      name="location.state"
+                      icon="\f279"
+                      defaultValue={states.filter(
+                        (state) => state.value === values.location.state
+                      )}
+                      closeMenuOnSelect={true}
+                      components={animatedComponents}
+                      placeholder="Clique para selecionar"
+                      options={states}
+                      onBlur={() => setFieldTouched('location.state', true)}
+                      onChange={(selectedOption, data) =>
+                        handleStringChange(
+                          selectedOption,
+                          data.name,
+                          setFieldValue
+                        )
+                      }
+                      styles={reactSelectStyle}
+                    />
+                  ) : (
+                    <Select
+                      styles={reactSelectStyle}
+                      icon="\f279"
+                      placeholder="Não aplica à sua seleção"
+                      isDisabled
+                    />
+                  )}
+                  <ErrorMessage name="location.state">
+                    {(msg) => <div className="form-error">{msg}</div>}
+                  </ErrorMessage>
+                </label>
+                <label>
+                  Cidade
+                  {values.location.country === 'Brasil' &&
+                  values.model !== 'online' &&
+                  values.location.state ? (
+                    <Select
+                      name="location.city"
+                      icon="\f3c5"
+                      defaultValue={cities.filter(
+                        (city) => city.label === values.location.city
+                      )}
+                      closeMenuOnSelect={true}
+                      components={animatedComponents}
+                      placeholder="Clique para selecionar"
+                      options={getCities(values.location.state)}
+                      onBlur={() => setFieldTouched('location.city', true)}
+                      onChange={(selectedOption, data) =>
+                        handleStringChange(
+                          selectedOption,
+                          data.name,
+                          setFieldValue
+                        )
+                      }
+                      styles={reactSelectStyle}
+                    />
+                  ) : (
+                    <Select
+                      icon="\f3c5"
+                      styles={reactSelectStyle}
+                      placeholder="Não aplica à sua seleção"
+                      isDisabled
+                    />
+                  )}
+                  <ErrorMessage name="location.city">
+                    {(msg) => <div className="form-error">{msg}</div>}
+                  </ErrorMessage>
+                </label>
                 <label>
                   Quantidade de Membros *
-                  <Field name="members" type="number">
-                    {({ field }) => (
-                      <MaskedInput
-                        {...field}
-                        mask={numberMask}
-                        className="input"
-                      />
-                    )}
-                  </Field>
+                  <div className="input-wrapper">
+                    <i className="fas fa-users fa-fw"></i>
+                    <Field name="members" type="number">
+                      {({ field }) => (
+                        <MaskedInput
+                          {...field}
+                          mask={numberMask}
+                          className="input"
+                          placeholder="Digite a quantidade de membros"
+                        />
+                      )}
+                    </Field>
+                  </div>
                   <ErrorMessage name="members">
                     {(msg) => <div className="form-error">{msg}</div>}
                   </ErrorMessage>
                 </label>
                 <label>
-                  Link da Logo da comunidade
-                  <Field name="logo" className="input" />
-                  <ErrorMessage name="logo">
+                  Informe um e-mail da liderança *
+                  <div className="input-wrapper">
+                    <i className="fas fa-envelope"></i>
+                    <Field
+                      name="owner"
+                      className="input"
+                      placeholder="Digite o email"
+                    />
+                  </div>
+                  <ErrorMessage name="owner">
                     {(msg) => <div className="form-error">{msg}</div>}
                   </ErrorMessage>
                 </label>
                 <label>
                   Se você é membro da Impulso Network, informe seu nome de
                   usuário
-                  <Field name="creator.rocketChat" className="input" />
+                  <div className="input-wrapper">
+                    <i className="fas fa-user"></i>
+                    <Field name="creator.rocketChat" className="input" />
+                  </div>
                   <ErrorMessage name="creator.rocketChat">
                     {(msg) => <div className="form-error">{msg}</div>}
                   </ErrorMessage>
                 </label>
                 <label>
-                  Informe o email do líder da comunidade *
-                  <Field name="owner" className="input" />
-                  <ErrorMessage name="owner">
+                  Link da comunidade *
+                  <div className="input-wrapper">
+                    <i className="fas fa-link"></i>
+                    <Field name="url" className="input" />
+                  </div>
+                  <ErrorMessage name="url">
                     {(msg) => <div className="form-error">{msg}</div>}
                   </ErrorMessage>
                 </label>
+                <label>
+                  Link da Logo da comunidade
+                  <div className="input-wrapper">
+                    <i className="far fa-file-image"></i>
+                    <Field
+                      name="logo"
+                      className="input"
+                      placeholder="https://suacomunidade.com/imagem.jpg"
+                    />
+                  </div>
+                  <ErrorMessage name="logo">
+                    {(msg) => <div className="form-error">{msg}</div>}
+                  </ErrorMessage>
+                </label>
+                <label>
+                  Descrição *
+                  <Field
+                    name="description"
+                    component="textarea"
+                    className="textarea"
+                    rows="4"
+                    placeholder="Escreva um pouco sobre a comunidade"
+                  />
+                  <ErrorMessage name="description">
+                    {(msg) => <div className="form-error">{msg}</div>}
+                  </ErrorMessage>
+                </label>
+                <p className="required-form">* Itens obrigatórios</p>
               </div>
             </div>
-            <p className="required-form">* Itens obrigatórios</p>
             <div className="columns">
-              <div className="column is-half is-offset-one-quarter">
+              <div className="column is-4 is-offset-4">
                 <button
                   disabled={loading}
                   className="button is-primary  is-fullwidth is-large"
@@ -351,10 +413,11 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                 >
                   {loading ? (
                     <span>
-                      <i className="fa fa-spinner fa-spin"></i> enviar
+                      <i className="fa fa-spinner fa-spin"></i> Cadastrar
+                      Comunidade
                     </span>
                   ) : (
-                    'enviar'
+                    'Cadastrar Comunidade'
                   )}
                 </button>
               </div>
