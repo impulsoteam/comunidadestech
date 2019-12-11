@@ -299,6 +299,17 @@ describe('CommunityController.checkName', () => {
     expect(statusCode).toBe(200);
     expect(body).toBe(false);
   });
+  it('Should be case and diacritic insensitive', async () => {
+    await factory.create('Community', {
+      name: 'João',
+    });
+    const { statusCode, body } = await supertest(app)
+      .get(`/community/checkName/jOAO`)
+      .set('Authorization', `Bearer ${user.token}`);
+
+    expect(statusCode).toBe(200);
+    expect(body).toBe(true);
+  });
   it('Should return 404 status', async () => {
     const { statusCode } = await supertest(app)
       .get(`/community/checkName/`)
