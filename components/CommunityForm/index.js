@@ -60,7 +60,7 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
         return (
           <Form>
             <div className="columns">
-              <div className="column is-4 is-offset-4">
+              <div className="column is-6-tablet is-offset-3-tablet is-4-desktop is-offset-4-desktop">
                 <label>
                   Nome da comunidade *
                   <div className="input-wrapper">
@@ -405,10 +405,10 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
               </div>
             </div>
             <div className="columns">
-              <div className="column is-4 is-offset-4">
+              <div className="column is-6-tablet is-offset-3-tablet is-4-desktop is-offset-4-desktop">
                 <button
                   disabled={loading}
-                  className="button is-primary  is-fullwidth is-large"
+                  className="button is-primary is-fullwidth is-large"
                   type="submit"
                 >
                   {loading ? (
