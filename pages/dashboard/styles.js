@@ -11,7 +11,7 @@ export default css`
   }
 
   .card-wrapper {
-    margin-top: 20px;
+    margin-top: 1.25rem;
   }
 
   .title {
@@ -20,7 +20,25 @@ export default css`
   }
 
   .is-divider {
-    margin: 2.375rem 0 1.875rem;
     border: 2px solid ${colors.wildSand};
+    margin: 2.375rem 0 1.875rem;
+  }
+
+  @media screen and (max-width: 769px) {
+    .container {
+      padding-top: 1.5rem;
+    }
+    .columns:not(:last-child) {
+      margin-bottom: calc(2rem);
+    }
+    .title {
+      margin-bottom: 0;
+    }
+    .card-wrapper {
+      margin-top: 0;
+    }
+    .is-divider {
+      display: none;
+    }
   }
 `;
