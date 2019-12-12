@@ -356,17 +356,6 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                   </ErrorMessage>
                 </label>
                 <label>
-                  Se você é membro da Impulso Network, informe seu nome de
-                  usuário
-                  <div className="input-wrapper">
-                    <i className="fas fa-user"></i>
-                    <Field name="creator.rocketChat" className="input" />
-                  </div>
-                  <ErrorMessage name="creator.rocketChat">
-                    {(msg) => <div className="form-error">{msg}</div>}
-                  </ErrorMessage>
-                </label>
-                <label>
                   Link da comunidade *
                   <div className="input-wrapper">
                     <i className="fas fa-link"></i>
