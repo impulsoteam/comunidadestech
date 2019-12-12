@@ -276,6 +276,7 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                       styles={reactSelectStyle}
                       icon="\f279"
                       placeholder="Não aplica à sua seleção"
+                      value="Não aplica à sua seleção"
                       isDisabled
                     />
                   )}
@@ -291,13 +292,13 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                     <Select
                       name="location.city"
                       icon="\f3c5"
+                      options={getCities(values.location.state)}
                       defaultValue={cities.filter(
                         (city) => city.label === values.location.city
                       )}
                       closeMenuOnSelect={true}
                       components={animatedComponents}
                       placeholder="Clique para selecionar"
-                      options={getCities(values.location.state)}
                       onBlur={() => setFieldTouched('location.city', true)}
                       onChange={(selectedOption, data) =>
                         handleStringChange(
@@ -313,6 +314,7 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                       icon="\f3c5"
                       styles={reactSelectStyle}
                       placeholder="Não aplica à sua seleção"
+                      value="Não aplica à sua seleção"
                       isDisabled
                     />
                   )}

@@ -20,7 +20,6 @@ export default css`
       font-size: 14px;
       left: 8px;
       position: absolute;
-      z-index: 1;
     }
   }
 
