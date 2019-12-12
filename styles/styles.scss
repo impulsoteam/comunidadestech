@@ -44,6 +44,7 @@ textarea {
     font-weight: bold;
     min-height: 44px;
     color: #7a7a7a;
+    z-index: -1;
 
     &::placeholder {
       color: #7a7a7a;
