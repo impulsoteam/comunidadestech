@@ -6,6 +6,7 @@ export const colors = {
   silverChalice: '#a9a9a9',
   softCloud: '#fbfbfb',
   white: '#fff',
+  wildSand: '#f5f5f5',
 };
 
 export const fonts = {

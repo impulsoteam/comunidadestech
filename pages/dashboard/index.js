@@ -31,9 +31,7 @@ const Dashboard = ({ credentials }) => {
       {!loading && (
         <div className="columns">
           <div className="column">
-            <h2 className="title has-text-weight-bold is-size-2-desktop is-size-2-tablet is-size-3-mobile">
-              minhas comunidades
-            </h2>
+            <h2 className="title is-size-6 is-uppercase">minhas comunidades</h2>
             <div className="columns is-multiline card-wrapper">
               {myCommunities.map((card) => (
                 <div className="column is-one-quarter" key={card.id}>
@@ -44,10 +42,11 @@ const Dashboard = ({ credentials }) => {
           </div>
         </div>
       )}
+      <div className="is-divider"></div>
       {pendingCommunities.length > 0 && (
         <div className="columns">
           <div className="column">
-            <h2 className="title has-text-weight-bold is-size-2-desktop is-size-2-tablet is-size-3-mobile">
+            <h2 className="title is-size-6 is-uppercase">
               comunidades pendentes
             </h2>
             <div className="columns is-multiline card-wrapper">
