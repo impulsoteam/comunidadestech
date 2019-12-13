@@ -47,7 +47,7 @@ export const reactSelectStyle = {
     return {
       ...styles,
       alignItems: 'center',
-      color: `${colors.boulder}`,
+      color: `${colors.dark}`,
       display: 'flex',
       fontSize: '14px',
       marginLeft: '-2px',
