@@ -110,6 +110,9 @@ export default css`
   }
 
   .required-form {
+    color: #363636;
+    font-size: 14px;
+    font-weight: bold;
     margin-top: 20px;
   }
 `;

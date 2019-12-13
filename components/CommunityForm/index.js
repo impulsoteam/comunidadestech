@@ -381,13 +381,15 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                 </label>
                 <label>
                   Descrição *
-                  <Field
-                    name="description"
-                    component="textarea"
-                    className="textarea"
-                    rows="4"
-                    placeholder="Escreva um pouco sobre a comunidade"
-                  />
+                  <div className="input-wrapper">
+                    <Field
+                      name="description"
+                      component="textarea"
+                      className="textarea"
+                      rows="4"
+                      placeholder="Escreva um pouco sobre a comunidade"
+                    />
+                  </div>
                   <ErrorMessage name="description">
                     {(msg) => <div className="form-error">{msg}</div>}
                   </ErrorMessage>

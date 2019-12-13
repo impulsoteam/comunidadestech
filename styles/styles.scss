@@ -40,6 +40,11 @@ textarea {
   .input,
   select {
     padding-left: 30px;
+  }
+
+  .input,
+  select,
+  textarea {
     font-size: 14px;
     font-weight: bold;
     min-height: 44px;
