@@ -31,7 +31,7 @@ const Dashboard = ({ credentials }) => {
       {!loading && (
         <div className="columns">
           <div className="column">
-            <h2 className="title has-text-weight-bold is-size-2-desktop is-size-2-tablet is-size-3-mobile">
+            <h2 className="title is-size-6 is-uppercase has-text-centered-mobile">
               minhas comunidades
             </h2>
             <div className="columns is-multiline card-wrapper">
@@ -44,10 +44,11 @@ const Dashboard = ({ credentials }) => {
           </div>
         </div>
       )}
+      <div className="is-divider"></div>
       {pendingCommunities.length > 0 && (
         <div className="columns">
           <div className="column">
-            <h2 className="title has-text-weight-bold is-size-2-desktop is-size-2-tablet is-size-3-mobile">
+            <h2 className="title is-size-6 is-uppercase has-text-centered-mobile">
               comunidades pendentes
             </h2>
             <div className="columns is-multiline card-wrapper">
