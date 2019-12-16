@@ -15,7 +15,7 @@ const RegisterCommunity = ({ credentials }) => {
     const { _id, name, email } = credentials;
     return {
       name: '',
-      model: '',
+      model: 'both',
       location: {
         country: '',
         state: '',
@@ -27,7 +27,7 @@ const RegisterCommunity = ({ credentials }) => {
       type: '',
       tags: '',
       globalProgram: {
-        isParticipant: '',
+        isParticipant: false,
         name: '',
       },
       members: '',

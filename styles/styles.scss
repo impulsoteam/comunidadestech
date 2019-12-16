@@ -12,12 +12,15 @@ textarea {
 .full-width {
   width: 100%;
 }
+
 .full-height {
   height: 100vh;
 }
+
 .full-height-min {
   min-height: 100vh;
 }
+
 .text-center {
   text-align: center;
 }
@@ -31,4 +34,26 @@ textarea {
 
 .container {
   padding: 0 10px;
+}
+
+.input-wrapper {
+  .input,
+  select {
+    padding-left: 30px;
+  }
+
+  .input,
+  select,
+  textarea {
+    font-size: 14px;
+    font-weight: bold;
+    min-height: 44px;
+    color: #363636;
+    z-index: -1;
+
+    &::placeholder {
+      color: #7a7a7a;
+      opacity: 1;
+    }
+  }
 }
