@@ -14,8 +14,7 @@ class Header extends Component {
 
   handleToggleMenu = () => {
     let isActive = this.state.isActive;
-    isActive ? (isActive = '') : (isActive = 'is-active');
-    this.setState({ isActive });
+    this.setState({ isActive: isActive ? '' : 'is-active' });
   };
 
   generateButtons = ({ name, avatar, token, isModerator }) => {
