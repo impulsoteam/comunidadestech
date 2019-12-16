@@ -45,7 +45,6 @@ const RegisterCommunity = ({ credentials }) => {
   const postCommunity = async (community) => {
     setLoading(true);
     setHeader(credentials);
-    console.log(community);
     await api.post('/community/store', community);
     toast.success(
       `Comunidade cadastrada com sucesso!\n
