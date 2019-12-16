@@ -40,4 +40,21 @@ export default css`
   .container {
     margin-bottom: 50px;
   }
+
+  @media screen and (max-width: 1023px) {
+    .title {
+      margin-top: 100px;
+    }
+  }
+
+  @media screen and (max-width: 769px) {
+    .hero-body {
+      padding-left: 0;
+      padding-right: 0;
+
+      .container {
+        padding: 0;
+      }
+    }
+  }
 `;

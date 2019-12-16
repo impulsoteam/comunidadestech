@@ -5,85 +5,105 @@ import Router from 'next/router';
 import styles from './styles';
 
 class Header extends Component {
+  state = { isActive: '' };
+
   logout = () => {
     Cookies.remove('ctech_credentials');
     Router.push('/');
   };
+
+  handleToggleMenu = () => {
+    let isActive = this.state.isActive;
+    this.setState({ isActive: isActive ? '' : 'is-active' });
+  };
+
   generateButtons = ({ name, avatar, token, isModerator }) => {
     if (!token)
       return (
-        <div className="top-menu">
-          <p className="control">
+        <div
+          id="ctech-navbar"
+          className={`navbar-menu  ${this.state.isActive}`}
+        >
+          <div className="navbar-end">
+            <a href={'/'} className="navbar-item">
+              Home
+            </a>
             <a
-              className="button is-primary"
               href={`https://www.linkedin.com/oauth/v2/authorization?client_id=${process.env.LINKEDIN_API_KEY}&client_secret=${process.env.LINKEDIN_SECRET_KEY}&redirect_uri=${process.env.LINKEDIN_CALLBACK_URL}&response_type=code&scope=r_liteprofile%20r_emailaddress%20w_member_social`}
+              className="navbar-item is-hidden-desktop"
             >
-              <strong>Login Linkedin</strong>
+              Login LinkedIn
             </a>
-            <a className="button is-primary" href="/auth/google">
-              <strong>Login Google</strong>
+            <a href="/auth/google" className="navbar-item is-hidden-desktop">
+              Login Google
             </a>
-          </p>
+
+            <div className="navbar-item is-hidden-touch">
+              <div className="buttons">
+                <a
+                  href={`https://www.linkedin.com/oauth/v2/authorization?client_id=${process.env.LINKEDIN_API_KEY}&client_secret=${process.env.LINKEDIN_SECRET_KEY}&redirect_uri=${process.env.LINKEDIN_CALLBACK_URL}&response_type=code&scope=r_liteprofile%20r_emailaddress%20w_member_social`}
+                  className="button is-primary is-outlined"
+                >
+                  <span className="icon">
+                    <i className="fab fa-linkedin-in"></i>
+                  </span>
+                  <span>Login LinkedIn</span>
+                </a>
+                <a
+                  href="/auth/google"
+                  className="button is-primary is-outlined"
+                >
+                  <span className="icon">
+                    <i className="fab fa-google"></i>
+                  </span>
+                  <span>Login Google</span>
+                </a>
+              </div>
+            </div>
+          </div>
           <style jsx>{styles}</style>
         </div>
       );
 
     return (
-      <div className="top-menu">
-        <p className="control">
-          <a
-            className="button is-primary is-hidden-touch"
-            href={'/'}
-            title="Home"
-          >
-            <strong>Home</strong>
+      <div id="ctech-navbar" className={`navbar-menu  ${this.state.isActive}`}>
+        <div className="navbar-end">
+          <a href={'/'} className="navbar-item">
+            Home
           </a>
-          <a
-            className="button is-primary is-hidden-desktop is-small is-hidden-mobile"
-            href={'/'}
-            title="Home"
-          >
-            <strong>Home</strong>
-          </a>
-          {isModerator && (
-            <>
-              <a
-                className="button is-primary is-hidden-touch"
-                href={'/dashboard'}
-                title="Dashboard"
-              >
-                <strong>Dashboard</strong>
+
+          <div className="navbar-item is-hidden-touch">
+            <div className="buttons">
+              <a href={'/cadastrar'} className="button is-primary is-outlined">
+                <strong>Cadastre uma comunidade</strong>
               </a>
-              <a
-                className="button is-primary is-hidden-desktop is-small"
-                href={'/dashboard'}
-                title="Dashboard"
-              >
-                <strong>Dashboard</strong>
+            </div>
+          </div>
+
+          <div className="navbar-item has-dropdown is-hoverable is-hidden-touch">
+            <a className="navbar-link">
+              <img className="profile-image" src={avatar} />
+              {name.split(' ')[0]}
+            </a>
+            <div className="navbar-dropdown">
+              <a href={'/dashboard'} className="navbar-item">
+                Dashboard
               </a>
-            </>
-          )}
-          <a
-            className="button is-primary is-hidden-touch"
-            href={'/cadastrar'}
-            title="Cadastre uma comunidade"
-          >
-            <strong>Cadastre uma comunidade</strong>
+              <hr className="navbar-divider" />
+              <a onClick={this.logout} className="navbar-item">
+                <i className="fas fa-sign-out-alt"></i> Sair
+              </a>
+            </div>
+          </div>
+          <a href={'/cadastrar'} className="navbar-item is-hidden-desktop">
+            Cadastrar comunidade
           </a>
-          <a
-            className="button is-primary is-hidden-desktop is-small"
-            href={'/cadastrar'}
-            title="Cadastre uma comunidade"
-          >
-            <strong>Cadastre</strong>
+          <a href={'/dashboard'} className="navbar-item is-hidden-desktop">
+            Dashboard
           </a>
-        </p>
-        <div className="profile-wrapper">
-          <img src={avatar} />
-          <p className="is-hidden-mobile">{name.split(' ')[0]}</p>
-          <button className="button is-primary is-small" onClick={this.logout}>
-            <strong>Logout</strong>
-          </button>
+          <a onClick={this.logout} className="navbar-item is-hidden-desktop">
+            <i className="fas fa-sign-out-alt"></i> Sair
+          </a>
         </div>
         <style jsx>{styles}</style>
       </div>
@@ -93,33 +113,29 @@ class Header extends Component {
   render() {
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
-        <div className="container">
-          <div className="container columns is-vcentered is-flex-mobile">
-            <div className="navbar-brand column">
-              <a className="navbar-item" href="/">
-                <img
-                  src="/static/ctech-logo.svg"
-                  alt="comunidades.tech"
-                  className="logo is-hidden-mobile"
-                />
-                <img
-                  src="/static/logo.svg"
-                  alt="comunidades.tech"
-                  className="logo is-hidden-tablet is-hidden-desktop"
-                />
-              </a>
-            </div>
-            <div className="navbar-menu column">
-              <div className="navbar-end is-flex-touch">
-                <div className="navbar-item">
-                  <div className="field is-grouped is-grouped-multiline">
-                    {this.generateButtons(this.props.credentials)}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="navbar-brand">
+          <a className="navbar-item" href="/">
+            <img
+              className="navbar-logo"
+              src="/static/ctech-logo.svg"
+              width="112"
+            />
+          </a>
+
+          <a
+            role="button"
+            className={`navbar-burger burger ${this.state.isActive}`}
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="ctech-navbar"
+            onClick={this.handleToggleMenu}
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
+        {this.generateButtons(this.props.credentials)}
         <style jsx>{styles}</style>
       </nav>
     );
