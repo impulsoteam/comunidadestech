@@ -1,89 +1,87 @@
 import css from 'styled-jsx/css';
+import { colors } from '/utils/variables';
 
 export default css`
-  .navbar-brand {
-    @media screen and (max-width: 768px) {
-      padding: 0;
-    }
-  }
   .navbar {
-    padding: 1.2rem 0;
-    box-shadow: none;
-    z-index: auto;
-  }
-  .navbar-item {
-    min-width: 80px;
+    margin: 0 auto;
+    max-width: 1280px;
+    padding: 1.375rem 0;
 
-    @media screen and (max-width: 768px) {
+    .navbar-burger span {
+      height: 2px;
+    }
+
+    .navbar-menu.is-active {
+      border-radius: 6px;
+      border-top: solid 2px rgba(10, 10, 10, 0.1);
+      margin-left: auto;
+      margin-right: 10px;
+      max-width: 400px;
       padding: 0;
+      width: 90%;
+
+      .navbar-item:not(:first-child) {
+        border-top: solid 2px rgba(10, 10, 10, 0.1);
+      }
     }
   }
-  .logo {
-    min-height: 48px;
-  }
-  a[href*='github'] {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    min-width: 20px;
-  }
-  .github {
-    height: 32px;
-  }
 
-  .navbar-menu {
-    box-shadow: none;
-  }
+  .navbar-item {
+    font-weight: bold;
 
-  .navbar-end {
-    justify-content: flex-end;
-  }
+    &:hover,
+    &.has-dropdown:hover .navbar-link {
+      background-color: transparent;
+      color: ${colors.primary};
+    }
 
-  .top-menu {
-    display: flex;
-    align-items: center;
+    & .navbar-link::after {
+      border-color: ${colors.primary};
+    }
 
-    .control > .button {
-      margin-right: 10px;
+    .navbar-logo {
+      max-height: none;
+      width: 180px;
+    }
 
-      &:last-child {
-        margin-right: 20px;
-      }
+    .profile-image {
+      border-radius: 50%;
+      border: solid 1px #8c43ff;
+      height: 50px;
+      margin-right: 0.75rem;
+      max-height: none;
+      width: 50px;
+    }
 
-      @media screen and (max-width: 768px) {
-        margin-right: 3px;
+    .navbar-dropdown {
+      border-radius: 6px;
+      border-top: 2px solid rgba(10, 10, 10, 0.05);
+      padding: 0;
 
-        &:last-child {
-          margin-right: 8px;
+      .navbar-item {
+        padding: 1rem 1rem;
+
+        :hover {
+          color: ${colors.primary};
+        }
+
+        i {
+          margin-right: 0.5rem;
         }
       }
+      .navbar-divider {
+        margin: 0;
+      }
     }
   }
-
-  .profile-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    img {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
+  @media screen and (max-width: 1023px) {
+    .navbar {
+      position: fixed;
+      width: 100%;
     }
-
-    p {
-      font-size: 12px;
-      font-weight: bold;
-      line-height: 1.1;
-    }
-
-    button {
-      max-height: 18px;
-      margin-top: 3px;
-
-      strong {
-        line-height: 0;
-      }
+    .navbar-menu.is-active {
+      position: absolute;
+      right: 0;
     }
   }
 `;

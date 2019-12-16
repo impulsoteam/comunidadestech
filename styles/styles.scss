@@ -1,5 +1,14 @@
 @import './theme';
 
+*,
+body,
+button,
+input,
+select,
+textarea {
+  font-family: 'Raleway', sans-serif;
+}
+
 .full-width {
   width: 100%;
 }
