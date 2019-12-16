@@ -1,5 +1,14 @@
 @import './theme';
 
+*,
+body,
+button,
+input,
+select,
+textarea {
+  font-family: $defaultFont;
+}
+
 .full-width {
   width: 100%;
 }
