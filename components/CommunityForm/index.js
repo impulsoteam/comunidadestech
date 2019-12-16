@@ -34,7 +34,10 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
     <Formik
       initialValues={initialValues}
       validationSchema={SignupSchema}
-      onSubmit={(values) => service(values)}
+      onSubmit={(values) => {
+        values.members = parseInt(values.members.replace('.', ''));
+        service(values);
+      }}
     >
       {({ values, setFieldValue, setFieldTouched, errors, touched }) => {
         const { nameAlreadyExists } = errorMessages;
