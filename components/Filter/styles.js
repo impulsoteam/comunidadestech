@@ -3,23 +3,23 @@ import { colors } from '/utils/variables';
 
 export default css`
   .filter-wrapper {
-    margin: 0;
-    padding: 1rem 0.75rem;
+    align-items: center;
     border-bottom: solid 2px ${colors.wildSand};
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    margin: 0;
+    padding: 1rem 0.75rem;
   }
 
   .filter-box {
     display: flex;
-    padding: 0.75rem 0.125rem;
     justify-content: center;
+    padding: 0.75rem 0.125rem;
 
     .filter-title-wrapper {
-      height: 34px;
-      display: flex;
       align-items: center;
+      display: flex;
+      height: 34px;
 
       .filter-title {
         font-size: 0.875rem;
@@ -37,11 +37,11 @@ export default css`
         }
         select,
         input {
-          width: 7.125rem;
-          font-weight: bold;
           color: ${colors.boulder};
+          font-weight: bold;
           height: 34px;
           padding-left: 1.2rem;
+          width: 7.125rem;
 
           &::placeholder {
             color: ${colors.boulder};
@@ -64,8 +64,8 @@ export default css`
       }
     }
     .unique-button button {
-      margin-left: 0.5rem;
       height: 34px;
+      margin-left: 0.5rem;
 
       &.button-reset {
         background-color: ${colors.chestnutRose};
@@ -79,11 +79,11 @@ export default css`
       }
 
       span:not(.icon) {
-        font-weight: bold;
-        text-transform: uppercase;
         font-size: 10px;
-        text-align: left;
+        font-weight: bold;
         line-height: 1;
+        text-align: left;
+        text-transform: uppercase;
       }
     }
   }
@@ -95,14 +95,15 @@ export default css`
 
       &.active {
         background-color: ${colors.primary};
-        color: ${colors.white};
         border-color: ${colors.primary};
+        color: ${colors.white};
       }
     }
   }
 
   .more-filter {
     display: none;
+    padding-top: 1.5rem;
 
     &.is-active {
       display: flex;
@@ -122,6 +123,7 @@ export default css`
     }
     .more-filter {
       flex-direction: column;
+      padding-top: 0.75rem;
 
       .filter-options {
         flex-direction: column;
@@ -153,8 +155,8 @@ export default css`
         }
 
         .button-reset {
-          width: 100%;
           margin: 0;
+          width: 100%;
         }
       }
     }
