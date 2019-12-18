@@ -4,14 +4,11 @@ import styles from './styles';
 class Hero extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="container component-wrapper is-fluid is-hidden-mobile">
         <div className="hero-body">
           <div className="container">
             <div className="columns is-centered">
               <div className="column has-text-centered">
-                <h1 className="title is-size-1-desktop is-size-2-tablet is-size-3-mobile">
-                  Comunidades.tech
-                </h1>
                 <h2 className="subtitle is-size-4-desktop">
                   Espaço de visibilidade e fortalecimento das comunidades de
                   tecnologia.

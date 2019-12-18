@@ -2,170 +2,159 @@ import css from 'styled-jsx/css';
 import { colors } from '/utils/variables';
 
 export default css`
-  .filter {
-    margin-left: -2.5rem;
-    margin-right: -2.5rem;
+  .filter-wrapper {
+    margin: 0;
+    padding: 1rem 0.75rem;
+    border-bottom: solid 2px ${colors.wildSand};
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-    .filter-box {
-      box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1),
-        0 0 0 1px rgba(10, 10, 10, 0.1);
-      border-radius: 4px;
+  .filter-box {
+    display: flex;
+    padding: 0.75rem 0.125rem;
+    justify-content: center;
+
+    .filter-title-wrapper {
+      height: 34px;
       display: flex;
-      padding: 0;
-    }
-    .filter-title {
       align-items: center;
-      background-color: whitesmoke;
-      display: flex;
-      padding: 0;
 
-      .filter-label {
-        transform: rotate(-90deg);
+      .filter-title {
+        font-size: 0.875rem;
+        font-weight: bold;
+        margin-right: 0.5rem;
       }
-    }
-
-    .filter-label {
-      background-color: whitesmoke;
-      color: ${colors.boulder};
-      font-size: 0.65em;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .reset-title {
-      align-items: center;
-      background-color: ${colors.chestnutRose};
-      border-bottom-right-radius: 4px;
-      border-top-right-radius: 4px;
-      cursor: pointer;
-      display: flex;
-      padding: 0.75rem;
-    }
-
-    .reset-label {
-      color: ${colors.white};
-      font-size: 0.65em;
-      font-weight: bold;
-      letter-spacing: 0.05em;
-      max-width: 75px;
-      text-align: center;
-      text-transform: uppercase;
-    }
-
-    form {
-      display: flex;
     }
 
     .filter-options {
-      align-items: stretch;
       display: flex;
-      flex: 1;
 
       .filter-option-wrapper {
-        align-items: stretch;
-        border-left: solid 2px rgba(10, 10, 10, 0.1);
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        text-align: center;
+        :not(:last-child) {
+          margin-right: 0.25rem;
+        }
+        select,
+        input {
+          width: 7.125rem;
+          font-weight: bold;
+          color: ${colors.boulder};
+          height: 34px;
+          padding-left: 1.2rem;
 
-        .filter-option {
-          align-items: center;
-          display: flex;
-          justify-content: center;
-          padding: 10px 10px;
-
-          .control.has-icons-left .select select {
-            max-width: 115px;
-            padding-left: 1.75em;
-          }
-
-          .button {
-            margin-left: 5px;
-          }
-
-          &.check {
-            flex-direction: column;
-            padding: 7px 10px;
+          &::placeholder {
+            color: ${colors.boulder};
+            opacity: 1;
           }
         }
 
-        .checkbox {
-          align-items: center;
-          display: flex;
-          font-size: 13px;
-
-          input {
-            margin-right: 3px;
-          }
+        input {
+          width: 10.625rem;
         }
 
-        .checkbox:not(:last-of-type) {
-          margin-bottom: 1px;
+        .select:not(.is-multiple):not(.is-loading)::after {
+          border-color: ${colors.primary};
+          top: 63%;
         }
 
-        &.filter-by-name {
-          flex: 1.8;
+        .icon {
+          top: 10%;
+        }
+      }
+    }
+    .unique-button button {
+      margin-left: 0.5rem;
+      height: 34px;
+
+      &.button-reset {
+        background-color: ${colors.chestnutRose};
+        color: ${colors.white};
+
+        &:hover {
+          background-color: ${colors.white};
+          border: solid 1px;
+          color: ${colors.chestnutRose};
         }
       }
 
-      .select:not(.is-multiple):not(.is-loading)::after {
+      span:not(.icon) {
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 10px;
+        text-align: left;
+        line-height: 1;
+      }
+    }
+  }
+
+  .toggle-box-wrapper {
+    button {
+      font-weight: bold;
+      height: 34px;
+
+      &.active {
+        background-color: ${colors.primary};
+        color: ${colors.white};
         border-color: ${colors.primary};
       }
     }
+  }
 
-    @media screen and (max-width: 1215px) {
-      .filter-box {
-        flex-wrap: wrap;
+  .more-filter {
+    display: none;
 
-        .filter-title,
-        .reset-title {
-          flex-basis: 100%;
-          justify-content: center;
-        }
+    &.is-active {
+      display: flex;
+    }
+  }
 
-        .filter-title {
-          border-bottom: solid 2px #e6e6e6;
+  @media screen and (min-width: 1024px) {
+    .more-filter {
+      justify-content: flex-start;
+      padding-left: 65px;
+    }
+  }
 
-          .filter-label {
-            transform: rotate(0deg);
-          }
-        }
+  @media screen and (max-width: 769px) {
+    .filter-wrapper {
+      margin-top: 100px;
+    }
+    .more-filter {
+      flex-direction: column;
 
-        .reset-title {
-          border-top-right-radius: 0;
-          border-bottom-left-radius: 4px;
-        }
+      .filter-options {
+        flex-direction: column;
 
-        .filter-options {
-          flex-wrap: wrap;
+        .filter-option-wrapper {
+          margin: 0 0.25rem 0.75rem;
 
-          .filter-option-wrapper:first-of-type,
-          .filter-option-wrapper:nth-of-type(5) {
-            border-left: none;
-          }
-          .filter-option-wrapper:nth-of-type(-n + 7) {
-            flex-basis: 25%;
-            border-bottom: solid 2px #e6e6e6;
-          }
-
-          .filter-option-wrapper:last-of-type {
-            flex-basis: 50%;
-            border-bottom: solid 2px #e6e6e6;
-            border-left: none;
+          .select,
+          select,
+          input {
+            width: 100%;
           }
         }
       }
-    }
-    @media screen and (max-width: 1023px) {
-    }
-    @media screen and (max-width: 769px) {
-      .filter-box {
-        .filter-options .filter-option-wrapper:nth-of-type(-n + 4) {
-          flex-basis: 50%;
+
+      .unique-button {
+        margin: 0 0.25rem;
+
+        &:not(:last-child) {
+          margin-bottom: 0.5rem;
+
+          button {
+            background-color: ${colors.primary};
+
+            &:hover {
+              color: ${colors.primary};
+            }
+          }
         }
-        .filter-options .filter-option-wrapper:nth-of-type(n + 5) {
-          flex-basis: 100%;
+
+        .button-reset {
+          width: 100%;
+          margin: 0;
         }
       }
     }

@@ -78,6 +78,7 @@ export default css`
     .navbar {
       position: fixed;
       width: 100%;
+      top: 0;
     }
     .navbar-menu.is-active {
       position: absolute;

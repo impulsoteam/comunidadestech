@@ -1,21 +1,26 @@
 import css from 'styled-jsx/css';
+import { colors } from '/utils/variables';
 
 export default css`
   .counter-wrapper {
     display: flex;
     justify-content: center;
-    margin-bottom: 50px;
+    padding-bottom: 2rem;
+    background-color: ${colors.primary};
+    margin-left: 0;
+    margin-right: 0;
 
     .counter {
       display: flex;
+      color: ${colors.white};
+
       :not(:last-child) {
         margin-right: 20px;
       }
 
       i {
         font-size: 1.25em;
-        margin: 5px 10px 0 0;
-        opacity: 0.8;
+        margin: 10px 5px 0 0;
       }
 
       .counter-info {
@@ -24,7 +29,7 @@ export default css`
 
         h2 {
           font-weight: 900;
-          line-height: 0.9;
+          line-height: 1.1;
         }
 
         h5 {
