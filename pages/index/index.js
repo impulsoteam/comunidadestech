@@ -149,7 +149,7 @@ export default class Home extends PureComponent {
               style={{
                 maxWidth: '100px',
                 display: 'block',
-                margin: '30px auto',
+                margin: '100px auto',
               }}
             />
           </div>

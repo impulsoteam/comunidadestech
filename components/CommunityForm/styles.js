@@ -105,10 +105,6 @@ export default css`
     padding: 20px 0;
   }
 
-  .container {
-    margin-bottom: 50px;
-  }
-
   .required-form {
     color: #363636;
     font-size: 14px;
