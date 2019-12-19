@@ -3,16 +3,16 @@ import { colors } from '/utils/variables';
 
 export default css`
   .counter-wrapper {
+    background-color: ${colors.primary};
     display: flex;
     justify-content: center;
-    padding-bottom: 2rem;
-    background-color: ${colors.primary};
     margin-left: 0;
     margin-right: 0;
+    padding-bottom: 2rem;
 
     .counter {
-      display: flex;
       color: ${colors.white};
+      display: flex;
 
       :not(:last-child) {
         margin-right: 20px;

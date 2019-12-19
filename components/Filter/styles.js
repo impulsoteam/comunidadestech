@@ -6,7 +6,7 @@ export default css`
     align-items: center;
     border-bottom: solid 2px ${colors.wildSand};
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin: 0;
     padding: 1rem 0.75rem;
   }
@@ -107,6 +107,7 @@ export default css`
 
     &.is-active {
       display: flex;
+      justify-content: center;
     }
   }
 
@@ -119,8 +120,11 @@ export default css`
 
   @media screen and (max-width: 769px) {
     .filter-wrapper {
-      margin-top: 100px;
+      border-top: solid 2px ${colors.wildSand};
+      margin-top: 101px;
+      padding: 0.25rem 0.75rem;
     }
+
     .more-filter {
       flex-direction: column;
       padding-top: 0.75rem;

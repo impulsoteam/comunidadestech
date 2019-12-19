@@ -11,7 +11,7 @@ export default css`
   }
 
   .container {
-    opacity: 0.5;
+    opacity: 0.2;
     z-index: -1;
   }
 
