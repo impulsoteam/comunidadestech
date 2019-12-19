@@ -2,170 +2,165 @@ import css from 'styled-jsx/css';
 import { colors } from '/utils/variables';
 
 export default css`
-  .filter {
-    margin-left: -2.5rem;
-    margin-right: -2.5rem;
+  .filter-wrapper {
+    align-items: center;
+    border-bottom: solid 2px ${colors.wildSand};
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 1rem 0.75rem;
+  }
 
-    .filter-box {
-      box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1),
-        0 0 0 1px rgba(10, 10, 10, 0.1);
-      border-radius: 4px;
-      display: flex;
-      padding: 0;
-    }
-    .filter-title {
+  .filter-box {
+    display: flex;
+    justify-content: center;
+    padding: 0.75rem 0.125rem;
+
+    .filter-title-wrapper {
       align-items: center;
-      background-color: whitesmoke;
       display: flex;
-      padding: 0;
+      height: 34px;
 
-      .filter-label {
-        transform: rotate(-90deg);
+      .filter-title {
+        font-size: 0.875rem;
+        font-weight: bold;
+        margin-right: 0.5rem;
       }
-    }
-
-    .filter-label {
-      background-color: whitesmoke;
-      color: ${colors.boulder};
-      font-size: 0.65em;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .reset-title {
-      align-items: center;
-      background-color: ${colors.chestnutRose};
-      border-bottom-right-radius: 4px;
-      border-top-right-radius: 4px;
-      cursor: pointer;
-      display: flex;
-      padding: 0.75rem;
-    }
-
-    .reset-label {
-      color: ${colors.white};
-      font-size: 0.65em;
-      font-weight: bold;
-      letter-spacing: 0.05em;
-      max-width: 75px;
-      text-align: center;
-      text-transform: uppercase;
-    }
-
-    form {
-      display: flex;
     }
 
     .filter-options {
-      align-items: stretch;
       display: flex;
-      flex: 1;
 
       .filter-option-wrapper {
-        align-items: stretch;
-        border-left: solid 2px rgba(10, 10, 10, 0.1);
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        text-align: center;
+        :not(:last-child) {
+          margin-right: 0.25rem;
+        }
+        select,
+        input {
+          color: ${colors.boulder};
+          font-weight: bold;
+          height: 34px;
+          padding-left: 1.2rem;
+          width: 7.125rem;
 
-        .filter-option {
-          align-items: center;
-          display: flex;
-          justify-content: center;
-          padding: 10px 10px;
-
-          .control.has-icons-left .select select {
-            max-width: 115px;
-            padding-left: 1.75em;
-          }
-
-          .button {
-            margin-left: 5px;
-          }
-
-          &.check {
-            flex-direction: column;
-            padding: 7px 10px;
+          &::placeholder {
+            color: ${colors.boulder};
+            opacity: 1;
           }
         }
 
-        .checkbox {
-          align-items: center;
-          display: flex;
-          font-size: 13px;
-
-          input {
-            margin-right: 3px;
-          }
+        input {
+          width: 10.625rem;
         }
 
-        .checkbox:not(:last-of-type) {
-          margin-bottom: 1px;
+        .select:not(.is-multiple):not(.is-loading)::after {
+          border-color: ${colors.primary};
+          top: 63%;
         }
 
-        &.filter-by-name {
-          flex: 1.8;
+        .icon {
+          top: 10%;
+        }
+      }
+    }
+    .unique-button button {
+      height: 34px;
+      margin-left: 0.5rem;
+
+      &.button-reset {
+        background-color: ${colors.chestnutRose};
+        color: ${colors.white};
+
+        &:hover {
+          background-color: ${colors.white};
+          border: solid 1px;
+          color: ${colors.chestnutRose};
         }
       }
 
-      .select:not(.is-multiple):not(.is-loading)::after {
+      span:not(.icon) {
+        font-size: 10px;
+        font-weight: bold;
+        line-height: 1;
+        text-align: left;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .toggle-box-wrapper {
+    button {
+      font-weight: bold;
+      height: 34px;
+
+      &.active {
+        background-color: ${colors.primary};
         border-color: ${colors.primary};
+        color: ${colors.white};
       }
     }
+  }
 
-    @media screen and (max-width: 1215px) {
-      .filter-box {
-        flex-wrap: wrap;
+  .more-filter {
+    display: none;
+    padding-top: 1.5rem;
 
-        .filter-title,
-        .reset-title {
-          flex-basis: 100%;
-          justify-content: center;
-        }
+    &.is-active {
+      display: flex;
+      justify-content: center;
+    }
+  }
 
-        .filter-title {
-          border-bottom: solid 2px #e6e6e6;
+  @media screen and (min-width: 1024px) {
+    .more-filter {
+      justify-content: flex-start;
+      padding-left: 65px;
+    }
+  }
 
-          .filter-label {
-            transform: rotate(0deg);
-          }
-        }
+  @media screen and (max-width: 769px) {
+    .filter-wrapper {
+      border-top: solid 2px ${colors.wildSand};
+      margin-top: 101px;
+      padding: 0.25rem 0.75rem;
+    }
 
-        .reset-title {
-          border-top-right-radius: 0;
-          border-bottom-left-radius: 4px;
-        }
+    .more-filter {
+      flex-direction: column;
+      padding-top: 0.75rem;
 
-        .filter-options {
-          flex-wrap: wrap;
+      .filter-options {
+        flex-direction: column;
 
-          .filter-option-wrapper:first-of-type,
-          .filter-option-wrapper:nth-of-type(5) {
-            border-left: none;
-          }
-          .filter-option-wrapper:nth-of-type(-n + 7) {
-            flex-basis: 25%;
-            border-bottom: solid 2px #e6e6e6;
-          }
+        .filter-option-wrapper {
+          margin: 0 0.25rem 0.75rem;
 
-          .filter-option-wrapper:last-of-type {
-            flex-basis: 50%;
-            border-bottom: solid 2px #e6e6e6;
-            border-left: none;
+          .select,
+          select,
+          input {
+            width: 100%;
           }
         }
       }
-    }
-    @media screen and (max-width: 1023px) {
-    }
-    @media screen and (max-width: 769px) {
-      .filter-box {
-        .filter-options .filter-option-wrapper:nth-of-type(-n + 4) {
-          flex-basis: 50%;
+
+      .unique-button {
+        margin: 0 0.25rem;
+
+        &:not(:last-child) {
+          margin-bottom: 0.5rem;
+
+          button {
+            background-color: ${colors.primary};
+
+            &:hover {
+              color: ${colors.primary};
+            }
+          }
         }
-        .filter-options .filter-option-wrapper:nth-of-type(n + 5) {
-          flex-basis: 100%;
+
+        .button-reset {
+          margin: 0;
+          width: 100%;
         }
       }
     }

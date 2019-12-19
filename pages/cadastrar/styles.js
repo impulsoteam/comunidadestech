@@ -37,10 +37,6 @@ export default css`
     margin-top: 20px;
   }
 
-  .container {
-    margin-bottom: 50px;
-  }
-
   @media screen and (max-width: 1023px) {
     .title {
       margin-top: 100px;

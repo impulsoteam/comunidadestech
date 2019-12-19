@@ -10,8 +10,13 @@ export default css`
     font-size: 14px;
   }
 
+  .container {
+    opacity: 0.2;
+    z-index: -1;
+  }
+
   .hero-foot {
-    margin-top: 32px;
+    margin-top: -120px;
     border-bottom: 3px solid ${colors.primary};
     border-radius: 1px;
 

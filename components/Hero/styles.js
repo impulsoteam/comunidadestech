@@ -1,16 +1,24 @@
 import css from 'styled-jsx/css';
-import { fonts } from '/utils/variables';
+import { fonts, colors } from '/utils/variables';
 
 export default css`
+  .component-wrapper {
+    background-color: ${colors.primary};
+    padding-top: 25px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
   .title {
     font-weight: 700;
   }
+
   .subtitle {
     font-family: ${fonts.raleway};
     font-size: 20px !important;
-    font-weight: 300;
-    margin: 0 auto 20px;
-    max-width: 400px;
+    font-weight: bold;
+    color: ${colors.white};
+    margin: 0 auto;
   }
 
   .hero-body {
@@ -18,7 +26,7 @@ export default css`
   }
 
   @media screen and (max-width: 1023px) {
-    .title {
+    .subtitle {
       margin-top: 100px;
     }
   }

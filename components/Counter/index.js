@@ -5,7 +5,7 @@ class Counter extends Component {
   render() {
     const { list } = this.props;
     return (
-      <div className="container counter-wrapper">
+      <div className="container counter-wrapper is-fluid is-hidden-mobile">
         <div className="counter">
           <i className="fas fa-laptop-code"></i>
           <div className="counter-info">

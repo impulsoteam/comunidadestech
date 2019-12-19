@@ -47,7 +47,7 @@ export default class Home extends PureComponent {
     const { name, value } = event.target;
     let newFilter = this.state.multipleFilter;
 
-    value === 'all'
+    value === 'all' || value === 'both'
       ? (newFilter[name] = '')
       : name === 'nameSearch'
       ? (newFilter[name] = value.toLowerCase())
@@ -120,15 +120,14 @@ export default class Home extends PureComponent {
           <div>
             <Hero />
             <Counter list={list} />
-            <br />
+            <Filter
+              list={list}
+              select={this.handleChange}
+              reset={this.handleResetButton}
+              multipleFilter={multipleFilter}
+              propertyList={this.getPropertyList(list)}
+            />
             <div className="container">
-              <Filter
-                list={list}
-                select={this.handleChange}
-                reset={this.handleResetButton}
-                multipleFilter={multipleFilter}
-                propertyList={this.getPropertyList(list)}
-              />
               <div className="columns">
                 <div className="column">
                   <div className="columns is-multiline card-wrapper">
@@ -150,7 +149,7 @@ export default class Home extends PureComponent {
               style={{
                 maxWidth: '100px',
                 display: 'block',
-                margin: '30px auto',
+                margin: '100px auto',
               }}
             />
           </div>
