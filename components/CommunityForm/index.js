@@ -35,7 +35,8 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
       initialValues={initialValues}
       validationSchema={SignupSchema}
       onSubmit={(values) => {
-        values.members = parseInt(values.members.replace('.', ''));
+        if (typeof values.members === 'string')
+          values.members = parseInt(values.members.replace('.', ''));
         service(values);
       }}
     >
