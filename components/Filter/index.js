@@ -300,6 +300,7 @@ class Filter extends Component {
                 onClick={(event) => {
                   reset(event);
                   this.resetHandler();
+                  this.handleMoreFilter();
                 }}
                 className="button button-reset"
               >
@@ -560,6 +561,7 @@ class Filter extends Component {
               onClick={(event) => {
                 reset(event);
                 this.resetHandler();
+                this.handleMoreFilter();
               }}
               className="button button-reset"
             >
