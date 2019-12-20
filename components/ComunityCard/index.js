@@ -80,34 +80,22 @@ const CommunityCard = ({ canModify, community, credentials }) => {
               <i className="fas fa-users"></i>
               <span>{members} Membros</span>
             </p>
-            <a href={url} className="button is-primary has-text-weight-bold">
-              Participar da Comunidade
-            </a>
             <div className="options">
               {canModify && (
                 <>
-                  <a
-                    href={`/editar?name=${name}`}
-                    className="button is-primary has-text-weight-bold"
-                  >
-                    Editar
+                  <a href={`/editar?name=${name}`} className="">
+                    <i className="fas fa-edit"></i>editar
                   </a>
-                  <button
-                    onClick={deleteCommunity}
-                    className="button is-primary has-text-weight-bold"
-                  >
-                    Deletar
-                  </button>
+                  <a onClick={deleteCommunity} className="">
+                    <i className="fas fa-trash-alt"></i>deletar
+                  </a>
                 </>
               )}
               {status === 'awaitingPublication' && credentials.isModerator && (
                 <>
-                  <button
-                    onClick={publishCommunity}
-                    className="button is-primary has-text-weight-bold"
-                  >
-                    Publicar
-                  </button>
+                  <a onClick={publishCommunity} className="button is-small">
+                    <i className="fas fa-check-double"></i> publicar
+                  </a>
                 </>
               )}
             </div>
