@@ -47,9 +47,9 @@ const Community = ({ credentials }) => {
               />
               <div className="container links">
                 <Divider dataContent="Links" />
-                <div className="columns is-multiline">
+                <div className="columns is-multiline is-mobile">
                   {Object.keys(community.links).map((link) => (
-                    <div className="column is-one-quarter">
+                    <div className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
                       <a href={community.links[link]} target="_blank">
                         <i className={`${ICONS[link]} fa-3x`}></i>
                       </a>
@@ -66,7 +66,7 @@ const Community = ({ credentials }) => {
                 </div>
                 <div className="columns is-2 is-variable is-multiline">
                   {related.map((card) => (
-                    <div className="column is-one-third" key={card.id}>
+                    <div className="column is-one-third " key={card.id}>
                       <Card content={card} />
                     </div>
                   ))}
