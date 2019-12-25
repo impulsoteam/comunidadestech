@@ -71,6 +71,7 @@ class CommunityController {
     }
   }
 
+  async setResponse() {}
   async update(req, res) {
     try {
       const { body: community, params, decoded } = req;

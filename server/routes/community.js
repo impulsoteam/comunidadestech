@@ -10,6 +10,7 @@ router.get('/name/:name', CommunityController.getByName);
 router.use(SessionController.checkToken);
 
 router.get('/owner', CommunityController.getByOwner);
+router.put('/invitation', CommunityController.setResponse);
 router.get('/checkName/:name', CommunityController.checkName);
 router.post('/store', CommunityController.store);
 router.delete('/:_id', CommunityController.delete);

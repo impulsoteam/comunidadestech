@@ -42,6 +42,32 @@ export default css`
       line-height: 1;
       position: absolute;
     }
+    .form-warning {
+      bottom: -12px;
+      color: ${colors.turbo};
+      font-size: 10px;
+      font-weight: normal;
+      line-height: 1;
+      position: absolute;
+    }
+    .form-info {
+      bottom: -12px;
+      color: ${colors.emerald};
+      font-size: 10px;
+      font-weight: normal;
+      line-height: 1;
+      position: absolute;
+    }
+    .subscribe-button {
+      color: ${colors.primary};
+      font-size: 16px;
+      font-weight: bold;
+      border: 1px solid ${colors.primary};
+      width: 70%;
+      height: 28px;
+      margin: 8px 0px;
+      cursor: pointer;
+    }
   }
 
   fieldset {

@@ -3,6 +3,12 @@ import mongoose from 'mongoose';
 export const modelTypes = ['online', 'presential', 'both'];
 export const statusTypes = ['awaitingPublication', 'published', 'archived'];
 
+export const invitationStatus = {
+  awaiting: 'AWAITING',
+  accepted: 'ACCEPTED',
+  declined: 'DECLINED',
+};
+
 function validateCountry() {
   return !(this.model === 'online');
 }
@@ -104,6 +110,7 @@ const communitySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    managers: Array,
     creator,
     status: {
       type: String,
