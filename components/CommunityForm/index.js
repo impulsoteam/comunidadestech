@@ -9,14 +9,14 @@ import Links from './links';
 import styles from './styles';
 
 const CommunityForm = ({ service, initialValues, loading, credentials }) => {
-  const [currentPage, setCurrentPage] = useState(Object.keys(pageTitles)[0]);
-
   const pageTitles = {
     BasicInfos: 'Informações básicas',
     Location: 'Localização',
     People: 'Membros e Administradores',
     Links: 'Links',
   };
+
+  const [currentPage, setCurrentPage] = useState(Object.keys(pageTitles)[0]);
 
   const renderPages = (props) => {
     return {
