@@ -106,40 +106,40 @@ export default css`
     }
 
     .link-section {
-      position: relative;
       margin-bottom: 0.875rem;
+      position: relative;
 
       label {
-        position: absolute;
-        margin: 0;
-        width: calc(100% - 68px);
-        top: 0;
         left: 60px;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        width: calc(100% - 68px);
       }
 
       .link-delete {
-        position: absolute;
-        top: 50%;
-        right: 0;
-        transform: translateY(-50%);
-        width: 18px;
-        height: 18px;
         background: red;
+        border-radius: 50%;
         border: none;
         color: white;
-        border-radius: 50%;
-        font-weight: bold;
-        font-size: 16px;
+        cursor: pointer;
         display: flex;
+        font-size: 16px;
+        font-weight: bold;
+        height: 18px;
         justify-content: center;
         line-height: 1;
-        cursor: pointer;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
       }
     }
 
     button.is-primary {
-      font-weight: bold;
       float: right;
+      font-weight: bold;
     }
   }
 

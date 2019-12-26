@@ -72,10 +72,14 @@ export const linksSelectStyle = {
   singleValue: (styles) => ({ ...styles, strong: { display: 'none' } }),
   control: (styles) => ({
     ...styles,
+    borderBottomRightRadius: 0,
+    borderTopRightRadius: 0,
     height: '44px',
     width: '60px',
-    borderTopRightRadius: 0,
-    borderBottomRightRadius: 0,
+
+    i: {
+      color: `${colors.primary}`,
+    },
   }),
   dropdownIndicator: (styles) => ({
     ...styles,
