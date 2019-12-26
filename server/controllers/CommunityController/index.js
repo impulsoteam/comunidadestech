@@ -23,7 +23,6 @@ class CommunityController {
       const community = await Community.create(body);
       return res.status(201).json(community);
     } catch (error) {
-      console.log(error);
       return res.status(400).json(error);
     }
   }

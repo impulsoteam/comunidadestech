@@ -395,6 +395,7 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                                 />
                               </label>
                               <button
+                                type="button"
                                 className="link-delete"
                                 onClick={() => arrayHelpers.remove(index)}
                               >
@@ -403,6 +404,7 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                             </div>
                           ))}
                           <button
+                            type="button"
                             className="button is-primary is-outlined"
                             onClick={() =>
                               arrayHelpers.push({ type: 'url', url: '' })
