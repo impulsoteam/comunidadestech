@@ -11,9 +11,7 @@ export const SignupSchema = Yup.object().shape({
       /^(http(s)?:\/\/|www\.).*(\.jpg|\.jpeg|\.png)$/,
       'Deve ser um endereço de uma imagem JPG ou PNG'
     ),
-  url: Yup.string()
-    .url('Link inválido. Exemplo: http://site.com')
-    .required('Item obrigatório'),
+  links: Yup.array().typeError('Insira pelo menos um link'),
   description: Yup.string().required('Item obrigatório'),
   type: Yup.string().required('Item obrigatório'),
   category: Yup.string().required('Item obrigatório'),
@@ -152,4 +150,71 @@ export const MODEL = [
 export const GLOBAL_PROGRAM = [
   { label: 'Sim', value: true },
   { label: 'Não', value: false },
+];
+
+export const LINKS = [
+  {
+    label: (
+      <span>
+        <i className="fab fa-discord"></i> <strong>Discord</strong>
+      </span>
+    ),
+    value: 'discord',
+  },
+  {
+    label: (
+      <span>
+        <i className="fab fa-facebook-square"></i> <strong>Facebook</strong>
+      </span>
+    ),
+    value: 'facebook',
+  },
+  {
+    label: (
+      <span>
+        <i className="fab fa-meetup"></i> <strong>Meetup</strong>
+      </span>
+    ),
+    value: 'meetup',
+  },
+  {
+    label: (
+      <span>
+        <i className="fas fa-link"></i> <strong>Outro</strong>
+      </span>
+    ),
+    value: 'other',
+  },
+  {
+    label: (
+      <span>
+        <i className="fab fa-slack"></i> <strong>Slack</strong>
+      </span>
+    ),
+    value: 'slack',
+  },
+  {
+    label: (
+      <span>
+        <i className="fab fa-telegram-plane"></i> <strong>Telegram</strong>
+      </span>
+    ),
+    value: 'telegram',
+  },
+  {
+    label: (
+      <span>
+        <i className="fas fa-globe"></i> <strong>Site</strong>
+      </span>
+    ),
+    value: 'url',
+  },
+  {
+    label: (
+      <span>
+        <i className="fab fa-whatsapp"></i> <strong>Whatsapp</strong>
+      </span>
+    ),
+    value: 'whatsapp',
+  },
 ];

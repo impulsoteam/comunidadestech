@@ -1,10 +1,10 @@
-import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import React, { useState, useEffect } from 'react';
+import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import MaskedInput from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
-import { reactSelectStyle } from './reactSelectStyle';
+import { reactSelectStyle, linksSelectStyle } from './reactSelectStyle';
 
 import { api, setHeader } from '../../utils/axios';
 import styles from './styles';
@@ -17,9 +17,12 @@ import {
   TYPES,
   MODEL,
   GLOBAL_PROGRAM,
+  LINKS,
 } from './utils';
 
 const CommunityForm = ({ service, initialValues, loading, credentials }) => {
+  const [selectedLinkType, setSelectedLinkType] = useState('url');
+  const [temporaryLinks, setTemporaryLinks] = useState([]);
   const getCities = (state) => cities.filter((city) => city.state === state);
   const animatedComponents = makeAnimated();
 
@@ -35,7 +38,9 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
       initialValues={initialValues}
       validationSchema={SignupSchema}
       onSubmit={(values) => {
-        values.members = parseInt(values.members.replace('.', ''));
+        if (typeof values.members === 'string')
+          values.members = parseInt(values.members.replace('.', ''));
+        console.log(values);
         service(values);
       }}
     >
@@ -58,6 +63,15 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
 
         const handleStringChange = (selectedOption, data) => {
           setFieldValue(data || data.value, selectedOption.value);
+        };
+
+        const handleLinks = (a) => {
+          setSelectedLinkType(a.value);
+        };
+
+        const handleTest = (selectedOption, data) => {
+          console.log(selectedOption);
+          console.log(data);
         };
 
         return (
@@ -358,16 +372,66 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                     {(msg) => <div className="form-error">{msg}</div>}
                   </ErrorMessage>
                 </label>
-                <label>
-                  Link da comunidade *
-                  <div className="input-wrapper">
-                    <i className="fas fa-link"></i>
-                    <Field name="url" className="input" />
+                <div className="links-wrapper">
+                  <h5>Links</h5>
+                  <div>
+                    <FieldArray
+                      name="links"
+                      render={(arrayHelpers) => (
+                        <div>
+                          {values.links.map((link, index) => (
+                            <div key={index} className="link-section">
+                              <Select
+                                name={`links[${index}].type`}
+                                onChange={(selectedOption, data) =>
+                                  handleStringChange(
+                                    selectedOption,
+                                    data.name,
+                                    setFieldValue
+                                  )
+                                }
+                                defaultValue={LINKS.filter(
+                                  (link) =>
+                                    link.value === values.links[index].type
+                                )}
+                                styles={linksSelectStyle}
+                                options={LINKS}
+                              />
+                              <label>
+                                <Field
+                                  name={`links.${index}.url`}
+                                  className="input link-input"
+                                  placeholder="https://"
+                                />
+                              </label>
+
+                              <button
+                                className="link-delete"
+                                onClick={() => arrayHelpers.remove(index)}
+                              >
+                                -
+                              </button>
+                            </div>
+                          ))}
+                          <button
+                            className="button is-primary is-outlined"
+                            onClick={() =>
+                              arrayHelpers.push({ type: 'url', url: '' })
+                            }
+                          >
+                            <span className="icon is-small">
+                              <i className="fas fa-plus"></i>
+                            </span>
+                            <span>adicionar mais um link</span>
+                          </button>
+                        </div>
+                      )}
+                    />
                   </div>
-                  <ErrorMessage name="url">
+                  <ErrorMessage name="links">
                     {(msg) => <div className="form-error">{msg}</div>}
                   </ErrorMessage>
-                </label>
+                </div>
                 <label>
                   Link da Logo da comunidade
                   <div className="input-wrapper">

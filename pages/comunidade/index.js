@@ -32,6 +32,8 @@ const Community = ({ credentials }) => {
     return false;
   };
 
+  console.log(community);
+
   return (
     <>
       {!loading ? (
@@ -48,10 +50,10 @@ const Community = ({ credentials }) => {
               <div className="container links">
                 <Divider dataContent="Links" />
                 <div className="columns is-multiline is-mobile">
-                  {Object.keys(community.links).map((link) => (
+                  {community.links.map((link) => (
                     <div className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
-                      <a href={community.links[link]} target="_blank">
-                        <i className={`${ICONS[link]} fa-3x`}></i>
+                      <a href={link.url} target="_blank">
+                        <i className={`${ICONS[link.type]} fa-3x`}></i>
                       </a>
                     </div>
                   ))}

@@ -98,6 +98,51 @@ export default css`
     }
   }
 
+  .links-wrapper {
+    h5 {
+      color: ${colors.primary};
+      font-weight: 600;
+      margin-top: 1.25rem;
+    }
+
+    .link-section {
+      position: relative;
+      margin-bottom: 0.875rem;
+
+      label {
+        position: absolute;
+        margin: 0;
+        width: calc(100% - 68px);
+        top: 0;
+        left: 60px;
+      }
+
+      .link-delete {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        background: red;
+        border: none;
+        color: white;
+        border-radius: 50%;
+        font-weight: bold;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        line-height: 1;
+        cursor: pointer;
+      }
+    }
+
+    button.is-primary {
+      font-weight: bold;
+      float: right;
+    }
+  }
+
   button.is-large {
     font-size: 16px;
     font-weight: bold;

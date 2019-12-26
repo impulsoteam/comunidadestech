@@ -68,10 +68,6 @@ const communitySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    url: {
-      type: String,
-      required: true,
-    },
 
     description: {
       type: String,
@@ -86,6 +82,10 @@ const communitySchema = new mongoose.Schema(
       required: true,
     },
     tags: {
+      type: Array,
+      required: true,
+    },
+    links: {
       type: Array,
       required: true,
     },

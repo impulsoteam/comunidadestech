@@ -57,3 +57,18 @@ textarea {
     }
   }
 }
+
+.link-section .link-input {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  font-size: 14px;
+  font-weight: bold;
+  min-height: 44px;
+  color: #363636;
+  z-index: -1;
+
+  &::placeholder {
+    color: #7a7a7a;
+    opacity: 1;
+  }
+}
