@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 import { Field, ErrorMessage } from 'formik';
 
-import ManagerCard from './managerCard';
+import ManagersList from './managersList';
 import { invitationStatus } from '../../utils/variables';
 import { api, setHeader } from '../../utils/axios';
 import MaskedInput from 'react-text-mask';
@@ -24,12 +25,7 @@ export default function People({
   const [managers, setManagers] = useState(values.managers);
   const [isValidEmail, setValidEmail] = useState(false);
 
-  const {
-    managerAlreadyListed,
-    invalidEmail,
-    userSubscribed,
-    userNotSubscribed,
-  } = errorMessages;
+  const { managerAlreadyListed, userNotSubscribed } = errorMessages;
 
   const validator = /\S+@\S+\.\S+/;
   const formatEmail = (email) => (email ? email.trim().toLowerCase() : '');
@@ -41,21 +37,31 @@ export default function People({
   });
 
   const checkManager = async (value) => {
+    const isTouched = touched.manager;
     const email = formatEmail(value);
     const validEmail = validator.test(email);
 
     if (!validEmail) return setValidEmail(false);
+
+    !isTouched && setFieldTouched('manager', true);
     setValidEmail(true);
     setHeader(credentials);
     const { data: subscribed } = await api.get(`/user/checkManager/${email}`);
-    setSubscribed(subscribed || { email });
+    if (!subscribed) return userNotSubscribed;
+
     const managersEmails = values.managers.map(({ email }) => email);
-    return managersEmails.includes(value) ? managerAlreadyListed : null;
+    if (managersEmails.includes(value)) return managerAlreadyListed;
+    setSubscribed(subscribed);
   };
 
   const addManager = async () => {
     const manager = subscribed;
-    manager.status = invitationStatus.awaiting;
+    const status = invitationStatus.sent;
+
+    manager.invitation = {
+      status,
+      in: moment().toDate(),
+    };
     values.managers.push(manager);
 
     setFieldValue('manager', '');
@@ -69,14 +75,6 @@ export default function People({
     );
     values.managers = managers;
     setManagers(values.managers);
-  };
-
-  const renderNote = () => {
-    if (isValidEmail && !subscribed.name)
-      return <div className="form-warning">{userNotSubscribed}</div>;
-
-    if (isValidEmail && subscribed.name && !errors.manager)
-      return <div className="form-info">{userSubscribed}</div>;
   };
 
   return (
@@ -111,8 +109,9 @@ export default function People({
           {(msg) => <div className="form-error">{msg}</div>}
         </ErrorMessage>
       </label>
-      <h2 className="is-size-4-desktop">Administradores</h2>
-      <ManagerCard managers={managers} removeManager={removeManager} />
+      {managers.length !== 0 && (
+        <ManagersList {...{ managers, removeManager, credentials }} />
+      )}
       <h2 className="is-size-4-desktop">Cadastrar Administrador</h2>
       <label>
         Email do administrador
@@ -128,7 +127,6 @@ export default function People({
         <ErrorMessage name="manager">
           {(msg) => <div className="form-error">{msg}</div>}
         </ErrorMessage>
-        {renderNote()}
       </label>
       <button
         disabled={!!errors.manager || !isValidEmail}

@@ -6,7 +6,7 @@ import loader from '../../static/comunidades-tech-loader.gif';
 import { api, setHeader } from '../../utils/axios';
 import Card from '../../components/Card';
 
-const Dashboard = ({ credentials }) => {
+export default function Dashboard({ credentials }) {
   const [loading, setLoading] = useState(true);
   const [myCommunities, setMyCommunities] = useState([]);
   const [pendingCommunities, setPendingCommunities] = useState([]);
@@ -34,13 +34,18 @@ const Dashboard = ({ credentials }) => {
     setLoading(false);
   }, []);
 
-  const sendResponse = async ({ accept, community }) => {
-    console.log({ accept, community });
+  const sendResponse = async ({ accept, communityId }) => {
     setHeader(credentials);
     const { data } = await api.put(`/community/invitation`, {
       accept,
-      community,
+      communityId,
     });
+
+    if (data.success) {
+      setHeader(credentials);
+      const { data } = await api.get(`/user/invitations`);
+      setPendingInvites(data);
+    }
   };
 
   const renderDashboard = () => {
@@ -75,14 +80,14 @@ const Dashboard = ({ credentials }) => {
                     </p>
                     <button
                       onClick={() =>
-                        sendResponse({ accept: true, community: invite._id })
+                        sendResponse({ accept: true, communityId: invite._id })
                       }
                     >
                       sim
                     </button>
                     <button
                       onClick={() =>
-                        sendResponse({ accept: false, community: invite._id })
+                        sendResponse({ accept: false, communityId: invite._id })
                       }
                     >
                       nao
@@ -130,7 +135,7 @@ const Dashboard = ({ credentials }) => {
   };
 
   return renderDashboard();
-};
+}
 
 Dashboard.getInitialProps = async (ctx) => {
   const credentials = cookies(ctx).ctech_credentials || {};
@@ -141,5 +146,3 @@ Dashboard.getInitialProps = async (ctx) => {
     ctx.res.end();
   }
 };
-
-export default Dashboard;

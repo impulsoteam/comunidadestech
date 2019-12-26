@@ -9,13 +9,14 @@ import Links from './links';
 import styles from './styles';
 
 const CommunityForm = ({ service, initialValues, loading, credentials }) => {
+  const [currentPage, setCurrentPage] = useState(Object.keys(pageTitles)[0]);
+
   const pageTitles = {
     BasicInfos: 'Informações básicas',
     Location: 'Localização',
     People: 'Membros e Administradores',
     Links: 'Links',
   };
-  const [currentPage, setCurrentPage] = useState(Object.keys(pageTitles)[0]);
 
   const renderPages = (props) => {
     return {
@@ -25,6 +26,7 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
       Links: <Links {...props} />,
     }[props.currentPage];
   };
+
   const renderButton = () => {
     const titles = Object.keys(pageTitles);
     const lastTitle = titles[titles.length - 1];
@@ -45,6 +47,7 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
         </button>
       );
   };
+
   return (
     <Formik
       initialValues={initialValues}

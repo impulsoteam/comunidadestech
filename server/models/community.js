@@ -63,6 +63,18 @@ const globalProgram = {
   },
 };
 
+const manager = {
+  _id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  email: { type: String, required: true },
+  invitation: {
+    status: { type: String, required: true },
+    in: { type: Date, required: true },
+  },
+};
+
 const communitySchema = new mongoose.Schema(
   {
     name: {
@@ -110,7 +122,7 @@ const communitySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    managers: Array,
+    managers: [manager],
     creator,
     status: {
       type: String,

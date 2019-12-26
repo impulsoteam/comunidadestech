@@ -68,8 +68,7 @@ export const errorMessages = {
   nameAlreadyExists: 'Comunidade já cadastrada',
   userNotSubscribed: 'Email ainda não está cadastrado no comunidades.tech',
   userSubscribed: 'Email está cadastrado no comunidades.tech',
-  managerAlreadyListed: 'Usuário já cadastrado',
-  invalidEmail: 'Ops, parece que tem algo errado com esse email',
+  managerAlreadyListed: 'Usuário já é administrador desta comunidade',
 };
 
 export const CATEGORIES = [

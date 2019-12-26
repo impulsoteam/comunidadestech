@@ -16,7 +16,8 @@ export const fonts = {
 };
 
 export const invitationStatus = {
-  awaiting: 'AWAITING',
+  waitingSubscribe: 'AWAITING_SUBSCRIBE',
+  sent: 'SENT',
   accepted: 'ACCEPTED',
   declined: 'DECLINED',
 };

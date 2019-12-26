@@ -60,7 +60,7 @@ class UserController {
       const invites = await Community.find(
         {
           managers: {
-            $elemMatch: { _id: id, status: 'AWAITING' },
+            $elemMatch: { _id: id, 'invitation.status': 'SENT' },
           },
         },
         { name: 1, logo: 1 }

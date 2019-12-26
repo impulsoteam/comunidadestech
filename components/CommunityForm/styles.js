@@ -58,16 +58,6 @@ export default css`
       line-height: 1;
       position: absolute;
     }
-    .subscribe-button {
-      color: ${colors.primary};
-      font-size: 16px;
-      font-weight: bold;
-      border: 1px solid ${colors.primary};
-      width: 70%;
-      height: 28px;
-      margin: 8px 0px;
-      cursor: pointer;
-    }
   }
 
   fieldset {
@@ -136,5 +126,15 @@ export default css`
     font-size: 14px;
     font-weight: bold;
     margin-top: 20px;
+  }
+  .subscribe-button {
+    color: ${colors.primary};
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid ${colors.primary};
+    width: 70%;
+    height: 28px;
+    margin: 20px 0px;
+    cursor: pointer;
   }
 `;
