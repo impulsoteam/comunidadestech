@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -21,8 +21,6 @@ import {
 } from './utils';
 
 const CommunityForm = ({ service, initialValues, loading, credentials }) => {
-  const [selectedLinkType, setSelectedLinkType] = useState('url');
-  const [temporaryLinks, setTemporaryLinks] = useState([]);
   const getCities = (state) => cities.filter((city) => city.state === state);
   const animatedComponents = makeAnimated();
 
