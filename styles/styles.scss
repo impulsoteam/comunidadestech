@@ -26,9 +26,9 @@ textarea {
 }
 
 .flex-vertical-center {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
 }
 
@@ -45,30 +45,30 @@ textarea {
   .input,
   select,
   textarea {
+    color: $dark;
     font-size: 14px;
     font-weight: bold;
     min-height: 44px;
-    color: #363636;
     z-index: -1;
 
     &::placeholder {
-      color: #7a7a7a;
+      color: $boulder;
       opacity: 1;
     }
   }
 }
 
 .link-section .link-input {
-  border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  color: $dark;
   font-size: 14px;
   font-weight: bold;
   min-height: 44px;
-  color: #363636;
   z-index: -1;
 
   &::placeholder {
-    color: #7a7a7a;
+    color: $boulder;
     opacity: 1;
   }
 }
