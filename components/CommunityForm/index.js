@@ -40,7 +40,6 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
       onSubmit={(values) => {
         if (typeof values.members === 'string')
           values.members = parseInt(values.members.replace('.', ''));
-        console.log(values);
         service(values);
       }}
     >
@@ -63,15 +62,6 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
 
         const handleStringChange = (selectedOption, data) => {
           setFieldValue(data || data.value, selectedOption.value);
-        };
-
-        const handleLinks = (a) => {
-          setSelectedLinkType(a.value);
-        };
-
-        const handleTest = (selectedOption, data) => {
-          console.log(selectedOption);
-          console.log(data);
         };
 
         return (
@@ -404,7 +394,6 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                                   placeholder="https://"
                                 />
                               </label>
-
                               <button
                                 className="link-delete"
                                 onClick={() => arrayHelpers.remove(index)}

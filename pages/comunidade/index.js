@@ -32,8 +32,6 @@ const Community = ({ credentials }) => {
     return false;
   };
 
-  console.log(community);
-
   return (
     <>
       {!loading ? (
