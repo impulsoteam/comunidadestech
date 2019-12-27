@@ -33,7 +33,6 @@ export default css`
       text-align: left;
       width: 100%;
     }
-
     .form-error {
       bottom: -12px;
       color: ${colors.chestnutRose};
@@ -106,7 +105,7 @@ export default css`
     }
 
     .link-section {
-      margin-bottom: 0.875rem;
+      margin-bottom: 1.25rem;
       position: relative;
 
       label {
@@ -140,6 +139,15 @@ export default css`
     button.is-primary {
       float: right;
       font-weight: bold;
+    }
+
+    .form-error {
+      color: ${colors.chestnutRose};
+      font-size: 10px;
+      font-weight: normal;
+      line-height: 1;
+      margin-bottom: 1rem;
+      margin-top: -1.25rem;
     }
   }
 

@@ -368,38 +368,45 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                       render={(arrayHelpers) => (
                         <div>
                           {values.links.map((link, index) => (
-                            <div key={index} className="link-section">
-                              <Select
-                                name={`links[${index}].type`}
-                                onChange={(selectedOption, data) =>
-                                  handleStringChange(
-                                    selectedOption,
-                                    data.name,
-                                    setFieldValue
-                                  )
-                                }
-                                defaultValue={LINKS.filter(
-                                  (link) =>
-                                    link.value === values.links[index].type
-                                )}
-                                styles={linksSelectStyle}
-                                options={LINKS}
-                              />
-                              <label>
-                                <Field
-                                  name={`links.${index}.url`}
-                                  className="input link-input"
-                                  placeholder="https://"
+                            <>
+                              <div key={index} className="link-section">
+                                <Select
+                                  name={`links[${index}].type`}
+                                  onChange={(selectedOption, data) =>
+                                    handleStringChange(
+                                      selectedOption,
+                                      data.name,
+                                      setFieldValue
+                                    )
+                                  }
+                                  defaultValue={LINKS.filter(
+                                    (link) =>
+                                      link.value === values.links[index].type
+                                  )}
+                                  styles={linksSelectStyle}
+                                  options={LINKS}
                                 />
-                              </label>
-                              <button
-                                type="button"
-                                className="link-delete"
-                                onClick={() => arrayHelpers.remove(index)}
-                              >
-                                -
-                              </button>
-                            </div>
+                                <label>
+                                  <Field
+                                    name={`links.${index}.url`}
+                                    className="input link-input"
+                                    placeholder="https://"
+                                  />
+                                </label>
+                                <button
+                                  type="button"
+                                  className="link-delete"
+                                  onClick={() => arrayHelpers.remove(index)}
+                                >
+                                  -
+                                </button>
+                              </div>
+                              <ErrorMessage name={`links.${index}.url`}>
+                                {(msg) => (
+                                  <div className="form-error">{msg}</div>
+                                )}
+                              </ErrorMessage>
+                            </>
                           ))}
                           <button
                             type="button"
@@ -417,9 +424,6 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                       )}
                     />
                   </div>
-                  <ErrorMessage name="links">
-                    {(msg) => <div className="form-error">{msg}</div>}
-                  </ErrorMessage>
                 </div>
                 <label>
                   Link da Logo da comunidade
