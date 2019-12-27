@@ -21,7 +21,7 @@ const RegisterCommunity = ({ credentials }) => {
         state: '',
         city: '',
       },
-      url: 'https://',
+      links: [{ type: 'url', url: '' }],
       description: '',
       category: '',
       type: '',
