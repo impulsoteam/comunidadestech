@@ -211,6 +211,14 @@ export const LINKS = [
   {
     label: (
       <span>
+        <i className="fab fa-twitter"></i> <strong>Twitter</strong>
+      </span>
+    ),
+    value: 'twitter',
+  },
+  {
+    label: (
+      <span>
         <i className="fas fa-globe"></i> <strong>Site</strong>
       </span>
     ),
