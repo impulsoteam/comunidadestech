@@ -1,7 +1,13 @@
 import React from 'react';
-import { Field, ErrorMessage } from 'formik';
+
+import { Field, ErrorMessage, FieldArray } from 'formik';
+import Select from 'react-select';
+
+import { linksSelectStyle } from './reactSelectStyle';
 
 import styles from './styles';
+
+import { LINKS } from './utils';
 
 export default function Links({
   credentials,
@@ -12,19 +18,72 @@ export default function Links({
   setFieldValue,
   setFieldTouched,
 }) {
+  const handleStringChange = (selectedOption, data) => {
+    setFieldValue(data || data.value, selectedOption.value);
+  };
+
   return (
-    <>
-      <label>
-        Link da comunidade *
-        <div className="input-wrapper">
-          <i className="fas fa-link"></i>
-          <Field name="url" className="input" />
-        </div>
-        <ErrorMessage name="url">
-          {(msg) => <div className="form-error">{msg}</div>}
-        </ErrorMessage>
-      </label>
+    <div className="links-wrapper">
+      <h5>Links</h5>
+      <div>
+        <FieldArray
+          name="links"
+          render={(arrayHelpers) => (
+            <div>
+              {values.links.map((link, index) => (
+                <>
+                  <div key={index} className="link-section">
+                    <Select
+                      name={`links[${index}].type`}
+                      onChange={(selectedOption, data) =>
+                        handleStringChange(
+                          selectedOption,
+                          data.name,
+                          setFieldValue
+                        )
+                      }
+                      defaultValue={LINKS.filter(
+                        (link) => link.value === values.links[index].type
+                      )}
+                      styles={linksSelectStyle}
+                      options={LINKS}
+                    />
+                    <label>
+                      <Field
+                        name={`links.${index}.url`}
+                        className="input link-input"
+                        placeholder="https://"
+                      />
+                    </label>
+                    <button
+                      disabled={values.links.length === 1}
+                      type="button"
+                      className="link-delete"
+                      onClick={() => arrayHelpers.remove(index)}
+                    >
+                      -
+                    </button>
+                  </div>
+                  <ErrorMessage name={`links.${index}.url`}>
+                    {(msg) => <div className="form-error">{msg}</div>}
+                  </ErrorMessage>
+                </>
+              ))}
+              <button
+                type="button"
+                className="button is-primary is-outlined"
+                onClick={() => arrayHelpers.push({ type: 'url', url: '' })}
+              >
+                <span className="icon is-small">
+                  <i className="fas fa-plus"></i>
+                </span>
+                <span>adicionar mais um link</span>
+              </button>
+            </div>
+          )}
+        />
+      </div>
       <style jsx>{styles}</style>
-    </>
+    </div>
   );
 }

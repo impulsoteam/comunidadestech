@@ -1,30 +1,14 @@
 import React, { useState } from 'react';
 
-import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
-import MaskedInput from 'react-text-mask';
-import createNumberMask from 'text-mask-addons/dist/createNumberMask';
-import { reactSelectStyle, linksSelectStyle } from './reactSelectStyle';
+import { Formik, Form } from 'formik';
 
-import { SignupSchema } from './utils';
 import BasicInfos from './basicInfo';
 import Location from './location';
 import People from './people';
 import Links from './links';
 import styles from './styles';
 
-import { countries, states, cities } from './location';
-import {
-  SignupSchema,
-  errorMessages,
-  CATEGORIES,
-  TAGS,
-  TYPES,
-  MODEL,
-  GLOBAL_PROGRAM,
-  LINKS,
-} from './utils';
+import { SignupSchema } from './utils';
 
 const CommunityForm = ({ service, initialValues, loading, credentials }) => {
   const pageTitles = {
@@ -99,7 +83,6 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
             </div>
             <div className="columns">
               <div className="column is-6-tablet is-offset-3-tablet is-4-desktop is-offset-4-desktop">
-
                 {renderPages({
                   currentPage,
                   errors,
