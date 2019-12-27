@@ -39,6 +39,7 @@ const RegisterCommunity = ({ credentials }) => {
         rocketChat: '',
       },
       owner: '',
+      managers: [],
     };
   };
 

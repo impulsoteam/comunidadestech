@@ -71,6 +71,9 @@ export const SignupSchema = Yup.object().shape({
 
 export const errorMessages = {
   nameAlreadyExists: 'Comunidade já cadastrada',
+  userNotSubscribed: 'Email ainda não está cadastrado no comunidades.tech',
+  userSubscribed: 'Email está cadastrado no comunidades.tech',
+  managerAlreadyListed: 'Usuário já é administrador desta comunidade',
 };
 
 export const CATEGORIES = [

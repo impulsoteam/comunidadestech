@@ -41,6 +41,22 @@ export default css`
       line-height: 1;
       position: absolute;
     }
+    .form-warning {
+      bottom: -12px;
+      color: ${colors.turbo};
+      font-size: 10px;
+      font-weight: normal;
+      line-height: 1;
+      position: absolute;
+    }
+    .form-info {
+      bottom: -12px;
+      color: ${colors.emerald};
+      font-size: 10px;
+      font-weight: normal;
+      line-height: 1;
+      position: absolute;
+    }
   }
 
   fieldset {
@@ -168,5 +184,15 @@ export default css`
     font-size: 14px;
     font-weight: bold;
     margin-top: 20px;
+  }
+  .subscribe-button {
+    color: ${colors.primary};
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid ${colors.primary};
+    width: 70%;
+    height: 28px;
+    margin: 20px 0px;
+    cursor: pointer;
   }
 `;
