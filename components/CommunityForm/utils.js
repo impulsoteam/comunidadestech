@@ -11,7 +11,14 @@ export const SignupSchema = Yup.object().shape({
       /^(http(s)?:\/\/|www\.).*(\.jpg|\.jpeg|\.png)$/,
       'Deve ser um endereço de uma imagem JPG ou PNG'
     ),
-  links: Yup.array().typeError('Insira pelo menos um link'),
+  links: Yup.array().of(
+    Yup.object().shape({
+      type: Yup.string(),
+      url: Yup.string()
+        .url('Link inválido. Exemplo: http://site.com')
+        .required('Item obrigatório'),
+    })
+  ),
   description: Yup.string().required('Item obrigatório'),
   type: Yup.string().required('Item obrigatório'),
   category: Yup.string().required('Item obrigatório'),
