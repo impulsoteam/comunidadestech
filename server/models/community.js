@@ -75,6 +75,17 @@ const manager = {
   },
 };
 
+const links = {
+  type: {
+    type: String,
+    required: true,
+  },
+  url: {
+    type: String,
+    required: true,
+  },
+};
+
 const communitySchema = new mongoose.Schema(
   {
     name: {
@@ -83,10 +94,6 @@ const communitySchema = new mongoose.Schema(
       unique: true,
     },
     logo: {
-      type: String,
-      required: true,
-    },
-    url: {
       type: String,
       required: true,
     },
@@ -107,6 +114,7 @@ const communitySchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+    links: [links],
     members: {
       type: Number,
       required: true,

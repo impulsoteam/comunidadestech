@@ -29,4 +29,8 @@ export default css`
   a {
     color: initial;
   }
+
+  .footer {
+    background-color: ${colors.white};
+  }
 `;

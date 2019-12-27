@@ -19,9 +19,8 @@ export default css`
   }
 
   .description {
-    border-bottom: 2px solid ${colors.softCloud};
     margin-top: 40px;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
   }
 
   .image {
@@ -65,28 +64,49 @@ export default css`
     }
   }
   .options {
-    align-items: inherit;
+    align-items: center;
     align-self: end;
     display: flex;
     justify-content: end;
-    margin-top: 12px;
+    margin-top: auto;
     width: 50%;
 
-    button {
+    a {
+      font-weight: bold;
+      font-size: 0.75rem;
       margin-left: 4px;
+      color: ${colors.dark};
+
+      &:not(last-child) {
+        margin-right: 10px;
+      }
+
+      &:hover {
+        color: ${colors.primary};
+      }
+
+      &.button {
+        background-color: ${colors.primary};
+        border-color: ${colors.primary};
+        border-radius: 4px;
+        color: ${colors.white};
+
+        &:hover {
+          background-color: ${colors.white};
+          color: ${colors.primary};
+        }
+      }
+
+      i {
+        margin-right: 5px;
+      }
+    }
+    @media screen and (max-width: 768px) {
+      margin-top: 1rem;
+      width: 100%;
     }
   }
   .tags > div {
     width: 100%;
-  }
-
-  .button {
-    align-self: flex-end;
-    margin-top: auto;
-
-    @media screen and (max-width: 768px) {
-      align-self: flex-start;
-      margin-top: 20px;
-    }
   }
 `;

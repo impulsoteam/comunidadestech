@@ -13,6 +13,6 @@ export default css`
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 400px;
+    min-height: 260px;
   }
 `;

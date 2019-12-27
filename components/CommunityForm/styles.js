@@ -33,7 +33,6 @@ export default css`
       text-align: left;
       width: 100%;
     }
-
     .form-error {
       bottom: -12px;
       color: ${colors.chestnutRose};
@@ -111,6 +110,65 @@ export default css`
           border-width: 5px;
         }
       }
+    }
+  }
+
+  .links-wrapper {
+    h5 {
+      color: ${colors.primary};
+      font-weight: 600;
+      margin-top: 1.25rem;
+    }
+
+    .link-section {
+      margin-bottom: 1.25rem;
+      position: relative;
+
+      label {
+        left: 60px;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        width: calc(100% - 68px);
+      }
+
+      .link-delete {
+        background: ${colors.chestnutRose};
+        border-radius: 50%;
+        border: none;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        font-size: 16px;
+        font-weight: bold;
+        height: 18px;
+        justify-content: center;
+        line-height: 1;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+
+        &:disabled {
+          background: ${colors.silverChalice};
+          cursor: not-allowed;
+        }
+      }
+    }
+
+    button.is-primary {
+      float: right;
+      font-weight: bold;
+    }
+
+    .form-error {
+      color: ${colors.chestnutRose};
+      font-size: 10px;
+      font-weight: normal;
+      line-height: 1;
+      margin-bottom: 1rem;
+      margin-top: -1.25rem;
     }
   }
 
