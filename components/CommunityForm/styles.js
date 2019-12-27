@@ -136,6 +136,7 @@ export default css`
 
         &:disabled {
           background: ${colors.silverChalice};
+          cursor: not-allowed;
         }
       }
     }
