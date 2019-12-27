@@ -394,6 +394,7 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                                   />
                                 </label>
                                 <button
+                                  disabled={values.links.length === 1}
                                   type="button"
                                   className="link-delete"
                                   onClick={() => arrayHelpers.remove(index)}

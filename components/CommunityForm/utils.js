@@ -179,6 +179,13 @@ export const LINKS = [
   {
     label: (
       <span>
+        <i className="fab fa-instagram"></i> <strong>Instagram</strong>
+      </span>
+    ),
+  },
+  {
+    label: (
+      <span>
         <i className="fab fa-meetup"></i> <strong>Meetup</strong>
       </span>
     ),

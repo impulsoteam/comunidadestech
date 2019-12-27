@@ -117,7 +117,7 @@ export default css`
       }
 
       .link-delete {
-        background: red;
+        background: ${colors.chestnutRose};
         border-radius: 50%;
         border: none;
         color: white;
@@ -133,6 +133,10 @@ export default css`
         top: 50%;
         transform: translateY(-50%);
         width: 18px;
+
+        &:disabled {
+          background: ${colors.silverChalice};
+        }
       }
     }
 

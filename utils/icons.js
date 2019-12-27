@@ -1,6 +1,7 @@
 export const ICONS = {
   discord: 'fab fa-discord',
   facebook: 'fab fa-facebook-square',
+  instagrm: 'fab fa-instagram',
   meetup: 'fab fa-meetup',
   other: 'fas fa-link',
   slack: 'fab fa-slack',
