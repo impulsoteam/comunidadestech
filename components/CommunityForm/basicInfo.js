@@ -163,6 +163,20 @@ export default function BasicInfos({
         </label>
       )}
       <label>
+        Link da Logo da comunidade
+        <div className="input-wrapper">
+          <i className="far fa-file-image"></i>
+          <Field
+            name="logo"
+            className="input"
+            placeholder="https://suacomunidade.com/imagem.jpg"
+          />
+        </div>
+        <ErrorMessage name="logo">
+          {(msg) => <div className="form-error">{msg}</div>}
+        </ErrorMessage>
+      </label>
+      <label>
         Descrição *
         <div className="input-wrapper">
           <Field
@@ -174,20 +188,6 @@ export default function BasicInfos({
           />
         </div>
         <ErrorMessage name="description">
-          {(msg) => <div className="form-error">{msg}</div>}
-        </ErrorMessage>
-      </label>
-      <label>
-        Link da Logo da comunidade
-        <div className="input-wrapper">
-          <i className="far fa-file-image"></i>
-          <Field
-            name="logo"
-            className="input"
-            placeholder="https://suacomunidade.com/imagem.jpg"
-          />
-        </div>
-        <ErrorMessage name="logo">
           {(msg) => <div className="form-error">{msg}</div>}
         </ErrorMessage>
       </label>

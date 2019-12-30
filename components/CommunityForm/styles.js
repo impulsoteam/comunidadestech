@@ -9,8 +9,35 @@ export default css`
     font-family: 'Raleway', sans-serif;
     font-size: 20px !important;
     font-weight: 300;
-    margin: 0 auto 20px;
+    margin: 0 auto 10px;
     max-width: 400px;
+  }
+
+  .menu-column {
+    border-right: solid 2px ${colors.silverChalice};
+    padding-right: 20px;
+  }
+
+  .content-column {
+    padding-left: 36px;
+  }
+
+  .page-title {
+    font-weight: bold;
+    font-size: 14px;
+    padding: 8px 14px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    cursor: pointer;
+
+    &.is-active {
+      background-color: ${colors.primary};
+      color: ${colors.white};
+    }
+
+    &:first-of-type {
+      margin-top: 20px;
+    }
   }
 
   .input-wrapper {
@@ -113,6 +140,12 @@ export default css`
     }
   }
 
+  .admin-title {
+    color: ${colors.dark};
+    font-weight: 600;
+    margin-top: 1.25rem;
+  }
+
   .links-wrapper {
     h5 {
       color: ${colors.primary};
@@ -157,11 +190,6 @@ export default css`
       }
     }
 
-    button.is-primary {
-      float: right;
-      font-weight: bold;
-    }
-
     .form-error {
       color: ${colors.chestnutRose};
       font-size: 10px;
@@ -170,6 +198,11 @@ export default css`
       margin-bottom: 1rem;
       margin-top: -1.25rem;
     }
+  }
+
+  button.is-primary {
+    float: right;
+    font-weight: bold;
   }
 
   button.is-large {

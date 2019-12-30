@@ -16,6 +16,10 @@ const EditCommunity = ({ credentials }) => {
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await api.get(`community/name/${router.query.name}`);
+      const managersEmails = data.community.managers.map(({ email }) => email);
+      managersEmails.push(data.community.creator.email);
+      managersEmails.push(data.community.owner);
+      if (!managersEmails.includes(credentials.email)) Router.push('/');
       setCommunity(data.community);
       setLoading(false);
     };

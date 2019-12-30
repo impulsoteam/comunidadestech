@@ -112,10 +112,11 @@ export default function People({
       {managers.length !== 0 && (
         <ManagersList {...{ managers, removeManager, credentials }} />
       )}
-      <h2 className="is-size-4-desktop">Cadastrar Administrador</h2>
-      <label>
+      <h5 className="admin-title">Adicionar Administrador</h5>
+      <label style={{ marginBottom: '1.25rem' }}>
         Email do administrador
         <div className="input-wrapper">
+          <i className="fas fa-envelope"></i>
           <Field
             name="manager"
             onBlur={() => setFieldTouched('manager', true)}
@@ -131,7 +132,7 @@ export default function People({
       <button
         disabled={!!errors.manager || !isValidEmail}
         type="button"
-        className="subscribe-button"
+        className="button is-primary is-outlined"
         onClick={() => addManager()}
       >
         + adicionar administrador

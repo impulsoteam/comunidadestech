@@ -32,24 +32,46 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
   const renderButton = () => {
     const titles = Object.keys(pageTitles);
     const lastTitle = titles[titles.length - 1];
-    if (currentPage === lastTitle)
+    const currentPosition = Object.keys(pageTitles).indexOf(currentPage);
+    if (currentPage === lastTitle) {
       return (
-        <button
-          disabled={loading}
-          className="button is-primary is-fullwidth is-large"
-          type="submit"
-        >
-          {loading ? (
-            <span>
-              <i className="fa fa-spinner fa-spin"></i> Cadastrar Comunidade
-            </span>
-          ) : (
-            'Cadastrar Comunidade'
-          )}
-        </button>
+        <>
+          <button
+            disabled={loading}
+            className="button is-primary is-fullwidth is-large"
+            type="submit"
+          >
+            {loading ? (
+              <span>
+                <i className="fa fa-spinner fa-spin"></i> Criar Comunidade
+              </span>
+            ) : (
+              'Criar Comunidade'
+            )}
+          </button>
+          <style jsx>{styles}</style>
+        </>
       );
+    } else {
+      return (
+        <>
+          <button
+            disabled={loading}
+            className="button is-primary is-fullwidth is-large"
+            type="button"
+            onClick={() =>
+              setCurrentPage(Object.keys(pageTitles)[currentPosition + 1])
+            }
+          >
+            Continuar
+          </button>
+          <style jsx>{styles}</style>
+        </>
+      );
+    }
   };
 
+  console.log('a pagina', currentPage);
   return (
     <Formik
       initialValues={initialValues}
@@ -70,19 +92,23 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
       }) => {
         return (
           <Form>
-            <div>
-              {Object.keys(pageTitles).map((page) => (
-                <p
-                  className="title is-7"
-                  key={page}
-                  onClick={() => setCurrentPage(page)}
-                >
-                  {pageTitles[page]}
-                </p>
-              ))}
-            </div>
             <div className="columns">
-              <div className="column is-6-tablet is-offset-3-tablet is-4-desktop is-offset-4-desktop">
+              <div className="column is-6-tablet is-3-desktop is-offset-2-desktop menu-column">
+                <ul>
+                  {Object.keys(pageTitles).map((page) => (
+                    <li
+                      className={`page-title ${
+                        page === currentPage ? 'is-active' : ''
+                      }`}
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                    >
+                      {pageTitles[page]}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="column is-6-tablet is-5-desktop content-column">
                 {renderPages({
                   currentPage,
                   errors,
@@ -95,11 +121,7 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                   setErrors,
                 })}
                 <p className="required-form">* Itens obrigatórios</p>
-              </div>
-            </div>
-            <div className="columns">
-              <div className="column is-6-tablet is-offset-3-tablet is-4-desktop is-offset-4-desktop">
-                {renderButton()}
+                <div>{renderButton()}</div>
               </div>
             </div>
             <style jsx>{styles}</style>

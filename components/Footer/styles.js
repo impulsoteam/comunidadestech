@@ -12,7 +12,7 @@ export default css`
 
   .container {
     opacity: 0.2;
-    z-index: -1;
+    z-index: -2;
   }
 
   .hero-foot {
