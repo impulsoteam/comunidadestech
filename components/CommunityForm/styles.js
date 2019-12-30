@@ -37,9 +37,9 @@ export default css`
     .form-error {
       bottom: -12px;
       color: ${colors.chestnutRose};
-      font-size: 10px;
+      font-size: 13px;
       font-weight: normal;
-      line-height: 1;
+      line-height: 0;
       position: absolute;
     }
   }
