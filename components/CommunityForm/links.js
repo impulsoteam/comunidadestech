@@ -24,7 +24,7 @@ export default function Links({
 
   return (
     <div className="links-wrapper">
-      <h5>Links</h5>
+      <h5>Links *</h5>
       <div>
         <FieldArray
           name="links"

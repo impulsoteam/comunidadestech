@@ -71,7 +71,6 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
     }
   };
 
-  console.log('a pagina', currentPage);
   return (
     <Formik
       initialValues={initialValues}
