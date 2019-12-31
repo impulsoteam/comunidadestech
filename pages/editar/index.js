@@ -19,6 +19,7 @@ const EditCommunity = ({ credentials }) => {
       const managersEmails = data.community.managers.map(({ email }) => email);
       managersEmails.push(data.community.creator.email);
       managersEmails.push(data.community.owner);
+      credentials.isModerator && managersEmails.push(credentials.email);
       if (!managersEmails.includes(credentials.email)) Router.push('/');
       setCommunity(data.community);
       setLoading(false);

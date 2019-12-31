@@ -38,28 +38,21 @@ function ManagerCard({ manager, removeManager, credentials }) {
     const { email, name, avatar, invitation } = managerDetails;
 
     if (loading) return <p>loading</p>;
-
+    console.log(avatar);
     return (
-      <ul>
-        <p>
-          avatar: <span>{avatar ? 'avatar here' : 'not found'}</span>
-        </p>
-        <p>
-          name: <span>{name || 'not found'}</span>
-        </p>
-        <p>
-          email: <span>{email}</span>
-        </p>
-        <p>
-          status: <span>{invitation.status}</span>
-        </p>
-        <p>
-          sent in: <span>{JSON.stringify(invitation.in)}</span>
-        </p>
+      <div className="manager-wrapper">
+        <div className="manager-avatar">
+          {avatar ? <img src={avatar} /> : 'not found'}
+        </div>
+        <div className="manager-info">
+          <p>{name || 'not found'}</p>
+          <p>{email}</p>
+          <p>{invitation.status}</p>
+        </div>
         <button type="button" onClick={() => removeManager(email)}>
-          remover
+          <i className="fas fa-trash-alt"></i> remover
         </button>
-      </ul>
+      </div>
     );
   };
   return renderCard();

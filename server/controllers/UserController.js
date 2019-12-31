@@ -63,7 +63,7 @@ class UserController {
             $elemMatch: { _id: id, 'invitation.status': 'SENT' },
           },
         },
-        { name: 1, logo: 1 }
+        { name: 1, logo: 1, location: 1 }
       );
       return res.json(invites);
     } catch (error) {
