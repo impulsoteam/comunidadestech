@@ -64,34 +64,50 @@ export default function Dashboard({ credentials }) {
           <div className="columns">
             <div className="column">
               <h2 className="title is-size-6 is-uppercase has-text-centered-mobile">
+                administração pendente
+              </h2>
+              <h4 className="is-size-6 has-text-centered-mobile">
                 Você é um administrador dessa comunidade?
-              </h2>
-              <h2 className="title is-size-6 is-uppercase has-text-centered-mobile">
-                minhas comunidades
-              </h2>
-              <div className="columns is-multiline card-wrapper">
+              </h4>
+
+              <div className="columns is-multiline">
                 {pendingInvites.map((invite) => (
-                  <div id={invite._id}>
-                    <p>
-                      community name: <span>{invite.name}</span>
-                    </p>
-                    <p>
-                      community logo:<span>{invite.logo}</span>
-                    </p>
-                    <button
-                      onClick={() =>
-                        sendResponse({ accept: true, communityId: invite._id })
-                      }
-                    >
-                      sim
-                    </button>
-                    <button
-                      onClick={() =>
-                        sendResponse({ accept: false, communityId: invite._id })
-                      }
-                    >
-                      nao
-                    </button>
+                  <div className="invite-wrapper" id={invite._id}>
+                    <div>
+                      <img src={invite.logo} />
+                      <p>{invite.name}</p>
+                      <p>
+                        {invite.location.state ? (
+                          <span>
+                            {invite.location.city}, {invite.location.state}
+                          </span>
+                        ) : (
+                          <span>Remota</span>
+                        )}
+                      </p>
+                    </div>
+                    <div>
+                      <button
+                        onClick={() =>
+                          sendResponse({
+                            accept: true,
+                            communityId: invite._id,
+                          })
+                        }
+                      >
+                        Sim
+                      </button>
+                      <button
+                        onClick={() =>
+                          sendResponse({
+                            accept: false,
+                            communityId: invite._id,
+                          })
+                        }
+                      >
+                        Não
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>

@@ -1,13 +1,99 @@
 import React, { useState, useEffect } from 'react';
 import { api, setHeader } from '../../utils/axios';
+import { invitationStatus } from '../../utils/variables';
 
-export default function ManagersList(props) {
+export default function ManagersList({
+  managers: allManagers,
+  removeManager,
+  credentials,
+}) {
+  const pendingInvites = [];
+  const declinedInvites = [];
+  const acceptedInvites = [];
+  for (const manager of allManagers) {
+    if (allManagers.length === 0) return;
+
+    const isPending = manager.invitation.status === invitationStatus.sent;
+    const isDeclined = manager.invitation.status === invitationStatus.declined;
+
+    if (isDeclined) {
+      declinedInvites.push(manager);
+      continue;
+    }
+
+    isPending ? pendingInvites.push(manager) : acceptedInvites.push(manager);
+  }
+
+  const renderManagers = () => {
+    if (acceptedInvites.length === 0)
+      return (
+        <>
+          <h2>Não há administradores cadastrados</h2>
+        </>
+      );
+    return (
+      <>
+        <h2>Administradores</h2>
+        {acceptedInvites.map((manager) => (
+          <ManagerCard
+            key={manager.email}
+            {...{
+              manager,
+              removeManager,
+              credentials,
+            }}
+          />
+        ))}
+      </>
+    );
+  };
+
+  const renderPendingInvites = () => {
+    if (pendingInvites.length === 0)
+      return (
+        <>
+          <h2>Não há convites pendentes</h2>
+        </>
+      );
+    return (
+      <>
+        <h2>Convites Pendentes</h2>
+        {pendingInvites.map((manager) => (
+          <ManagerCard
+            key={manager.email}
+            {...{
+              manager,
+              removeManager,
+              credentials,
+            }}
+          />
+        ))}
+      </>
+    );
+  };
+  const renderDeclinedInvites = () => {
+    if (declinedInvites.length === 0) return;
+    return (
+      <>
+        <h2>Convites Recusados</h2>
+        {declinedInvites.map((manager) => (
+          <ManagerCard
+            key={manager.email}
+            {...{
+              manager,
+              removeManager,
+              credentials,
+            }}
+          />
+        ))}
+      </>
+    );
+  };
   return (
     <>
-      <h2>Administradores</h2>
-      {props.managers.map((manager) => (
-        <ManagerCard key={manager.email} {...{ ...props, manager }} />
-      ))}
+      {renderManagers()}
+      {renderPendingInvites()}
+      {renderDeclinedInvites()}
     </>
   );
 }
@@ -38,21 +124,28 @@ function ManagerCard({ manager, removeManager, credentials }) {
     const { email, name, avatar, invitation } = managerDetails;
 
     if (loading) return <p>loading</p>;
-    console.log(avatar);
+
     return (
-      <div className="manager-wrapper">
-        <div className="manager-avatar">
-          {avatar ? <img src={avatar} /> : 'not found'}
-        </div>
-        <div className="manager-info">
-          <p>{name || 'not found'}</p>
-          <p>{email}</p>
-          <p>{invitation.status}</p>
-        </div>
+      <ul>
+        <p>
+          avatar: <span>{avatar ? 'avatar here' : 'not found'}</span>
+        </p>
+        <p>
+          name: <span>{name || 'not found'}</span>
+        </p>
+        <p>
+          email: <span>{email}</span>
+        </p>
+        <p>
+          status: <span>{invitation.status}</span>
+        </p>
+        <p>
+          sent in: <span>{JSON.stringify(invitation.in)}</span>
+        </p>
         <button type="button" onClick={() => removeManager(email)}>
-          <i className="fas fa-trash-alt"></i> remover
+          remover
         </button>
-      </div>
+      </ul>
     );
   };
   return renderCard();
