@@ -19,6 +19,7 @@ export default function BasicInfos({
   errors,
   touched,
   values,
+  dirty,
   initialValues,
   setFieldValue,
   setFieldTouched,
@@ -41,6 +42,15 @@ export default function BasicInfos({
   };
   return (
     <>
+      <pre
+        style={{
+          background: '#f6f8fa',
+          fontSize: '.65rem',
+          padding: '.5rem',
+        }}
+      >
+        {JSON.stringify({ values, dirty, errors, touched }, null, 2)}
+      </pre>
       <label>
         Nome da comunidade *
         <div className="input-wrapper">
@@ -48,6 +58,7 @@ export default function BasicInfos({
           <Field
             name="name"
             validate={checkName}
+            onBlur={() => setFieldTouched('name', true)}
             className="input is-medium"
             placeholder="Digite o nome da sua comunidade"
           />

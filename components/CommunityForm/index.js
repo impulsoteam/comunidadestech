@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-
 import { Formik, Form } from 'formik';
 
 import BasicInfos from './basicInfo';
 import Location from './location';
 import People from './people';
 import Links from './links';
+import FormButton from './formButton';
 import styles from './styles';
 
 import { SignupSchema } from './utils';
@@ -29,48 +29,6 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
     }[props.currentPage];
   };
 
-  const renderButton = () => {
-    const titles = Object.keys(pageTitles);
-    const lastTitle = titles[titles.length - 1];
-    const currentPosition = Object.keys(pageTitles).indexOf(currentPage);
-    if (currentPage === lastTitle) {
-      return (
-        <>
-          <button
-            disabled={loading}
-            className="button is-primary is-fullwidth is-large"
-            type="submit"
-          >
-            {loading ? (
-              <span>
-                <i className="fa fa-spinner fa-spin"></i> Criar Comunidade
-              </span>
-            ) : (
-              'Criar Comunidade'
-            )}
-          </button>
-          <style jsx>{styles}</style>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <button
-            disabled={loading}
-            className="button is-primary is-fullwidth is-large"
-            type="button"
-            onClick={() =>
-              setCurrentPage(Object.keys(pageTitles)[currentPosition + 1])
-            }
-          >
-            Continuar
-          </button>
-          <style jsx>{styles}</style>
-        </>
-      );
-    }
-  };
-
   return (
     <Formik
       initialValues={initialValues}
@@ -86,6 +44,7 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
         setFieldValue,
         setFieldTouched,
         errors,
+        dirty,
         touched,
         setErrors,
       }) => {
@@ -113,6 +72,7 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                   errors,
                   touched,
                   values,
+                  dirty,
                   initialValues,
                   credentials,
                   setFieldValue,
@@ -120,7 +80,18 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                   setErrors,
                 })}
                 <p className="required-form">* Itens obrigatórios</p>
-                <div>{renderButton()}</div>
+                <FormButton
+                  {...{
+                    errors,
+                    touched,
+                    values,
+                    pageTitles,
+                    currentPage,
+                    setCurrentPage,
+                    loading,
+                  }}
+                />
+                {/* <div>{renderButton({ errors, touched, values })}</div> */}
               </div>
             </div>
             <style jsx>{styles}</style>

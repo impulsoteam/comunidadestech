@@ -15,7 +15,7 @@ const RegisterCommunity = ({ credentials }) => {
     const { _id, name, email } = credentials;
     return {
       name: '',
-      model: 'both',
+      model: 'online',
       location: {
         country: '',
         state: '',

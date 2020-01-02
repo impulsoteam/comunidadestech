@@ -24,6 +24,15 @@ export default function Links({
 
   return (
     <div className="links-wrapper">
+      <pre
+        style={{
+          background: '#f6f8fa',
+          fontSize: '.65rem',
+          padding: '.5rem',
+        }}
+      >
+        {JSON.stringify({ values, errors, touched }, null, 2)}
+      </pre>
       <h5>Links *</h5>
       <div>
         <FieldArray
@@ -64,21 +73,27 @@ export default function Links({
                       -
                     </button>
                   </div>
-                  <ErrorMessage name={`links.${index}.url`}>
+                  <ErrorMessage name={`links[${index}].url`}>
                     {(msg) => <div className="form-error">{msg}</div>}
                   </ErrorMessage>
+                  {!values.links[index + 1] && (
+                    <button
+                      type="button"
+                      disabled={errors.links && !!errors.links[index]}
+                      className="button is-primary is-outlined"
+                      onClick={() => {
+                        setFieldTouched(`links[${index}]`, true, true);
+                        arrayHelpers.push({ type: 'url', url: '' });
+                      }}
+                    >
+                      <span className="icon is-small">
+                        <i className="fas fa-plus"></i>
+                      </span>
+                      <span>adicionar mais um link</span>
+                    </button>
+                  )}
                 </>
               ))}
-              <button
-                type="button"
-                className="button is-primary is-outlined"
-                onClick={() => arrayHelpers.push({ type: 'url', url: '' })}
-              >
-                <span className="icon is-small">
-                  <i className="fas fa-plus"></i>
-                </span>
-                <span>adicionar mais um link</span>
-              </button>
             </div>
           )}
         />
