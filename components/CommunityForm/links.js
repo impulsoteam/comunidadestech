@@ -24,15 +24,6 @@ export default function Links({
 
   return (
     <div className="links-wrapper">
-      <pre
-        style={{
-          background: '#f6f8fa',
-          fontSize: '.65rem',
-          padding: '.5rem',
-        }}
-      >
-        {JSON.stringify({ values, errors, touched }, null, 2)}
-      </pre>
       <h5>Links *</h5>
       <div>
         <FieldArray

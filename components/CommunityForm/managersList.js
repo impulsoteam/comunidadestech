@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { api, setHeader } from '../../utils/axios';
 import { invitationStatus } from '../../utils/variables';
+import Divider from '../Divider';
+
+import styles from './cardStyles';
 
 export default function ManagersList({
   managers: allManagers,
@@ -29,11 +32,12 @@ export default function ManagersList({
       return (
         <>
           <h2>Não há administradores cadastrados</h2>
+          <style jsx>{styles}</style>
         </>
       );
     return (
       <>
-        <h2>Administradores</h2>
+        <Divider dataContent="Administradores" />
         {acceptedInvites.map((manager) => (
           <ManagerCard
             key={manager.email}
@@ -52,12 +56,13 @@ export default function ManagersList({
     if (pendingInvites.length === 0)
       return (
         <>
-          <h2>Não há convites pendentes</h2>
+          <h5 className="admin-title">Convites Pendentes</h5>
+          <style jsx>{styles}</style>
         </>
       );
     return (
       <>
-        <h2>Convites Pendentes</h2>
+        <h5 className="admin-title">Convites Pendentes</h5>
         {pendingInvites.map((manager) => (
           <ManagerCard
             key={manager.email}
@@ -68,6 +73,7 @@ export default function ManagersList({
             }}
           />
         ))}
+        <style jsx>{styles}</style>
       </>
     );
   };
@@ -75,7 +81,8 @@ export default function ManagersList({
     if (declinedInvites.length === 0) return;
     return (
       <>
-        <h2>Convites Recusados</h2>
+        <h5 className="admin-title">Convites Recusados</h5>
+        <style jsx>{styles}</style>
         {declinedInvites.map((manager) => (
           <ManagerCard
             key={manager.email}
@@ -126,26 +133,31 @@ function ManagerCard({ manager, removeManager, credentials }) {
     if (loading) return <p>loading</p>;
 
     return (
-      <ul>
-        <p>
-          avatar: <span>{avatar ? 'avatar here' : 'not found'}</span>
-        </p>
-        <p>
-          name: <span>{name || 'not found'}</span>
-        </p>
-        <p>
-          email: <span>{email}</span>
-        </p>
-        <p>
-          status: <span>{invitation.status}</span>
-        </p>
-        <p>
-          sent in: <span>{JSON.stringify(invitation.in)}</span>
-        </p>
-        <button type="button" onClick={() => removeManager(email)}>
-          remover
-        </button>
-      </ul>
+      <div className="manager-card card">
+        <div className="card-content">
+          <div className="media">
+            <div className="media-left">
+              <figure className="image is-32x32">
+                <img
+                  src={avatar}
+                  alt={name}
+                  onError={(img) => {
+                    img.target.src = '../../static/default-user.png';
+                  }}
+                />
+              </figure>
+            </div>
+            <div className="media-content">
+              <p className="title is-7">{name}</p>
+              <p className="subtitle is-7">{email}</p>
+            </div>
+          </div>
+          <button type="button" onClick={() => removeManager(email)}>
+            <i className="fas fa-trash-alt"></i> remover
+          </button>
+        </div>
+        <style jsx>{styles}</style>
+      </div>
     );
   };
   return renderCard();
