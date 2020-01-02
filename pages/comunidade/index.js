@@ -17,6 +17,17 @@ const Community = ({ credentials }) => {
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await api.get(`community/name/${router.query.name}`);
+      const managers = data.community.managers;
+      if (managers[0]) {
+        for (const manager of managers) {
+          const { data: response } = await api.get(
+            `/user/checkManager/${manager.email}`
+          );
+          manager.name = response.name;
+          manager.avatar = response.avatar;
+        }
+      }
+      data.community.managers = managers;
       setCommunity(data.community);
       setRelated(data.related);
       setLoading(false);

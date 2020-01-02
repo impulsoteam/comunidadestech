@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import Router from 'next/router';
 import { api, setHeader } from '../../utils/axios';
@@ -18,7 +18,10 @@ const CommunityCard = ({ canModify, community, credentials }) => {
     url,
     status,
     type,
+    managers,
   } = community;
+
+  console.log(managers);
 
   const sendNotification = (type) => {
     const types = {
@@ -125,6 +128,54 @@ const CommunityCard = ({ canModify, community, credentials }) => {
                     )
                   : null}
               </div>
+            </div>
+            <div className="managers-wrapper">
+              <h3>Administradores</h3>
+              {managers
+                .filter((manager) => manager.invitation.status === 'ACCEPTED')
+                .slice(0, 4)
+                .map(
+                  (manager) =>
+                    manager.invitation.status && (
+                      <div className="managers" key={manager._id}>
+                        <img src={manager.avatar} alt={manager.name} />
+                        <span>{manager.name}</span>
+                      </div>
+                    )
+                )}
+              {managers.length > 1 && (
+                <div className="tooltip-toggle">
+                  <div className="tooltip-button">
+                    <span>
+                      <i className="fas fa-plus"></i> mostrar mais
+                    </span>
+                  </div>
+                  <div className="tooltip-wrapper">
+                    {managers
+                      .filter(
+                        (manager) => manager.invitation.status === 'ACCEPTED'
+                      )
+                      .slice(4)
+                      .map(
+                        (manager) =>
+                          manager.invitation.status && (
+                            <div className="managers" key={manager._id}>
+                              <img
+                                src={manager.avatar}
+                                alt={manager.name}
+                                onError={(img) => {
+                                  img.target.src =
+                                    '../../static/default-user.png';
+                                }}
+                              />
+
+                              <span>{manager.name}</span>
+                            </div>
+                          )
+                      )}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <div className="column">

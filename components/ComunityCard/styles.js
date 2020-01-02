@@ -109,4 +109,56 @@ export default css`
   .tags > div {
     width: 100%;
   }
+
+  .managers-wrapper {
+    position: relative;
+
+    h3 {
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .managers {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+
+      img {
+        border-radius: 50%;
+        margin-right: 0.5rem;
+        width: 36px;
+      }
+
+      span {
+        font-size: 0.875rem;
+      }
+    }
+
+    .tooltip-wrapper {
+      background: ${colors.white};
+      border-radius: 4px;
+      border: solid 1px rgba(10, 10, 10, 0.1);
+      padding: 10px 0 0 10px;
+      position: absolute;
+      width: 100%;
+      z-index: 1;
+      display: none;
+    }
+
+    .tooltip-button {
+      font-size: 12px;
+      text-align: center;
+      background: ${colors.wildSand};
+      padding: 4px;
+      cursor: pointer;
+
+      span {
+        line-height: 1;
+      }
+    }
+
+    .tooltip-toggle:hover .tooltip-wrapper {
+      display: initial;
+    }
+  }
 `;
