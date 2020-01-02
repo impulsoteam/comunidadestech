@@ -138,7 +138,13 @@ const CommunityCard = ({ canModify, community, credentials }) => {
                   (manager) =>
                     manager.invitation.status && (
                       <div className="managers" key={manager._id}>
-                        <img src={manager.avatar} alt={manager.name} />
+                        <img
+                          src={manager.avatar}
+                          alt={manager.name}
+                          onError={(img) => {
+                            img.target.src = '../../static/default-user.png';
+                          }}
+                        />
                         <span>{manager.name}</span>
                       </div>
                     )

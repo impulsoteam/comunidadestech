@@ -42,15 +42,6 @@ export default function BasicInfos({
   };
   return (
     <>
-      {/* <pre
-        style={{
-          background: '#f6f8fa',
-          fontSize: '.65rem',
-          padding: '.5rem',
-        }}
-      >
-        {JSON.stringify({ values, dirty, errors, touched }, null, 2)}
-      </pre> */}
       <label>
         Nome da comunidade *
         <div className="input-wrapper">

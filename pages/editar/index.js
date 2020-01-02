@@ -46,6 +46,10 @@ const EditCommunity = ({ credentials }) => {
             <h1 className="title is-size-1-desktop is-size-2-tablet is-size-3-mobile">
               Edite sua comunidade
             </h1>
+          </div>
+        </div>
+        <div className="columns is-centered">
+          <div className="column">
             {!loading && (
               <CommunityForm
                 credentials={credentials}
