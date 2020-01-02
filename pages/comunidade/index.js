@@ -28,7 +28,6 @@ const Community = ({ credentials }) => {
         }
       }
       data.community.managers = managers;
-
       setCommunity(data.community);
       setRelated(data.related);
       setLoading(false);

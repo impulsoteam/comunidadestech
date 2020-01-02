@@ -70,43 +70,51 @@ export default function Dashboard({ credentials }) {
                 Você é um administrador dessa comunidade?
               </h4>
 
-              <div className="columns is-multiline">
+              <div className="columns is-multiline card-wrapper" style={{marginBottom: '2rem'}}>
                 {pendingInvites.map((invite) => (
-                  <div className="invite-wrapper" id={invite._id}>
-                    <div>
-                      <img src={invite.logo} />
-                      <p>{invite.name}</p>
-                      <p>
-                        {invite.location.state ? (
-                          <span>
-                            {invite.location.city}, {invite.location.state}
-                          </span>
-                        ) : (
-                          <span>Remota</span>
-                        )}
-                      </p>
-                    </div>
-                    <div>
-                      <button
-                        onClick={() =>
-                          sendResponse({
-                            accept: true,
-                            communityId: invite._id,
-                          })
-                        }
-                      >
-                        Sim
-                      </button>
-                      <button
-                        onClick={() =>
-                          sendResponse({
-                            accept: false,
-                            communityId: invite._id,
-                          })
-                        }
-                      >
-                        Não
-                      </button>
+                  <div className="column is-4">
+                    <div className="card invite-card">
+                      <div className="card-content">
+                        <div className="media">
+                          <div className="media-left">
+                            <figure className="image is-32x32">
+                              <img src={invite.logo} alt={invite.name} />
+                            </figure>
+                          </div>
+                          <div className="media-content">
+                            <p className="title is-6">{invite.name}</p>
+                            {invite.location.state ? (
+                              <p className="subtitle is-7">
+                                {invite.location.city}, {invite.location.state}
+                              </p>
+                            ) : (
+                              <p className="subtitle is-7">Remota</p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="invite-buttons">
+                        <button
+                          onClick={() =>
+                            sendResponse({
+                              accept: true,
+                              communityId: invite._id,
+                            })
+                          }
+                        >
+                          Sim
+                        </button>
+                        <button
+                          onClick={() =>
+                            sendResponse({
+                              accept: false,
+                              communityId: invite._id,
+                            })
+                          }
+                        >
+                          Não
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}
