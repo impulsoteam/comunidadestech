@@ -42,7 +42,7 @@ export default function BasicInfos({
   };
   return (
     <>
-      <pre
+      {/* <pre
         style={{
           background: '#f6f8fa',
           fontSize: '.65rem',
@@ -50,7 +50,7 @@ export default function BasicInfos({
         }}
       >
         {JSON.stringify({ values, dirty, errors, touched }, null, 2)}
-      </pre>
+      </pre> */}
       <label>
         Nome da comunidade *
         <div className="input-wrapper">

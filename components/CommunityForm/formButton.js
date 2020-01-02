@@ -66,14 +66,19 @@ export default function FormButton({
     };
 
     const getStepFour = () => {
-      return {
-        haveLinks: values.links[0] ? 0 : 1,
-      };
+      if (!values.links[0].url) return { haveLinks: 0 };
+      const stepFour = {};
+
+      values.links.forEach(({ url }, index) =>
+        !!url ? (stepFour[`${index}`] = 1) : (stepFour[`${index}`] = 0)
+      );
+      console.log(stepFour);
+      return stepFour;
     };
 
     const getPercentage = () => {
-      const size = Object.keys(getStepThree()).length;
-      const percentage = Object.values(getStepThree()).reduce(
+      const size = Object.keys(getStepFour()).length;
+      const percentage = Object.values(getStepFour()).reduce(
         (accumulator, currentValue) => accumulator + currentValue
       );
       return (percentage / size) * 100;
@@ -83,26 +88,26 @@ export default function FormButton({
     const lastTitle = titles[titles.length - 1];
     const currentPosition = Object.keys(pageTitles).indexOf(currentPage);
 
-    if (currentPage === lastTitle) {
-      return (
-        <>
-          <button
-            disabled={loading}
-            className="button is-primary is-fullwidth is-large"
-            type="submit"
-          >
-            {loading ? (
-              <span>
-                <i className="fa fa-spinner fa-spin"></i> Criar Comunidade
-              </span>
-            ) : (
-              'Criar Comunidade'
-            )}
-          </button>
-          <style jsx>{styles}</style>
-        </>
-      );
-    }
+    // if (currentPage === lastTitle) {
+    //   return (
+    //     <>
+    //       <button
+    //         disabled={loading}
+    //         className="button is-primary is-fullwidth is-large"
+    //         type="submit"
+    //       >
+    //         {loading ? (
+    //           <span>
+    //             <i className="fa fa-spinner fa-spin"></i> Criar Comunidade
+    //           </span>
+    //         ) : (
+    //           'Criar Comunidade'
+    //         )}
+    //       </button>
+    //       <style jsx>{styles}</style>
+    //     </>
+    //   );
+    // }
     return (
       <>
         <button
