@@ -79,7 +79,6 @@ export default function FormButton({
           ? (stepFour[`link${index}`] = 1)
           : (stepFour[`link${index}`] = 0);
       });
-      console.log(stepFour);
       return stepFour;
     };
 
@@ -88,6 +87,7 @@ export default function FormButton({
       Location: getStepTwo(),
       People: getStepThree(),
       Links: getStepFour(),
+      ReviewAndSave: { a: 1 },
     };
 
     const titles = Object.keys(pageTitles);
@@ -122,6 +122,7 @@ export default function FormButton({
     //     </>
     //   );
     // }
+
     return (
       <>
         <button
@@ -137,8 +138,27 @@ export default function FormButton({
             setCurrentPage(Object.keys(pageTitles)[currentPosition + 1])
           }
         >
-          Continuar
+          {currentPage === 'ReviewAndSave' ? 'Publicar' : 'Continuar'}
         </button>
+        {currentPage === 'ReviewAndSave' && (
+          <>
+            <button
+              disabled={loading}
+              className="button is-primary is-fullwidth is-large"
+              type="submit"
+            >
+              {loading ? (
+                <span>
+                  <i className="fa fa-spinner fa-spin"></i> Continuar
+                </span>
+              ) : (
+                // 'Criar Comunidade'
+                'Voltar'
+              )}
+            </button>
+            <style jsx>{styles}</style>
+          </>
+        )}
       </>
     );
   };

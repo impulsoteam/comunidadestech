@@ -25,7 +25,7 @@ export default function Links({
   return (
     <div className="links-wrapper">
       <h5>Links *</h5>
-      <pre
+      {/* <pre
         style={{
           background: '#f6f8fa',
           fontSize: '.65rem',
@@ -33,7 +33,7 @@ export default function Links({
         }}
       >
         {JSON.stringify({ values, errors }, null, 2)}
-      </pre>
+      </pre> */}
       <div>
         <FieldArray
           name="links"

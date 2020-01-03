@@ -3,7 +3,7 @@ export const colors = {
   chestnutRose: '#D26060',
   dark: '#363636',
   emerald: '#2ecc71',
-  heliotrope: '#DF73FF',
+  heliotrope: '#be99ff',
   primary: '#8c43ff',
   silverChalice: '#a9a9a9',
   softCloud: '#fbfbfb',

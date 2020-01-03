@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import { useWindowSize } from 'react-use';
 
+import CommunityCard from '../ComunityCard';
 import BasicInfos from './basicInfo';
 import Location from './location';
 import People from './people';
@@ -10,6 +11,7 @@ import FormButton from './formButton';
 import styles from './styles';
 
 import { SignupSchema } from './utils';
+import { getFormStatus } from './formStatus';
 
 const CommunityForm = ({ service, initialValues, loading, credentials }) => {
   const pageTitles = {
@@ -17,6 +19,7 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
     Location: 'Localização',
     People: 'Membros e Administradores',
     Links: 'Links',
+    ReviewAndSave: 'Revisar e salvar',
   };
   const { width } = useWindowSize();
   const isMobile = width > 768 ? false : true;
@@ -40,6 +43,9 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
       Location: <Location {...props} />,
       People: <People {...props} />,
       Links: <Links {...props} />,
+      ReviewAndSave: (
+        <CommunityCard {...props} community={props.values} canModify={false} />
+      ),
     }[props.currentPage];
   };
 
@@ -62,27 +68,44 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
         touched,
         setErrors,
       }) => {
+        const currentStatus = getFormStatus({
+          errors,
+          touched,
+          values,
+          pageTitles,
+          currentPage,
+          setCurrentPage,
+          loading,
+          isMobile,
+        });
+        console.log(currentStatus);
         return (
           <Form>
             <div className="columns">
-              <div className="column is-6-tablet is-3-desktop is-offset-2-desktop menu-column">
-                {!isMobile && (
-                  <ul>
-                    {Object.keys(pageTitles).map((page) => (
-                      <li
-                        className={`page-title ${
-                          page === currentPage ? 'is-active' : ''
-                        }`}
-                        key={page}
-                        onClick={() => setCurrentPage(page)}
-                      >
-                        {pageTitles[page]}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-              <div className="column is-6-tablet is-5-desktop content-column">
+              {currentPage !== 'ReviewAndSave' && (
+                <div className="column is-6-tablet is-3-desktop is-offset-2-desktop menu-column">
+                  {!isMobile && (
+                    <ul>
+                      {Object.keys(pageTitles).map((page) => (
+                        <li
+                          className={`page-title ${
+                            page === currentPage ? 'is-active' : ''
+                          }`}
+                          key={page}
+                          onClick={() => setCurrentPage(page)}
+                        >
+                          <button>{pageTitles[page]}</button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
+
+              <div
+                className="column is-6-tablet is-5-desktop content-column"
+                style={currentPage === 'ReviewAndSave' ? { width: '100%' } : {}}
+              >
                 {renderPages({
                   currentPage,
                   errors,
@@ -90,7 +113,6 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                   values,
                   dirty,
                   initialValues,
-
                   credentials,
                   setFieldValue,
                   setFieldTouched,
