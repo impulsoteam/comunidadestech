@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
+import { useWindowSize } from 'react-use';
 
 import BasicInfos from './basicInfo';
 import Location from './location';
@@ -17,10 +18,23 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
     People: 'Membros e Administradores',
     Links: 'Links',
   };
+  const { width } = useWindowSize();
+  const isMobile = width > 768 ? false : true;
 
   const [currentPage, setCurrentPage] = useState(Object.keys(pageTitles)[0]);
 
   const renderPages = (props) => {
+    if (isMobile) {
+      return (
+        <>
+          <BasicInfos {...props} />
+          <Location {...props} />
+          <People {...props} />
+          <Links {...props} />
+        </>
+      );
+    }
+
     return {
       BasicInfos: <BasicInfos {...props} />,
       Location: <Location {...props} />,
@@ -52,21 +66,28 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
           <Form>
             <div className="columns">
               <div className="column is-6-tablet is-3-desktop is-offset-2-desktop menu-column">
-                <ul>
-                  {Object.keys(pageTitles).map((page) => (
-                    <li
-                      className={`page-title ${
-                        page === currentPage ? 'is-active' : ''
-                      }`}
-                      key={page}
-                      onClick={() => setCurrentPage(page)}
-                    >
-                      {pageTitles[page]}
-                    </li>
-                  ))}
-                </ul>
+                {!isMobile && (
+                  <ul>
+                    {Object.keys(pageTitles).map((page) => (
+                      <li
+                        className={`page-title ${
+                          page === currentPage ? 'is-active' : ''
+                        }`}
+                        key={page}
+                        onClick={() => setCurrentPage(page)}
+                      >
+                        {pageTitles[page]}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
               <div className="column is-6-tablet is-5-desktop content-column">
+                {width > 768 ? (
+                  <p>Menu com barra lateral</p>
+                ) : (
+                  <p>Menu sem barra lateral</p>
+                )}
                 {renderPages({
                   currentPage,
                   errors,
