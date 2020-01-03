@@ -6825,6 +6825,13 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-beforeunload@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-beforeunload/-/react-beforeunload-2.1.0.tgz#549eaf801cc2457e0702a11f6e07f24c38328b8e"
+  integrity sha512-D/raQTUUQNuPDBmouSFtWypnfhWSFTz8w/Lfm+9WEazmmqSC10rZBYAANLAju5QQWhYRqCuIUs3yFYlt43Y5Iw==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-dom@^16.8.6:
   version "16.11.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.11.0.tgz#7e7c4a5a85a569d565c2462f5d345da2dd849af5"

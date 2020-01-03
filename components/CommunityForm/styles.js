@@ -201,7 +201,6 @@ export default css`
   }
 
   button.is-primary {
-    float: right;
     font-weight: bold;
   }
 
@@ -216,7 +215,7 @@ export default css`
     color: #363636;
     font-size: 14px;
     font-weight: bold;
-    margin-top: 20px;
+    margin: 20px 0 10px;
   }
   .subscribe-button {
     color: ${colors.primary};

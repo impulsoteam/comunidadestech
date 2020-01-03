@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import { useWindowSize } from 'react-use';
+import { useBeforeunload } from 'react-beforeunload';
 
 import BasicInfos from './basicInfo';
 import Location from './location';
@@ -20,6 +21,7 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
   };
   const { width } = useWindowSize();
   const isMobile = width > 768 ? false : true;
+  useBeforeunload(() => "You'll lose your data!");
 
   const [currentPage, setCurrentPage] = useState(Object.keys(pageTitles)[0]);
 

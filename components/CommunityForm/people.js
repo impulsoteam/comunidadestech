@@ -129,14 +129,16 @@ export default function People({
           {(msg) => <div className="form-error">{msg}</div>}
         </ErrorMessage>
       </label>
-      <button
-        disabled={!!errors.manager || !isValidEmail}
-        type="button"
-        className="button is-primary is-outlined"
-        onClick={() => addManager()}
-      >
-        + adicionar administrador
-      </button>
+      <div style={{ textAlign: 'right' }}>
+        <button
+          disabled={!!errors.manager || !isValidEmail}
+          type="button"
+          className="button is-primary is-outlined"
+          onClick={() => addManager()}
+        >
+          + adicionar administrador
+        </button>
+      </div>
       <style jsx>{styles}</style>
     </>
   );
