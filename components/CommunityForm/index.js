@@ -91,7 +91,6 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                     loading,
                   }}
                 />
-                {/* <div>{renderButton({ errors, touched, values })}</div> */}
               </div>
             </div>
             <style jsx>{styles}</style>
