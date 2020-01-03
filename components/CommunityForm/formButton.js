@@ -17,12 +17,12 @@ export default function FormButton({
       const { globalProgram: errorGlobalProgram = {} } = errors;
       const { globalProgram: touchedGlobalProgram = {} } = touched;
       const stepOne = {
-        haveName: !errors.name && touched.name ? 1 : 0,
-        haveType: !errors.type && touched.type ? 1 : 0,
-        haveCategory: !errors.category && touched.category ? 1 : 0,
-        haveTags: !errors.tags && touched.tags ? 1 : 0,
-        haveLogo: !errors.logo && touched.logo ? 1 : 0,
-        haveDescription: !errors.description && touched.description ? 1 : 0,
+        haveName: !errors.name && !!values.name ? 1 : 0,
+        haveType: !errors.type && !!values.type ? 1 : 0,
+        haveCategory: !errors.category && !!values.category ? 1 : 0,
+        haveTags: !errors.tags && !!values.tags ? 1 : 0,
+        haveLogo: !errors.logo && !!values.logo ? 1 : 0,
+        haveDescription: !errors.description && !!values.description ? 1 : 0,
       };
       if (
         !errorGlobalProgram.name &&
@@ -40,53 +40,67 @@ export default function FormButton({
 
     const getStepTwo = () => {
       const { city, state, country } = values.location;
-      const { location: touchedLocation = {} } = touched;
 
-      if (values.model === 'online')
-        return { haveCountry: !!country && touchedLocation.country ? 1 : 0 };
+      if (values.model === 'online') return { haveCountry: !!country ? 1 : 0 };
 
       return {
-        haveCountry: !!country && touchedLocation.country ? 1 : 0,
-        haveState: !!state && touchedLocation.state ? 1 : 0,
-        haveCity: !!city && touchedLocation.city ? 1 : 0,
+        haveCountry: !!country ? 1 : 0,
+        haveState: !!state ? 1 : 0,
+        haveCity: !!city ? 1 : 0,
       };
     };
 
     const getStepThree = () => {
       const stepThree = {
-        haveMembers: !errors.members && touched.members ? 1 : 0,
-        haveOwner: !errors.owner && touched.owner ? 1 : 0,
+        haveMembers: !errors.members && !!values.members ? 1 : 0,
+        haveOwner: !errors.owner && !!values.owner ? 1 : 0,
       };
 
-      values.managers[0]
-        ? (stepThree.haveManagers = 1)
-        : delete stepThree.managers;
+      if (values.managers[0]) {
+        for (const { email } of values.managers) {
+          stepThree[email] = 1;
+        }
+      }
 
       return stepThree;
     };
 
     const getStepFour = () => {
-      if (!values.links[0].url) return { haveLinks: 0 };
       const stepFour = {};
 
-      values.links.forEach(({ url }, index) =>
-        !!url ? (stepFour[`${index}`] = 1) : (stepFour[`${index}`] = 0)
-      );
+      values.links.forEach((link, index) => {
+        const { links: linkErros = [] } = errors;
+        const noErros = linkErros.length === 0;
+
+        if (!link.url && noErros) return (stepFour[`link${index}`] = 0);
+        if (!!link.url && noErros) return (stepFour[`link${index}`] = 1);
+
+        !!link.url && linkErros[index] === null
+          ? (stepFour[`link${index}`] = 1)
+          : (stepFour[`link${index}`] = 0);
+      });
       console.log(stepFour);
       return stepFour;
     };
 
-    const getPercentage = () => {
-      const size = Object.keys(getStepFour()).length;
-      const percentage = Object.values(getStepFour()).reduce(
-        (accumulator, currentValue) => accumulator + currentValue
-      );
-      return (percentage / size) * 100;
+    const steps = {
+      BasicInfos: getStepOne(),
+      Location: getStepTwo(),
+      People: getStepThree(),
+      Links: getStepFour(),
     };
 
     const titles = Object.keys(pageTitles);
     const lastTitle = titles[titles.length - 1];
     const currentPosition = Object.keys(pageTitles).indexOf(currentPage);
+
+    const getPercentage = () => {
+      const size = Object.keys(steps[currentPage]).length;
+      const percentage = Object.values(steps[currentPage]).reduce(
+        (accumulator, currentValue) => accumulator + currentValue
+      );
+      return (percentage / size) * 100;
+    };
 
     // if (currentPage === lastTitle) {
     //   return (
