@@ -83,11 +83,6 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                 )}
               </div>
               <div className="column is-6-tablet is-5-desktop content-column">
-                {width > 768 ? (
-                  <p>Menu com barra lateral</p>
-                ) : (
-                  <p>Menu sem barra lateral</p>
-                )}
                 {renderPages({
                   currentPage,
                   errors,
@@ -95,6 +90,7 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                   values,
                   dirty,
                   initialValues,
+
                   credentials,
                   setFieldValue,
                   setFieldTouched,
