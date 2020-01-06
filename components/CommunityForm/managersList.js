@@ -9,6 +9,7 @@ export default function ManagersList({
   managers: allManagers,
   removeManager,
   credentials,
+  pageType,
 }) {
   const pendingInvites = [];
   const declinedInvites = [];
@@ -28,10 +29,10 @@ export default function ManagersList({
   }
 
   const renderManagers = () => {
-    if (acceptedInvites.length === 0)
+    if (acceptedInvites.length === 0 && pageType !== 'create')
       return (
         <>
-          <h2>Não há administradores cadastrados</h2>
+          <Divider dataContent="Não há administradores cadastrados" />
           <style jsx>{styles}</style>
         </>
       );

@@ -68,7 +68,7 @@ const CommunityForm = ({
     return {
       BasicInfos: <BasicInfos {...props} />,
       Location: <Location {...props} />,
-      People: <People {...props} />,
+      People: <People {...props} pageType={type} />,
       Links: <Links {...props} />,
       ReviewAndSave: (
         <ReviewAndSave {...props} community={props.values} canModify={false} />

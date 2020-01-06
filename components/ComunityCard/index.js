@@ -23,8 +23,6 @@ const CommunityCard = ({ canModify, community, credentials }) => {
     managers,
   } = community;
 
-  console.log(managers);
-
   const sendNotification = (type) => {
     const types = {
       delete: 'Comunidade deletada com sucesso!',

@@ -20,6 +20,7 @@ export default function People({
   initialValues,
   setFieldValue,
   setFieldTouched,
+  pageType,
 }) {
   const [subscribed, setSubscribed] = useState({});
   const [managers, setManagers] = useState(values.managers);
@@ -110,7 +111,7 @@ export default function People({
         </ErrorMessage>
       </label>
       {managers.length !== 0 && (
-        <ManagersList {...{ managers, removeManager, credentials }} />
+        <ManagersList {...{ managers, removeManager, credentials, pageType }} />
       )}
       <h5 className="admin-title">Adicionar Administrador</h5>
       <label style={{ marginBottom: '1.25rem' }}>
