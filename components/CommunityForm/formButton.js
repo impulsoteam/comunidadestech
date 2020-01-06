@@ -139,13 +139,10 @@ export default function FormButton({
               z-index: 1;
             }
             &:after {
-              align-items: center;
               background: ${colors.primary};
               border-radius: 4px;
               content: '';
-              display: flex;
               height: 40px;
-              justify-content: center;
               left: 0;
               position: absolute;
               transition: all 0.5s;
