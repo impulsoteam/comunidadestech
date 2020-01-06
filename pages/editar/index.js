@@ -56,6 +56,7 @@ const EditCommunity = ({ credentials }) => {
                 loading={loading}
                 service={editCommunity}
                 initialValues={community}
+                type={'edit'}
               />
             )}
           </div>

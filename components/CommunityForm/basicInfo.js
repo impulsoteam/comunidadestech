@@ -108,7 +108,10 @@ export default function BasicInfos({
         <Select
           name="tags"
           icon="\f02b"
-          defaultValue={TAGS.filter((type) => values.tags.includes(type.value))}
+          defaultValue={
+            values.tags &&
+            TAGS.filter((type) => values.tags.includes(type.value))
+          }
           closeMenuOnSelect={false}
           components={animatedComponents}
           placeholder="Clique para selecionar"

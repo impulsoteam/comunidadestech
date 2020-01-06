@@ -14,7 +14,13 @@ import styles from './styles';
 import { SignupSchema } from './utils';
 import { getFormStatus } from './formStatus';
 
-const CommunityForm = ({ service, initialValues, loading, credentials }) => {
+const CommunityForm = ({
+  service,
+  initialValues,
+  loading,
+  credentials,
+  type,
+}) => {
   const pageTitles = {
     BasicInfos: 'Informações básicas',
     Location: 'Localização',
@@ -27,6 +33,25 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
   useBeforeunload(() => "You'll lose your data!");
 
   const [currentPage, setCurrentPage] = useState(Object.keys(pageTitles)[0]);
+
+  const isDisabled = ({ page: button, currentStatus, currentPage }) => {
+    const { stepsPercentage, totalPercentage } = currentStatus;
+    const pages = Object.keys(pageTitles);
+
+    if (button === currentPage) return false;
+    if (button === 'ReviewAndSave') return totalPercentage < 100 ? true : false;
+
+    const previousSteps = pages.slice(0, pages.indexOf(button));
+    let previousCompleteness = 0;
+    for (const step of previousSteps) {
+      previousCompleteness += stepsPercentage[step];
+    }
+
+    previousCompleteness = previousCompleteness / previousSteps.length;
+    const isDisabled = previousCompleteness < 100;
+
+    return isDisabled;
+  };
 
   const renderPages = (props) => {
     if (isMobile) {
@@ -74,13 +99,7 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
           errors,
           touched,
           values,
-          pageTitles,
-          currentPage,
-          setCurrentPage,
-          loading,
-          isMobile,
         });
-        console.log(currentStatus);
         return (
           <Form>
             <div className="columns">
@@ -90,13 +109,22 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                     <ul>
                       {Object.keys(pageTitles).map((page) => (
                         <li
+                          key={page}
                           className={`page-title ${
                             page === currentPage ? 'is-active' : ''
                           }`}
-                          key={page}
-                          onClick={() => setCurrentPage(page)}
                         >
-                          <button>{pageTitles[page]}</button>
+                          <button
+                            disabled={isDisabled({
+                              page,
+                              currentPage,
+                              currentStatus,
+                            })}
+                            type="button"
+                            onClick={() => setCurrentPage(page)}
+                          >
+                            {pageTitles[page]}
+                          </button>
                         </li>
                       ))}
                     </ul>
@@ -123,10 +151,10 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                 <p className="required-form">* Itens obrigatórios</p>
                 <FormButton
                   {...{
-                    errors,
-                    touched,
-                    values,
+                    isMobile,
+                    type,
                     pageTitles,
+                    currentStatus,
                     currentPage,
                     setCurrentPage,
                     loading,

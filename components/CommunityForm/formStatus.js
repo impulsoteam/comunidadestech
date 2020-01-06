@@ -1,20 +1,11 @@
-export const getFormStatus = ({
-  errors,
-  touched,
-  values,
-  pageTitles,
-  currentPage,
-  setCurrentPage,
-  loading,
-  isMobile,
-}) => {
-  const test = (x) => {
-    const size = Object.keys(x).length;
-    const percentage = Object.values(x).reduce(
+export const getFormStatus = ({ errors, touched, values }) => {
+  const getPercentage = (values) => {
+    const size = Object.keys(values).length;
+    const percentage = Object.values(values).reduce(
       (accumulator, currentValue) => accumulator + currentValue
     );
 
-    return (percentage / size) * 100;
+    return Math.floor((percentage / size) * 100);
   };
 
   const getStepOne = () => {
@@ -40,7 +31,7 @@ export const getFormStatus = ({
       stepOne.haveGlobalProgram = 0;
     }
 
-    return test(stepOne);
+    return stepOne;
   };
 
   const getStepTwo = () => {
@@ -74,15 +65,15 @@ export const getFormStatus = ({
     const stepFour = {};
 
     values.links.forEach((link, index) => {
-      const { links: linkErros = [] } = errors;
-      const noErros = linkErros.length === 0;
+      const { links: listOfErrors = [] } = errors;
 
-      if (!link.url && noErros) return (stepFour[`link${index}`] = 0);
-      if (!!link.url && noErros) return (stepFour[`link${index}`] = 1);
+      const haveLink = !!link.url;
+      const haveError = !!listOfErrors[index];
 
-      !!link.url && linkErros[index] === null
-        ? (stepFour[`link${index}`] = 1)
-        : (stepFour[`link${index}`] = 0);
+      if (!haveLink) return (stepFour[`link${index}`] = 0);
+      if (haveLink && haveError) return (stepFour[`link${index}`] = 0);
+
+      return (stepFour[`link${index}`] = 1);
     });
     return stepFour;
   };
@@ -94,41 +85,21 @@ export const getFormStatus = ({
     Links: getStepFour(),
   };
 
-  // const getPercentage = () => {
-  //   const isReview = currentPage === 'ReviewAndSave';
-
-  //   if (isReview) return { page: currentPage, percentage: 100 };
-
-  //   const size = Object.keys(steps[currentPage]).length;
-  //   const percentage = Object.values(steps[currentPage]).reduce(
-  //     (accumulator, currentValue) => accumulator + currentValue
-  //   );
-  //   return { page: currentPage, percentage: (percentage / size) * 100 };
-  // };
-
-  // const getMobilePercentage = () => {
-  //   const isReview = currentPage === 'ReviewAndSave';
-
-  //   if (isReview) return 100;
-  //   const { BasicInfos, Location, People, Links, ReviewAndSave } = steps;
-  //   const all = {
-  //     ...BasicInfos,
-  //     ...Location,
-  //     ...People,
-  //     ...Links,
-  //     ...ReviewAndSave,
-  //   };
-  //   const size = Object.keys(all).length;
-  //   const percentage = Object.values(all).reduce(
-  //     (accumulator, currentValue) => accumulator + currentValue
-  //   );
-  //   return (percentage / size) * 100;
-  // };
+  const stepsPercentage = {
+    BasicInfos: getPercentage(steps.BasicInfos),
+    Location: getPercentage(steps.Location),
+    People: getPercentage(steps.People),
+    Links: getPercentage(steps.Links),
+  };
+  const totalPercentage = getPercentage({
+    ...steps.BasicInfos,
+    ...steps.Location,
+    ...steps.People,
+    ...steps.Links,
+  });
 
   return {
-    isMobile,
-    steps,
-    // percentage: getPercentage(),
-    // mobilePercentage: getMobilePercentage(),
+    stepsPercentage,
+    totalPercentage,
   };
 };

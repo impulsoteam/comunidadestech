@@ -75,6 +75,7 @@ const RegisterCommunity = ({ credentials }) => {
               service={postCommunity}
               loading={loading}
               initialValues={getInitialValues()}
+              type={'create'}
             />
           </div>
         </div>
