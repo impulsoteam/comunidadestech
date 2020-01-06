@@ -151,7 +151,9 @@ const CommunityCard = ({ canModify, community, credentials }) => {
                       </div>
                     )
                 )}
-              {managers.length > 1 && (
+              {managers.filter(
+                (manager) => manager.invitation.status === 'ACCEPTED'
+              ).length > 4 && (
                 <div className="tooltip-toggle">
                   <div className="tooltip-button">
                     <span>
@@ -176,7 +178,6 @@ const CommunityCard = ({ canModify, community, credentials }) => {
                                     '../../static/default-user.png';
                                 }}
                               />
-
                               <span>{manager.name}</span>
                             </div>
                           )
