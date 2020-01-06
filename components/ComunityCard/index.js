@@ -3,6 +3,8 @@ import { toast } from 'react-toastify';
 import Router from 'next/router';
 import { api, setHeader } from '../../utils/axios';
 import styles from './styles';
+import { ICONS } from '../../utils/icons';
+import Divider from '../Divider';
 
 const CommunityCard = ({ canModify, community, credentials }) => {
   const {
@@ -188,6 +190,19 @@ const CommunityCard = ({ canModify, community, credentials }) => {
             <p>{description}</p>
           </div>
         </div>
+      </div>
+      <div className="container links">
+        <Divider dataContent="Links" />
+        <div className="columns is-multiline is-mobile">
+          {community.links.map((link) => (
+            <div className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
+              <a href={link.url} target="_blank">
+                <i className={`${ICONS[link.type]} fa-3x`}></i>
+              </a>
+            </div>
+          ))}
+        </div>
+        <Divider />
       </div>
       <style jsx>{styles}</style>
     </div>

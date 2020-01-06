@@ -53,7 +53,7 @@ export default function FormButton({
           style={{ backgroundColor: colors.heliotrope }}
           css={css`
             &:before {
-              content: ${getTitle()};
+              content: "${getTitle()}";
               position: absolute;
               z-index: 1;
             }
@@ -71,33 +71,44 @@ export default function FormButton({
           onClick={() => setNextPage()}
         >
           {getTitle()}
+          <style jsx>{styles}</style>
         </button>
       );
     return (
-      <>
-        <button
-          disabled={loading}
-          className="button is-primary is-fullwidth is-large"
-          type="submit"
-        >
-          {loading ? (
-            <span>
-              <i className="fa fa-spinner fa-spin"></i> Continuar
-            </span>
-          ) : (
-            getTitle()
-          )}
-        </button>
-        <button
-          disabled={loading}
-          className="button is-primary is-fullwidth is-large"
-          type="button"
-          onClick={() => setCurrentPage(Object.keys(pageTitles)[0])}
-        >
-          Voltar
-        </button>
-        <style jsx>{styles}</style>
-      </>
+      <div className="wrapper">
+        <div className="container" style={{ maxWidth: '936px' }}>
+          <div className="columns">
+            <div className="column is-12-mobile is-8-tablet is-6-desktop is-offset-3-desktop is-offset-2-tablet columns">
+              <div className="column is-5">
+                <button
+                  disabled={loading}
+                  className="button is-primary is-large is-fullwidth is-outlined"
+                  type="button"
+                  onClick={() => setCurrentPage(Object.keys(pageTitles)[0])}
+                >
+                  Voltar
+                </button>
+              </div>
+              <div className="column is-7">
+                <button
+                  disabled={loading}
+                  className="button is-primary is-large is-fullwidth"
+                  type="submit"
+                >
+                  {loading ? (
+                    <span>
+                      <i className="fa fa-spinner fa-spin"></i> Continuar
+                    </span>
+                  ) : (
+                    getTitle()
+                  )}
+                </button>
+              </div>
+            </div>
+            <style jsx>{styles}</style>
+          </div>
+        </div>
+      </div>
     );
   };
 

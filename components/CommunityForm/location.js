@@ -135,6 +135,7 @@ export default function Location({
           {(msg) => <div className="form-error">{msg}</div>}
         </ErrorMessage>
       </label>
+      <p className="required-form">* Itens obrigatórios</p>
       <style jsx>{styles}</style>
     </>
   );

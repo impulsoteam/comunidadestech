@@ -3,7 +3,7 @@ import { Formik, Form } from 'formik';
 import { useWindowSize } from 'react-use';
 import { useBeforeunload } from 'react-beforeunload';
 
-import CommunityCard from '../ComunityCard';
+import ReviewAndSave from '../ReviewAndSave';
 import BasicInfos from './basicInfo';
 import Location from './location';
 import People from './people';
@@ -71,7 +71,7 @@ const CommunityForm = ({
       People: <People {...props} />,
       Links: <Links {...props} />,
       ReviewAndSave: (
-        <CommunityCard {...props} community={props.values} canModify={false} />
+        <ReviewAndSave {...props} community={props.values} canModify={false} />
       ),
     }[props.currentPage];
   };
@@ -101,72 +101,94 @@ const CommunityForm = ({
           values,
         });
         return (
-          <Form>
-            <div className="columns">
-              {currentPage !== 'ReviewAndSave' && (
-                <div className="column is-6-tablet is-3-desktop is-offset-2-desktop menu-column">
-                  {!isMobile && (
-                    <ul>
-                      {Object.keys(pageTitles).map((page) => (
-                        <li>
-                          <button
-                            key={page}
-                            className={`page-title ${
-                              page === currentPage ? 'is-active' : ''
-                            }`}
-                            disabled={isDisabled({
-                              page,
-                              currentPage,
-                              currentStatus,
-                            })}
-                            type="button"
-                            className={`page-title ${
-                              page === currentPage ? 'is-active' : ''
-                            }`}
-                            key={page}
-                            onClick={() => setCurrentPage(page)}
-                          >
-                            {pageTitles[page]}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              )}
-
-              <div
-                className="column is-6-tablet is-5-desktop content-column"
-                style={currentPage === 'ReviewAndSave' ? { width: '100%' } : {}}
-              >
-                {renderPages({
-                  currentPage,
-                  errors,
-                  touched,
-                  values,
-                  dirty,
-                  initialValues,
-                  credentials,
-                  setFieldValue,
-                  setFieldTouched,
-                  setErrors,
-                })}
-                <p className="required-form">* Itens obrigatórios</p>
-                <FormButton
-                  {...{
-                    isMobile,
-                    type,
-                    pageTitles,
-                    currentStatus,
-                    currentPage,
-                    setCurrentPage,
-                    loading,
-                  }}
-                />
+          <>
+            <div className="columns is-centered">
+              <div className="column has-text-centered">
+                {type === 'create' && currentPage !== 'ReviewAndSave' && (
+                  <>
+                    <h1 className="title is-size-1-desktop is-size-2-tablet is-size-3-mobile">
+                      Cadastre sua comunidade
+                    </h1>
+                    <h2 className="subtitle is-size-4-desktop">
+                      Preencha o formulário e tenha sua comunidade publicada em
+                      nosso diretório!
+                    </h2>
+                  </>
+                )}
+                {type === 'edit' && currentPage !== 'ReviewAndSave' && (
+                  <h1 className="title is-size-1-desktop is-size-2-tablet is-size-3-mobile">
+                    Edite sua comunidade
+                  </h1>
+                )}
               </div>
             </div>
+            <Form>
+              <div className="columns">
+                {currentPage !== 'ReviewAndSave' && (
+                  <div className="column is-6-tablet is-3-desktop is-offset-2-desktop menu-column">
+                    {!isMobile && (
+                      <ul>
+                        {Object.keys(pageTitles).map((page) => (
+                          <li>
+                            <button
+                              key={page}
+                              className={`page-title ${
+                                page === currentPage ? 'is-active' : ''
+                              }`}
+                              disabled={isDisabled({
+                                page,
+                                currentPage,
+                                currentStatus,
+                              })}
+                              type="button"
+                              className={`page-title ${
+                                page === currentPage ? 'is-active' : ''
+                              }`}
+                              key={page}
+                              onClick={() => setCurrentPage(page)}
+                            >
+                              {pageTitles[page]}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                )}
+                <div
+                  className="column is-6-tablet is-5-desktop content-column"
+                  style={
+                    currentPage === 'ReviewAndSave' ? { width: '100%' } : {}
+                  }
+                >
+                  {renderPages({
+                    currentPage,
+                    errors,
+                    touched,
+                    values,
+                    dirty,
+                    initialValues,
+                    credentials,
+                    setFieldValue,
+                    setFieldTouched,
+                    setErrors,
+                  })}
+                  <FormButton
+                    {...{
+                      isMobile,
+                      type,
+                      pageTitles,
+                      currentStatus,
+                      currentPage,
+                      setCurrentPage,
+                      loading,
+                    }}
+                  />
+                </div>
+              </div>
+            </Form>
             <style jsx>{styles}</style>
-          </Form>
+          </>
         );
       }}
     </Formik>

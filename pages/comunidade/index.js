@@ -6,8 +6,6 @@ import CommunityHero from '../../components/ComunityHero';
 import CommunityCard from '../../components/ComunityCard';
 import Card from '../../components/Card';
 import loader from '../../static/comunidades-tech-loader.gif';
-import { ICONS } from '../../utils/icons';
-import Divider from '../../components/Divider';
 
 const Community = ({ credentials }) => {
   const [related, setRelated] = useState([]);
@@ -56,19 +54,6 @@ const Community = ({ credentials }) => {
                 credentials={credentials}
                 type={community.type}
               />
-              <div className="container links">
-                <Divider dataContent="Links" />
-                <div className="columns is-multiline is-mobile">
-                  {community.links.map((link) => (
-                    <div className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
-                      <a href={link.url} target="_blank">
-                        <i className={`${ICONS[link.type]} fa-3x`}></i>
-                      </a>
-                    </div>
-                  ))}
-                </div>
-                <Divider />
-              </div>
               <div className="container related">
                 <div className="columns">
                   <div className="column isfull">

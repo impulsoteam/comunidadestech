@@ -139,6 +139,7 @@ export default function People({
           + adicionar administrador
         </button>
       </div>
+      <p className="required-form">* Itens obrigatórios</p>
       <style jsx>{styles}</style>
     </>
   );

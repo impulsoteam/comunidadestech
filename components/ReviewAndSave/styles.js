@@ -2,6 +2,10 @@ import css from 'styled-jsx/css';
 import { colors } from '/utils/variables';
 
 export default css`
+  .wrapper {
+    margin-top: 60px;
+  }
+
   .container {
     max-width: 936px;
 
@@ -63,49 +67,7 @@ export default css`
       width: 20px;
     }
   }
-  .options {
-    align-items: center;
-    align-self: end;
-    display: flex;
-    justify-content: end;
-    margin-top: auto;
-    width: 50%;
 
-    a {
-      font-weight: bold;
-      font-size: 0.75rem;
-      margin-left: 4px;
-      color: ${colors.dark};
-
-      &:not(last-child) {
-        margin-right: 10px;
-      }
-
-      &:hover {
-        color: ${colors.primary};
-      }
-
-      &.button {
-        background-color: ${colors.primary};
-        border-color: ${colors.primary};
-        border-radius: 4px;
-        color: ${colors.white};
-
-        &:hover {
-          background-color: ${colors.white};
-          color: ${colors.primary};
-        }
-      }
-
-      i {
-        margin-right: 5px;
-      }
-    }
-    @media screen and (max-width: 768px) {
-      margin-top: 1rem;
-      width: 100%;
-    }
-  }
   .tags > div {
     width: 100%;
   }
@@ -132,33 +94,6 @@ export default css`
       span {
         font-size: 0.875rem;
       }
-    }
-
-    .tooltip-wrapper {
-      background: ${colors.white};
-      border-radius: 4px;
-      border: solid 1px rgba(10, 10, 10, 0.1);
-      padding: 10px 0 0 10px;
-      position: absolute;
-      width: 100%;
-      z-index: 1;
-      display: none;
-    }
-
-    .tooltip-button {
-      font-size: 12px;
-      text-align: center;
-      background: ${colors.wildSand};
-      padding: 4px;
-      cursor: pointer;
-
-      span {
-        line-height: 1;
-      }
-    }
-
-    .tooltip-toggle:hover .tooltip-wrapper {
-      display: initial;
     }
   }
 

@@ -58,17 +58,6 @@ const RegisterCommunity = ({ credentials }) => {
     <div className="container">
       <div className="hero-body">
         <div className="columns is-centered">
-          <div className="column has-text-centered">
-            <h1 className="title is-size-1-desktop is-size-2-tablet is-size-3-mobile">
-              Cadastre sua comunidade
-            </h1>
-            <h2 className="subtitle is-size-4-desktop">
-              Preencha o formulário e tenha sua comunidade publicada em nosso
-              diretório!
-            </h2>
-          </div>
-        </div>
-        <div className="columns is-centered">
           <div className="column">
             <CommunityForm
               credentials={credentials}
