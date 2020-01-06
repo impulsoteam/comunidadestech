@@ -144,15 +144,16 @@ export const TAGS = [
 ];
 
 export const TYPES = [
-  { label: 'Podcast', value: 'Podcast' },
+  { label: 'Discord', value: 'Discord' },
   {
     label: 'Grupo do Facebook',
     value: 'Grupo do Facebook',
   },
-  { label: 'Whatsapp', value: 'Whatsapp' },
   { label: 'Meetup', value: 'Meetup' },
-  { label: 'Discord', value: 'Discord' },
+  { label: 'Podcast', value: 'Podcast' },
   { label: 'Slack', value: 'Slack' },
+  { label: 'Telegram', value: 'Telegram' },
+  { label: 'Whatsapp', value: 'Whatsapp' },
 ];
 
 export const MODEL = [
