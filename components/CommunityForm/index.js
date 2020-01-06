@@ -76,6 +76,40 @@ const CommunityForm = ({
     }[props.currentPage];
   };
 
+  const renderMenu = ({ currentStatus }) => {
+    if (isMobile) return;
+
+    let options = Object.keys(pageTitles);
+
+    if (type === 'edit')
+      options = options.filter((page) => page !== 'ReviewAndSave');
+
+    return (
+      <ul>
+        {options.map((page) => (
+          <li>
+            <button
+              key={page}
+              disabled={isDisabled({
+                page,
+                currentPage,
+                currentStatus,
+              })}
+              type="button"
+              className={`page-title ${
+                page === currentPage ? 'is-active' : ''
+              }`}
+              onClick={() => setCurrentPage(page)}
+            >
+              {pageTitles[page]}
+            </button>
+          </li>
+        ))}
+        <style jsx>{styles}</style>
+      </ul>
+    );
+  };
+
   return (
     <Formik
       initialValues={initialValues}
@@ -126,33 +160,7 @@ const CommunityForm = ({
               <div className="columns">
                 {currentPage !== 'ReviewAndSave' && (
                   <div className="column is-6-tablet is-3-desktop is-offset-2-desktop menu-column">
-                    {!isMobile && (
-                      <ul>
-                        {Object.keys(pageTitles).map((page) => (
-                          <li>
-                            <button
-                              key={page}
-                              className={`page-title ${
-                                page === currentPage ? 'is-active' : ''
-                              }`}
-                              disabled={isDisabled({
-                                page,
-                                currentPage,
-                                currentStatus,
-                              })}
-                              type="button"
-                              className={`page-title ${
-                                page === currentPage ? 'is-active' : ''
-                              }`}
-                              key={page}
-                              onClick={() => setCurrentPage(page)}
-                            >
-                              {pageTitles[page]}
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
+                    {renderMenu({ currentStatus })}
                   </div>
                 )}
                 <div

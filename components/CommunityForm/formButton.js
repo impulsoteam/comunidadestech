@@ -31,6 +31,7 @@ export default function FormButton({
   };
 
   const setNextPage = () => {
+    if (type === 'edit') return;
     const pages = Object.keys(pageTitles);
     const currentIndex = pages.indexOf(currentPage);
 
