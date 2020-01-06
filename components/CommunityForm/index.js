@@ -89,14 +89,16 @@ const CommunityForm = ({ service, initialValues, loading, credentials }) => {
                   {!isMobile && (
                     <ul>
                       {Object.keys(pageTitles).map((page) => (
-                        <li
-                          className={`page-title ${
-                            page === currentPage ? 'is-active' : ''
-                          }`}
-                          key={page}
-                          onClick={() => setCurrentPage(page)}
-                        >
-                          <button>{pageTitles[page]}</button>
+                        <li>
+                          <button
+                            className={`page-title ${
+                              page === currentPage ? 'is-active' : ''
+                            }`}
+                            key={page}
+                            onClick={() => setCurrentPage(page)}
+                          >
+                            {pageTitles[page]}
+                          </button>
                         </li>
                       ))}
                     </ul>

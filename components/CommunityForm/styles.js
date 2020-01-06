@@ -23,21 +23,30 @@ export default css`
   }
 
   .page-title {
-    font-weight: bold;
-    font-size: 14px;
-    padding: 8px 14px;
+    background: ${colors.white};
     border-radius: 4px;
-    margin-bottom: 8px;
+    border: none;
+    color: inherit;
     cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+    padding: 8px 14px;
+    text-align: left;
+    width: 100%;
 
     &.is-active {
       background-color: ${colors.primary};
       color: ${colors.white};
     }
-
-    &:first-of-type {
-      margin-top: 20px;
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
     }
+  }
+
+  li:first-of-type .page-title {
+    margin-top: 20px;
   }
 
   .input-wrapper {

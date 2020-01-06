@@ -1,4 +1,6 @@
 import React from 'react';
+import { css, jsx } from '@emotion/core';
+/** @jsx jsx */
 
 import styles from './styles';
 import { colors } from '../../utils/variables';
@@ -129,11 +131,27 @@ export default function FormButton({
           disabled={loading}
           className="button is-primary is-fullwidth is-large"
           type="button"
-          style={{
-            background: `linear-gradient(to right, ${
-              colors.primary
-            } ${getPercentage()}%, ${colors.heliotrope} 0%)`,
-          }}
+          style={{ backgroundColor: colors.heliotrope }}
+          css={css`
+            &:before {
+              content: 'Continuar';
+              position: absolute;
+              z-index: 1;
+            }
+            &:after {
+              align-items: center;
+              background: ${colors.primary};
+              border-radius: 4px;
+              content: '';
+              display: flex;
+              height: 40px;
+              justify-content: center;
+              left: 0;
+              position: absolute;
+              transition: all 0.5s;
+              width: ${getPercentage()}%;
+            }
+          `}
           onClick={() =>
             setCurrentPage(Object.keys(pageTitles)[currentPosition + 1])
           }
@@ -156,9 +174,9 @@ export default function FormButton({
                 'Voltar'
               )}
             </button>
-            <style jsx>{styles}</style>
           </>
         )}
+        <style jsx>{styles}</style>
       </>
     );
   };
