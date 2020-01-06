@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { css, jsx } from '@emotion/core';
 import styles from './styles';
 import { colors } from '../../utils/variables';
 
@@ -49,11 +49,24 @@ export default function FormButton({
           disabled={isDisabled()}
           className="button is-primary is-fullwidth is-large"
           type="button"
-          style={{
-            background: `linear-gradient(to right, ${
-              colors.primary
-            } ${getPercentage()}%, ${colors.heliotrope} 0%)`,
-          }}
+          style={{ backgroundColor: colors.heliotrope }}
+          css={css`
+            &:before {
+              content: 'Continuar';
+              position: absolute;
+              z-index: 1;
+            }
+            &:after {
+              background: ${colors.primary};
+              border-radius: 4px;
+              content: '';
+              height: 40px;
+              left: 0;
+              position: absolute;
+              transition: all 0.5s;
+              width: ${getPercentage()}%;
+            }
+          `}
           onClick={() => setNextPage()}
         >
           {getTitle()}
