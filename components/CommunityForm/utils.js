@@ -56,11 +56,14 @@ export const SignupSchema = Yup.object().shape({
     }),
   }),
   globalProgram: Yup.object().shape({
-    isParticipant: Yup.string().required('Item obrigatório'),
-    name: Yup.string()
-      .required('Item obrigatório')
-      .min(2, 'Muito curto!')
-      .max(30, 'Muito longo!'),
+    isParticipant: Yup.bool(),
+    name: Yup.string().when('isParticipant', {
+      is: (isParticipant) => isParticipant,
+      then: Yup.string()
+        .required('Item obrigatório')
+        .min(2, 'Muito curto!')
+        .max(30, 'Muito longo!'),
+    }),
   }),
   creator: Yup.object().shape({
     rocketChat: Yup.string(),

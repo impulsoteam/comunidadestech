@@ -1,5 +1,6 @@
 import React from 'react';
 import { css, jsx } from '@emotion/core';
+/** @jsx jsx */
 import styles from './styles';
 import { colors } from '../../utils/variables';
 
@@ -48,11 +49,11 @@ export default function FormButton({
         <button
           disabled={isDisabled()}
           className="button is-primary is-fullwidth is-large"
-          type="button"
+          type={type === 'edit' ? 'submit' : 'button'}
           style={{ backgroundColor: colors.heliotrope }}
           css={css`
             &:before {
-              content: 'Continuar';
+              content: ${getTitle()};
               position: absolute;
               z-index: 1;
             }

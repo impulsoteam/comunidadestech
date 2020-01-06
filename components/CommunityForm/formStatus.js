@@ -9,8 +9,6 @@ export const getFormStatus = ({ errors, touched, values }) => {
   };
 
   const getStepOne = () => {
-    const { globalProgram: errorGlobalProgram = {} } = errors;
-    const { globalProgram: touchedGlobalProgram = {} } = touched;
     const stepOne = {
       haveName: !errors.name && !!values.name ? 1 : 0,
       haveType: !errors.type && !!values.type ? 1 : 0,
@@ -19,17 +17,12 @@ export const getFormStatus = ({ errors, touched, values }) => {
       haveLogo: !errors.logo && !!values.logo ? 1 : 0,
       haveDescription: !errors.description && !!values.description ? 1 : 0,
     };
-    if (
-      !errorGlobalProgram.name &&
-      touchedGlobalProgram.name &&
-      values.globalProgram.isParticipant
-    ) {
-      stepOne.haveGlobalProgram = 1;
-    } else if (!values.globalProgram.isParticipant) {
-      delete stepOne.haveGlobalProgram;
-    } else {
-      stepOne.haveGlobalProgram = 0;
-    }
+
+    const isParticipant = !!values.globalProgram.isParticipant;
+    const haveName = !!values.globalProgram.name;
+
+    if (isParticipant && haveName) stepOne.haveGlobalProgram = 1;
+    if (isParticipant && !haveName) stepOne.haveGlobalProgram = 0;
 
     return stepOne;
   };
