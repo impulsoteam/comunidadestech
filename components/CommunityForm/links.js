@@ -18,19 +18,6 @@ export default function Links({
   };
   return (
     <>
-      <pre
-        style={{
-          background: '#f6f8fa',
-          fontSize: '.65rem',
-          padding: '.5rem',
-        }}
-      >
-        {JSON.stringify(
-          { values: values.links, errorsLink: errors.links },
-          null,
-          2
-        )}
-      </pre>
       <div className="links-wrapper">
         <h5>Links *</h5>
         <div>
