@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import { Link, Router } from '../../server/routes';
 import styles from './styles';
 
 class Card extends Component {
