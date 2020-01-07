@@ -51,10 +51,17 @@ export default function FormButton({
           disabled={isDisabled()}
           className="button is-primary is-fullwidth is-large"
           type={type === 'edit' ? 'submit' : 'button'}
-          style={{ backgroundColor: colors.heliotrope }}
+          style={{
+            backgroundColor: colors.heliotrope,
+            padding: 0,
+            height: '40px',
+          }}
           css={css`
             &:before {
+              align-items: center;
               content: "${getTitle()}";
+              display: flex;
+              height: 40px;
               position: absolute;
               z-index: 1;
             }
