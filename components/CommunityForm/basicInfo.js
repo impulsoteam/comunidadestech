@@ -19,7 +19,6 @@ export default function BasicInfos({
   errors,
   touched,
   values,
-  dirty,
   initialValues,
   setFieldValue,
   setFieldTouched,
@@ -27,7 +26,9 @@ export default function BasicInfos({
   const { nameAlreadyExists } = errorMessages;
   const animatedComponents = makeAnimated();
   const checkName = async (name) => {
-    if (!name || name === initialValues.name) return;
+    const toShort = name.length < 3;
+    const notChanged = name === initialValues.name;
+    if (toShort || notChanged) return;
     setHeader(credentials);
     const { data } = await api.get(`/community/checkName/${name}`);
 

@@ -17,7 +17,6 @@ export default function People({
   setErrors,
   touched,
   values,
-  initialValues,
   setFieldValue,
   setFieldTouched,
   pageType,

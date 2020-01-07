@@ -4,15 +4,7 @@ import Select from 'react-select';
 import { linksSelectStyle } from './reactSelectStyle';
 import styles from './styles';
 import { LINKS } from './utils';
-export default function Links({
-  credentials,
-  errors,
-  touched,
-  values,
-  initialValues,
-  setFieldValue,
-  setFieldTouched,
-}) {
+export default function Links({ errors, values, setFieldValue }) {
   const handleStringChange = (selectedOption, data) => {
     setFieldValue(data || data.value, selectedOption.value);
   };

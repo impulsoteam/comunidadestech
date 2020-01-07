@@ -124,15 +124,10 @@ const CommunityForm = ({
         setFieldValue,
         setFieldTouched,
         errors,
-        dirty,
         touched,
         setErrors,
       }) => {
-        const currentStatus = getFormStatus({
-          errors,
-          touched,
-          values,
-        });
+        const currentStatus = getFormStatus({ errors, values });
         return (
           <>
             <div className="columns is-centered">
@@ -173,7 +168,6 @@ const CommunityForm = ({
                     errors,
                     touched,
                     values,
-                    dirty,
                     initialValues,
                     credentials,
                     setFieldValue,

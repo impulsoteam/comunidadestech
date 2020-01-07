@@ -129,7 +129,7 @@ function ManagerCard({ manager, removeManager, credentials }) {
   }, []);
 
   const renderCard = () => {
-    const { email, name, avatar, invitation } = managerDetails;
+    const { email, name, avatar } = managerDetails;
 
     if (loading) return <p>loading</p>;
 

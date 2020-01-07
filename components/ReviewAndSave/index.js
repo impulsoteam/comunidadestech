@@ -6,9 +6,8 @@ import styles from './styles';
 import { ICONS } from '../../utils/icons';
 import Divider from '../Divider';
 
-const ReviewAndSave = ({ canModify, community, credentials }) => {
+const ReviewAndSave = ({ community }) => {
   const {
-    _id,
     name,
     city,
     state,
@@ -17,7 +16,6 @@ const ReviewAndSave = ({ canModify, community, credentials }) => {
     description,
     logo,
     tags,
-    url,
     status,
     type,
     managers,

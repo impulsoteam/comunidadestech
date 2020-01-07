@@ -1,4 +1,4 @@
-export const getFormStatus = ({ errors, touched, values }) => {
+export const getFormStatus = ({ errors, values }) => {
   const getPercentage = (values) => {
     const size = Object.keys(values).length;
     const percentage = Object.values(values).reduce(

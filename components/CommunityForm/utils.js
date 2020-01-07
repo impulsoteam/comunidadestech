@@ -19,7 +19,10 @@ export const SignupSchema = Yup.object().shape({
         .required('Item obrigatório'),
     })
   ),
-  description: Yup.string().required('Item obrigatório'),
+  description: Yup.string()
+    .min(25, 'Fale um pouco mais sobre sua comunidade.')
+    // .max(140, 'Opa, essa descrição ficou muito grande. Max: 140 caracteres')
+    .required('Item obrigatório'),
   type: Yup.string().required('Item obrigatório'),
   category: Yup.string().required('Item obrigatório'),
   tags: Yup.array()
