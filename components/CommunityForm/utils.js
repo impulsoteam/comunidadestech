@@ -190,6 +190,7 @@ export const LINKS = [
         <i className="fab fa-instagram"></i> <strong>Instagram</strong>
       </span>
     ),
+    value: 'instagram',
   },
   {
     label: (

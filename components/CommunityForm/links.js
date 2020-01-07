@@ -37,7 +37,7 @@ export default function Links({
                             setFieldValue
                           )
                         }
-                        defaultValue={LINKS.filter(
+                        value={LINKS.filter(
                           (link) => link.value === values.links[index].type
                         )}
                         styles={linksSelectStyle}

@@ -87,9 +87,8 @@ const CommunityForm = ({
     return (
       <ul>
         {options.map((page) => (
-          <li>
+          <li key={page}>
             <button
-              key={page}
               disabled={isDisabled({
                 page,
                 currentPage,
