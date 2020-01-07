@@ -2,16 +2,6 @@ import css from 'styled-jsx/css';
 import { fonts, colors } from '/utils/variables';
 
 export default css`
-  .title {
-    font-weight: 700;
-  }
-  .subtitle {
-    font-family: ${fonts.raleway};
-    font-size: 20px !important;
-    margin: 0 auto 20px;
-    max-width: 448px;
-  }
-
   label {
     display: inline-block;
     width: 100%;
@@ -35,12 +25,6 @@ export default css`
 
   button {
     margin-top: 20px;
-  }
-
-  @media screen and (max-width: 1023px) {
-    .title {
-      margin-top: 100px;
-    }
   }
 
   @media screen and (max-width: 769px) {

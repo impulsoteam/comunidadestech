@@ -236,4 +236,10 @@ export default css`
     margin: 20px 0px;
     cursor: pointer;
   }
+
+  @media screen and (max-width: 1023px) {
+    .title {
+      margin-top: 100px;
+    }
+  }
 `;
