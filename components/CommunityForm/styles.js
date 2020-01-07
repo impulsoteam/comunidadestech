@@ -218,6 +218,10 @@ export default css`
     font-weight: bold;
     margin-top: 20px;
     padding: 20px 0;
+
+    &:disabled {
+      opacity: 1;
+    }
   }
 
   .required-form {
