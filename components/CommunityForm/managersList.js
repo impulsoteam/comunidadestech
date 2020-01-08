@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import loader from '../../static/comunidades-tech-loader.gif';
 import { api, setHeader } from '../../utils/axios';
 import { invitationStatus } from '../../utils/variables';
 import Divider from '../Divider';
@@ -131,7 +132,15 @@ function ManagerCard({ manager, removeManager, credentials }) {
   const renderCard = () => {
     const { email, name, avatar } = managerDetails;
 
-    if (loading) return <p>loading</p>;
+    if (loading)
+      return (
+        <div style={{ height: ' 45px' }}>
+          <img
+            src={loader}
+            style={{ maxWidth: '30px', display: 'block', margin: '0 auto' }}
+          />
+        </div>
+      );
 
     return (
       <div className="manager-card card">
