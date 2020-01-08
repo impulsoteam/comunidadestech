@@ -159,8 +159,13 @@ class CommunityController {
     try {
       const { name } = req.params;
 
-      const community = await Community.findOne({ name });
-
+      const community = await Community.findOne({
+        name: name.split('-').join(' '),
+      }).collation({
+        locale: 'pt',
+        strength: 1,
+      });
+      console.log(community);
       if (!community)
         return res
           .status(400)

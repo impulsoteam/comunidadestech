@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-// import { Link, Router } from '../../server/routes';
+
 import styles from './styles';
+import { formatName } from '../../utils';
 
 class Card extends Component {
   render() {
@@ -8,7 +9,7 @@ class Card extends Component {
     return (
       <div className="card">
         <div className="card-content">
-          <a href={`/comunidade?name=${content.name}`}>
+          <a href={`/c/${formatName(content.name)}`}>
             <div className="media">
               <div className="media-left">
                 <figure className="image is-32x32">

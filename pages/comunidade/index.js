@@ -13,8 +13,6 @@ const Community = ({ credentials }) => {
   const [community, setCommunity] = useState([]);
   const router = useRouter();
   useEffect(() => {
-    console.log(router);
-    return;
     const fetchData = async () => {
       const { data } = await api.get(`community/name/${router.query.name}`);
       const managers = data.community.managers;
