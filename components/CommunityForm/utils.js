@@ -2,9 +2,10 @@ import * as Yup from 'yup';
 
 export const SignupSchema = Yup.object().shape({
   name: Yup.string()
-    .min(2, 'Muito curto!')
+    .min(3, 'Muito curto!')
     .max(30, 'Muito longo!')
     .required('Item obrigatório'),
+  slug: Yup.string().min(3, 'Muito curto!'),
   logo: Yup.string()
     .required('Item obrigatório')
     .matches(
@@ -77,6 +78,8 @@ export const SignupSchema = Yup.object().shape({
 });
 
 export const errorMessages = {
+  slugAlreadyExists:
+    'Url já existente, tente alterar algo no nome da comunidade',
   nameAlreadyExists: 'Comunidade já cadastrada',
   userNotSubscribed: 'Email ainda não está cadastrado no comunidades.tech',
   userSubscribed: 'Email está cadastrado no comunidades.tech',

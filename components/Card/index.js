@@ -9,7 +9,7 @@ class Card extends Component {
     return (
       <div className="card">
         <div className="card-content">
-          <a href={`/c/${formatName(content.name)}`}>
+          <a href={`/c/${content.slug}`}>
             <div className="media">
               <div className="media-left">
                 <figure className="image is-32x32">

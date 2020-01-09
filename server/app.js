@@ -52,12 +52,12 @@ app
     server.use('/auth', sessionRoutes);
     server.use('/api/v1', routes);
 
-    server.get('/c/:name', (req, res) => {
-      return app.render(req, res, '/comunidade', { name: req.params.name });
+    server.get('/c/:slug', (req, res) => {
+      return app.render(req, res, '/comunidade', { slug: req.params.slug });
     });
 
-    server.get('/editar/:name', (req, res) => {
-      return app.render(req, res, '/editar', { name: req.params.name });
+    server.get('/editar/:slug', (req, res) => {
+      return app.render(req, res, '/editar', { slug: req.params.slug });
     });
 
     server.get('*', (req, res) => {
