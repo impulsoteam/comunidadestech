@@ -10,8 +10,7 @@ const CommunityCard = ({ canModify, community, credentials }) => {
   const {
     _id,
     name,
-    city,
-    state,
+    location,
     members,
     category,
     description,
@@ -46,7 +45,7 @@ const CommunityCard = ({ canModify, community, credentials }) => {
     sendNotification('publish');
     Router.push(`/`);
   };
-
+  console.log();
   return (
     <div className="wrapper">
       <div className="container head">
@@ -71,9 +70,9 @@ const CommunityCard = ({ canModify, community, credentials }) => {
             </h2>
             <p className="info">
               <i className="fas fa-map-marker-alt"></i>
-              {city ? (
+              {location.city ? (
                 <span>
-                  {city}, {state}
+                  {location.city}, {location.state}
                 </span>
               ) : (
                 <span>Remota</span>
