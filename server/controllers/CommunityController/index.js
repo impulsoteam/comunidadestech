@@ -92,7 +92,7 @@ class CommunityController {
         },
         { returnOriginal: false }
       );
-      console.log(updatedCommunity.managers);
+
       const success = updatedCommunity.managers.filter(
         ({ _id, status }) => _id === decoded.id && status === 'SENT'
       );

@@ -217,7 +217,6 @@ export default css`
     font-size: 16px;
     font-weight: bold;
     margin-top: 20px;
-    /*padding: 20px 0;*/
 
     &:disabled {
       opacity: 1;

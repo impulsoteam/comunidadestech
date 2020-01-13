@@ -25,7 +25,7 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content="#8c43ff" />
           <meta
             name="description"
-            content="Lista de comunidades profissionais de tecnologia do Brasil"
+            content="Lista de Comunidades Tech Brasileiras"
           />
           <link
             rel="shortcut icon"

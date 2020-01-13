@@ -22,6 +22,7 @@ router.get(
 
 router.get(
   '/linkedin',
+  SessionController.checkError,
   passport.authenticate('linkedin-token', { session: false }),
   SessionController.login
 );
