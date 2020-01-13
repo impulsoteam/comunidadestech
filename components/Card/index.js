@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import styles from './styles';
-import { formatName } from '../../utils';
 
 class Card extends Component {
   render() {

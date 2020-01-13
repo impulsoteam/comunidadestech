@@ -5,12 +5,12 @@ import { api, setHeader } from '../../utils/axios';
 import styles from './styles';
 import { ICONS } from '../../utils/icons';
 import Divider from '../Divider';
-import { formatName } from '../../utils';
 
 const CommunityCard = ({ canModify, community, credentials }) => {
   const {
     _id,
     name,
+    slug,
     city,
     state,
     members,
@@ -87,7 +87,7 @@ const CommunityCard = ({ canModify, community, credentials }) => {
             <div className="options">
               {canModify && (
                 <>
-                  <a href={`/editar/${formatName(name)}`} className="">
+                  <a href={`/editar/${slug}`} className="">
                     <i className="fas fa-edit"></i>editar
                   </a>
                   <a onClick={deleteCommunity} className="">
