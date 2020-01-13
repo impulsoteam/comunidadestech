@@ -1,48 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '../Card';
 import ReactMap, { NavigationControl, Marker } from 'react-map-gl';
 import styles from './styles';
 import CommunitySideBar from '../CommunitySideBar';
 
-const Map = (props) => {
-  let {
-    list,
-    clickPin,
-    clickCommunity,
-    communitySideBar,
-    closeSideBar,
-  } = props;
-
-  let locations = [];
-
-  list.forEach((item) => {
-    if (locations.filter((city) => city.state) !== item.location.state)
-      item.location.state &&
-        locations.push({
-          state: item.location.state,
-          city: item.location.city,
-          latitude: item.location.latitude,
-          longitude: item.location.longitude,
-        });
-  });
-
-  locations.forEach((location) => {
-    location.number = locations.filter(
-      (item) => item.state === location.state && item.city === location.city
-    ).length;
-  });
-
-  locations = locations.filter(
-    (elem, index, self) =>
-      self.findIndex((item) => {
-        return (
-          item.city === elem.city &&
-          item.number === elem.number &&
-          elem.number > 1
-        );
-      }) === index
-  );
-
+const Map = ({
+  list,
+  clickPin,
+  clickCommunity,
+  communitySideBar,
+  closeSideBar,
+}) => {
   const [viewport, setViewport] = useState({
     latitude: -15.6634068,
     longitude: -58.6388463,
@@ -50,6 +18,36 @@ const Map = (props) => {
     width: '100%',
     height: '100%',
   });
+  const [locations, setLocations] = useState([]);
+  useEffect(() => {
+    let locations = [];
+    list.forEach((item) => {
+      if (locations.filter((city) => city.state) !== item.location.state)
+        item.location.state &&
+          locations.push({
+            state: item.location.state,
+            city: item.location.city,
+            latitude: item.location.latitude,
+            longitude: item.location.longitude,
+          });
+    });
+    locations.forEach((location) => {
+      location.number = locations.filter(
+        (item) => item.state === location.state && item.city === location.city
+      ).length;
+    });
+    locations = locations.filter(
+      (elem, index, self) =>
+        self.findIndex((item) => {
+          return (
+            item.city === elem.city &&
+            item.number === elem.number &&
+            elem.number > 1
+          );
+        }) === index
+    );
+    setLocations(locations);
+  }, [list]);
 
   return (
     <div className="map-component-wrapper">
