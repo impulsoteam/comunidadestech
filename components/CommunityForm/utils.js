@@ -78,8 +78,7 @@ export const SignupSchema = Yup.object().shape({
 });
 
 export const errorMessages = {
-  slugAlreadyExists:
-    'Url já existente, tente alterar algo no nome da comunidade',
+  slugAlreadyExists: 'Url já existente, tente alterar o nome da comunidade',
   nameAlreadyExists: 'Comunidade já cadastrada',
   userNotSubscribed: 'Email ainda não está cadastrado no comunidades.tech',
   userSubscribed: 'Email está cadastrado no comunidades.tech',

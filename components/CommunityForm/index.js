@@ -122,7 +122,6 @@ const CommunityForm = ({
       {({
         values,
         setFieldValue,
-        setFieldError,
         setFieldTouched,
         errors,
         touched,
@@ -172,7 +171,6 @@ const CommunityForm = ({
                     initialValues,
                     credentials,
                     setFieldValue,
-                    setFieldError,
                     setFieldTouched,
                     setErrors,
                   })}
