@@ -12,6 +12,7 @@ import FormButton from './formButton';
 import styles from './styles';
 
 import { SignupSchema } from './utils';
+import { invitationStatus } from '../../utils/variables';
 import { getFormStatus } from './formStatus';
 
 const CommunityForm = ({
@@ -31,6 +32,23 @@ const CommunityForm = ({
   const { width } = useWindowSize();
   const isMobile = width > 768 ? false : true;
   useBeforeunload(() => "You'll lose your data!");
+
+  const formatAndSendForm = (values) => {
+    const { managers } = values;
+
+    if (managers.length > 0) {
+      for (const manager of managers) {
+        const { status } = manager.invitation;
+        if (status === invitationStatus.sending)
+          manager.invitation.status = invitationStatus.sent;
+      }
+    }
+
+    if (typeof values.members === 'string')
+      values.members = parseInt(values.members.replace('.', ''));
+
+    service(values);
+  };
 
   const [currentPage, setCurrentPage] = useState(Object.keys(pageTitles)[0]);
 
@@ -113,11 +131,7 @@ const CommunityForm = ({
     <Formik
       initialValues={initialValues}
       validationSchema={SignupSchema}
-      onSubmit={(values) => {
-        if (typeof values.members === 'string')
-          values.members = parseInt(values.members.replace('.', ''));
-        service(values);
-      }}
+      onSubmit={(values) => formatAndSendForm(values)}
     >
       {({
         values,

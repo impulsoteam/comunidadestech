@@ -56,7 +56,7 @@ export default function People({
 
   const addManager = async () => {
     const manager = subscribed;
-    const status = invitationStatus.sent;
+    const status = invitationStatus.sending;
 
     manager.invitation = {
       status,
@@ -112,7 +112,6 @@ export default function People({
       {managers.length !== 0 && (
         <ManagersList {...{ managers, removeManager, credentials, pageType }} />
       )}
-      <h5 className="admin-title">Adicionar Administrador</h5>
       <label style={{ marginBottom: '1.25rem' }}>
         Email do administrador
         <div className="input-wrapper">

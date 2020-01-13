@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import loader from '../../static/comunidades-tech-loader.gif';
 import { api, setHeader } from '../../utils/axios';
 import { invitationStatus } from '../../utils/variables';
 import Divider from '../Divider';
@@ -11,22 +12,22 @@ export default function ManagersList({
   credentials,
   pageType,
 }) {
-  const pendingInvites = [];
-  const declinedInvites = [];
-  const acceptedInvites = [];
-  for (const manager of allManagers) {
-    if (allManagers.length === 0) return;
+  if (allManagers.length === 0) return;
 
-    const isPending = manager.invitation.status === invitationStatus.sent;
-    const isDeclined = manager.invitation.status === invitationStatus.declined;
+  const { sending, sent, declined, accepted } = invitationStatus;
 
-    if (isDeclined) {
-      declinedInvites.push(manager);
-      continue;
-    }
-
-    isPending ? pendingInvites.push(manager) : acceptedInvites.push(manager);
-  }
+  const sendingInvites = allManagers.filter(
+    ({ invitation }) => invitation.status === sending
+  );
+  const pendingInvites = allManagers.filter(
+    ({ invitation }) => invitation.status === sent
+  );
+  const declinedInvites = allManagers.filter(
+    ({ invitation }) => invitation.status === declined
+  );
+  const acceptedInvites = allManagers.filter(
+    ({ invitation }) => invitation.status === accepted
+  );
 
   const renderManagers = () => {
     if (acceptedInvites.length === 0 && pageType !== 'create')
@@ -54,13 +55,7 @@ export default function ManagersList({
   };
 
   const renderPendingInvites = () => {
-    if (pendingInvites.length === 0)
-      return (
-        <>
-          <h5 className="admin-title">Convites Pendentes</h5>
-          <style jsx>{styles}</style>
-        </>
-      );
+    if (pendingInvites.length === 0) return;
     return (
       <>
         <h5 className="admin-title">Convites Pendentes</h5>
@@ -97,11 +92,33 @@ export default function ManagersList({
       </>
     );
   };
+
+  const renderSendingInvites = () => {
+    if (sendingInvites.length === 0) return;
+    return (
+      <>
+        <h5 className="admin-title">Convites a Serem Enviados</h5>
+        <style jsx>{styles}</style>
+        {sendingInvites.map((manager) => (
+          <ManagerCard
+            key={manager.email}
+            {...{
+              manager,
+              removeManager,
+              credentials,
+            }}
+          />
+        ))}
+      </>
+    );
+  };
+
   return (
     <>
       {renderManagers()}
       {renderPendingInvites()}
       {renderDeclinedInvites()}
+      {renderSendingInvites()}
     </>
   );
 }
@@ -131,7 +148,15 @@ function ManagerCard({ manager, removeManager, credentials }) {
   const renderCard = () => {
     const { email, name, avatar } = managerDetails;
 
-    if (loading) return <p>loading</p>;
+    if (loading)
+      return (
+        <div style={{ height: ' 45px' }}>
+          <img
+            src={loader}
+            style={{ maxWidth: '30px', display: 'block', margin: '0 auto' }}
+          />
+        </div>
+      );
 
     return (
       <div className="manager-card card">
