@@ -47,16 +47,17 @@ const CommunityForm = ({
 
     if (typeof values.members === 'string')
       values.members = parseInt(values.members.replace('.', ''));
-    
+
     if (values.location.city) {
-          const { location } = values;
-          cities.forEach((city) => {
-            if (location.state === city.state && location.city === city.value) {
-              values.location.latitude = city.latitude;
-              values.location.longitude = city.longitude;
-            }
-          });
+      const { location } = values;
+      for (const city of cities) {
+        if (location.state === city.state && location.city === city.value) {
+          values.location.latitude = city.latitude;
+          values.location.longitude = city.longitude;
+          break;
         }
+      }
+    }
 
     service(values);
   };
