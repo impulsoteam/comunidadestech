@@ -6,7 +6,7 @@ export default css`
     align-items: center;
     border-bottom: solid 2px ${colors.wildSand};
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     margin: 0;
     padding: 1rem 0.75rem;
   }
@@ -98,6 +98,10 @@ export default css`
         border-color: ${colors.primary};
         color: ${colors.white};
       }
+    }
+    span,
+    i {
+      pointer-events: none;
     }
   }
 

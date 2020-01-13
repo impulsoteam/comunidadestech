@@ -52,6 +52,14 @@ const location = {
     type: String,
     required: validateLocation,
   },
+  latitude: {
+    type: Number,
+    required: validateLocation,
+  },
+  longitude: {
+    type: Number,
+    required: validateLocation,
+  },
 };
 const globalProgram = {
   isParticipant: {

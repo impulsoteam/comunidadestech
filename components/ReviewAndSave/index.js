@@ -84,27 +84,29 @@ const ReviewAndSave = ({ community }) => {
                   : null}
               </div>
             </div>
-            <div className="managers-wrapper">
-              {community.managers.length > 0 && (
-                <>
-                  <h3>Administradores</h3>
-                  {community.managers
-                    .filter((manager) => manager.invitation.status === 'SENT')
-                    .map((manager) => (
-                      <div className="managers" key={manager._id}>
-                        <img
-                          src={manager.avatar}
-                          alt={manager.name}
-                          onError={(img) => {
-                            img.target.src = '../../static/default-user.png';
-                          }}
-                        />
-                        <span>{manager.name}</span>
-                      </div>
-                    ))}
-                </>
-              )}
-            </div>
+            {managers && (
+              <div className="managers-wrapper">
+                {community.managers.length > 0 && (
+                  <>
+                    <h3>Administradores</h3>
+                    {community.managers
+                      .filter((manager) => manager.invitation.status === 'SENT')
+                      .map((manager) => (
+                        <div className="managers" key={manager._id}>
+                          <img
+                            src={manager.avatar}
+                            alt={manager.name}
+                            onError={(img) => {
+                              img.target.src = '../../static/default-user.png';
+                            }}
+                          />
+                          <span>{manager.name}</span>
+                        </div>
+                      ))}
+                  </>
+                )}
+              </div>
+            )}
           </div>
           <div className="column">
             <p>{description}</p>

@@ -3,36 +3,55 @@ import styles from './styles';
 
 class Card extends Component {
   render() {
-    const { content } = this.props;
+    const { content, miniPage, clickCommunity } = this.props;
+    const Media = () => {
+      return (
+        <div
+          className="media"
+          onClick={(e) => {
+            clickCommunity(e);
+          }}
+          data-name={content.nameSearch}
+        >
+          <div className="media-left">
+            <figure className="image is-32x32">
+              {!content.logo || content.logo === 'legacy' ? (
+                <img
+                  src="../../static/ctech-small-logo.png"
+                  alt={content.name}
+                />
+              ) : (
+                <img src={content.logo} alt={content.name} />
+              )}
+            </figure>
+          </div>
+          <div className="media-content">
+            <p className="title is-6">{content.name}</p>
+            {content.location.city ? (
+              <p className="subtitle is-7">
+                {content.location.city}, {content.location.state}
+              </p>
+            ) : (
+              <p className="subtitle is-7">Remota</p>
+            )}
+          </div>
+          <style jsx>{styles}</style>
+        </div>
+      );
+    };
+
     return (
       <div className="card">
         <div className="card-content">
-          <a href={`/comunidade?name=${content.name}`}>
-            <div className="media">
-              <div className="media-left">
-                <figure className="image is-32x32">
-                  {!content.logo || content.logo === 'legacy' ? (
-                    <img
-                      src="../../static/ctech-small-logo.png"
-                      alt={content.name}
-                    />
-                  ) : (
-                    <img src={content.logo} alt={content.name} />
-                  )}
-                </figure>
-              </div>
-              <div className="media-content">
-                <p className="title is-6">{content.name}</p>
-                {content.location.city ? (
-                  <p className="subtitle is-7">
-                    {content.location.city}, {content.location.state}
-                  </p>
-                ) : (
-                  <p className="subtitle is-7">Remota</p>
-                )}
-              </div>
-            </div>
-          </a>
+          {miniPage ? (
+            <a href="#">
+              <Media />
+            </a>
+          ) : (
+            <a href={`/comunidade?name=${content.name}`}>
+              <Media />
+            </a>
+          )}
           <div className="content">
             <p className="description">
               {content.description <= 85
@@ -72,8 +91,7 @@ class Card extends Component {
                 )}
                 <span className="tooltip">
                   <div className="title-tooltip">Tags:</div>
-
-                  {content.tags.splice(5).map(
+                  {content.tags.slice(5).map(
                     (tag, tag_item_index) =>
                       tag.length <= 20 && (
                         <span key={tag_item_index} className="tag is-primary">

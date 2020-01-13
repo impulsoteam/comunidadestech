@@ -42,13 +42,23 @@ class Filter extends Component {
     this.setState({ url: {}, model: '' });
   };
 
-  handleMoreFilter = () => {
+  handleMoreFilter = (event) => {
+    if (event === 'forceClose') return this.setState({ isActive: '' });
     let isActive = this.state.isActive;
     this.setState({ isActive: isActive ? '' : 'is-active' });
   };
 
   render() {
-    const { list, select, reset, multipleFilter, propertyList } = this.props;
+    const {
+      list,
+      select,
+      reset,
+      multipleFilter,
+      propertyList,
+      pageOptions,
+      pageSelected,
+    } = this.props;
+
     return (
       <>
         <div className="container is-fluid filter-wrapper">
@@ -300,7 +310,7 @@ class Filter extends Component {
                 onClick={(event) => {
                   reset(event);
                   this.resetHandler();
-                  this.handleMoreFilter();
+                  this.handleMoreFilter('forceClose');
                 }}
                 className="button button-reset"
               >
@@ -315,10 +325,17 @@ class Filter extends Component {
               </button>
             </div>
           </div>
-          <div className="toggle-box-wrapper is-hidden">
+          <div className="toggle-box-wrapper">
             <div className="field has-addons">
               <p className="control">
-                <button className="button active">
+                <button
+                  type="button"
+                  value="list"
+                  className={`button ${pageSelected === 'list' && ' active'}`}
+                  onClick={(e) => {
+                    pageOptions(e);
+                  }}
+                >
                   <span className="icon is-small">
                     <i className="fas fa-list"></i>
                   </span>
@@ -326,7 +343,14 @@ class Filter extends Component {
                 </button>
               </p>
               <p className="control">
-                <button className="button">
+                <button
+                  className={`button ${pageSelected === 'map' && ' active'}`}
+                  type="button"
+                  value="map"
+                  onClick={(e) => {
+                    pageOptions(e);
+                  }}
+                >
                   <span className="icon is-small">
                     <i className="fas fa-map"></i>
                   </span>
@@ -561,7 +585,7 @@ class Filter extends Component {
               onClick={(event) => {
                 reset(event);
                 this.resetHandler();
-                this.handleMoreFilter();
+                this.handleMoreFilter('forceClose');
               }}
               className="button button-reset"
             >

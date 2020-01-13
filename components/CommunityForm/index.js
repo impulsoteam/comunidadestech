@@ -13,7 +13,8 @@ import styles from './styles';
 
 import { SignupSchema } from './utils';
 import { getFormStatus } from './formStatus';
-
+import { cities } from './locationOptions';
+console.log(cities);
 const CommunityForm = ({
   service,
   initialValues,
@@ -116,6 +117,17 @@ const CommunityForm = ({
       onSubmit={(values) => {
         if (typeof values.members === 'string')
           values.members = parseInt(values.members.replace('.', ''));
+
+        cities.map((city) => {
+          if (
+            city.state === values.location.state &&
+            city.value === values.location.city
+          ) {
+            values.location.latitude = city.latitude;
+            values.location.longitude = city.longitude;
+          }
+        });
+        console.log(values);
         service(values);
       }}
     >

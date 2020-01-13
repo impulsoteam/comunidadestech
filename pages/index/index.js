@@ -4,6 +4,7 @@ import { api, setHeader } from '../../utils/axios';
 import Card from '/components/Card/';
 import Hero from '/components/Hero/';
 import Filter from '../../components/Filter';
+import Map from '../../components/Map';
 import Counter from '../../components/Counter';
 import Router from 'next/router';
 import loader from '../../static/comunidades-tech-loader.gif';
@@ -17,6 +18,8 @@ export default class Home extends PureComponent {
     filteredMulti: [],
     searchURL: '',
     searchName: '',
+    pageOptions: '',
+    communitySideBar: {},
   };
 
   async componentDidMount() {
@@ -36,6 +39,8 @@ export default class Home extends PureComponent {
       filteredMulti,
       multipleFilter: newFilter,
       loading: false,
+      pageOptions: 'list',
+      communitySideBar: {},
     });
   }
 
@@ -76,7 +81,59 @@ export default class Home extends PureComponent {
     this.setState({
       filteredMulti: this.state.list,
       multipleFilter: {},
+      communitySideBar: {},
     });
+  };
+
+  handleClickPin = (e) => {
+    const { city, state, name } = e.target.dataset;
+    let communitySideBar = this.state.communitySideBar;
+    let newFilter = this.state.multipleFilter;
+
+    if (city && state && !name) {
+      newFilter = Object.assign(
+        { country: 'Brasil', state: state, city: city },
+        newFilter
+      );
+      this.setState({ multipleFilter: newFilter });
+      const filteredMulti = paramFilter(this.state.list, newFilter);
+      this.setState({ filteredMulti, communitySideBar: {} });
+    }
+
+    if (name) {
+      newFilter = { nameSearch: name };
+      communitySideBar = paramFilter(this.state.list, newFilter)[0];
+      this.setState({ communitySideBar });
+    }
+
+    let address = '/?';
+    for (const prop in newFilter) {
+      newFilter[prop] &&
+        (address = `${address}${prop}=`) &&
+        (address = `${address}${newFilter[prop]}&`);
+    }
+    const href = address.slice(0, -1);
+    const as = href;
+    Router.push(href, as, { shallow: true });
+  };
+
+  handleCloseSideBar = () => {
+    this.setState({ communitySideBar: {} });
+  };
+
+  handleClickCommunity = (e) => {
+    const { name } = e.target.dataset;
+    let communitySideBar = this.state.communitySideBar;
+    let newFilter = { nameSearch: name };
+
+    communitySideBar = paramFilter(this.state.list, newFilter)[0];
+
+    this.setState({ communitySideBar });
+  };
+
+  handlePageOtions = (e) => {
+    const { value } = e.target;
+    this.setState({ pageOptions: value });
   };
 
   getPropertyList = (list) => {
@@ -113,7 +170,14 @@ export default class Home extends PureComponent {
   };
 
   render() {
-    const { list, loading, filteredMulti, multipleFilter } = this.state;
+    const {
+      list,
+      loading,
+      filteredMulti,
+      multipleFilter,
+      pageOptions,
+      communitySideBar,
+    } = this.state;
     return (
       <>
         {!loading ? (
@@ -126,21 +190,36 @@ export default class Home extends PureComponent {
               reset={this.handleResetButton}
               multipleFilter={multipleFilter}
               propertyList={this.getPropertyList(list)}
+              pageOptions={this.handlePageOtions}
+              pageSelected={pageOptions}
             />
-            <div className="container">
-              <div className="columns">
-                <div className="column">
-                  <div className="columns is-multiline card-wrapper">
-                    {filteredMulti.map((card) => (
-                      <div className="column is-one-quarter" key={card.id}>
-                        <Card content={card} />
-                      </div>
-                    ))}
+            {pageOptions === 'list' && (
+              <div className="container">
+                <div className="columns">
+                  <div className="column">
+                    <div className="columns is-multiline card-wrapper">
+                      {filteredMulti.map((card) => (
+                        <div className="column is-one-quarter" key={card.id}>
+                          <Card content={card} />
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-              <style jsx>{styles}</style>
-            </div>
+            )}{' '}
+            {pageOptions === 'map' && (
+              <div className="container is-fluid map-container">
+                <Map
+                  list={filteredMulti}
+                  clickPin={this.handleClickPin}
+                  clickCommunity={this.handleClickCommunity}
+                  communitySideBar={communitySideBar}
+                  closeSideBar={this.handleCloseSideBar}
+                />
+              </div>
+            )}
+            <style jsx>{styles}</style>
           </div>
         ) : (
           <div>
