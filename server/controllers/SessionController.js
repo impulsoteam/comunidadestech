@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+
 class SessionController {
   login(req, res) {
     const { user } = req;
@@ -27,6 +28,14 @@ class SessionController {
       })
     );
     res.redirect('/');
+  }
+
+  checkError(req, res, next) {
+    const { error } = req.query;
+
+    if (!!error) return res.redirect('/');
+
+    next();
   }
 
   checkToken(req, res, next) {

@@ -1,51 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { api, setHeader } from '../../utils/axios';
 import styles from './styles';
 import { ICONS } from '../../utils/icons';
 import Divider from '../Divider';
 
-const CommunityCard = ({ canModify, community, credentials }) => {
+const ReviewAndSave = ({ community }) => {
   const {
-    _id,
     name,
-    location,
+    city,
+    state,
     members,
     category,
     description,
     logo,
     tags,
-    url,
     status,
     type,
     managers,
   } = community;
 
-  const sendNotification = (type) => {
-    const types = {
-      delete: 'Comunidade deletada com sucesso!',
-      publish: 'Comunidade publicada com sucesso!',
-    };
-    toast.success(types[type]);
-  };
-
-  const deleteCommunity = async () => {
-    setHeader(credentials);
-    await api.delete(`/community/${_id}`);
-    sendNotification('delete');
-    Router.push('/');
-  };
-
-  const publishCommunity = async () => {
-    setHeader(credentials);
-    await api.put(`/community/publish/${_id}`, {
-      status: 'published',
-    });
-    sendNotification('publish');
-    Router.push(`/`);
-  };
-  console.log();
   return (
     <div className="wrapper">
       <div className="container head">
@@ -70,9 +45,9 @@ const CommunityCard = ({ canModify, community, credentials }) => {
             </h2>
             <p className="info">
               <i className="fas fa-map-marker-alt"></i>
-              {location.city ? (
+              {city ? (
                 <span>
-                  {location.city}, {location.state}
+                  {city}, {state}
                 </span>
               ) : (
                 <span>Remota</span>
@@ -82,25 +57,6 @@ const CommunityCard = ({ canModify, community, credentials }) => {
               <i className="fas fa-users"></i>
               <span>{members} Membros</span>
             </p>
-            <div className="options">
-              {canModify && (
-                <>
-                  <a href={`/editar?name=${name}`} className="">
-                    <i className="fas fa-edit"></i>editar
-                  </a>
-                  <a onClick={deleteCommunity} className="">
-                    <i className="fas fa-trash-alt"></i>deletar
-                  </a>
-                </>
-              )}
-              {status === 'awaitingPublication' && credentials.isModerator && (
-                <>
-                  <a onClick={publishCommunity} className="button is-small">
-                    <i className="fas fa-check-double"></i> publicar
-                  </a>
-                </>
-              )}
-            </div>
           </div>
         </div>
       </div>
@@ -129,13 +85,12 @@ const CommunityCard = ({ canModify, community, credentials }) => {
               </div>
             </div>
             <div className="managers-wrapper">
-              <h3>Administradores</h3>
-              {managers
-                .filter((manager) => manager.invitation.status === 'ACCEPTED')
-                .slice(0, 4)
-                .map(
-                  (manager) =>
-                    manager.invitation.status && (
+              {community.managers.length > 0 && (
+                <>
+                  <h3>Administradores</h3>
+                  {community.managers
+                    .filter((manager) => manager.invitation.status === 'SENT')
+                    .map((manager) => (
                       <div className="managers" key={manager._id}>
                         <img
                           src={manager.avatar}
@@ -146,41 +101,8 @@ const CommunityCard = ({ canModify, community, credentials }) => {
                         />
                         <span>{manager.name}</span>
                       </div>
-                    )
-                )}
-              {managers.filter(
-                (manager) => manager.invitation.status === 'ACCEPTED'
-              ).length > 4 && (
-                <div className="tooltip-toggle">
-                  <div className="tooltip-button">
-                    <span>
-                      <i className="fas fa-plus"></i> mostrar mais
-                    </span>
-                  </div>
-                  <div className="tooltip-wrapper">
-                    {managers
-                      .filter(
-                        (manager) => manager.invitation.status === 'ACCEPTED'
-                      )
-                      .slice(4)
-                      .map(
-                        (manager) =>
-                          manager.invitation.status && (
-                            <div className="managers" key={manager._id}>
-                              <img
-                                src={manager.avatar}
-                                alt={manager.name}
-                                onError={(img) => {
-                                  img.target.src =
-                                    '../../static/default-user.png';
-                                }}
-                              />
-                              <span>{manager.name}</span>
-                            </div>
-                          )
-                      )}
-                  </div>
-                </div>
+                    ))}
+                </>
               )}
             </div>
           </div>
@@ -207,4 +129,4 @@ const CommunityCard = ({ canModify, community, credentials }) => {
   );
 };
 
-export default CommunityCard;
+export default ReviewAndSave;

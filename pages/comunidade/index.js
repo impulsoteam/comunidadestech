@@ -12,10 +12,20 @@ const Community = ({ credentials }) => {
   const [loading, setLoading] = useState(true);
   const [community, setCommunity] = useState([]);
   const router = useRouter();
-
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await api.get(`community/name/${router.query.name}`);
+      const managers = data.community.managers;
+      if (managers[0]) {
+        for (const manager of managers) {
+          const { data: response } = await api.get(
+            `/user/checkManager/${manager.email}`
+          );
+          manager.name = response.name;
+          manager.avatar = response.avatar;
+        }
+      }
+      data.community.managers = managers;
       setCommunity(data.community);
       setRelated(data.related);
       setLoading(false);
@@ -52,7 +62,7 @@ const Community = ({ credentials }) => {
                 </div>
                 <div className="columns is-2 is-variable is-multiline">
                   {related.map((card) => (
-                    <div className="column is-one-third" key={card.id}>
+                    <div className="column is-one-third " key={card.id}>
                       <Card content={card} />
                     </div>
                   ))}

@@ -11,10 +11,18 @@ export const SignupSchema = Yup.object().shape({
       /^(http(s)?:\/\/|www\.).*(\.jpg|\.jpeg|\.png)$/,
       'Deve ser um endereço de uma imagem JPG ou PNG'
     ),
-  url: Yup.string()
-    .url('Link inválido. Exemplo: http://site.com')
+  links: Yup.array().of(
+    Yup.object().shape({
+      type: Yup.string(),
+      url: Yup.string()
+        .url('Link inválido. Exemplo: http://site.com')
+        .required('Item obrigatório'),
+    })
+  ),
+  description: Yup.string()
+    .min(25, 'Fale um pouco mais sobre sua comunidade.')
+    // .max(140, 'Opa, essa descrição ficou muito grande. Max: 140 caracteres')
     .required('Item obrigatório'),
-  description: Yup.string().required('Item obrigatório'),
   type: Yup.string().required('Item obrigatório'),
   category: Yup.string().required('Item obrigatório'),
   tags: Yup.array()
@@ -51,10 +59,14 @@ export const SignupSchema = Yup.object().shape({
     }),
   }),
   globalProgram: Yup.object().shape({
-    isParticipant: Yup.string().required('Item obrigatório'),
-    name: Yup.string()
-      .min(2, 'Muito curto!')
-      .max(30, 'Muito longo!'),
+    isParticipant: Yup.bool(),
+    name: Yup.string().when('isParticipant', {
+      is: (isParticipant) => isParticipant,
+      then: Yup.string()
+        .required('Item obrigatório')
+        .min(2, 'Muito curto!')
+        .max(30, 'Muito longo!'),
+    }),
   }),
   creator: Yup.object().shape({
     rocketChat: Yup.string(),
@@ -66,6 +78,9 @@ export const SignupSchema = Yup.object().shape({
 
 export const errorMessages = {
   nameAlreadyExists: 'Comunidade já cadastrada',
+  userNotSubscribed: 'Email ainda não está cadastrado no comunidades.tech',
+  userSubscribed: 'Email está cadastrado no comunidades.tech',
+  managerAlreadyListed: 'Usuário já é administrador desta comunidade',
 };
 
 export const CATEGORIES = [
@@ -132,15 +147,16 @@ export const TAGS = [
 ];
 
 export const TYPES = [
-  { label: 'Podcast', value: 'Podcast' },
+  { label: 'Discord', value: 'Discord' },
   {
     label: 'Grupo do Facebook',
     value: 'Grupo do Facebook',
   },
-  { label: 'Whatsapp', value: 'Whatsapp' },
   { label: 'Meetup', value: 'Meetup' },
-  { label: 'Discord', value: 'Discord' },
+  { label: 'Podcast', value: 'Podcast' },
   { label: 'Slack', value: 'Slack' },
+  { label: 'Telegram', value: 'Telegram' },
+  { label: 'Whatsapp', value: 'Whatsapp' },
 ];
 
 export const MODEL = [
@@ -152,4 +168,87 @@ export const MODEL = [
 export const GLOBAL_PROGRAM = [
   { label: 'Sim', value: true },
   { label: 'Não', value: false },
+];
+
+export const LINKS = [
+  {
+    label: (
+      <span>
+        <i className="fab fa-discord"></i> <strong>Discord</strong>
+      </span>
+    ),
+    value: 'discord',
+  },
+  {
+    label: (
+      <span>
+        <i className="fab fa-facebook-square"></i> <strong>Facebook</strong>
+      </span>
+    ),
+    value: 'facebook',
+  },
+  {
+    label: (
+      <span>
+        <i className="fab fa-instagram"></i> <strong>Instagram</strong>
+      </span>
+    ),
+    value: 'instagram',
+  },
+  {
+    label: (
+      <span>
+        <i className="fab fa-meetup"></i> <strong>Meetup</strong>
+      </span>
+    ),
+    value: 'meetup',
+  },
+  {
+    label: (
+      <span>
+        <i className="fas fa-link"></i> <strong>Outro</strong>
+      </span>
+    ),
+    value: 'other',
+  },
+  {
+    label: (
+      <span>
+        <i className="fab fa-slack"></i> <strong>Slack</strong>
+      </span>
+    ),
+    value: 'slack',
+  },
+  {
+    label: (
+      <span>
+        <i className="fab fa-telegram-plane"></i> <strong>Telegram</strong>
+      </span>
+    ),
+    value: 'telegram',
+  },
+  {
+    label: (
+      <span>
+        <i className="fab fa-twitter"></i> <strong>Twitter</strong>
+      </span>
+    ),
+    value: 'twitter',
+  },
+  {
+    label: (
+      <span>
+        <i className="fas fa-globe"></i> <strong>Site</strong>
+      </span>
+    ),
+    value: 'url',
+  },
+  {
+    label: (
+      <span>
+        <i className="fab fa-whatsapp"></i> <strong>Whatsapp</strong>
+      </span>
+    ),
+    value: 'whatsapp',
+  },
 ];

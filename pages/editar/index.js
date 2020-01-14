@@ -16,6 +16,11 @@ const EditCommunity = ({ credentials }) => {
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await api.get(`community/name/${router.query.name}`);
+      const managersEmails = data.community.managers.map(({ email }) => email);
+      managersEmails.push(data.community.creator.email);
+      managersEmails.push(data.community.owner);
+      credentials.isModerator && managersEmails.push(credentials.email);
+      if (!managersEmails.includes(credentials.email)) Router.push('/');
       setCommunity(data.community);
       setLoading(false);
     };
@@ -37,16 +42,14 @@ const EditCommunity = ({ credentials }) => {
     <div className="container">
       <div className="hero-body">
         <div className="columns is-centered">
-          <div className="column has-text-centered">
-            <h1 className="title is-size-1-desktop is-size-2-tablet is-size-3-mobile">
-              Edite sua comunidade
-            </h1>
+          <div className="column">
             {!loading && (
               <CommunityForm
                 credentials={credentials}
                 loading={loading}
                 service={editCommunity}
                 initialValues={community}
+                type={'edit'}
               />
             )}
           </div>

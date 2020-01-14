@@ -3,6 +3,12 @@ import mongoose from 'mongoose';
 export const modelTypes = ['online', 'presential', 'both'];
 export const statusTypes = ['awaitingPublication', 'published', 'archived'];
 
+export const invitationStatus = {
+  awaiting: 'AWAITING',
+  accepted: 'ACCEPTED',
+  declined: 'DECLINED',
+};
+
 function validateCountry() {
   return !(this.model === 'online');
 }
@@ -57,6 +63,29 @@ const globalProgram = {
   },
 };
 
+const manager = {
+  _id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  email: { type: String, required: true },
+  invitation: {
+    status: { type: String, required: true },
+    in: { type: Date, required: true },
+  },
+};
+
+const links = {
+  type: {
+    type: String,
+    required: true,
+  },
+  url: {
+    type: String,
+    required: true,
+  },
+};
+
 const communitySchema = new mongoose.Schema(
   {
     name: {
@@ -65,10 +94,6 @@ const communitySchema = new mongoose.Schema(
       unique: true,
     },
     logo: {
-      type: String,
-      required: true,
-    },
-    url: {
       type: String,
       required: true,
     },
@@ -89,6 +114,7 @@ const communitySchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+    links: [links],
     members: {
       type: Number,
       required: true,
@@ -104,6 +130,7 @@ const communitySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    managers: [manager],
     creator,
     status: {
       type: String,

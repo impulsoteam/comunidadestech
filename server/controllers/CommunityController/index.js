@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import Community, { statusTypes } from '../../models/community';
 import User from '../../models/user';
 import Utils from './Utils';
@@ -66,6 +68,35 @@ class CommunityController {
       );
 
       return res.json(publishedCommunity);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  }
+
+  async setInviteResponse(req, res) {
+    try {
+      const { body, decoded } = req;
+      const response = body.accept ? 'ACCEPTED' : 'DECLINED';
+      const updatedCommunity = await Community.findOneAndUpdate(
+        {
+          _id: body.communityId,
+          managers: {
+            $elemMatch: { _id: decoded.id, 'invitation.status': 'SENT' },
+          },
+        },
+        {
+          $set: {
+            'managers.$.invitation.status': response,
+            'managers.$.invitation.in': moment().toDate(),
+          },
+        },
+        { returnOriginal: false }
+      );
+
+      const success = updatedCommunity.managers.filter(
+        ({ _id, status }) => _id === decoded.id && status === 'SENT'
+      );
+      return res.json({ success: success.length === 0 });
     } catch (error) {
       return res.status(500).json(error);
     }

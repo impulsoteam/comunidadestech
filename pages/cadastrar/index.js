@@ -15,13 +15,13 @@ const RegisterCommunity = ({ credentials }) => {
     const { _id, name, email } = credentials;
     return {
       name: '',
-      model: 'both',
+      model: 'online',
       location: {
         country: '',
         state: '',
         city: '',
       },
-      url: 'https://',
+      links: [{ type: 'url', url: '' }],
       description: '',
       category: '',
       type: '',
@@ -39,6 +39,7 @@ const RegisterCommunity = ({ credentials }) => {
         rocketChat: '',
       },
       owner: '',
+      managers: [],
     };
   };
 
@@ -57,23 +58,13 @@ const RegisterCommunity = ({ credentials }) => {
     <div className="container">
       <div className="hero-body">
         <div className="columns is-centered">
-          <div className="column has-text-centered">
-            <h1 className="title is-size-1-desktop is-size-2-tablet is-size-3-mobile">
-              Cadastre sua comunidade
-            </h1>
-            <h2 className="subtitle is-size-4-desktop">
-              Preencha o formulário e tenha sua comunidade publicada em nosso
-              diretório!
-            </h2>
-          </div>
-        </div>
-        <div className="columns is-centered">
           <div className="column">
             <CommunityForm
               credentials={credentials}
               service={postCommunity}
               loading={loading}
               initialValues={getInitialValues()}
+              type={'create'}
             />
           </div>
         </div>

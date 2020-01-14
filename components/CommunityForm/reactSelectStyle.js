@@ -66,3 +66,28 @@ export const reactSelectStyle = {
     };
   },
 };
+
+export const linksSelectStyle = {
+  indicatorSeparator: (styles) => ({ ...styles, display: 'none' }),
+  singleValue: (styles) => ({ ...styles, strong: { display: 'none' } }),
+  control: (styles) => ({
+    ...styles,
+    borderBottomRightRadius: 0,
+    borderTopRightRadius: 0,
+    height: '44px',
+    width: '60px',
+
+    i: {
+      color: `${colors.primary}`,
+    },
+  }),
+  dropdownIndicator: (styles) => ({
+    ...styles,
+    color: `${colors.primary}`,
+    padding: '0 8px 0 0',
+    ':hover': {
+      opacity: '0.5',
+    },
+  }),
+  menu: (styles) => ({ ...styles, width: '100%' }),
+};
