@@ -131,7 +131,7 @@ export default class Home extends PureComponent {
     this.setState({ communitySideBar });
   };
 
-  handlePageOtions = (e) => {
+  handlePageOptions = (e) => {
     const { value } = e.target;
     this.setState({ pageOptions: value });
   };
@@ -190,7 +190,7 @@ export default class Home extends PureComponent {
               reset={this.handleResetButton}
               multipleFilter={multipleFilter}
               propertyList={this.getPropertyList(list)}
-              pageOptions={this.handlePageOtions}
+              pageOptions={this.handlePageOptions}
               pageSelected={pageOptions}
             />
             {pageOptions === 'list' && (
