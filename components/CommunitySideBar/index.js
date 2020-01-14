@@ -13,6 +13,7 @@ const CommunitySideBar = ({ community }) => {
     description,
     logo,
     tags,
+    slug,
   } = community;
 
   return (
@@ -87,7 +88,7 @@ const CommunitySideBar = ({ community }) => {
       </div>
       <div className="container">
         <a
-          href={`/comunidade?name=${name}`}
+          href={`/c/${slug}`}
           className="button is-primary has-text-weight-bold"
         >
           Mais informações

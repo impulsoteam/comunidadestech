@@ -48,7 +48,7 @@ class Card extends Component {
               <Media />
             </a>
           ) : (
-            <a href={`/comunidade?name=${content.name}`}>
+            <a href={`/c/${content.slug}`}>
               <Media />
             </a>
           )}
