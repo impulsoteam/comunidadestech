@@ -202,7 +202,7 @@ export default function BasicInfos({
         </label>
       )}
       <label>
-        Link da Logo da comunidade
+        Link da Logo da comunidade *
         <div className="input-wrapper">
           <i className="far fa-file-image"></i>
           <Field
