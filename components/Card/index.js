@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import styles from './styles';
 
 class Card extends Component {
@@ -7,7 +8,7 @@ class Card extends Component {
     return (
       <div className="card">
         <div className="card-content">
-          <a href={`/comunidade?name=${content.name}`}>
+          <a href={`/c/${content.slug}`}>
             <div className="media">
               <div className="media-left">
                 <figure className="image is-32x32">

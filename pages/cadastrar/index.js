@@ -15,6 +15,7 @@ const RegisterCommunity = ({ credentials }) => {
     const { _id, name, email } = credentials;
     return {
       name: '',
+      slug: 'comunidades.tech/c/',
       model: 'online',
       location: {
         country: '',

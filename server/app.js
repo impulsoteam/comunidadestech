@@ -45,11 +45,21 @@ app
     server.use(express.json());
     server.use(passport.initialize());
     server.use(passport.session());
+
     PassportConfig.google();
     PassportConfig.linkedin();
-    server.use('/auth', sessionRoutes);
 
+    server.use('/auth', sessionRoutes);
     server.use('/api/v1', routes);
+
+    server.get('/c/:slug', (req, res) => {
+      return app.render(req, res, '/comunidade', { slug: req.params.slug });
+    });
+
+    server.get('/editar/:slug', (req, res) => {
+      return app.render(req, res, '/editar', { slug: req.params.slug });
+    });
+
     server.get('*', (req, res) => {
       return handle(req, res);
     });

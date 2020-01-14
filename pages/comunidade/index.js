@@ -14,7 +14,7 @@ const Community = ({ credentials }) => {
   const router = useRouter();
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await api.get(`community/name/${router.query.name}`);
+      const { data } = await api.get(`community/slug/${router.query.slug}`);
       const managers = data.community.managers;
       if (managers[0]) {
         for (const manager of managers) {
@@ -93,7 +93,7 @@ const Community = ({ credentials }) => {
 };
 
 Community.getInitialProps = async (ctx) => {
-  if (!ctx.query.name) {
+  if (!ctx.query.slug) {
     ctx.res.writeHead(302, {
       Location: '/',
     });

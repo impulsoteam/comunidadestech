@@ -10,6 +10,9 @@ const CommunityCard = ({ canModify, community, credentials }) => {
   const {
     _id,
     name,
+    slug,
+    city,
+    state,
     location,
     members,
     category,
@@ -85,7 +88,7 @@ const CommunityCard = ({ canModify, community, credentials }) => {
             <div className="options">
               {canModify && (
                 <>
-                  <a href={`/editar?name=${name}`} className="">
+                  <a href={`/editar/${slug}`} className="">
                     <i className="fas fa-edit"></i>editar
                   </a>
                   <a onClick={deleteCommunity} className="">

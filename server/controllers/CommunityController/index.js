@@ -138,6 +138,16 @@ class CommunityController {
     }
   }
 
+  async checkSlug(req, res) {
+    try {
+      const { slug } = req.params;
+      const alreadyExists = await Community.findOne({ slug });
+      return res.json(!!alreadyExists);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  }
+
   async getByStatus(req, res) {
     try {
       const { status } = req.params;
@@ -155,19 +165,19 @@ class CommunityController {
     }
   }
 
-  async getByName(req, res) {
+  async getBySlug(req, res) {
     try {
-      const { name } = req.params;
+      const { slug } = req.params;
 
-      const community = await Community.findOne({ name });
+      const community = await Community.findOne({ slug });
 
       if (!community)
         return res
           .status(400)
-          .json({ message: 'Community name does not exists' });
+          .json({ message: 'Community slug does not exists' });
 
       const related = await Utils.getRelated({
-        name,
+        name: community.name,
         city: community.location.city,
         state: community.location.state,
         category: community.category,
