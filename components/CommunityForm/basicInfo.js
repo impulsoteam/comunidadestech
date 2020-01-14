@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Field, ErrorMessage } from 'formik';
+import slug from 'slug';
 import { api, setHeader } from '../../utils/axios';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -23,17 +24,33 @@ export default function BasicInfos({
   setFieldValue,
   setFieldTouched,
 }) {
-  const { nameAlreadyExists } = errorMessages;
+  const { nameAlreadyExists, slugAlreadyExists } = errorMessages;
+
   const animatedComponents = makeAnimated();
+
+  useEffect(() => {
+    setFieldValue('slug', slug(values.name, { lower: true }));
+  }, [values.name]);
+
+  const checkSlug = async (slug) => {
+    const toShort = slug.length < 4;
+    const notChanged = slug === initialValues.slug;
+    if (!slug || toShort || notChanged) return;
+    setHeader(credentials);
+    const { data } = await api.get(`/community/checkSlug/${slug}`);
+    return data ? slugAlreadyExists : null;
+  };
+
   const checkName = async (name) => {
-    const toShort = name.length < 3;
+    const toShort = name.length < 4;
     const notChanged = name === initialValues.name;
-    if (toShort || notChanged) return;
+    if (!name || toShort || notChanged) return;
     setHeader(credentials);
     const { data } = await api.get(`/community/checkName/${name}`);
 
     return data ? nameAlreadyExists : null;
   };
+
   const handleChange = (selectedOption) => {
     const selected = selectedOption && selectedOption.map(({ value }) => value);
     setFieldValue('tags', selected);
@@ -61,6 +78,22 @@ export default function BasicInfos({
         <ErrorMessage name="name">
           {(msg) => <div className="form-error">{msg}</div>}
         </ErrorMessage>
+      </label>
+      <label>
+        Url da comunidade *
+        <div className="input-wrapper">
+          <i className="fas fa-users fa-fw"></i>
+          <Field
+            name="slug"
+            value={`comunidades.tech/c/${values.slug}`}
+            validate={checkSlug}
+            className="input is-medium"
+            disabled
+          />
+        </div>
+        {errors.slug === slugAlreadyExists && (
+          <div className="form-error">{errors.slug}</div>
+        )}
       </label>
       <label>
         Tipo *
@@ -169,7 +202,7 @@ export default function BasicInfos({
         </label>
       )}
       <label>
-        Link da Logo da comunidade
+        Link da Logo da comunidade *
         <div className="input-wrapper">
           <i className="far fa-file-image"></i>
           <Field

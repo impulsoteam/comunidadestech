@@ -14,9 +14,9 @@ export default css`
     }
 
     .form-error {
-      font-size: 10px;
+      font-size: 13px;
       color: ${colors.chestnutRose};
-      line-height: 1;
+      line-height: 0;
       position: absolute;
       bottom: -12px;
       font-weight: normal;
