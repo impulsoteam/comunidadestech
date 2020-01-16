@@ -15,6 +15,7 @@ export default css`
         border: none;
         display: inline-block;
         position: relative;
+        cursor: pointer;
 
         .marker-form {
           background: ${colors.primary};
@@ -75,7 +76,27 @@ export default css`
         max-width: calc(100% - 4px);
         padding: 10px;
       }
+
+      .button-reset {
+        background-color: ${colors.chestnutRose};
+        color: ${colors.white};
+
+        &:hover {
+          background-color: ${colors.white};
+          border: solid 1px;
+          color: ${colors.chestnutRose};
+        }
+
+        span:not(.icon) {
+          font-size: 10px;
+          font-weight: bold;
+          line-height: 1;
+          text-align: left;
+          text-transform: uppercase;
+        }
+      }
     }
+
     .community-side-bar {
       background: white;
       box-shadow: -7px 0px 20px -10px rgba(0, 0, 0, 0.4);

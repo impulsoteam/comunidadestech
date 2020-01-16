@@ -10,6 +10,7 @@ const Map = ({
   clickCommunity,
   communitySideBar,
   closeSideBar,
+  reset,
 }) => {
   const [viewport, setViewport] = useState({
     latitude: -15.6634068,
@@ -113,7 +114,7 @@ const Map = ({
                     <div className="marker-form"></div>
                     <div className="marker-content">
                       <img src={community.logo} alt={community.name} />
-                    </div>
+                    </div>{' '}
                   </button>
                 </Marker>
               ))
@@ -121,9 +122,21 @@ const Map = ({
           <div style={{ position: 'absolute', left: '10px', top: '10px' }}>
             <NavigationControl />
           </div>
+          <div style={{ position: 'absolute', right: '10px', top: '10px' }}>
+            <button
+              onClick={(event) => {
+                reset(event);
+              }}
+              className="button button-reset-map"
+            >
+              <span className="icon is-small">
+                <i className="fas fa-sync-alt"></i>
+              </span>
+              <span>Resetar Mapa</span>
+            </button>
+          </div>
         </ReactMap>
       </div>
-
       <div className="community-list">
         <div className="container">
           <div className="columns">
@@ -138,6 +151,19 @@ const Map = ({
                     />
                   </div>
                 ))}
+                <div className="column is-12">
+                  <button
+                    onClick={(event) => {
+                      reset(event);
+                    }}
+                    className="button button-reset is-fullwidth"
+                  >
+                    <span className="icon is-small">
+                      <i className="fas fa-sync-alt"></i>
+                    </span>
+                    <span>Resetar Filtro</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>

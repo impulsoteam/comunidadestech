@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './styles';
 import { ICONS } from '../../utils/icons';
-import Divider from '../Divider';
 
 const CommunitySideBar = ({ community }) => {
   const {

@@ -20,6 +20,8 @@ export default class Home extends PureComponent {
     searchName: '',
     pageOptions: '',
     communitySideBar: {},
+    url: {},
+    model: '',
   };
 
   async componentDidMount() {
@@ -35,12 +37,17 @@ export default class Home extends PureComponent {
 
     const filteredMulti = paramFilter(this.state.list, newFilter);
 
+    const url = Router.router.query;
+    const model = url.model;
+
     this.setState({
       filteredMulti,
       multipleFilter: newFilter,
       loading: false,
       pageOptions: 'list',
       communitySideBar: {},
+      url,
+      model,
     });
   }
 
@@ -82,6 +89,8 @@ export default class Home extends PureComponent {
       filteredMulti: this.state.list,
       multipleFilter: {},
       communitySideBar: {},
+      url: {},
+      model: '',
     });
   };
 
@@ -136,6 +145,18 @@ export default class Home extends PureComponent {
     this.setState({ pageOptions: value });
   };
 
+  paramsHandler = (event) => {
+    const { name, value } = event.target;
+    const newUrl = this.state.url;
+    let model = this.state.model;
+    name === 'model' && (model = value);
+    value === 'all' ? (newUrl[name] = '') : (newUrl[name] = value);
+    this.setState({
+      url: newUrl,
+      model,
+    });
+  };
+
   getPropertyList = (list) => {
     const propertyList = {
       tags: [],
@@ -177,6 +198,8 @@ export default class Home extends PureComponent {
       multipleFilter,
       pageOptions,
       communitySideBar,
+      url,
+      model,
     } = this.state;
     return (
       <>
@@ -192,6 +215,9 @@ export default class Home extends PureComponent {
               propertyList={this.getPropertyList(list)}
               pageOptions={this.handlePageOptions}
               pageSelected={pageOptions}
+              url={url}
+              model={model}
+              paramsHandler={this.paramsHandler}
             />
             {pageOptions === 'list' && (
               <div className="container">
@@ -216,6 +242,7 @@ export default class Home extends PureComponent {
                   clickCommunity={this.handleClickCommunity}
                   communitySideBar={communitySideBar}
                   closeSideBar={this.handleCloseSideBar}
+                  reset={this.handleResetButton}
                 />
               </div>
             )}
