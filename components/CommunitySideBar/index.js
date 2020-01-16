@@ -59,14 +59,34 @@ const CommunitySideBar = ({ community }) => {
                 <span className="tag is-dark">{category}</span>
               </div>
               <div>
-                {tags
-                  ? tags.map(
-                      (tag) =>
+                {tags &&
+                  tags.slice(0, 5).map(
+                    (tag, tag_item_index) =>
+                      tag.length <= 20 && (
+                        <span key={tag_item_index} className="tag is-primary">
+                          {tag}
+                        </span>
+                      )
+                  )}
+                <div className="open-tooltip">
+                  {tags.length > 5 && (
+                    <button type="button" className="tag btn-tooltip">
+                      <i className="fas fa-plus"></i>
+                      &nbsp;Tags
+                    </button>
+                  )}
+                  <span className="tooltip">
+                    <div className="title-tooltip">Tags:</div>
+                    {tags.slice(5).map(
+                      (tag, tag_item_index) =>
                         tag.length <= 20 && (
-                          <span className="tag is-primary">{tag}</span>
+                          <span key={tag_item_index} className="tag is-primary">
+                            {tag}
+                          </span>
                         )
-                    )
-                  : null}
+                    )}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
