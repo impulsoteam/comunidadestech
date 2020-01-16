@@ -100,10 +100,14 @@ export default class Home extends PureComponent {
     let newFilter = this.state.multipleFilter;
 
     if (city && state && !name) {
-      newFilter = Object.assign(
-        { country: 'Brasil', state: state, city: city },
-        newFilter
-      );
+      newFilter.country
+        ? delete newFilter.country &&
+          delete newFilter.state &&
+          delete newFilter.city
+        : (newFilter = Object.assign(
+            { country: 'Brasil', state: state, city: city },
+            newFilter
+          ));
       this.setState({ multipleFilter: newFilter });
       const filteredMulti = paramFilter(this.state.list, newFilter);
       this.setState({ filteredMulti, communitySideBar: {} });
