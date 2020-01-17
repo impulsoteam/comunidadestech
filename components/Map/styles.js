@@ -143,6 +143,7 @@ export default css`
 
   @media screen and (max-width: 768px) {
     .map-component-wrapper {
+      min-height: 600px;
       .map-wrapper {
         width: 100%;
       }
