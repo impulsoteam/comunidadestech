@@ -22,6 +22,7 @@ export default class Home extends PureComponent {
     communitySideBar: {},
     url: {},
     model: '',
+    mobileSideBar: false,
   };
 
   async componentDidMount() {
@@ -48,6 +49,7 @@ export default class Home extends PureComponent {
       communitySideBar: {},
       url,
       model,
+      mobileSideBar: false,
     });
   }
 
@@ -110,7 +112,12 @@ export default class Home extends PureComponent {
           ));
       this.setState({ multipleFilter: newFilter });
       const filteredMulti = paramFilter(this.state.list, newFilter);
-      this.setState({ filteredMulti, communitySideBar: {} });
+      const mobileSideBar = this.state.mobileSideBar ? false : true;
+      this.setState({
+        filteredMulti,
+        communitySideBar: {},
+        mobileSideBar,
+      });
     }
 
     if (name) {
@@ -132,6 +139,18 @@ export default class Home extends PureComponent {
 
   handleCloseSideBar = () => {
     this.setState({ communitySideBar: {} });
+  };
+
+  handleCloseMobileSideBar = () => {
+    let newFilter = this.state.multipleFilter;
+    delete newFilter.country;
+    delete newFilter.state;
+    delete newFilter.city;
+    this.setState({ mobileSideBar: false, multipleFilter: newFilter });
+    setTimeout(() => {
+      const filteredMulti = paramFilter(this.state.list, newFilter);
+      this.setState({ filteredMulti });
+    }, 300);
   };
 
   handleClickCommunity = (e) => {
@@ -204,6 +223,7 @@ export default class Home extends PureComponent {
       communitySideBar,
       url,
       model,
+      mobileSideBar,
     } = this.state;
     return (
       <>
@@ -246,7 +266,9 @@ export default class Home extends PureComponent {
                   clickCommunity={this.handleClickCommunity}
                   communitySideBar={communitySideBar}
                   closeSideBar={this.handleCloseSideBar}
+                  closeMobileSideBar={this.handleCloseMobileSideBar}
                   reset={this.handleResetButton}
+                  mobileSideBar={mobileSideBar}
                 />
               </div>
             )}

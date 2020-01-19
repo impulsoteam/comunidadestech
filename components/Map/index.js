@@ -10,7 +10,9 @@ const Map = ({
   clickCommunity,
   communitySideBar,
   closeSideBar,
+  closeMobileSideBar,
   reset,
+  mobileSideBar,
 }) => {
   const [viewport, setViewport] = useState({
     latitude: -15.6634068,
@@ -137,8 +139,15 @@ const Map = ({
           </div>
         </ReactMap>
       </div>
-      <div className="community-list">
+      <div className={`community-list ${mobileSideBar && `mobile-sidebar`}`}>
         <div className="container">
+          <div className="columns button-wrapper" onClick={closeMobileSideBar}>
+            <div className="column is-12 " style={{ height: '2.75rem' }}>
+              <div className="close-button">
+                <i className="fas fa-chevron-right"></i>
+              </div>
+            </div>
+          </div>
           <div className="columns">
             <div className="column">
               <div className="columns is-multiline card-wrapper">

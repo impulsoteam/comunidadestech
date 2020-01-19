@@ -111,21 +111,24 @@ export default css`
       &.is-active {
         right: 0;
       }
+    }
+    .close-button {
+      align-items: center;
+      background: ${colors.dark};
+      border-radius: 50%;
+      color: ${colors.white};
+      display: flex;
+      height: 1.5rem;
+      justify-content: center;
+      margin: 0.75rem;
+      padding-left: 1px;
+      position: absolute;
+      top: 0;
+      width: 1.5rem;
+    }
 
-      .close-button {
-        align-items: center;
-        background: ${colors.dark};
-        border-radius: 50%;
-        color: ${colors.white};
-        display: flex;
-        height: 1.5rem;
-        justify-content: center;
-        margin: 0.75rem;
-        padding-left: 1px;
-        position: absolute;
-        top: 0;
-        width: 1.5rem;
-      }
+    .button-wrapper {
+      display: none;
     }
   }
 
@@ -149,7 +152,25 @@ export default css`
       }
 
       .community-list {
-        display: none;
+        background: ${colors.white};
+        height: 100%;
+        overflow-x: hidden;
+        position: absolute;
+        right: -81%;
+        transition: all 0.3s;
+        width: 80%;
+
+        .container {
+          padding: 4px;
+        }
+
+        &.mobile-sidebar {
+          right: 0;
+        }
+
+        .button-wrapper {
+          display: flex;
+        }
       }
 
       .community-side-bar {
