@@ -58,7 +58,7 @@ const Map = ({
         <ReactMap
           style={{ width: '100%' }}
           {...viewport}
-          mapboxApiAccessToken="pk.eyJ1IjoiaW1wdWxzbyIsImEiOiJjazVtZ3JnaTIwemp3M2tqb2EwYmxqdDdtIn0.SbP2fpIN_HUJ1nyq9C39iQ"
+          mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
           mapStyle="mapbox://styles/impulso/ck5mh46rt392t1iqkpdpl7dx0"
           scrollZoom={false}
           onViewportChange={(viewport) => {
