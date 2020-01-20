@@ -58,8 +58,8 @@ const Map = ({
         <ReactMap
           style={{ width: '100%' }}
           {...viewport}
-          mapboxApiAccessToken="pk.eyJ1IjoidGhlbGVvYWQiLCJhIjoiY2s1NDVwM2hkMGZ6ZzNncWt1dzBzZnZudSJ9.nfMovVhu68L-bZj4WE9Mpg"
-          mapStyle="mapbox://styles/theleoad/ck54752un51f91dlkif9somna"
+          mapboxApiAccessToken="pk.eyJ1IjoiaW1wdWxzbyIsImEiOiJjazVtZ3JnaTIwemp3M2tqb2EwYmxqdDdtIn0.SbP2fpIN_HUJ1nyq9C39iQ"
+          mapStyle="mapbox://styles/impulso/ck5mh46rt392t1iqkpdpl7dx0"
           scrollZoom={false}
           onViewportChange={(viewport) => {
             setViewport(viewport);
