@@ -21,10 +21,7 @@ export default class MyDocument extends Document {
     return (
       <html lang="pt-br">
         <Head>
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0"
-          />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content="#8c43ff" />
           <meta
             name="description"

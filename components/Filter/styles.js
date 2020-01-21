@@ -129,7 +129,7 @@ export default css`
       padding: 0.25rem 0.75rem;
     }
 
-    .more-filter {
+    .more-filter.filter-box {
       flex-direction: column;
       padding-top: 0.75rem;
 
@@ -143,6 +143,14 @@ export default css`
           select,
           input {
             width: 100%;
+            font-size: 16px;
+            &:not(.is-multiple):not(.is-loading)::after {
+              top: 50%;
+            }
+          }
+          select,
+          input {
+            padding-left: 1.4rem;
           }
         }
       }
