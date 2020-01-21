@@ -48,6 +48,7 @@
     "react-dom": "^16.8.6",
     "react-dropzone": "^10.2.1",
     "react-image-crop": "^8.5.0",
+    "react-map-gl": "^5.2.0",
     "react-select": "^3.0.8",
     "react-text-mask": "^5.4.3",
     "react-toastify": "^5.4.1",

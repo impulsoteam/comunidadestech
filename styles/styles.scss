@@ -72,3 +72,32 @@ textarea {
     opacity: 1;
   }
 }
+
+.map-wrapper > div {
+  height: 100% !important;
+  width: 100% !important;
+
+  .mapboxgl-marker {
+    left: -29px !important;
+    top: -46px !important;
+  }
+
+  .button-reset-map {
+    background-color: $chestnutRose;
+    color: $white;
+
+    &:hover {
+      background-color: $white;
+      border: solid 1px;
+      color: $chestnutRose;
+    }
+
+    span:not(.icon) {
+      font-size: 10px;
+      font-weight: bold;
+      line-height: 1;
+      text-align: left;
+      text-transform: uppercase;
+    }
+  }
+}
