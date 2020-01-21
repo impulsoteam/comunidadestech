@@ -9,4 +9,9 @@ export default css`
   .card-wrapper {
     margin-top: 20px;
   }
+
+  .map-container {
+    margin: 0;
+    padding: 0;
+  }
 `;

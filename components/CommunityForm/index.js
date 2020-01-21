@@ -14,6 +14,7 @@ import styles from './styles';
 import { SignupSchema } from './utils';
 import { invitationStatus } from '../../utils/variables';
 import { getFormStatus } from './formStatus';
+import { cities } from './locationOptions';
 
 const CommunityForm = ({
   service,
@@ -46,6 +47,17 @@ const CommunityForm = ({
 
     if (typeof values.members === 'string')
       values.members = parseInt(values.members.replace('.', ''));
+
+    if (values.location.city) {
+      const { location } = values;
+      for (const city of cities) {
+        if (location.state === city.state && location.city === city.value) {
+          values.location.latitude = city.latitude;
+          values.location.longitude = city.longitude;
+          break;
+        }
+      }
+    }
 
     service(values);
   };

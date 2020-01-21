@@ -4,6 +4,7 @@ import { api, setHeader } from '../../utils/axios';
 import Card from '/components/Card/';
 import Hero from '/components/Hero/';
 import Filter from '../../components/Filter';
+import Map from '../../components/Map';
 import Counter from '../../components/Counter';
 import Router from 'next/router';
 import loader from '../../static/comunidades-tech-loader.gif';
@@ -17,6 +18,11 @@ export default class Home extends PureComponent {
     filteredMulti: [],
     searchURL: '',
     searchName: '',
+    pageOptions: '',
+    communitySideBar: {},
+    url: {},
+    model: '',
+    mobileSideBar: false,
   };
 
   async componentDidMount() {
@@ -32,10 +38,18 @@ export default class Home extends PureComponent {
 
     const filteredMulti = paramFilter(this.state.list, newFilter);
 
+    const url = Router.router.query;
+    const model = url.model;
+
     this.setState({
       filteredMulti,
       multipleFilter: newFilter,
       loading: false,
+      pageOptions: 'list',
+      communitySideBar: {},
+      url,
+      model,
+      mobileSideBar: false,
     });
   }
 
@@ -76,6 +90,93 @@ export default class Home extends PureComponent {
     this.setState({
       filteredMulti: this.state.list,
       multipleFilter: {},
+      communitySideBar: {},
+      url: {},
+      model: '',
+    });
+  };
+
+  handleClickPin = (e) => {
+    const { city, state, name } = e.target.dataset;
+    let communitySideBar = this.state.communitySideBar;
+    let newFilter = this.state.multipleFilter;
+
+    if (city && state && !name) {
+      newFilter.country
+        ? delete newFilter.country &&
+          delete newFilter.state &&
+          delete newFilter.city
+        : (newFilter = Object.assign(
+            { country: 'Brasil', state: state, city: city },
+            newFilter
+          ));
+      this.setState({ multipleFilter: newFilter });
+      const filteredMulti = paramFilter(this.state.list, newFilter);
+      const mobileSideBar = this.state.mobileSideBar ? false : true;
+      this.setState({
+        filteredMulti,
+        communitySideBar: {},
+        mobileSideBar,
+      });
+    }
+
+    if (name) {
+      newFilter = { nameSearch: name };
+      communitySideBar = paramFilter(this.state.list, newFilter)[0];
+      this.setState({ communitySideBar });
+    }
+
+    let address = '/?';
+    for (const prop in newFilter) {
+      newFilter[prop] &&
+        (address = `${address}${prop}=`) &&
+        (address = `${address}${newFilter[prop]}&`);
+    }
+    const href = address.slice(0, -1);
+    const as = href;
+    Router.push(href, as, { shallow: true });
+  };
+
+  handleCloseSideBar = () => {
+    this.setState({ communitySideBar: {} });
+  };
+
+  handleCloseMobileSideBar = () => {
+    let newFilter = this.state.multipleFilter;
+    delete newFilter.country;
+    delete newFilter.state;
+    delete newFilter.city;
+    this.setState({ mobileSideBar: false, multipleFilter: newFilter });
+    setTimeout(() => {
+      const filteredMulti = paramFilter(this.state.list, newFilter);
+      this.setState({ filteredMulti });
+    }, 300);
+  };
+
+  handleClickCommunity = (e) => {
+    const { name } = e.target.dataset;
+    let communitySideBar = this.state.communitySideBar;
+    let newFilter = { nameSearch: name };
+
+    communitySideBar = paramFilter(this.state.list, newFilter)[0];
+
+    this.setState({ communitySideBar });
+  };
+
+  handlePageOptions = (e) => {
+    const { value } = e.target;
+    this.setState({ pageOptions: value });
+  };
+
+  paramsHandler = (event) => {
+    const { name, value } = event.target;
+    const newUrl = this.state.url;
+    let model = this.state.model;
+    name === 'model' && (model = value);
+    value === 'all' ? (newUrl[name] = '') : (newUrl[name] = value);
+    this.setState({
+      url: newUrl,
+      model,
     });
   };
 
@@ -113,7 +214,17 @@ export default class Home extends PureComponent {
   };
 
   render() {
-    const { list, loading, filteredMulti, multipleFilter } = this.state;
+    const {
+      list,
+      loading,
+      filteredMulti,
+      multipleFilter,
+      pageOptions,
+      communitySideBar,
+      url,
+      model,
+      mobileSideBar,
+    } = this.state;
     return (
       <>
         {!loading ? (
@@ -126,21 +237,42 @@ export default class Home extends PureComponent {
               reset={this.handleResetButton}
               multipleFilter={multipleFilter}
               propertyList={this.getPropertyList(list)}
+              pageOptions={this.handlePageOptions}
+              pageSelected={pageOptions}
+              url={url}
+              model={model}
+              paramsHandler={this.paramsHandler}
             />
-            <div className="container">
-              <div className="columns">
-                <div className="column">
-                  <div className="columns is-multiline card-wrapper">
-                    {filteredMulti.map((card) => (
-                      <div className="column is-one-quarter" key={card.id}>
-                        <Card content={card} />
-                      </div>
-                    ))}
+            {pageOptions === 'list' && (
+              <div className="container">
+                <div className="columns">
+                  <div className="column">
+                    <div className="columns is-multiline card-wrapper">
+                      {filteredMulti.map((card) => (
+                        <div className="column is-one-quarter" key={card.id}>
+                          <Card content={card} />
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-              <style jsx>{styles}</style>
-            </div>
+            )}{' '}
+            {pageOptions === 'map' && (
+              <div className="container is-fluid map-container">
+                <Map
+                  list={filteredMulti}
+                  clickPin={this.handleClickPin}
+                  clickCommunity={this.handleClickCommunity}
+                  communitySideBar={communitySideBar}
+                  closeSideBar={this.handleCloseSideBar}
+                  closeMobileSideBar={this.handleCloseMobileSideBar}
+                  reset={this.handleResetButton}
+                  mobileSideBar={mobileSideBar}
+                />
+              </div>
+            )}
+            <style jsx>{styles}</style>
           </div>
         ) : (
           <div>
