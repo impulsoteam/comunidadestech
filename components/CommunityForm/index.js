@@ -145,6 +145,15 @@ const CommunityForm = ({
         return (
           <>
             <div className="columns is-centered">
+              <pre
+                style={{
+                  background: '#f6f8fa',
+                  fontSize: '.65rem',
+                  padding: '.5rem',
+                }}
+              >
+                {JSON.stringify({ values }, null, 2)}
+              </pre>
               <div className="column has-text-centered">
                 {type === 'create' && currentPage !== 'ReviewAndSave' && (
                   <>

@@ -32,7 +32,8 @@ const RegisterCommunity = ({ credentials }) => {
         name: '',
       },
       members: '',
-      logo: '',
+      logo:
+        'https://s3-sa-east-1.amazonaws.com/assets.comunidades.tech/a1f320f2a9bdeb20f4a8dc98e4c97d6b-ctech.svg',
       creator: {
         _id,
         name,

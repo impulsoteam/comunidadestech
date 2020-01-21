@@ -7,6 +7,8 @@ import makeAnimated from 'react-select/animated';
 import { reactSelectStyle } from './reactSelectStyle';
 import styles from './styles';
 
+import Logo from './logo';
+
 import {
   CATEGORIES,
   TAGS,
@@ -201,7 +203,17 @@ export default function BasicInfos({
           </ErrorMessage>
         </label>
       )}
-      <label>
+      <label>Logo da comunidade *</label>
+      <div className="input-wrapper">
+        <Logo
+          name="logo"
+          {...{
+            setFieldValue,
+            logo: values.logo,
+          }}
+        />
+      </div>
+      {/* <label>
         Link da Logo da comunidade *
         <div className="input-wrapper">
           <i className="far fa-file-image"></i>
@@ -214,7 +226,7 @@ export default function BasicInfos({
         <ErrorMessage name="logo">
           {(msg) => <div className="form-error">{msg}</div>}
         </ErrorMessage>
-      </label>
+      </label> */}
       <label>
         Descrição *
         <div className="input-wrapper">
