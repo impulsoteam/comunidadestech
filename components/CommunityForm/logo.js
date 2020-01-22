@@ -5,12 +5,11 @@ import ReactCrop from 'react-image-crop';
 import 'react-image-crop/lib/ReactCrop.scss';
 import 'react-image-crop/dist/ReactCrop.css';
 
-export default function Logo({ setFieldValue, logo }) {
+export default function Logo({ setFieldValue, currentLogo }) {
   const [src, setSrc] = useState('');
   const [imageRef, setImageRef] = useState('');
   const [crop, setCrop] = useState({ aspect: 1 });
-  const [croppedImage, setCroppedImage] = useState('');
-  const [fileUrl, setFleUrl] = useState();
+  const [fileUrl, setFileUrl] = useState();
 
   const onSelectFile = (files) => {
     if (!!files[0]) {
@@ -23,18 +22,11 @@ export default function Logo({ setFieldValue, logo }) {
 
   const onImageLoaded = (ref) => setImageRef(ref);
 
-  const onCropComplete = (crop) => makeClientCrop(crop);
+  const onCropComplete = () => makeClientCrop(crop);
 
   const makeClientCrop = async (crop) => {
-    if (!!imageRef && crop.width && crop.height) {
-      const croppedImageUrl = await getCroppedImg(
-        imageRef,
-        crop,
-        'newFile.jpeg'
-      );
-      setFieldValue('logo', croppedImageUrl);
-      setCroppedImage(croppedImageUrl);
-    }
+    if (!!imageRef && crop.width && crop.height)
+      await getCroppedImg(imageRef, crop, 'customLogo');
   };
 
   const getCroppedImg = (image, crop, fileName) => {
@@ -57,15 +49,14 @@ export default function Logo({ setFieldValue, logo }) {
       crop.height
     );
 
-    return new Promise((resolve, reject) => {
-      canvas.toBlob((blob) => {
-        if (!blob) return;
-        blob.name = fileName;
-        window.URL.revokeObjectURL(fileUrl);
-        const newFileUrl = window.URL.createObjectURL(blob);
-        setFleUrl(newFileUrl);
-        resolve(newFileUrl);
-      }, 'image/jpeg');
+    canvas.toBlob((blob) => {
+      if (!blob) return;
+      blob.name = fileName;
+      window.URL.revokeObjectURL(fileUrl);
+      const newFileUrl = window.URL.createObjectURL(blob);
+      setFieldValue('logo', blob);
+      setFileUrl(newFileUrl);
+      setSrc('');
     });
   };
 
@@ -83,22 +74,30 @@ export default function Logo({ setFieldValue, logo }) {
 
   return (
     <div>
-      <div>
-        <img alt="Crop" style={{ maxWidth: '100%' }} src={logo} />
+      <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <img
+          alt="Crop"
+          style={{ width: '120px', height: '120px' }}
+          src={fileUrl || currentLogo}
+        />
       </div>
       {src && (
-        <ReactCrop
-          src={src}
-          crop={crop}
-          ruleOfThirds
-          onImageLoaded={onImageLoaded}
-          onComplete={onCropComplete}
-          onChange={onCropChange}
-        />
+        <>
+          <ReactCrop
+            src={src}
+            crop={crop}
+            ruleOfThirds
+            onImageLoaded={onImageLoaded}
+            onChange={onCropChange}
+          />
+          <button type="button" onClick={() => onCropComplete()}>
+            escolher imagem
+          </button>
+          <button type="sair" onClick={() => setSrc('')}>
+            cancelar
+          </button>
+        </>
       )}
-      {/* {!!croppedImage && (
-        <img alt="Crop" style={{ maxWidth: '100%' }} src={croppedImage} />
-      )} */}
       <Dropzone accept="image/*" onDropAccepted={onSelectFile}>
         {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
           <div

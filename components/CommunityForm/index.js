@@ -11,6 +11,7 @@ import Links from './links';
 import FormButton from './formButton';
 import styles from './styles';
 
+import { api, setHeader } from '../../utils/axios';
 import { SignupSchema } from './utils';
 import { invitationStatus } from '../../utils/variables';
 import { getFormStatus } from './formStatus';
@@ -34,8 +35,22 @@ const CommunityForm = ({
   const isMobile = width > 768 ? false : true;
   useBeforeunload(() => "You'll lose your data!");
 
-  const formatAndSendForm = (values) => {
+  const formatAndSendForm = async (values) => {
     const { managers } = values;
+
+    if (typeof values.logo === 'object') {
+      try {
+        const data = new FormData();
+
+        data.append('file', values.logo);
+        setHeader(credentials);
+        const { data: newLogo } = await api.post('/image', data);
+        values.logo = newLogo;
+      } catch (error) {
+        values.logo =
+          'https://s3-sa-east-1.amazonaws.com/assets.comunidades.tech/a1f320f2a9bdeb20f4a8dc98e4c97d6b-ctech.svg';
+      }
+    }
 
     if (managers.length > 0) {
       for (const manager of managers) {
@@ -157,15 +172,6 @@ const CommunityForm = ({
         return (
           <>
             <div className="columns is-centered">
-              <pre
-                style={{
-                  background: '#f6f8fa',
-                  fontSize: '.65rem',
-                  padding: '.5rem',
-                }}
-              >
-                {JSON.stringify({ values }, null, 2)}
-              </pre>
               <div className="column has-text-centered">
                 {type === 'create' && currentPage !== 'ReviewAndSave' && (
                   <>

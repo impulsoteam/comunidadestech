@@ -13,9 +13,7 @@ const storageTypes = {
     filename: (req, file, cb) => {
       crypto.randomBytes(16, (err, hash) => {
         if (err) cb(err);
-
-        file.key = `${hash.toString('hex')}-${file.originalname}`;
-
+        file.key = `${hash.toString('hex')}`;
         cb(null, file.key);
       });
     },
@@ -28,7 +26,7 @@ const storageTypes = {
     key: (req, file, cb) => {
       crypto.randomBytes(16, (err, hash) => {
         if (err) cb(err);
-        const fileName = `${hash.toString('hex')}-${file.originalname}`;
+        const fileName = `${hash.toString('hex')}`;
         cb(null, fileName);
       });
     },
@@ -49,7 +47,6 @@ export default {
       'image/svg',
       'image/svg+xml',
     ];
-    console.log(file.mimetype);
     const isAllowed = allowedMimes.includes(file.mimetype);
 
     isAllowed ? cb(null, true) : cb(new Error('Invalid file type.'));
