@@ -38,7 +38,7 @@ const storageTypes = {
 
 export default {
   dest: path.resolve(__dirname, '..', '..', 'temp', 'uploads'),
-  storage: storageTypes[!isDev ? 'development' : 'production'],
+  storage: storageTypes[isDev ? 'development' : 'production'],
   limits: {
     fileSize: 2 * 1024 * 1024,
   },
