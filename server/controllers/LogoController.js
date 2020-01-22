@@ -1,7 +1,4 @@
-import fs from 'fs';
-import path from 'path';
 import multer from 'multer';
-import { promisify } from 'util';
 import multerConfig from '../config/multer';
 
 class LogoController {

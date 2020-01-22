@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.use(SessionController.checkToken);
 
-router.post('/', LogoController.upload);
+router.post('/:slug', LogoController.upload);
 
 export default router;

@@ -43,7 +43,7 @@ const CommunityForm = ({
       const data = new FormData();
       data.append('file', values.logo);
       setHeader(credentials);
-      const { data: response } = await api.post('/logo', data);
+      const { data: response } = await api.post(`/logo/${values.slug}`, data);
       const { success, logo } = response;
       if (!success)
         toast.warn(
