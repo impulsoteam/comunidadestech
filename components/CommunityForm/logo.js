@@ -83,19 +83,43 @@ export default function Logo({ setFieldValue, currentLogo }) {
       </div>
       {src && (
         <>
-          <ReactCrop
+          <div class="modal" style={{ display: 'block' }}>
+            <div className="modal-background"></div>
+            <div className="modal-content">
+              <ReactCrop
+                src={src}
+                crop={crop}
+                ruleOfThirds
+                onImageLoaded={onImageLoaded}
+                onChange={onCropChange}
+                className="modal"
+              />
+              <button type="button" onClick={() => onCropComplete()}>
+                escolher imagem
+              </button>
+              <button type="sair" onClick={() => setSrc('')}>
+                cancelar
+              </button>
+            </div>
+            <button
+              className="modal-close is-large"
+              aria-label="close"
+            ></button>
+          </div>
+          {/* <ReactCrop
             src={src}
             crop={crop}
             ruleOfThirds
             onImageLoaded={onImageLoaded}
             onChange={onCropChange}
+            className="modal"
           />
           <button type="button" onClick={() => onCropComplete()}>
             escolher imagem
           </button>
           <button type="sair" onClick={() => setSrc('')}>
             cancelar
-          </button>
+          </button> */}
         </>
       )}
       <Dropzone accept="image/*" onDropAccepted={onSelectFile}>

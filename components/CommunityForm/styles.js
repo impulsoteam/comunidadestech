@@ -2,7 +2,7 @@ import css from 'styled-jsx/css';
 import { colors } from '/utils/variables';
 
 export default css`
-  .modal {
+  /* .modal {
     align-items: center;
     background: rgba(0, 0, 0, 0.5);
     display: flex;
@@ -13,7 +13,7 @@ export default css`
     top: 0;
     width: 100vw;
     z-index: 10;
-  }
+  } */
   .test {
     background-color: ${colors.white};
     border-radius: 4px;
