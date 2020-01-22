@@ -15,7 +15,6 @@ export const getFormStatus = ({ errors, values }) => {
       haveType: !errors.type && !!values.type ? 1 : 0,
       haveCategory: !errors.category && !!values.category ? 1 : 0,
       haveTags: !errors.tags && !!values.tags ? 1 : 0,
-      haveLogo: !errors.logo && !!values.logo ? 1 : 0,
       haveDescription: !errors.description && !!values.description ? 1 : 0,
     };
 

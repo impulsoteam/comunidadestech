@@ -1,15 +1,12 @@
 import express from 'express';
-import multer from 'multer';
-import multerConfig from '../config/multer';
 
 import SessionController from '../controllers/SessionController';
+import LogoController from '../controllers/LogoController';
 
 const router = express.Router();
 
 router.use(SessionController.checkToken);
 
-router.post('/', multer(multerConfig).single('file'), async (req, res) => {
-  return res.json(req.file.location);
-});
+router.post('/', LogoController.upload);
 
 export default router;

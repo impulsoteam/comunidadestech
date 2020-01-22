@@ -7,7 +7,7 @@ import makeAnimated from 'react-select/animated';
 import { reactSelectStyle } from './reactSelectStyle';
 import styles from './styles';
 
-import Logo from './logo';
+import CustomLogo from './customLogo';
 
 import {
   CATEGORIES,
@@ -205,7 +205,7 @@ export default function BasicInfos({
       )}
       <label>Logo da comunidade *</label>
       <div className="input-wrapper">
-        <Logo
+        <CustomLogo
           name="logo"
           {...{
             setFieldValue,

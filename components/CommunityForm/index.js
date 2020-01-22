@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import { Formik, Form } from 'formik';
 import { useWindowSize } from 'react-use';
 import { useBeforeunload } from 'react-beforeunload';
@@ -39,17 +40,16 @@ const CommunityForm = ({
     const { managers } = values;
 
     if (typeof values.logo === 'object') {
-      try {
-        const data = new FormData();
-
-        data.append('file', values.logo);
-        setHeader(credentials);
-        const { data: newLogo } = await api.post('/image', data);
-        values.logo = newLogo;
-      } catch (error) {
-        values.logo =
-          'https://s3-sa-east-1.amazonaws.com/assets.comunidades.tech/a1f320f2a9bdeb20f4a8dc98e4c97d6b-ctech.svg';
-      }
+      const data = new FormData();
+      data.append('file', values.logo);
+      setHeader(credentials);
+      const { data: response } = await api.post('/logo', data);
+      const { success, logo } = response;
+      if (!success)
+        toast.warn(
+          'Não foi possível fazer upload do seu logo.\nTente novamente mais tarde'
+        );
+      values.logo = logo;
     }
 
     if (managers.length > 0) {

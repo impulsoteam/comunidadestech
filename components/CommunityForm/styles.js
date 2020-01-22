@@ -2,26 +2,6 @@ import css from 'styled-jsx/css';
 import { colors } from '/utils/variables';
 
 export default css`
-  /* .modal {
-    align-items: center;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    height: 100vh;
-    left: 0;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    z-index: 10;
-  } */
-  .test {
-    background-color: ${colors.white};
-    border-radius: 4px;
-    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
-    min-height: 190px;
-    padding: 20px;
-    width: 500px;
-  }
   .title {
     font-weight: 700;
   }
