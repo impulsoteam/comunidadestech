@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/lib/ReactCrop.scss';
+import styles from './styles';
 
 export default function CustomLogo({ setFieldValue, currentLogo }) {
   const [src, setSrc] = useState('');
@@ -64,39 +65,15 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
   };
 
   return (
-    <div style={{ margin: '10px 0' }}>
-      <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-        <img
-          alt="Crop"
-          style={{ width: '120px', height: '120px' }}
-          src={fileUrl || currentLogo}
-        />
+    <div className="custom-logo-wrapper">
+      <div className="image-wrapper">
+        <img alt="Crop" src={fileUrl || currentLogo} />
       </div>
       {src && (
-        <div
-          class="modal"
-          style={{ display: 'flex', justifyContent: 'center' }}
-        >
+        <div className="modal">
           <div className="modal-background" />
-          <div
-            className="modal-content"
-            style={{
-              background: 'white',
-              borderRadius: '5px',
-              color: 'white',
-              fontWeight: 'bold',
-              fontSize: '16px ',
-            }}
-          >
-            <div
-              style={{
-                height: '48px',
-                background: '#8C43FF',
-                display: 'flex',
-                alignItems: 'center',
-                padding: '0px 20px',
-              }}
-            >
+          <div className="modal-content">
+            <div className="modal-title">
               <p>Editar imagem</p>
               <button
                 type="button"
@@ -105,12 +82,7 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
                 aria-label="close"
               ></button>
             </div>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-              }}
-            >
+            <div className="crop-wrapper">
               <ReactCrop
                 src={src}
                 crop={crop}
@@ -119,44 +91,11 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
                 onChange={(crop) => setCrop(crop)}
               />
             </div>
-            <div
-              style={{
-                height: '68px',
-                display: 'flex',
-                padding: '0px 20px',
-                justifyContent: 'end',
-                alignItems: 'center',
-              }}
-            >
-              <button
-                type="button"
-                style={{
-                  borderRadius: '5px',
-                  border: '1px solid #8C43FF',
-                  height: '70%',
-                  background: 'white',
-                  fontWeight: 'bold',
-                  fontSize: '16px ',
-                  color: '#8C43FF',
-                }}
-                onClick={() => setSrc('')}
-              >
+            <div className="crop-controls">
+              <button type="button" onClick={() => setSrc('')}>
                 Cancelar
               </button>
-              <button
-                type="button"
-                style={{
-                  borderRadius: '5px',
-                  marginLeft: '8px',
-                  border: '1px solid #8C43FF',
-                  height: '70%',
-                  background: '#8C43FF',
-                  fontWeight: 'bold',
-                  fontSize: '16px ',
-                  color: 'white',
-                }}
-                onClick={() => makeClientCrop()}
-              >
+              <button type="button" onClick={() => makeClientCrop()}>
                 Escolher imagem
               </button>
             </div>
@@ -166,6 +105,7 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
       <Dropzone accept="image/*" onDropAccepted={onSelectFile}>
         {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
           <div
+            className="drag-button"
             style={{
               width: '99%',
               margin: '15px 0',
@@ -186,6 +126,7 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
           </div>
         )}
       </Dropzone>
+      <style jsx>{styles}</style>
     </div>
   );
 }
