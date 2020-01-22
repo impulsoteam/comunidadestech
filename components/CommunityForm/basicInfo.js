@@ -203,6 +203,15 @@ export default function BasicInfos({
           </ErrorMessage>
         </label>
       )}
+      <pre
+        style={{
+          background: '#f6f8fa',
+          fontSize: '.65rem',
+          padding: '.5rem',
+        }}
+      >
+        {JSON.stringify({ values, initialValues, errors, touched }, null, 2)}
+      </pre>
       <label>Logo da comunidade *</label>
       <div className="input-wrapper">
         <CustomLogo

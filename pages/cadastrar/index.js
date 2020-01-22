@@ -13,6 +13,7 @@ const RegisterCommunity = ({ credentials }) => {
 
   const getInitialValues = () => {
     const { _id, name, email } = credentials;
+    const logo = `${process.env.DEFAULT_LOGO}`;
     return {
       name: '',
       slug: 'comunidades.tech/c/',
@@ -32,8 +33,7 @@ const RegisterCommunity = ({ credentials }) => {
         name: '',
       },
       members: '',
-      logo:
-        'https://s3-sa-east-1.amazonaws.com/assets.comunidades.tech/a1f320f2a9bdeb20f4a8dc98e4c97d6b-ctech.svg',
+      logo,
       creator: {
         _id,
         name,
