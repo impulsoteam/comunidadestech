@@ -28,20 +28,12 @@ Faça o fork deste repositório e, em seguida, faça o clone do projeto em sua m
 
 `git clone https://github.com/{your account}/comunidadestech`
 
-Em seguida, na raíz do projeto, crie um arquivo `.env` nesse formato:
+Em seguida, na raíz do projeto, crie um arquivo `.env` a partir do `.env.example` e atualize essas variáveis com as suas chaves:
 
 ```
-MONGODB_URI="mongodb://localhost/ctech"
-MONGODB_TEST_URI="mongodb://localhost/ctech"
-PORT=3000
-NODE_ENV="development"
-GOOGLE_CLIENT_ID=""
-GOOGLE_SECRET=""
-GOOGLE_CALLBACK_URL=""
 LINKEDIN_API_KEY="Seu Client ID"
 LINKEDIN_SECRET_KEY="Seu Client Secret"
-LINKEDIN_CALLBACK_URL="http://localhost:3000/auth/linkedin"
-JWT_SECRET_KEY="qualquer string aleatoria"
+
 ```
 
 Por fim, rode os comandos:

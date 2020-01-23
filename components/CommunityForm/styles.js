@@ -263,7 +263,9 @@ export default css`
     .modal {
       display: flex;
       justify-content: center;
-
+      .modal-background {
+        background-color: rgba(10, 10, 10, 0.45);
+      }
       .modal-content {
         background: white;
         border-radius: 5px;

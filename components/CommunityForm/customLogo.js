@@ -104,23 +104,7 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
       )}
       <Dropzone accept="image/*" onDropAccepted={onSelectFile}>
         {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
-          <div
-            className="drag-button"
-            style={{
-              width: '99%',
-              margin: '15px 0',
-              height: '50px',
-              border: '1px solid #7A7A7A',
-              borderRadius: '5px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              fontSize: '16px',
-              color: '#7A7A7A',
-              fontWeight: 'bold',
-            }}
-            {...getRootProps()}
-          >
+          <div className="drag-button" {...getRootProps()}>
             <input {...getInputProps()} />
             {renderDragMessage(isDragActive, isDragReject)}
           </div>
