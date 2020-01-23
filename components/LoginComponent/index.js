@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styles from './styles';
-import Footer from '../Footer';
 
 class LoginComponent extends Component {
   render() {
