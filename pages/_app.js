@@ -20,17 +20,27 @@ class MyApp extends App {
     return { pageProps, credentials };
   }
 
-  render() {
+  renderPages() {
     const { Component, pageProps, credentials } = this.props;
+    if (Component.name === 'Login')
+      return <Component credentials={credentials} {...pageProps} />;
+    return (
+      <>
+        <Header credentials={credentials} />
+        <Component credentials={credentials} {...pageProps} />
+        <Footer />
+      </>
+    );
+  }
+
+  render() {
     return (
       <Container>
         <ToastContainer />
         <Head>
           <title>Comunidades.tech</title>
         </Head>
-        <Header credentials={credentials} />
-        <Component credentials={credentials} {...pageProps} />
-        <Footer />
+        {this.renderPages()}
       </Container>
     );
   }
