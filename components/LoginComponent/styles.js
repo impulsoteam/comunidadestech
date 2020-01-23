@@ -4,38 +4,41 @@ import { fonts, colors } from '/utils/variables';
 export default css`
 .left-login {
   display: flex;
-  width: 35%;
   float: left;
   min-height: 100vh;
   padding: 0 70px;
+  width: 35%;
+
   @media only screen and (max-width: 600px) {
-    width: 100%;
     min-height: 80vh;
     padding: 20px;
+    width: 100%;
   }
 
   .container {
-    max-width: 100%;
     align-items: center;
     display: flex;
+    max-width: 100%;
   }
 
   .buttons {
-    padding: 45px 0;
     display: flex;
     justify-content: center;
+    padding: 45px 0;
 
     .button {
-      min-width: 100%;
-      height: 42px;
-      border-radius: 4px;
       background-color: ${colors.white};
+      border-radius: 4px;
       font-size: 12px;
       font-weight: bold;
-      border: none;
-
+      height: 42px;
+      min-width: 100%;
       .icon { font-size: 1rem; }
       .icon-img { padding-right: 5px; }
+
+      &:not(:last-child):not(.is-fullwidth) {
+        margin-right: 0;
+      }
 
       &.linkedin {
         background-color: ${colors.linkedin};
@@ -45,17 +48,17 @@ export default css`
 
       &.google {
         background-color: ${colors.white};
-        color: ${colors.boulder};
         border: solid 1px ${colors.gradientDark};
+        color: ${colors.boulder};
       }
     }
   }
 
   p {
-    font-size: 16px;
     color: ${colors.boulder};
-    line-height: 1.3;
+    font-size: 16px;
     letter-spacing: normal;
+    line-height: 1.3;
 
     b, strong {
       color: ${colors.primary};
@@ -64,40 +67,39 @@ export default css`
 }
 
 .right-login {
-  width: 65%;
   background-color: ${colors.primary};
-  color: ${colors.white};
-  float: right;
-  min-height: 100vh;
   background-image: url('/static/ballons.svg');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  color: ${colors.white};
   display: flex;
+  float: right;
+  min-height: 100vh;
+  width: 65%;
 
   .footer-login {
-    width: 100%;
     align-self: flex-end;
+    width: 100%;
   }
 
   .content {
-    display: flex;
-    padding: 0;
+    align-items: center;
     background-color: transparent;
+    border-top: 3px solid ${colors.white};
+    display: flex;
+    justify-content: center;
     min-width: 100%;
     min-height: 110px;
-    align-items: center;
-    justify-content: center;
-    border-top: 3px solid ${colors.white};
-    a {
-      color: ${colors.white};
-    }
+    padding: 0;
+
+    a { color: ${colors.white}; }
   }
 
   @media only screen and (max-width: 600px) {
-    width: 100%;
     min-height: 20vh;
     padding: 30px 0 0;
+    width: 100%;
   }
 }
 `;

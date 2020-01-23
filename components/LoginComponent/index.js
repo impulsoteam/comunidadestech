@@ -4,7 +4,7 @@ import styles from './styles';
 class LoginComponent extends Component {
   render() {
     return (
-      <div className="container component-wrapper is-fluid">
+      <div className="LoginComponent">
         <div className="left-login">
           <div className="container">
             <div className="columns is-centered">
@@ -54,13 +54,11 @@ class LoginComponent extends Component {
             <div className="container">
               <div className="columns is-centered">
                 <div className="column has-text-centered">
-                  <a className="hero-login" href="/">
-                    <img
-                      className="hero-img"
-                      src="/static/hero-clean.svg"
-                      width="450"
-                    />
-                  </a>
+                  <img
+                    className="hero-img"
+                    src="/static/hero-clean.svg"
+                    width="450"
+                  />
                 </div>
               </div>
             </div>
