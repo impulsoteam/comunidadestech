@@ -28,6 +28,19 @@ class Header extends Component {
             <a href={'/'} className="navbar-item">
               Home
             </a>
+            <div className="navbar-item is-hidden-touch">
+              <div className="buttons">
+                <a
+                  href={'/cadastrar'}
+                  className="button is-primary is-outlined"
+                >
+                  <strong>Cadastre uma comunidade</strong>
+                </a>
+              </div>
+            </div>
+            <a href="/cadastrar" className="navbar-item is-hidden-desktop">
+              Cadastre uma comunidade
+            </a>
             <a href="/login" className="navbar-item is-hidden-desktop">
               Entrar
             </a>
