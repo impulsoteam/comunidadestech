@@ -33,7 +33,7 @@ const ReviewAndSave = ({ community }) => {
           <div className="column is-one-quarter-mobile is-one-quarter ">
             <figure className="image">
               {logo ? (
-                <img src={logo} alt={name} />
+                <img src={logo.tempUrl || logo} alt={name} />
               ) : (
                 <img src="../../static/logo.svg" alt={name} />
               )}

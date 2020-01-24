@@ -6,12 +6,7 @@ export const SignupSchema = Yup.object().shape({
     .max(30, 'Muito longo!')
     .required('Item obrigatório'),
   slug: Yup.string().min(3, 'Muito curto!'),
-  logo: Yup.string()
-    .required('Item obrigatório')
-    .matches(
-      /^(http(s)?:\/\/|www\.).*(\.jpg|\.jpeg|\.png)$/,
-      'Deve ser um endereço de uma imagem JPG ou PNG'
-    ),
+  logo: Yup.string().required('Item obrigatório'),
   links: Yup.array().of(
     Yup.object().shape({
       type: Yup.string(),

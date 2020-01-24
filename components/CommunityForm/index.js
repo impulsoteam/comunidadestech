@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import { Formik, Form } from 'formik';
 import { useWindowSize } from 'react-use';
 import { useBeforeunload } from 'react-beforeunload';
@@ -11,6 +12,7 @@ import Links from './links';
 import FormButton from './formButton';
 import styles from './styles';
 
+import { api, setHeader } from '../../utils/axios';
 import { SignupSchema } from './utils';
 import { invitationStatus } from '../../utils/variables';
 import { getFormStatus } from './formStatus';
@@ -34,8 +36,21 @@ const CommunityForm = ({
   const isMobile = width > 768 ? false : true;
   useBeforeunload(() => "You'll lose your data!");
 
-  const formatAndSendForm = (values) => {
+  const formatAndSendForm = async (values) => {
     const { managers } = values;
+
+    if (typeof values.logo === 'object') {
+      const data = new FormData();
+      data.append('file', values.logo);
+      setHeader(credentials);
+      const { data: response } = await api.post(`/logo/${values.slug}`, data);
+      const { success, logo } = response;
+      if (!success)
+        toast.warn(
+          'Não foi possível fazer upload do seu logo.\nTente novamente mais tarde'
+        );
+      values.logo = logo;
+    }
 
     if (managers.length > 0) {
       for (const manager of managers) {
