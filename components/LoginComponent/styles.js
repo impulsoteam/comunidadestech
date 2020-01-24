@@ -9,10 +9,14 @@ export default css`
   padding: 0 70px;
   width: 35%;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 700px) {
     min-height: 80vh;
     padding: 20px;
     width: 100%;
+  }
+
+  @media only screen and (max-width: 800px) {
+    padding: 0 50px;
   }
 
   .container {
@@ -96,7 +100,7 @@ export default css`
     a { color: ${colors.white}; }
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 700px) {
     min-height: 20vh;
     padding: 30px 0 0;
     width: 100%;
