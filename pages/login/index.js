@@ -1,14 +1,17 @@
 import React, { PureComponent } from 'react';
-import styles from './styles';
+import cookies from 'next-cookies';
 import LoginComponent from '/components/LoginComponent/';
-import Router from 'next/router';
-import loader from '../../static/comunidades-tech-loader.gif';
 
-export default class Login extends PureComponent {
+const Login = () => <LoginComponent />;
 
-  render() {
-    return (
-      <LoginComponent />
-    );
+Login.getInitialProps = async (ctx) => {
+  const credentials = cookies(ctx).ctech_credentials || {};
+  if (credentials.token) {
+    ctx.res.writeHead(302, {
+      Location: '/',
+    });
+    ctx.res.end();
   }
-}
+};
+
+export default Login;
