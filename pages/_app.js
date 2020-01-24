@@ -23,7 +23,8 @@ class MyApp extends App {
   renderPages() {
     const { Component, pageProps, credentials } = this.props;
     console.log('nome do comp', Component.name);
-    if (Component.name === 'Login')
+    console.log('pageProps', pageProps);
+    if (Component.name === 'Login' || Component.name === 'w')
       return <Component credentials={credentials} {...pageProps} />;
     return (
       <>
