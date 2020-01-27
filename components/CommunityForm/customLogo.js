@@ -7,9 +7,9 @@ import styles from './styles';
 
 export default function CustomLogo({ setFieldValue, currentLogo }) {
   const [src, setSrc] = useState('');
-  const [imageRef, setImageRef] = useState('');
-  const [crop, setCrop] = useState({ aspect: 1 });
+  const [crop, setCrop] = useState({});
   const [fileUrl, setFileUrl] = useState();
+  const [imageRef, setImageRef] = useState('');
 
   const onSelectFile = (files) => {
     if (!!files[0]) {
@@ -17,6 +17,28 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
       reader.addEventListener('load', () => setSrc(reader.result));
       reader.readAsDataURL(files[0]);
     }
+  };
+
+  const onImageLoaded = (ref) => {
+    const width = ref.width > ref.height ? ref.height : ref.width;
+    const height = ref.height > ref.width ? ref.width : ref.height;
+    const scaleX = ref.width - width;
+    const scaleY = ref.height - height;
+    const x = scaleX === 0 ? 0 : scaleX / 2;
+    const y = scaleY === 0 ? 0 : scaleY / 2;
+
+    setImageRef(ref);
+
+    setCrop({
+      unit: 'px',
+      aspect: 1,
+      width,
+      height,
+      x,
+      y,
+    });
+
+    return false;
   };
 
   const makeClientCrop = async () => {
@@ -87,7 +109,7 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
                 src={src}
                 crop={crop}
                 ruleOfThirds
-                onImageLoaded={(ref) => setImageRef(ref)}
+                onImageLoaded={(ref) => onImageLoaded(ref)}
                 onChange={(crop) => setCrop(crop)}
               />
             </div>
@@ -95,7 +117,11 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
               <button type="button" onClick={() => setSrc('')}>
                 Cancelar
               </button>
-              <button type="button" onClick={() => makeClientCrop()}>
+              <button
+                className="button"
+                type="button"
+                onClick={() => makeClientCrop()}
+              >
                 Escolher imagem
               </button>
             </div>
