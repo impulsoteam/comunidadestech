@@ -117,11 +117,7 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
               <button type="button" onClick={() => setSrc('')}>
                 Cancelar
               </button>
-              <button
-                className="button"
-                type="button"
-                onClick={() => makeClientCrop()}
-              >
+              <button type="button" onClick={() => makeClientCrop()}>
                 Escolher imagem
               </button>
             </div>
