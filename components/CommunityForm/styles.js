@@ -224,7 +224,7 @@ export default css`
   }
 
   .required-form {
-    color: #363636;
+    color: ${colors.dark};
     font-size: 14px;
     font-weight: bold;
     margin: 20px 0 10px;
@@ -243,6 +243,89 @@ export default css`
   @media screen and (max-width: 1023px) {
     .title {
       margin-top: 100px;
+    }
+  }
+
+  .custom-logo-wrapper {
+    margin: 10px 0;
+
+    .image-wrapper {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+
+      img {
+        height: 120px;
+        width: 120px;
+      }
+    }
+
+    .modal {
+      display: flex;
+      justify-content: center;
+      .modal-background {
+        background-color: rgba(10, 10, 10, 0.45);
+      }
+      .modal-content {
+        background: white;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+
+        .modal-title {
+          align-items: center;
+          background: ${colors.primary};
+          display: flex;
+          height: 48px;
+          padding: 0px 20px;
+        }
+
+        .crop-wrapper {
+          display: flex;
+          justify-content: center;
+        }
+
+        .crop-controls {
+          align-items: center;
+          display: flex;
+          height: 68px;
+          justify-content: end;
+          padding: 0px 20px;
+
+          button {
+            background: white;
+            border-radius: 5px;
+            border: 1px solid ${colors.primary};
+            color: ${colors.primary};
+            font-size: 16px;
+            font-weight: bold;
+            height: 70%;
+
+            &:last-child {
+              background: ${colors.primary};
+              border: 1px solid ${colors.primary};
+              color: white;
+              margin-left: 8px;
+            }
+          }
+        }
+      }
+    }
+
+    .drag-button {
+      align-items: center;
+      border-radius: 5px;
+      border: 1px solid ${colors.boulder};
+      color: ${colors.boulder};
+      cursor: pointer;
+      display: flex;
+      font-size: 16px;
+      font-weight: bold;
+      height: 50px;
+      justify-content: center;
+      margin: 15px 0;
+      width: 99%;
     }
   }
 `;

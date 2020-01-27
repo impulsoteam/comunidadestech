@@ -58,6 +58,12 @@ export default css`
   .card-content {
     padding: 12px;
 
+    .media {
+      * {
+        pointer-events: none;
+      }
+    }
+
     .content {
       font-size: 12px;
       font-weight: 400;

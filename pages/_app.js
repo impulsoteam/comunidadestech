@@ -4,13 +4,22 @@ import cookies from 'next-cookies';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import React from 'react';
-import { withRouter } from 'next/router';
+import Router, { withRouter } from 'next/router';
 import 'styles/styles.scss';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 class MyApp extends App {
+  state = {
+    url: '',
+  };
+
+  componentDidMount() {
+    const url = Router.router.pathname;
+    this.setState({ url });
+  }
+
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
     const credentials = cookies(ctx).ctech_credentials || {};
@@ -22,7 +31,7 @@ class MyApp extends App {
 
   renderPages() {
     const { Component, pageProps, credentials } = this.props;
-    if (Component.name === 'Login')
+    if (this.state.url === '/login')
       return <Component credentials={credentials} {...pageProps} />;
     return (
       <>

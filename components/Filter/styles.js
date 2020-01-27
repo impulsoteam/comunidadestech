@@ -6,7 +6,7 @@ export default css`
     align-items: center;
     border-bottom: solid 2px ${colors.wildSand};
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     margin: 0;
     padding: 1rem 0.75rem;
   }
@@ -99,6 +99,10 @@ export default css`
         color: ${colors.white};
       }
     }
+    span,
+    i {
+      pointer-events: none;
+    }
   }
 
   .more-filter {
@@ -125,7 +129,7 @@ export default css`
       padding: 0.25rem 0.75rem;
     }
 
-    .more-filter {
+    .more-filter.filter-box {
       flex-direction: column;
       padding-top: 0.75rem;
 
@@ -139,6 +143,14 @@ export default css`
           select,
           input {
             width: 100%;
+            font-size: 16px;
+            &:not(.is-multiple):not(.is-loading)::after {
+              top: 50%;
+            }
+          }
+          select,
+          input {
+            padding-left: 1.4rem;
           }
         }
       }

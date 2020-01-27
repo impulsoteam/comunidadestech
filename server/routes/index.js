@@ -1,5 +1,6 @@
 import express from 'express';
 
+import logoRoutes from './logo';
 import userRoutes from './user';
 import communityRoutes from './community';
 
@@ -11,6 +12,7 @@ router.get('/', (req, res) => {
   });
 });
 
+router.use('/logo', logoRoutes);
 router.use('/user', userRoutes);
 router.use('/community', communityRoutes);
 

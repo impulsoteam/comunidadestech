@@ -1,4 +1,6 @@
 import express from 'express';
+import morgan from 'morgan';
+import path from 'path';
 import next from 'next';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
@@ -24,6 +26,7 @@ const port = process.env.PORT || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
+const localStorage = path.resolve(__dirname, '..', 'temp', 'uploads');
 
 app
   .prepare()
@@ -43,8 +46,11 @@ app
     });
 
     server.use(express.json());
+    server.use(express.urlencoded({ extended: true }));
+    server.use(morgan('dev'));
     server.use(passport.initialize());
     server.use(passport.session());
+    server.use('/files', express.static(localStorage));
 
     PassportConfig.google();
     PassportConfig.linkedin();
