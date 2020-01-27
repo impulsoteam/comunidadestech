@@ -27,10 +27,7 @@ class LoginComponent extends Component {
                     </span>
                     <span>Login LinkedIn</span>
                   </a>
-                  <a
-                    href="/auth/google"
-                    className="button google is-outlined"
-                  >
+                  <a href="/auth/google" className="button google is-outlined">
                     <img
                       className="icon-img"
                       src="/static/google.svg"
@@ -40,10 +37,11 @@ class LoginComponent extends Component {
                   </a>
                 </div>
 
-                <p>Ao participar da Comunidades.tech você também faz parte da
-                <a href="http://impulso.network" target="blank">
-                <b> Impulso.Network</b>
-                </a>
+                <p>
+                  Ao participar da Comunidades.tech você também faz parte da
+                  <a href="http://impulso.network" target="blank">
+                    <b> Impulso.Network</b>
+                  </a>
                 </p>
               </div>
             </div>
@@ -64,9 +62,10 @@ class LoginComponent extends Component {
             </div>
             <div className="content has-text-centered">
               <p>
-                <b>Comunidades.tech</b> é um projeto open source desenvolvido pela comunidade da
+                <b>Comunidades.tech</b> é um projeto open source desenvolvido
+                pela comunidade da
                 <a href="http://impulso.network" target="blank">
-                <b> Impulso.Network</b>
+                  <b> Impulso.Network</b>
                 </a>
               </p>
             </div>
@@ -74,8 +73,8 @@ class LoginComponent extends Component {
         </div>
         <style jsx>{styles}</style>
       </div>
-      );
-    }
+    );
   }
+}
 
-  export default LoginComponent;
+export default LoginComponent;

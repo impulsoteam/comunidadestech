@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 class SessionController {
   login(req, res) {
-    const { user } = req;
+    const { user, headers } = req;
     if (!user)
       return res.status(500).json({ message: 'Error while authenticating' });
 
@@ -27,7 +27,12 @@ class SessionController {
         isModerator: user.isModerator,
       })
     );
-    res.redirect('/');
+
+    const redirectTo = headers.referer.includes('cadastrar')
+      ? '/cadastrar'
+      : '/';
+
+    res.redirect(redirectTo);
   }
 
   checkError(req, res, next) {

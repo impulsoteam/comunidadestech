@@ -58,6 +58,10 @@ app
     server.use('/auth', sessionRoutes);
     server.use('/api/v1', routes);
 
+    server.get('/login/cadastrar', (req, res) => {
+      return app.render(req, res, '/login');
+    });
+
     server.get('/c/:slug', (req, res) => {
       return app.render(req, res, '/comunidade', { slug: req.params.slug });
     });
