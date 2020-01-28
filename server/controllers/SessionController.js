@@ -28,9 +28,10 @@ class SessionController {
       })
     );
 
+    const redirectUrl = cookies.previousPage || '/';
     if (!!cookies.previousPage) res.clearCookie('previousPage');
 
-    res.redirect(cookies.previousPage || '/');
+    res.redirect(redirectUrl);
   }
 
   checkError(req, res, next) {
