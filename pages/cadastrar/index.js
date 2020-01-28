@@ -81,7 +81,7 @@ RegisterCommunity.getInitialProps = async (ctx) => {
   const credentials = cookies(ctx).ctech_credentials || {};
   if (!credentials.token) {
     ctx.res.writeHead(302, {
-      Location: '/sing-in',
+      Location: '/sign-in',
     });
     ctx.res.end();
   }

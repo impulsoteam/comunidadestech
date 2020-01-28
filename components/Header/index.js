@@ -30,12 +30,12 @@ class Header extends Component {
             </a>
             <div className="navbar-item is-hidden-touch">
               <div className="buttons">
-                <a href="/sing-in" className="button is-primary is-outlined">
+                <a href="/sign-in" className="button is-primary is-outlined">
                   <strong>Cadastre uma comunidade</strong>
                 </a>
               </div>
             </div>
-            <a href="/sing-in" className="navbar-item is-hidden-desktop">
+            <a href="/sign-in" className="navbar-item is-hidden-desktop">
               Cadastre uma comunidade
             </a>
             <a href="/login" className="navbar-item is-hidden-desktop">
@@ -56,7 +56,7 @@ class Header extends Component {
     return (
       <div id="ctech-navbar" className={`navbar-menu  ${this.state.isActive}`}>
         <div className="navbar-end">
-          <a href={'/'} className="navbar-item">
+          <a href="/" className="navbar-item">
             Home
           </a>
 
