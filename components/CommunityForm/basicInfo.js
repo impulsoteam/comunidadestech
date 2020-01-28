@@ -23,7 +23,6 @@ export default function BasicInfos({
   touched,
   values,
   initialValues,
-  setErrors,
   setFieldValue,
   setFieldTouched,
 }) {
@@ -210,7 +209,6 @@ export default function BasicInfos({
           name="logo"
           {...{
             setFieldValue,
-
             currentLogo: initialValues.logo,
           }}
         />
