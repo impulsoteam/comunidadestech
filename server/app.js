@@ -60,7 +60,7 @@ app
     server.use('/auth', sessionRoutes);
     server.use('/api/v1', routes);
 
-    server.get('/singin', (req, res) => {
+    server.get('/sing-in', (req, res) => {
       res.cookie('previousPage', '/cadastrar');
       return res.redirect('/login');
     });

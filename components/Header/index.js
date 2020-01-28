@@ -30,12 +30,12 @@ class Header extends Component {
             </a>
             <div className="navbar-item is-hidden-touch">
               <div className="buttons">
-                <a href="/singin" className="button is-primary is-outlined">
+                <a href="/sing-in" className="button is-primary is-outlined">
                   <strong>Cadastre uma comunidade</strong>
                 </a>
               </div>
             </div>
-            <a href="/singin" className="navbar-item is-hidden-desktop">
+            <a href="/sing-in" className="navbar-item is-hidden-desktop">
               Cadastre uma comunidade
             </a>
             <a href="/login" className="navbar-item is-hidden-desktop">
