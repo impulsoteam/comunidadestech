@@ -13,7 +13,6 @@ export const getFormStatus = ({ errors, values }) => {
       haveName: !errors.name && !!values.name ? 1 : 0,
       haveSlug: !errors.slug && !!values.slug ? 1 : 0,
       haveType: !errors.type && !!values.type ? 1 : 0,
-      haveLogo: !errors.logo && !!values.logo ? 1 : 0,
       haveCategory: !errors.category && !!values.category ? 1 : 0,
       haveTags: !errors.tags && !!values.tags ? 1 : 0,
       haveDescription: !errors.description && !!values.description ? 1 : 0,

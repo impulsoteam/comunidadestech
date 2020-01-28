@@ -5,12 +5,7 @@ import ReactCrop from 'react-image-crop';
 import 'react-image-crop/lib/ReactCrop.scss';
 import styles from './styles';
 
-export default function CustomLogo({
-  setFieldValue,
-  setErrors,
-  currentLogo,
-  errors,
-}) {
+export default function CustomLogo({ setFieldValue, currentLogo }) {
   const [src, setSrc] = useState('');
   const [crop, setCrop] = useState({});
   const [fileUrl, setFileUrl] = useState();
@@ -48,10 +43,9 @@ export default function CustomLogo({
   };
 
   const onError = () => {
-    setImageError(true);
-    setErrors({
-      logo: 'Algo está errado com a sua imagem, tente fazer o upload novamente',
-    });
+    setImageError(
+      'Algo está errado com a url do seu logo, tente fazer o upload novamente'
+    );
   };
 
   const makeClientCrop = async () => {
@@ -86,7 +80,7 @@ export default function CustomLogo({
       const newFileUrl = window.URL.createObjectURL(blob);
       blob.name = fileName;
       blob.tempUrl = newFileUrl;
-      setImageError(false);
+      setImageError('');
       setFieldValue('logo', blob);
       setFileUrl(newFileUrl);
       setSrc('');
@@ -94,10 +88,16 @@ export default function CustomLogo({
   };
 
   const renderDragMessage = (isDragActive, isDragReject) => {
-    if (!!fileUrl) return <>Imagem selecionada</>;
-    if (isDragReject) return <>Arquivo não suportado</>;
-    if (isDragActive) return <>Solte a imagem aqui</>;
-    return <>Clique ou arraste a imagem aqui</>;
+    switch (true) {
+      case !!fileUrl:
+        return <div>Imagem selecionada</div>;
+      case isDragReject:
+        return <div>Arquivo não suportado</div>;
+      case isDragActive:
+        return <div>Solte a imagem aqui</div>;
+      default:
+        return <div>Clique ou arraste a imagem aqui</div>;
+    }
   };
 
   const renderImage = () => {
@@ -112,8 +112,8 @@ export default function CustomLogo({
       );
   };
 
-  const renderCrop = () => {
-    if (src)
+  const renderCropModal = () => {
+    if (!!src)
       return (
         <div className="modal">
           <div className="modal-background" />
@@ -145,6 +145,7 @@ export default function CustomLogo({
               </button>
             </div>
           </div>
+          <style jsx>{styles}</style>
         </div>
       );
   };
@@ -152,15 +153,15 @@ export default function CustomLogo({
   return (
     <div className="custom-logo-wrapper">
       {renderImage()}
-      {renderCrop()}
+      {renderCropModal()}
 
-      {!!errors.logo && <div className="image-error">{errors.logo}</div>}
+      {!!imageError && <div className="image-error">{imageError}</div>}
 
       <Dropzone accept="image/*" onDropAccepted={onSelectFile}>
         {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
           <div className="drag-button" {...getRootProps()}>
             <input {...getInputProps()} />
-            <div>{renderDragMessage(isDragActive, isDragReject)}</div>
+            {renderDragMessage(isDragActive, isDragReject)}
           </div>
         )}
       </Dropzone>

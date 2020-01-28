@@ -209,9 +209,8 @@ export default function BasicInfos({
         <CustomLogo
           name="logo"
           {...{
-            errors,
             setFieldValue,
-            setErrors,
+
             currentLogo: initialValues.logo,
           }}
         />
