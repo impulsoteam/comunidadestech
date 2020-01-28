@@ -5,7 +5,7 @@ import { useWindowSize } from 'react-use';
 
 import styles from './styles';
 
-const Header = (credentials) => {
+const Header = ({ name, avatar, token }) => {
   const [isActive, setIsActive] = useState('');
   const { width } = useWindowSize();
   const isMobile = width > 1023 ? false : true;
@@ -15,7 +15,7 @@ const Header = (credentials) => {
     Router.push('/');
   };
 
-  const getCreateButton = (isMobile, token) => (
+  const getCreateButton = () => (
     <>
       {!isMobile ? (
         <div className="navbar-item is-hidden-touch">
@@ -40,8 +40,7 @@ const Header = (credentials) => {
     </>
   );
 
-  const generateButtons = (props) => {
-    const { name, avatar, token } = props.credentials;
+  const generateButtons = () => {
     if (!token)
       return (
         <div id="ctech-navbar" className={`navbar-menu  ${isActive}`}>
@@ -49,7 +48,7 @@ const Header = (credentials) => {
             <a href="/" className="navbar-item">
               Home
             </a>
-            {getCreateButton(isMobile, token)}
+            {getCreateButton()}
             <a href="/login" className="navbar-item is-hidden-desktop">
               Entrar
             </a>
@@ -71,7 +70,7 @@ const Header = (credentials) => {
           <a href="/" className="navbar-item">
             Home
           </a>
-          {getCreateButton(isMobile, token)}
+          {getCreateButton()}
           <div className="navbar-item has-dropdown is-hoverable is-hidden-touch">
             <a className="navbar-link">
               <img className="profile-image" src={avatar} />
@@ -123,7 +122,7 @@ const Header = (credentials) => {
           <span aria-hidden="true"></span>
         </a>
       </div>
-      {generateButtons(credentials)}
+      {generateButtons()}
       <style jsx>{styles}</style>
     </nav>
   );
