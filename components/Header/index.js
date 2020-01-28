@@ -17,7 +17,7 @@ class Header extends Component {
     this.setState({ isActive: isActive ? '' : 'is-active' });
   };
 
-  generateButtons = ({ name, avatar, token, isModerator }) => {
+  generateButtons = ({ name, avatar, token }) => {
     if (!token)
       return (
         <div
@@ -25,20 +25,17 @@ class Header extends Component {
           className={`navbar-menu  ${this.state.isActive}`}
         >
           <div className="navbar-end">
-            <a href={'/'} className="navbar-item">
+            <a href="/" className="navbar-item">
               Home
             </a>
             <div className="navbar-item is-hidden-touch">
               <div className="buttons">
-                <a
-                  href={'/cadastrar'}
-                  className="button is-primary is-outlined"
-                >
+                <a href="/singin" className="button is-primary is-outlined">
                   <strong>Cadastre uma comunidade</strong>
                 </a>
               </div>
             </div>
-            <a href="/cadastrar" className="navbar-item is-hidden-desktop">
+            <a href="/singin" className="navbar-item is-hidden-desktop">
               Cadastre uma comunidade
             </a>
             <a href="/login" className="navbar-item is-hidden-desktop">
@@ -65,7 +62,7 @@ class Header extends Component {
 
           <div className="navbar-item is-hidden-touch">
             <div className="buttons">
-              <a href={'/cadastrar'} className="button is-primary is-outlined">
+              <a href="/cadastrar" className="button is-primary is-outlined">
                 <strong>Cadastre uma comunidade</strong>
               </a>
             </div>
@@ -77,7 +74,7 @@ class Header extends Component {
               {name.split(' ')[0]}
             </a>
             <div className="navbar-dropdown">
-              <a href={'/dashboard'} className="navbar-item">
+              <a href="/dashboard" className="navbar-item">
                 Dashboard
               </a>
               <hr className="navbar-divider" />
@@ -86,10 +83,10 @@ class Header extends Component {
               </a>
             </div>
           </div>
-          <a href={'/cadastrar'} className="navbar-item is-hidden-desktop">
+          <a href="/cadastrar" className="navbar-item is-hidden-desktop">
             Cadastrar comunidade
           </a>
-          <a href={'/dashboard'} className="navbar-item is-hidden-desktop">
+          <a href="/dashboard" className="navbar-item is-hidden-desktop">
             Dashboard
           </a>
           <a onClick={this.logout} className="navbar-item is-hidden-desktop">

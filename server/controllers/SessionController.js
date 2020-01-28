@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 class SessionController {
   login(req, res) {
-    const { user, headers } = req;
+    const { user, cookies } = req;
     if (!user)
       return res.status(500).json({ message: 'Error while authenticating' });
 
@@ -28,11 +28,9 @@ class SessionController {
       })
     );
 
-    const redirectTo = headers.referer.includes('cadastrar')
-      ? '/cadastrar'
-      : '/';
+    if (!!cookies.previousPage) res.clearCookie('previousPage');
 
-    res.redirect(redirectTo);
+    res.redirect(cookies.previousPage || '/');
   }
 
   checkError(req, res, next) {
