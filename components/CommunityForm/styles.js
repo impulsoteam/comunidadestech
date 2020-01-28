@@ -22,6 +22,13 @@ export default css`
     padding-left: 36px;
   }
 
+  .image-error {
+    color: ${colors.chestnutRose};
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 0;
+  }
+
   .page-title {
     background: ${colors.white};
     border-radius: 4px;

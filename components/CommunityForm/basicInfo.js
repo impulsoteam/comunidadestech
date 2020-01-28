@@ -23,6 +23,7 @@ export default function BasicInfos({
   touched,
   values,
   initialValues,
+  setErrors,
   setFieldValue,
   setFieldTouched,
 }) {
@@ -208,7 +209,9 @@ export default function BasicInfos({
         <CustomLogo
           name="logo"
           {...{
+            errors,
             setFieldValue,
+            setErrors,
             currentLogo: initialValues.logo,
           }}
         />

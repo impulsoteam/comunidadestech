@@ -5,11 +5,17 @@ import ReactCrop from 'react-image-crop';
 import 'react-image-crop/lib/ReactCrop.scss';
 import styles from './styles';
 
-export default function CustomLogo({ setFieldValue, currentLogo }) {
+export default function CustomLogo({
+  setFieldValue,
+  setErrors,
+  currentLogo,
+  errors,
+}) {
   const [src, setSrc] = useState('');
   const [crop, setCrop] = useState({});
   const [fileUrl, setFileUrl] = useState();
   const [imageRef, setImageRef] = useState('');
+  const [imageError, setImageError] = useState(false);
 
   const onSelectFile = (files) => {
     if (!!files[0]) {
@@ -39,6 +45,13 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
     });
 
     return false;
+  };
+
+  const onError = () => {
+    setImageError(true);
+    setErrors({
+      logo: 'Algo está errado com a sua imagem, tente fazer o upload novamente',
+    });
   };
 
   const makeClientCrop = async () => {
@@ -73,6 +86,7 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
       const newFileUrl = window.URL.createObjectURL(blob);
       blob.name = fileName;
       blob.tempUrl = newFileUrl;
+      setImageError(false);
       setFieldValue('logo', blob);
       setFileUrl(newFileUrl);
       setSrc('');
@@ -81,17 +95,26 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
 
   const renderDragMessage = (isDragActive, isDragReject) => {
     if (!!fileUrl) return <>Imagem selecionada</>;
-    if (isDragActive) return <>Solte a imagem aqui</>;
     if (isDragReject) return <>Arquivo não suportado</>;
+    if (isDragActive) return <>Solte a imagem aqui</>;
     return <>Clique ou arraste a imagem aqui</>;
   };
 
-  return (
-    <div className="custom-logo-wrapper">
-      <div className="image-wrapper">
-        <img alt="Crop" src={fileUrl || currentLogo} />
-      </div>
-      {src && (
+  const renderImage = () => {
+    const image = fileUrl || currentLogo;
+
+    if (!!image && !imageError)
+      return (
+        <div className="image-wrapper">
+          <img alt="Logo da Comunidade" src={image} onError={onError} />
+          <style jsx>{styles}</style>
+        </div>
+      );
+  };
+
+  const renderCrop = () => {
+    if (src)
+      return (
         <div className="modal">
           <div className="modal-background" />
           <div className="modal-content">
@@ -123,15 +146,25 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
             </div>
           </div>
         </div>
-      )}
+      );
+  };
+
+  return (
+    <div className="custom-logo-wrapper">
+      {renderImage()}
+      {renderCrop()}
+
+      {!!errors.logo && <div className="image-error">{errors.logo}</div>}
+
       <Dropzone accept="image/*" onDropAccepted={onSelectFile}>
         {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
           <div className="drag-button" {...getRootProps()}>
             <input {...getInputProps()} />
-            {renderDragMessage(isDragActive, isDragReject)}
+            <div>{renderDragMessage(isDragActive, isDragReject)}</div>
           </div>
         )}
       </Dropzone>
+
       <style jsx>{styles}</style>
     </div>
   );
