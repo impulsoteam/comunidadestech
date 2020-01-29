@@ -17,13 +17,25 @@ class MyApp extends App {
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
+    console.log('ctx', ctx);
     return { pageProps, credentials, path: ctx.pathname };
   }
 
   renderPages() {
     const { Component, pageProps, credentials, path } = this.props;
+
     if (path === '/login')
       return <Component credentials={credentials} {...pageProps} />;
+
+    if (path === '/_error') {
+      return (
+        <>
+          <Header {...credentials} />
+          <Component credentials={credentials} {...pageProps} />
+        </>
+      );
+    }
+
     return (
       <>
         <Header {...credentials} />
