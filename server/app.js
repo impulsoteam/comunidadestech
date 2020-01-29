@@ -1,4 +1,5 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import path from 'path';
 import next from 'next';
@@ -46,6 +47,7 @@ app
     });
 
     server.use(express.json());
+    server.use(cookieParser());
     server.use(express.urlencoded({ extended: true }));
     server.use(morgan('dev'));
     server.use(passport.initialize());
@@ -57,6 +59,11 @@ app
 
     server.use('/auth', sessionRoutes);
     server.use('/api/v1', routes);
+
+    server.get('/sign-in', (req, res) => {
+      res.cookie('previousPage', '/cadastrar');
+      return res.redirect('/login');
+    });
 
     server.get('/c/:slug', (req, res) => {
       return app.render(req, res, '/comunidade', { slug: req.params.slug });

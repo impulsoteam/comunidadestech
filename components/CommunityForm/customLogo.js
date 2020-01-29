@@ -7,9 +7,10 @@ import styles from './styles';
 
 export default function CustomLogo({ setFieldValue, currentLogo }) {
   const [src, setSrc] = useState('');
-  const [imageRef, setImageRef] = useState('');
-  const [crop, setCrop] = useState({ aspect: 1 });
+  const [crop, setCrop] = useState({});
   const [fileUrl, setFileUrl] = useState();
+  const [imageRef, setImageRef] = useState('');
+  const [imageError, setImageError] = useState(false);
 
   const onSelectFile = (files) => {
     if (!!files[0]) {
@@ -17,6 +18,34 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
       reader.addEventListener('load', () => setSrc(reader.result));
       reader.readAsDataURL(files[0]);
     }
+  };
+
+  const onImageLoaded = (ref) => {
+    const width = ref.width > ref.height ? ref.height : ref.width;
+    const height = ref.height > ref.width ? ref.width : ref.height;
+    const scaleX = ref.width - width;
+    const scaleY = ref.height - height;
+    const x = scaleX === 0 ? 0 : scaleX / 2;
+    const y = scaleY === 0 ? 0 : scaleY / 2;
+
+    setImageRef(ref);
+
+    setCrop({
+      unit: 'px',
+      aspect: 1,
+      width,
+      height,
+      x,
+      y,
+    });
+
+    return false;
+  };
+
+  const onError = () => {
+    setImageError(
+      'Algo está errado com a url do seu logo, tente fazer o upload novamente'
+    );
   };
 
   const makeClientCrop = async () => {
@@ -51,6 +80,7 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
       const newFileUrl = window.URL.createObjectURL(blob);
       blob.name = fileName;
       blob.tempUrl = newFileUrl;
+      setImageError('');
       setFieldValue('logo', blob);
       setFileUrl(newFileUrl);
       setSrc('');
@@ -58,18 +88,33 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
   };
 
   const renderDragMessage = (isDragActive, isDragReject) => {
-    if (!!fileUrl) return <>Imagem selecionada</>;
-    if (isDragActive) return <>Solte a imagem aqui</>;
-    if (isDragReject) return <>Arquivo não suportado</>;
-    return <>Clique ou arraste a imagem aqui</>;
+    switch (true) {
+      case !!fileUrl:
+        return <div>Imagem selecionada</div>;
+      case isDragReject:
+        return <div>Arquivo não suportado</div>;
+      case isDragActive:
+        return <div>Solte a imagem aqui</div>;
+      default:
+        return <div>Clique ou arraste a imagem aqui</div>;
+    }
   };
 
-  return (
-    <div className="custom-logo-wrapper">
-      <div className="image-wrapper">
-        <img alt="Crop" src={fileUrl || currentLogo} />
-      </div>
-      {src && (
+  const renderImage = () => {
+    const image = fileUrl || currentLogo;
+
+    if (!!image && !imageError)
+      return (
+        <div className="image-wrapper">
+          <img alt="Logo da Comunidade" src={image} onError={onError} />
+          <style jsx>{styles}</style>
+        </div>
+      );
+  };
+
+  const renderCropModal = () => {
+    if (!!src)
+      return (
         <div className="modal">
           <div className="modal-background" />
           <div className="modal-content">
@@ -87,7 +132,7 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
                 src={src}
                 crop={crop}
                 ruleOfThirds
-                onImageLoaded={(ref) => setImageRef(ref)}
+                onImageLoaded={(ref) => onImageLoaded(ref)}
                 onChange={(crop) => setCrop(crop)}
               />
             </div>
@@ -100,8 +145,18 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
               </button>
             </div>
           </div>
+          <style jsx>{styles}</style>
         </div>
-      )}
+      );
+  };
+
+  return (
+    <div className="custom-logo-wrapper">
+      {renderImage()}
+      {renderCropModal()}
+
+      {!!imageError && <div className="image-error">{imageError}</div>}
+
       <Dropzone accept="image/*" onDropAccepted={onSelectFile}>
         {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
           <div className="drag-button" {...getRootProps()}>
@@ -110,6 +165,7 @@ export default function CustomLogo({ setFieldValue, currentLogo }) {
           </div>
         )}
       </Dropzone>
+
       <style jsx>{styles}</style>
     </div>
   );

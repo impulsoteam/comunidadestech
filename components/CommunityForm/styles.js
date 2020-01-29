@@ -22,6 +22,13 @@ export default css`
     padding-left: 36px;
   }
 
+  .image-error {
+    color: ${colors.chestnutRose};
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 0;
+  }
+
   .page-title {
     background: ${colors.white};
     border-radius: 4px;
@@ -56,6 +63,7 @@ export default css`
       font-size: 14px;
       left: 8px;
       position: absolute;
+      z-index: 1;
     }
   }
 

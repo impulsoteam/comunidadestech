@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 class SessionController {
   login(req, res) {
-    const { user } = req;
+    const { user, cookies } = req;
     if (!user)
       return res.status(500).json({ message: 'Error while authenticating' });
 
@@ -27,7 +27,11 @@ class SessionController {
         isModerator: user.isModerator,
       })
     );
-    res.redirect('/');
+
+    const redirectUrl = cookies.previousPage || '/';
+    if (!!cookies.previousPage) res.clearCookie('previousPage');
+
+    res.redirect(redirectUrl);
   }
 
   checkError(req, res, next) {
