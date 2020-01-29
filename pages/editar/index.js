@@ -68,7 +68,7 @@ EditCommunity.getInitialProps = async (ctx) => {
 
   if (!credentials.token) {
     ctx.res.writeHead(302, {
-      Location: '/',
+      Location: '_error',
     });
     ctx.res.end();
   }
