@@ -11,31 +11,22 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 class MyApp extends App {
-  state = {
-    url: '',
-  };
-
-  componentDidMount() {
-    const url = Router.router.pathname;
-    this.setState({ url });
-  }
-
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
     const credentials = cookies(ctx).ctech_credentials || {};
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
-    return { pageProps, credentials };
+    return { pageProps, credentials, path: ctx.pathname };
   }
 
   renderPages() {
-    const { Component, pageProps, credentials } = this.props;
-    if (this.state.url === '/login')
+    const { Component, pageProps, credentials, path } = this.props;
+    if (path === '/login')
       return <Component credentials={credentials} {...pageProps} />;
     return (
       <>
-        <Header credentials={credentials} />
+        <Header {...credentials} />
         <Component credentials={credentials} {...pageProps} />
         <Footer />
       </>
