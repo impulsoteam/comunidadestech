@@ -45,14 +45,18 @@ export default css`
       }
     }
     @media screen and (max-width: 769px) {
-      & {
-        align-items: center;
-        flex-direction: column;
+      padding-bottom: 1rem;
 
-        .counter {
-          margin-bottom: 20px;
-          margin-right: 0 !important;
-          width: 160px;
+      .counter {
+        text-align: center;
+        margin: 10px;
+
+        &:not(:last-child) {
+          margin: 10px;
+        }
+
+        h2 {
+          margin-bottom: 3px;
         }
       }
     }
