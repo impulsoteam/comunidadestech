@@ -95,7 +95,7 @@ const Community = ({ credentials }) => {
 Community.getInitialProps = async (ctx) => {
   if (!ctx.query.slug) {
     ctx.res.writeHead(302, {
-      Location: '_error',
+      Location: '/',
     });
     ctx.res.end();
   }

@@ -165,7 +165,7 @@ Dashboard.getInitialProps = async (ctx) => {
   const credentials = cookies(ctx).ctech_credentials || {};
   if (!credentials.token) {
     ctx.res.writeHead(302, {
-      Location: '_error',
+      Location: '/',
     });
     ctx.res.end();
   }
