@@ -19,13 +19,14 @@ export default css`
       color: ${colors.white};
       font-size: 48px;
       font-weight: bold;
-      padding: 10px 0;
+      padding: 0;
     }
 
     p {
       color: ${colors.white};
       font-size: 20px;
       line-height: 1.25;
+      margin-bottom: 1.5rem;
     }
 
     a {

@@ -3,7 +3,7 @@ import styles from './styles';
 export default function ErrorMessage() {
   return (
     <div className="error-message">
-      <div className="msg-box">
+      <div className="error-box">
         <div className="container">
           <div className="columns is-centered">
             <div className="column has-text-centered">
