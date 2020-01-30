@@ -22,8 +22,19 @@ class MyApp extends App {
 
   renderPages() {
     const { Component, pageProps, credentials, path } = this.props;
+
     if (path === '/login')
       return <Component credentials={credentials} {...pageProps} />;
+
+    if (path === '/_error') {
+      return (
+        <>
+          <Header {...credentials} />
+          <Component credentials={credentials} {...pageProps} />
+        </>
+      );
+    }
+
     return (
       <>
         <Header {...credentials} />
