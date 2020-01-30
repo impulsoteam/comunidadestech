@@ -1,8 +1,7 @@
-import React, { PureComponent } from 'react';
-import MenssageComponent from '/components/MenssageComponent/';
+import ErrorMessage from '/components/ErrorMessage/';
 
 const Error = () => {
-	return <MenssageComponent />;
+	return <ErrorMessage />;
 }
 
 export default Error;

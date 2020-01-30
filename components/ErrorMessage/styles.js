@@ -1,14 +1,11 @@
 import css from 'styled-jsx/css';
-import { fonts, colors } from '/utils/variables';
+import { colors } from '/utils/variables';
 
 export default css`
-.menssage-content {
+.error-message {
   align-items: center;
+  background: url('/static/bg-stars.svg') center center/cover no-repeat;
   background-color: ${colors.primary};
-  background-image: url('/static/bg-stars.svg');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
   display: flex;
   flex-direction: row;
   float: left;
@@ -16,7 +13,8 @@ export default css`
   min-height: calc(100vh - 3.25rem);
   width: 100%;
 
-  .msg-box {
+  .error-box {
+    max-width: 45%;
     .title {
       color: ${colors.white};
       font-size: 48px;
@@ -37,10 +35,16 @@ export default css`
       padding-top: 24px;
     }
   }
+
   @media only screen and (max-width: 1023px) {
     height: 100vh;
     padding-top: 120px;
-    img { max-width: 90%; }
+
+    .img-error { max-width: 90%; }
+
+    .error-box {
+      max-width: 100%;
+    }
   }
 }
 `;
