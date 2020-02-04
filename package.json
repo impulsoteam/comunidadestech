@@ -20,7 +20,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.27",
     "@zeit/next-sass": "^1.0.1",
-    "aws-sdk": "^2.606.0",
+    "aws-sdk": "^2.610.0",
     "axios": "^0.19.0",
     "bulma": "^0.7.5",
     "cookie-parser": "^1.4.4",
