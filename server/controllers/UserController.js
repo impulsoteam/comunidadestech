@@ -9,6 +9,7 @@ class UserController {
         email: profile.emails[0].value
       },
       (err, user) => {
+        if (err) return
         if (!user) {
           const newUser = new User({
             name: profile.displayName,

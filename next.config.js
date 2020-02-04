@@ -3,13 +3,13 @@ const withSass = require('@zeit/next-sass')
 const withPlugins = require('next-compose-plugins')
 const withImages = require('next-images')
 if (typeof require !== 'undefined') {
+  /* eslint-disable node/no-deprecated-api */
   require.extensions['.less'] = () => {}
   require.extensions['.sass'] = () => {}
   require.extensions['.css'] = () => {}
   require.extensions['.png'] = () => {}
+  /* eslint-disable node/no-deprecated-api */
 }
-console.log('process.env.BUCKET_NAME', process.env.BUCKET_NAME)
-
 const nextConfig = {
   exportPathMap: function () {
     return {
@@ -17,7 +17,6 @@ const nextConfig = {
     }
   },
   env: {
-    BUCKET_NAME: process.env.BUCKET_NAME,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     LINKEDIN_API_KEY: process.env.LINKEDIN_API_KEY,
     LINKEDIN_SECRET_KEY: process.env.LINKEDIN_SECRET_KEY,
