@@ -1,27 +1,29 @@
-import React from 'react';
-import { ErrorMessage } from 'formik';
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
+import React from 'react'
+import Select from 'react-select'
+import makeAnimated from 'react-select/animated'
 
-import { countries, states, cities } from './locationOptions';
-import { MODEL } from './utils';
-import { reactSelectStyle } from './reactSelectStyle';
-import styles from './styles';
+import { ErrorMessage } from 'formik'
+import PropTypes from 'prop-types'
 
-export default function Location({
+import { countries, states, cities } from './locationOptions'
+import { reactSelectStyle } from './reactSelectStyle'
+import styles from './styles'
+import { MODEL } from './utils'
+
+function Location ({
   credentials,
   errors,
   touched,
   values,
   initialValues,
   setFieldValue,
-  setFieldTouched,
+  setFieldTouched
 }) {
-  const animatedComponents = makeAnimated();
-  const getCities = (state) => cities.filter((city) => city.state === state);
+  const animatedComponents = makeAnimated()
+  const getCities = (state) => cities.filter((city) => city.state === state)
   const handleStringChange = (selectedOption, data) => {
-    setFieldValue(data || data.value, selectedOption.value);
-  };
+    setFieldValue(data || data.value, selectedOption.value)
+  }
   return (
     <>
       <fieldset>
@@ -106,31 +108,31 @@ export default function Location({
         {values.location.country === 'Brasil' &&
         values.model !== 'online' &&
         values.location.state ? (
-          <Select
-            name="location.city"
-            icon="\f3c5"
-            options={getCities(values.location.state)}
-            defaultValue={cities.filter(
-              (city) => city.label === values.location.city
-            )}
-            closeMenuOnSelect={true}
-            components={animatedComponents}
-            placeholder="Clique para selecionar"
-            onBlur={() => setFieldTouched('location.city', true)}
-            onChange={(selectedOption, data) =>
-              handleStringChange(selectedOption, data.name, setFieldValue)
-            }
-            styles={reactSelectStyle}
-          />
-        ) : (
-          <Select
-            icon="\f3c5"
-            styles={reactSelectStyle}
-            placeholder="Não aplica à sua seleção"
-            value="Não aplica à sua seleção"
-            isDisabled
-          />
-        )}
+            <Select
+              name="location.city"
+              icon="\f3c5"
+              options={getCities(values.location.state)}
+              defaultValue={cities.filter(
+                (city) => city.label === values.location.city
+              )}
+              closeMenuOnSelect={true}
+              components={animatedComponents}
+              placeholder="Clique para selecionar"
+              onBlur={() => setFieldTouched('location.city', true)}
+              onChange={(selectedOption, data) =>
+                handleStringChange(selectedOption, data.name, setFieldValue)
+              }
+              styles={reactSelectStyle}
+            />
+          ) : (
+            <Select
+              icon="\f3c5"
+              styles={reactSelectStyle}
+              placeholder="Não aplica à sua seleção"
+              value="Não aplica à sua seleção"
+              isDisabled
+            />
+          )}
         <ErrorMessage name="location.city">
           {(msg) => <div className="form-error">{msg}</div>}
         </ErrorMessage>
@@ -138,5 +140,17 @@ export default function Location({
       <p className="required-form">* Itens obrigatórios</p>
       <style jsx>{styles}</style>
     </>
-  );
+  )
 }
+
+Location.propTypes = {
+  credentials: PropTypes.object,
+  errors: PropTypes.object,
+  initialValues: PropTypes.object,
+  touched: PropTypes.object,
+  values: PropTypes.object,
+  setFieldValue: PropTypes.func,
+  setFieldTouched: PropTypes.func
+}
+
+export default Location

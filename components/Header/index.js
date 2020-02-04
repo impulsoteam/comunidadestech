@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
-import Cookies from 'js-cookie';
-import Router from 'next/router';
-import { useWindowSize } from 'react-use';
+import React, { useState } from 'react'
+import { useWindowSize } from 'react-use'
 
-import styles from './styles';
+import Cookies from 'js-cookie'
+import Router from 'next/router'
+import PropTypes from 'prop-types'
+
+import styles from './styles'
 
 const Header = ({ name, avatar, token }) => {
-  const [isActive, setIsActive] = useState('');
-  const { width } = useWindowSize();
-  const isMobile = width > 1023 ? false : true;
+  const [isActive, setIsActive] = useState('')
+  const { width } = useWindowSize()
+  const isMobile = !(width > 1023)
 
   const logout = () => {
-    Cookies.remove('ctech_credentials');
-    Router.push('/');
-  };
+    Cookies.remove('ctech_credentials')
+    Router.push('/')
+  }
 
   const getCreateButton = () => (
     <>
@@ -21,7 +23,7 @@ const Header = ({ name, avatar, token }) => {
         <div className="navbar-item is-hidden-touch">
           <div className="buttons">
             <a
-              href={token ? `/cadastrar` : `/sign-in`}
+              href={token ? '/cadastrar' : '/sign-in'}
               className="button is-primary is-outlined"
             >
               <strong>Cadastre uma comunidade</strong>
@@ -30,7 +32,7 @@ const Header = ({ name, avatar, token }) => {
         </div>
       ) : (
         <a
-          href={token ? `/cadastrar` : `/sign-in`}
+          href={token ? '/cadastrar' : '/sign-in'}
           className="navbar-item is-hidden-desktop"
         >
           Cadastre uma comunidade
@@ -38,10 +40,10 @@ const Header = ({ name, avatar, token }) => {
       )}
       <style jsx>{styles}</style>
     </>
-  );
+  )
 
   const generateButtons = () => {
-    if (!token)
+    if (!token) {
       return (
         <div id="ctech-navbar" className={`navbar-menu  ${isActive}`}>
           <div className="navbar-end">
@@ -62,7 +64,8 @@ const Header = ({ name, avatar, token }) => {
           </div>
           <style jsx>{styles}</style>
         </div>
-      );
+      )
+    }
 
     return (
       <div id="ctech-navbar" className={`navbar-menu  ${isActive}`}>
@@ -95,8 +98,8 @@ const Header = ({ name, avatar, token }) => {
         </div>
         <style jsx>{styles}</style>
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -125,7 +128,13 @@ const Header = ({ name, avatar, token }) => {
       {generateButtons()}
       <style jsx>{styles}</style>
     </nav>
-  );
-};
+  )
+}
 
-export default Header;
+Header.propTypes = {
+  name: PropTypes.string,
+  avatar: PropTypes.string,
+  token: PropTypes.string
+}
+
+export default Header

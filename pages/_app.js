@@ -1,39 +1,40 @@
-import App, { Container } from 'next/app';
-import Head from 'next/head';
-import cookies from 'next-cookies';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import React from 'react';
-import Router, { withRouter } from 'next/router';
-import 'styles/styles.scss';
+import React from 'react'
+import { ToastContainer } from 'react-toastify'
 
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import cookies from 'next-cookies'
+import App, { Container } from 'next/app'
+import Head from 'next/head'
+import { withRouter } from 'next/router'
+
+import 'react-toastify/dist/ReactToastify.css'
+import 'styles/styles.scss'
+
+import Footer from '../components/Footer'
+import Header from '../components/Header'
 
 class MyApp extends App {
-  static async getInitialProps({ Component, ctx }) {
-    let pageProps = {};
-    const credentials = cookies(ctx).ctech_credentials || {};
+  static async getInitialProps ({ Component, ctx }) {
+    let pageProps = {}
+    const credentials = cookies(ctx).ctech_credentials || {}
     if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
+      pageProps = await Component.getInitialProps(ctx)
     }
-    return { pageProps, credentials, path: ctx.pathname };
+    return { pageProps, credentials, path: ctx.pathname }
   }
 
-  renderPages() {
-    const { Component, pageProps, credentials, path } = this.props;
-    if (path === '/login')
-      return <Component credentials={credentials} {...pageProps} />;
+  renderPages () {
+    const { Component, pageProps, credentials, path } = this.props
+    if (path === '/login') { return <Component credentials={credentials} {...pageProps} /> }
     return (
       <>
         <Header {...credentials} />
         <Component credentials={credentials} {...pageProps} />
         <Footer />
       </>
-    );
+    )
   }
 
-  render() {
+  render () {
     return (
       <Container>
         <ToastContainer />
@@ -42,8 +43,8 @@ class MyApp extends App {
         </Head>
         {this.renderPages()}
       </Container>
-    );
+    )
   }
 }
 
-export default withRouter(MyApp);
+export default withRouter(MyApp)

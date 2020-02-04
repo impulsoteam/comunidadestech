@@ -1,19 +1,19 @@
-import express from 'express';
+import express from 'express'
 
-import routes from '../../server/routes';
-import SessionController from '../../server/controllers/SessionController';
-import { passportWithGoogle, passportWithLinkedin } from '../utils';
+import SessionController from '../../server/controllers/SessionController'
+import routes from '../../server/routes'
+import { passportWithGoogle, passportWithLinkedin } from '../utils'
 
-const server = express();
+const server = express()
 
-server.use(express.json());
+server.use(express.json())
 
-server.use('/', routes);
-server.use('/auth/linkedin', passportWithLinkedin, SessionController.login);
+server.use('/', routes)
+server.use('/auth/linkedin', passportWithLinkedin, SessionController.login)
 server.use(
   '/auth/google_oauth2/callback',
   passportWithGoogle,
   SessionController.login
-);
+)
 
-export default server;
+export default server

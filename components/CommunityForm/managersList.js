@@ -1,42 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import loader from '../../static/comunidades-tech-loader.gif';
-import { api, setHeader } from '../../utils/axios';
-import { invitationStatus } from '../../utils/variables';
-import Divider from '../Divider';
+import React, { useState, useEffect } from 'react'
 
-import styles from './cardStyles';
+import PropTypes from 'prop-types'
 
-export default function ManagersList({
+import loader from '../../static/comunidades-tech-loader.gif'
+import { api, setHeader } from '../../utils/axios'
+import { invitationStatus } from '../../utils/variables'
+import Divider from '../Divider'
+import styles from './cardStyles'
+
+function ManagersList ({
   managers: allManagers,
   removeManager,
   credentials,
-  pageType,
+  pageType
 }) {
-  if (allManagers.length === 0) return;
+  if (allManagers.length === 0) return
 
-  const { sending, sent, declined, accepted } = invitationStatus;
+  const { sending, sent, declined, accepted } = invitationStatus
 
   const sendingInvites = allManagers.filter(
     ({ invitation }) => invitation.status === sending
-  );
+  )
   const pendingInvites = allManagers.filter(
     ({ invitation }) => invitation.status === sent
-  );
+  )
   const declinedInvites = allManagers.filter(
     ({ invitation }) => invitation.status === declined
-  );
+  )
   const acceptedInvites = allManagers.filter(
     ({ invitation }) => invitation.status === accepted
-  );
+  )
 
   const renderManagers = () => {
-    if (acceptedInvites.length === 0 && pageType !== 'create')
+    if (acceptedInvites.length === 0 && pageType !== 'create') {
       return (
         <>
           <Divider dataContent="Não há administradores cadastrados" />
           <style jsx>{styles}</style>
         </>
-      );
+      )
+    }
     return (
       <>
         <Divider dataContent="Administradores" />
@@ -46,16 +49,16 @@ export default function ManagersList({
             {...{
               manager,
               removeManager,
-              credentials,
+              credentials
             }}
           />
         ))}
       </>
-    );
-  };
+    )
+  }
 
   const renderPendingInvites = () => {
-    if (pendingInvites.length === 0) return;
+    if (pendingInvites.length === 0) return
     return (
       <>
         <h5 className="admin-title">Convites Pendentes</h5>
@@ -65,16 +68,16 @@ export default function ManagersList({
             {...{
               manager,
               removeManager,
-              credentials,
+              credentials
             }}
           />
         ))}
         <style jsx>{styles}</style>
       </>
-    );
-  };
+    )
+  }
   const renderDeclinedInvites = () => {
-    if (declinedInvites.length === 0) return;
+    if (declinedInvites.length === 0) return
     return (
       <>
         <h5 className="admin-title">Convites Recusados</h5>
@@ -85,16 +88,16 @@ export default function ManagersList({
             {...{
               manager,
               removeManager,
-              credentials,
+              credentials
             }}
           />
         ))}
       </>
-    );
-  };
+    )
+  }
 
   const renderSendingInvites = () => {
-    if (sendingInvites.length === 0) return;
+    if (sendingInvites.length === 0) return
     return (
       <>
         <h5 className="admin-title">Convites a Serem Enviados</h5>
@@ -105,13 +108,13 @@ export default function ManagersList({
             {...{
               manager,
               removeManager,
-              credentials,
+              credentials
             }}
           />
         ))}
       </>
-    );
-  };
+    )
+  }
 
   return (
     <>
@@ -120,35 +123,35 @@ export default function ManagersList({
       {renderDeclinedInvites()}
       {renderSendingInvites()}
     </>
-  );
+  )
 }
 
-function ManagerCard({ manager, removeManager, credentials }) {
-  const [loading, setLoading] = useState(true);
-  const [managerDetails, setManager] = useState({});
+function ManagerCard ({ manager, removeManager, credentials }) {
+  const [loading, setLoading] = useState(true)
+  const [managerDetails, setManager] = useState({})
 
   useEffect(() => {
     const getManager = async () => {
       if (!manager.avatar) {
-        setHeader(credentials);
+        setHeader(credentials)
         const { data: response } = await api.get(
           `/user/checkManager/${manager.email}`
-        );
+        )
 
-        manager.name = response.name;
-        manager.avatar = response.avatar;
-        manager._id = response._id;
+        manager.name = response.name
+        manager.avatar = response.avatar
+        manager._id = response._id
       }
-      setManager(manager);
-      setLoading(false);
-    };
-    getManager();
-  }, []);
+      setManager(manager)
+      setLoading(false)
+    }
+    getManager()
+  }, [])
 
   const renderCard = () => {
-    const { email, name, avatar } = managerDetails;
+    const { email, name, avatar } = managerDetails
 
-    if (loading)
+    if (loading) {
       return (
         <div style={{ height: ' 45px' }}>
           <img
@@ -156,7 +159,8 @@ function ManagerCard({ manager, removeManager, credentials }) {
             style={{ maxWidth: '30px', display: 'block', margin: '0 auto' }}
           />
         </div>
-      );
+      )
+    }
 
     return (
       <div className="manager-card card">
@@ -168,7 +172,7 @@ function ManagerCard({ manager, removeManager, credentials }) {
                   src={avatar}
                   alt={name}
                   onError={(img) => {
-                    img.target.src = '../../static/default-user.png';
+                    img.target.src = '../../static/default-user.png'
                   }}
                 />
               </figure>
@@ -184,7 +188,16 @@ function ManagerCard({ manager, removeManager, credentials }) {
         </div>
         <style jsx>{styles}</style>
       </div>
-    );
-  };
-  return renderCard();
+    )
+  }
+  return renderCard()
 }
+
+ManagersList.propTypes = {
+  removeManager: PropTypes.func,
+  credentials: PropTypes.object,
+  pageType: PropTypes.string,
+  managers: PropTypes.array
+}
+
+export default ManagersList

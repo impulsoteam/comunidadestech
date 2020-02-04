@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import styles from './styles';
+import React, { Component } from 'react'
+
+import styles from './styles'
 
 class CommunityHero extends Component {
-  render() {
+  render () {
     return (
       <>
         <section className="hero hero-image">
@@ -12,8 +13,8 @@ class CommunityHero extends Component {
           <style jsx>{styles}</style>
         </section>
       </>
-    );
+    )
   }
 }
 
-export default CommunityHero;
+export default CommunityHero

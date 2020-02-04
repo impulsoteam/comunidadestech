@@ -1,11 +1,12 @@
-import express from 'express';
-import SessionController from '../controllers/SessionController';
-import UserController from '../controllers/UserController';
+import express from 'express'
 
-const router = express.Router();
+import SessionController from '../controllers/SessionController'
+import UserController from '../controllers/UserController'
 
-router.get('/checkManager/:email', UserController.checkManager);
-router.use(SessionController.checkToken);
-router.get('/invitations', UserController.getInvitations);
+const router = express.Router()
 
-export default router;
+router.get('/checkManager/:email', UserController.checkManager)
+router.use(SessionController.checkToken)
+router.get('/invitations', UserController.getInvitations)
+
+export default router

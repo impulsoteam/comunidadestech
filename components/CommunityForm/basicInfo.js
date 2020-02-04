@@ -1,65 +1,66 @@
-import React, { useEffect } from 'react';
-import { Field, ErrorMessage } from 'formik';
-import slug from 'slug';
-import { api, setHeader } from '../../utils/axios';
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
-import { reactSelectStyle } from './reactSelectStyle';
-import styles from './styles';
+import React, { useEffect } from 'react'
+import Select from 'react-select'
+import makeAnimated from 'react-select/animated'
 
-import CustomLogo from './customLogo';
+import { Field, ErrorMessage } from 'formik'
+import PropTypes from 'prop-types'
+import slug from 'slug'
 
+import { api, setHeader } from '../../utils/axios'
+import CustomLogo from './customLogo'
+import { reactSelectStyle } from './reactSelectStyle'
+import styles from './styles'
 import {
   CATEGORIES,
   TAGS,
   TYPES,
   GLOBAL_PROGRAM,
-  errorMessages,
-} from './utils';
+  errorMessages
+} from './utils'
 
-export default function BasicInfos({
+function BasicInfos ({
   credentials,
   errors,
   touched,
   values,
   initialValues,
   setFieldValue,
-  setFieldTouched,
+  setFieldTouched
 }) {
-  const { nameAlreadyExists, slugAlreadyExists } = errorMessages;
+  const { nameAlreadyExists, slugAlreadyExists } = errorMessages
 
-  const animatedComponents = makeAnimated();
+  const animatedComponents = makeAnimated()
 
   useEffect(() => {
-    setFieldValue('slug', slug(values.name, { lower: true }));
-  }, [values.name]);
+    setFieldValue('slug', slug(values.name, { lower: true }))
+  }, [values.name])
 
   const checkSlug = async (slug) => {
-    const toShort = slug.length < 4;
-    const notChanged = slug === initialValues.slug;
-    if (!slug || toShort || notChanged) return;
-    setHeader(credentials);
-    const { data } = await api.get(`/community/checkSlug/${slug}`);
-    return data ? slugAlreadyExists : null;
-  };
+    const toShort = slug.length < 4
+    const notChanged = slug === initialValues.slug
+    if (!slug || toShort || notChanged) return
+    setHeader(credentials)
+    const { data } = await api.get(`/community/checkSlug/${slug}`)
+    return data ? slugAlreadyExists : null
+  }
 
   const checkName = async (name) => {
-    const toShort = name.length < 4;
-    const notChanged = name === initialValues.name;
-    if (!name || toShort || notChanged) return;
-    setHeader(credentials);
-    const { data } = await api.get(`/community/checkName/${name}`);
+    const toShort = name.length < 4
+    const notChanged = name === initialValues.name
+    if (!name || toShort || notChanged) return
+    setHeader(credentials)
+    const { data } = await api.get(`/community/checkName/${name}`)
 
-    return data ? nameAlreadyExists : null;
-  };
+    return data ? nameAlreadyExists : null
+  }
 
   const handleChange = (selectedOption) => {
-    const selected = selectedOption && selectedOption.map(({ value }) => value);
-    setFieldValue('tags', selected);
-  };
+    const selected = selectedOption && selectedOption.map(({ value }) => value)
+    setFieldValue('tags', selected)
+  }
   const handleStringChange = (selectedOption, data) => {
-    setFieldValue(data || data.value, selectedOption.value);
-  };
+    setFieldValue(data || data.value, selectedOption.value)
+  }
   return (
     <>
       <label>
@@ -209,7 +210,7 @@ export default function BasicInfos({
           name="logo"
           {...{
             setFieldValue,
-            currentLogo: initialValues.logo,
+            currentLogo: initialValues.logo
           }}
         />
       </div>
@@ -231,5 +232,17 @@ export default function BasicInfos({
       <p className="required-form">* Itens obrigatórios</p>
       <style jsx>{styles}</style>
     </>
-  );
+  )
 }
+
+BasicInfos.propTypes = {
+  credentials: PropTypes.object,
+  errors: PropTypes.object,
+  touched: PropTypes.object,
+  values: PropTypes.object,
+  initialValues: PropTypes.object,
+  setFieldValue: PropTypes.func,
+  setFieldTouched: PropTypes.func
+}
+
+export default BasicInfos

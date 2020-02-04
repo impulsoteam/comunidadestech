@@ -1,5 +1,6 @@
-import css from 'styled-jsx/css';
-import { colors } from '/utils/variables';
+import css from 'styled-jsx/css'
+
+import { colors } from '/utils/variables'
 
 export default css`
   .menu-label {
@@ -14,4 +15,4 @@ export default css`
     margin: 0;
     padding: 0;
   }
-`;
+`

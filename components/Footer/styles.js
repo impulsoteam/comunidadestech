@@ -1,5 +1,6 @@
-import css from 'styled-jsx/css';
-import { colors } from '/utils/variables';
+import css from 'styled-jsx/css'
+
+import { colors } from '/utils/variables'
 
 export default css`
   img {
@@ -33,4 +34,4 @@ export default css`
   .footer {
     background-color: ${colors.white};
   }
-`;
+`

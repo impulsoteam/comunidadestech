@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import Card from '../Card';
-import ReactMap, { NavigationControl, Marker } from 'react-map-gl';
-import styles from './styles';
-import CommunitySideBar from '../CommunitySideBar';
+import React, { useState, useEffect } from 'react'
+import ReactMap, { NavigationControl, Marker } from 'react-map-gl'
+
+import PropTypes from 'prop-types'
+
+import Card from '../Card'
+import CommunitySideBar from '../CommunitySideBar'
+import styles from './styles'
 
 const Map = ({
   list,
@@ -12,33 +15,34 @@ const Map = ({
   closeSideBar,
   closeMobileSideBar,
   reset,
-  mobileSideBar,
+  mobileSideBar
 }) => {
   const [viewport, setViewport] = useState({
     latitude: -15.6634068,
     longitude: -58.6388463,
     zoom: 3.5,
     width: '100%',
-    height: '100%',
-  });
-  const [locations, setLocations] = useState([]);
+    height: '100%'
+  })
+  const [locations, setLocations] = useState([])
   useEffect(() => {
-    let locations = [];
+    let locations = []
     list.forEach((item) => {
-      if (locations.filter((city) => city.state) !== item.location.state)
+      if (locations.filter((city) => city.state) !== item.location.state) {
         item.location.state &&
           locations.push({
             state: item.location.state,
             city: item.location.city,
             latitude: item.location.latitude,
-            longitude: item.location.longitude,
-          });
-    });
+            longitude: item.location.longitude
+          })
+      }
+    })
     locations.forEach((location) => {
       location.number = locations.filter(
         (item) => item.state === location.state && item.city === location.city
-      ).length;
-    });
+      ).length
+    })
     locations = locations.filter(
       (elem, index, self) =>
         self.findIndex((item) => {
@@ -46,11 +50,11 @@ const Map = ({
             item.city === elem.city &&
             item.number === elem.number &&
             elem.number > 1
-          );
+          )
         }) === index
-    );
-    setLocations(locations);
-  }, [list]);
+    )
+    setLocations(locations)
+  }, [list])
 
   return (
     <div className="map-component-wrapper">
@@ -62,7 +66,7 @@ const Map = ({
           mapStyle="mapbox://styles/impulso/ck5mh46rt392t1iqkpdpl7dx0"
           scrollZoom={false}
           onViewportChange={(viewport) => {
-            setViewport(viewport);
+            setViewport(viewport)
           }}
         >
           {list.map(
@@ -73,53 +77,53 @@ const Map = ({
                   location.state === community.location.state &&
                   location.city === community.location.city
               ).length > 0 ? (
-                <Marker
-                  key={community._id}
-                  latitude={community.location.latitude}
-                  longitude={community.location.longitude}
-                >
-                  <button
-                    className="marker-wrapper"
-                    onClick={(e) => {
-                      clickPin(e);
-                    }}
-                    data-state={community.location.state}
-                    data-city={community.location.city}
+                  <Marker
+                    key={community._id}
+                    latitude={community.location.latitude}
+                    longitude={community.location.longitude}
                   >
-                    <div className="marker-form"></div>
-                    <div className="marker-content">
-                      <span>
-                        {
-                          locations.filter(
-                            (location) =>
-                              location.state === community.location.state &&
+                    <button
+                      className="marker-wrapper"
+                      onClick={(e) => {
+                        clickPin(e)
+                      }}
+                      data-state={community.location.state}
+                      data-city={community.location.city}
+                    >
+                      <div className="marker-form"></div>
+                      <div className="marker-content">
+                        <span>
+                          {
+                            locations.filter(
+                              (location) =>
+                                location.state === community.location.state &&
                               location.city === community.location.city
-                          )[0].number
-                        }
-                      </span>
-                    </div>
-                  </button>
-                </Marker>
-              ) : (
-                <Marker
-                  key={community._id}
-                  latitude={community.location.latitude}
-                  longitude={community.location.longitude}
-                >
-                  <button
-                    className="marker-wrapper"
-                    onClick={(e) => {
-                      clickPin(e);
-                    }}
-                    data-name={community.nameSearch}
+                            )[0].number
+                          }
+                        </span>
+                      </div>
+                    </button>
+                  </Marker>
+                ) : (
+                  <Marker
+                    key={community._id}
+                    latitude={community.location.latitude}
+                    longitude={community.location.longitude}
                   >
-                    <div className="marker-form"></div>
-                    <div className="marker-content">
-                      <img src={community.logo} alt={community.name} />
-                    </div>{' '}
-                  </button>
-                </Marker>
-              ))
+                    <button
+                      className="marker-wrapper"
+                      onClick={(e) => {
+                        clickPin(e)
+                      }}
+                      data-name={community.nameSearch}
+                    >
+                      <div className="marker-form"></div>
+                      <div className="marker-content">
+                        <img src={community.logo} alt={community.name} />
+                      </div>{' '}
+                    </button>
+                  </Marker>
+                ))
           )}
           <div style={{ position: 'absolute', left: '10px', top: '10px' }}>
             <NavigationControl />
@@ -127,7 +131,7 @@ const Map = ({
           <div style={{ position: 'absolute', right: '10px', top: '10px' }}>
             <button
               onClick={(event) => {
-                reset(event);
+                reset(event)
               }}
               className="button button-reset-map"
             >
@@ -139,7 +143,7 @@ const Map = ({
           </div>
         </ReactMap>
       </div>
-      <div className={`community-list ${mobileSideBar && `mobile-sidebar`}`}>
+      <div className={`community-list ${mobileSideBar && 'mobile-sidebar'}`}>
         <div className="container">
           <div className="columns button-wrapper" onClick={closeMobileSideBar}>
             <div className="column is-12 " style={{ height: '2.75rem' }}>
@@ -163,7 +167,7 @@ const Map = ({
                 <div className="column is-12">
                   <button
                     onClick={(event) => {
-                      reset(event);
+                      reset(event)
                     }}
                     className="button button-reset is-fullwidth"
                   >
@@ -193,7 +197,18 @@ const Map = ({
       </div>
       <style jsx>{styles}</style>
     </div>
-  );
-};
+  )
+}
 
-export default Map;
+Map.propTypes = {
+  clickCommunity: PropTypes.func,
+  clickPin: PropTypes.func,
+  closeMobileSideBar: PropTypes.func,
+  closeSideBar: PropTypes.func,
+  communitySideBar: PropTypes.object,
+  list: PropTypes.array,
+  mobileSideBar: PropTypes.bool,
+  reset: PropTypes.func
+}
+
+export default Map

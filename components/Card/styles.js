@@ -1,6 +1,6 @@
-import css from 'styled-jsx/css';
-import { colors } from '/utils/variables';
-import { fonts } from '/utils/variables';
+import css from 'styled-jsx/css'
+
+import { colors, fonts } from '/utils/variables'
 
 export default css`
   .description {
@@ -127,4 +127,4 @@ export default css`
       line-height: 1.125;
     }
   }
-`;
+`

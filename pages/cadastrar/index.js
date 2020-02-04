@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
-import { toast } from 'react-toastify';
+import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 
-import Router from 'next/router';
-import cookies from 'next-cookies';
-import { api, setHeader } from '../../utils/axios';
+import cookies from 'next-cookies'
+import Router from 'next/router'
+import PropTypes from 'prop-types'
 
-import styles from './styles';
-import CommunityForm from '../../components/CommunityForm';
+import CommunityForm from '../../components/CommunityForm'
+import { api, setHeader } from '../../utils/axios'
+import styles from './styles'
 
 const RegisterCommunity = ({ credentials }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const getInitialValues = () => {
-    const { _id, name, email } = credentials;
-    const logo = `${process.env.DEFAULT_LOGO}`;
+    const { _id, name, email } = credentials
+    const logo = `${process.env.DEFAULT_LOGO}`
     return {
       name: '',
       slug: 'comunidades.tech/c/',
@@ -21,7 +22,7 @@ const RegisterCommunity = ({ credentials }) => {
       location: {
         country: '',
         state: '',
-        city: '',
+        city: ''
       },
       links: [{ type: 'url', url: '' }],
       description: '',
@@ -30,7 +31,7 @@ const RegisterCommunity = ({ credentials }) => {
       tags: '',
       globalProgram: {
         isParticipant: false,
-        name: '',
+        name: ''
       },
       members: '',
       logo,
@@ -38,23 +39,23 @@ const RegisterCommunity = ({ credentials }) => {
         _id,
         name,
         email,
-        rocketChat: '',
+        rocketChat: ''
       },
       owner: '',
-      managers: [],
-    };
-  };
+      managers: []
+    }
+  }
 
   const postCommunity = async (community) => {
-    setLoading(true);
-    setHeader(credentials);
-    await api.post('/community/store', community);
+    setLoading(true)
+    setHeader(credentials)
+    await api.post('/community/store', community)
     toast.success(
       `Comunidade cadastrada com sucesso!\n
     Em breve ela será publicada.`
-    );
-    Router.push('/');
-  };
+    )
+    Router.push('/')
+  }
 
   return (
     <div className="container">
@@ -74,16 +75,21 @@ const RegisterCommunity = ({ credentials }) => {
 
       <style jsx>{styles}</style>
     </div>
-  );
-};
+  )
+}
 
 RegisterCommunity.getInitialProps = async (ctx) => {
-  const credentials = cookies(ctx).ctech_credentials || {};
+  const credentials = cookies(ctx).ctech_credentials || {}
   if (!credentials.token) {
     ctx.res.writeHead(302, {
-      Location: '/sign-in',
-    });
-    ctx.res.end();
+      Location: '/sign-in'
+    })
+    ctx.res.end()
   }
-};
-export default RegisterCommunity;
+}
+
+RegisterCommunity.propTypes = {
+  credentials: PropTypes.object
+}
+
+export default RegisterCommunity

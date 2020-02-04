@@ -1,13 +1,17 @@
-import React from 'react';
-import { Field, ErrorMessage, FieldArray } from 'formik';
-import Select from 'react-select';
-import { linksSelectStyle } from './reactSelectStyle';
-import styles from './styles';
-import { LINKS } from './utils';
-export default function Links({ errors, values, setFieldValue }) {
+import React from 'react'
+import Select from 'react-select'
+
+import { Field, ErrorMessage, FieldArray } from 'formik'
+import PropTypes from 'prop-types'
+
+import { linksSelectStyle } from './reactSelectStyle'
+import styles from './styles'
+import { LINKS } from './utils'
+
+function Links ({ errors, values, setFieldValue }) {
   const handleStringChange = (selectedOption, data) => {
-    setFieldValue(data || data.value, selectedOption.value);
-  };
+    setFieldValue(data || data.value, selectedOption.value)
+  }
   return (
     <>
       <div className="links-wrapper">
@@ -64,7 +68,7 @@ export default function Links({ errors, values, setFieldValue }) {
                           }
                           className="button is-primary is-outlined"
                           onClick={() => {
-                            arrayHelpers.push({ type: 'url', url: '' });
+                            arrayHelpers.push({ type: 'url', url: '' })
                           }}
                         >
                           <span className="icon is-small">
@@ -84,5 +88,13 @@ export default function Links({ errors, values, setFieldValue }) {
       <p className="required-form">* Itens obrigatórios</p>
       <style jsx>{styles}</style>
     </>
-  );
+  )
 }
+
+Links.propTypes = {
+  setFieldValue: PropTypes.func,
+  errors: PropTypes.object,
+  values: PropTypes.object
+}
+
+export default Links

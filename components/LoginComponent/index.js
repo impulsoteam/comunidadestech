@@ -1,7 +1,8 @@
-import React from 'react';
-import styles from './styles';
+import React from 'react'
 
-export default function Login() {
+import styles from './styles'
+
+export default function Login () {
   return (
     <div>
       <div className="left-login">
@@ -72,5 +73,5 @@ export default function Login() {
       </div>
       <style jsx>{styles}</style>
     </div>
-  );
+  )
 }

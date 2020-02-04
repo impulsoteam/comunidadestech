@@ -1,292 +1,269 @@
-import React, { PureComponent } from 'react';
-import styles from './styles';
-import { api, setHeader } from '../../utils/axios';
-import Card from '/components/Card/';
-import Hero from '/components/Hero/';
-import Filter from '../../components/Filter';
-import Map from '../../components/Map';
-import Counter from '../../components/Counter';
-import Router from 'next/router';
-import loader from '../../static/comunidades-tech-loader.gif';
-import { paramFilter, normalize } from '../../utils/index';
-export default class Home extends PureComponent {
-  state = {
-    list: [],
-    loading: true,
-    openModal: false,
-    multipleFilter: {},
-    filteredMulti: [],
-    searchURL: '',
-    searchName: '',
-    pageOptions: '',
-    communitySideBar: {},
-    url: {},
-    model: '',
-    mobileSideBar: false,
-  };
+import React, { useState, useEffect } from 'react'
 
-  async componentDidMount() {
-    setHeader(this.props.credentials);
-    const { data } = await api.get('/community/status/published');
-    this.setState({ list: normalize(data) });
+import Router from 'next/router'
+import PropTypes from 'prop-types'
 
-    const route = Router.router.query;
-    let newFilter = this.state.multipleFilter;
-    for (const prop in route) {
-      newFilter[prop] = route[prop];
+import Counter from '../../components/Counter'
+import Filter from '../../components/Filter'
+import Map from '../../components/Map'
+import loader from '../../static/comunidades-tech-loader.gif'
+import { api, setHeader } from '../../utils/axios'
+import { paramFilter, normalize } from '../../utils/index'
+import styles from './styles'
+
+import Card from '/components/Card/'
+import Hero from '/components/Hero/'
+
+const Home = ({ credentials }) => {
+  const [list, setList] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [multipleFilter, setMultipleFilter] = useState([])
+  const [filteredMulti, setFilteredMulti] = useState([])
+  const [pageOptions, setPageOptions] = useState('')
+  const [model, setModel] = useState('')
+  const [mobileSideBar, setMobileSideBar] = useState(false)
+  const [url, setUrl] = useState({})
+  const [communitySideBar, setCommunitySideBar] = useState({})
+
+  useEffect(() => {
+    const getList = async () => {
+      setHeader(credentials)
+      const { data } = await api.get('/community/status/published')
+      setList(normalize(data))
+
+      const route = Router.router.query
+      const newFilter = multipleFilter
+      for (const prop in route) {
+        newFilter[prop] = route[prop]
+      }
+
+      const filteredMulti = paramFilter(normalize(data), newFilter)
+
+      const url = Router.router.query
+      const model = url.model
+
+      setFilteredMulti(filteredMulti)
+      setMultipleFilter(newFilter)
+      setLoading(false)
+      setPageOptions('list')
+      setCommunitySideBar({})
+      setUrl(url)
+      setModel(model)
+      setMobileSideBar(false)
     }
+    getList()
+  }, [])
 
-    const filteredMulti = paramFilter(this.state.list, newFilter);
-
-    const url = Router.router.query;
-    const model = url.model;
-
-    this.setState({
-      filteredMulti,
-      multipleFilter: newFilter,
-      loading: false,
-      pageOptions: 'list',
-      communitySideBar: {},
-      url,
-      model,
-      mobileSideBar: false,
-    });
-  }
-
-  handleModal = () => {
-    this.setState({ openModal: !this.state.openModal });
-  };
-
-  handleChange = (event) => {
-    const { name, value } = event.target;
-    let newFilter = this.state.multipleFilter;
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    const newFilter = multipleFilter
 
     value === 'all' || value === 'both'
       ? (newFilter[name] = '')
       : name === 'nameSearch'
-      ? (newFilter[name] = value.toLowerCase())
-      : (newFilter[name] = value);
-    name === 'state' && (newFilter['city'] = '');
-    this.setState({ multipleFilter: newFilter });
-    const filteredMulti = paramFilter(this.state.list, newFilter);
-    this.setState({ filteredMulti });
+        ? (newFilter[name] = value.toLowerCase())
+        : (newFilter[name] = value)
+    name === 'state' && (newFilter.city = '')
+    setMultipleFilter(newFilter)
+    const filteredMulti = paramFilter(list, newFilter)
+    setFilteredMulti(filteredMulti)
 
-    let address = '/?';
+    let address = '/?'
     for (const prop in newFilter) {
       newFilter[prop] &&
         (address = `${address}${prop}=`) &&
-        (address = `${address}${newFilter[prop]}&`);
+        (address = `${address}${newFilter[prop]}&`)
     }
-    const href = address.slice(0, -1);
-    const as = href;
-    Router.push(href, as, { shallow: true });
-  };
+    const href = address.slice(0, -1)
+    const as = href
+    Router.push(href, as, { shallow: true })
+  }
 
-  handleResetButton = () => {
-    const href = '/';
-    const as = href;
-    Router.push(href, as, { shallow: true });
+  const handleResetButton = () => {
+    const href = '/'
+    const as = href
+    Router.push(href, as, { shallow: true })
 
-    this.setState({
-      filteredMulti: this.state.list,
-      multipleFilter: {},
-      communitySideBar: {},
-      url: {},
-      model: '',
-    });
-  };
+    setFilteredMulti(list)
+    setMultipleFilter({})
+    setCommunitySideBar({})
+    setUrl({})
+    setModel('')
+  }
 
-  handleClickPin = (e) => {
-    const { city, state, name } = e.target.dataset;
-    let communitySideBar = this.state.communitySideBar;
-    let newFilter = this.state.multipleFilter;
+  const handleClickPin = (e) => {
+    const { city, state, name } = e.target.dataset
+    let newFilter = multipleFilter
 
     if (city && state && !name) {
       newFilter.country
         ? delete newFilter.country &&
           delete newFilter.state &&
           delete newFilter.city
-        : (newFilter = Object.assign(
-            { country: 'Brasil', state: state, city: city },
-            newFilter
-          ));
-      this.setState({ multipleFilter: newFilter });
-      const filteredMulti = paramFilter(this.state.list, newFilter);
-      const mobileSideBar = this.state.mobileSideBar ? false : true;
-      this.setState({
-        filteredMulti,
-        communitySideBar: {},
-        mobileSideBar,
-      });
+        : (newFilter = Object.assign({ country: 'Brasil', state: state, city: city }, newFilter))
+      setMultipleFilter(newFilter)
+      const filteredMulti = paramFilter(list, newFilter)
+      setFilteredMulti(filteredMulti)
+      setCommunitySideBar({})
+      setMobileSideBar(!mobileSideBar)
     }
 
     if (name) {
-      newFilter = { nameSearch: name };
-      communitySideBar = paramFilter(this.state.list, newFilter)[0];
-      this.setState({ communitySideBar });
+      newFilter = { nameSearch: name }
+      setCommunitySideBar(paramFilter(list, newFilter)[0])
     }
 
-    let address = '/?';
+    let address = '/?'
     for (const prop in newFilter) {
       newFilter[prop] &&
         (address = `${address}${prop}=`) &&
-        (address = `${address}${newFilter[prop]}&`);
+        (address = `${address}${newFilter[prop]}&`)
     }
-    const href = address.slice(0, -1);
-    const as = href;
-    Router.push(href, as, { shallow: true });
-  };
+    const href = address.slice(0, -1)
+    const as = href
+    Router.push(href, as, { shallow: true })
+  }
 
-  handleCloseSideBar = () => {
-    this.setState({ communitySideBar: {} });
-  };
+  const handleCloseSideBar = () => {
+    setCommunitySideBar({})
+  }
 
-  handleCloseMobileSideBar = () => {
-    let newFilter = this.state.multipleFilter;
-    delete newFilter.country;
-    delete newFilter.state;
-    delete newFilter.city;
-    this.setState({ mobileSideBar: false, multipleFilter: newFilter });
+  const handleCloseMobileSideBar = () => {
+    const newFilter = multipleFilter
+    delete newFilter.country
+    delete newFilter.state
+    delete newFilter.city
+    setMobileSideBar(false)
+    setMultipleFilter(newFilter)
     setTimeout(() => {
-      const filteredMulti = paramFilter(this.state.list, newFilter);
-      this.setState({ filteredMulti });
-    }, 300);
-  };
+      const newFilteredMulti = paramFilter(list, newFilter)
+      setFilteredMulti(newFilteredMulti)
+    }, 300)
+  }
 
-  handleClickCommunity = (e) => {
-    const { name } = e.target.dataset;
-    let communitySideBar = this.state.communitySideBar;
-    let newFilter = { nameSearch: name };
+  const handleClickCommunity = (e) => {
+    const { name } = e.target.dataset
+    const newFilter = { nameSearch: name }
+    const newCommunitySideBar = paramFilter(list, newFilter)[0]
 
-    communitySideBar = paramFilter(this.state.list, newFilter)[0];
+    setCommunitySideBar(newCommunitySideBar)
+  }
 
-    this.setState({ communitySideBar });
-  };
+  const handlePageOptions = (e) => {
+    const { value } = e.target
+    setPageOptions(value)
+  }
 
-  handlePageOptions = (e) => {
-    const { value } = e.target;
-    this.setState({ pageOptions: value });
-  };
+  const paramsHandler = (event) => {
+    const { name, value } = event.target
+    const newUrl = url
+    let newModel = model
+    name === 'model' && (newModel = value)
+    value === 'all' ? (newUrl[name] = '') : (newUrl[name] = value)
+    setUrl(newUrl)
+    setModel(newModel)
+  }
 
-  paramsHandler = (event) => {
-    const { name, value } = event.target;
-    const newUrl = this.state.url;
-    let model = this.state.model;
-    name === 'model' && (model = value);
-    value === 'all' ? (newUrl[name] = '') : (newUrl[name] = value);
-    this.setState({
-      url: newUrl,
-      model,
-    });
-  };
-
-  getPropertyList = (list) => {
+  const getPropertyList = (list) => {
     const propertyList = {
       tags: [],
       types: [],
-      locations: {},
-    };
-    let { types, locations } = propertyList;
+      locations: {}
+    }
+    const { types, locations } = propertyList
 
     list.forEach((item) => {
       item.type !== 'legacy' &&
         !types.includes(item.type) &&
-        types.push(item.type);
+        types.push(item.type)
       propertyList.tags = Array.from(
         new Set(propertyList.tags.concat(item.tags))
-      );
-      item.location.country && (locations[item.location.country] = {});
-    });
+      )
+      item.location.country && (locations[item.location.country] = {})
+    })
 
     list.forEach((item) => {
       item.location.state &&
-        (locations[item.location.country][item.location.state] = []);
-    });
+        (locations[item.location.country][item.location.state] = [])
+    })
 
     list.forEach((item) => {
       item.location.state &&
         item.location.city !== null &&
         locations[item.location.country][item.location.state].push(
           item.location.city
-        );
-    });
-    return propertyList;
-  };
+        )
+    })
+    return propertyList
+  }
 
-  render() {
-    const {
-      list,
-      loading,
-      filteredMulti,
-      multipleFilter,
-      pageOptions,
-      communitySideBar,
-      url,
-      model,
-      mobileSideBar,
-    } = this.state;
-    return (
-      <>
-        {!loading ? (
-          <div>
-            <Hero />
-            <Counter list={list} />
-            <Filter
-              list={list}
-              select={this.handleChange}
-              reset={this.handleResetButton}
-              multipleFilter={multipleFilter}
-              propertyList={this.getPropertyList(list)}
-              pageOptions={this.handlePageOptions}
-              pageSelected={pageOptions}
-              url={url}
-              model={model}
-              paramsHandler={this.paramsHandler}
-            />
-            {pageOptions === 'list' && (
-              <div className="container">
-                <div className="columns">
-                  <div className="column">
-                    <div className="columns is-multiline card-wrapper">
-                      {filteredMulti.map((card) => (
-                        <div className="column is-one-quarter" key={card.id}>
-                          <Card content={card} />
-                        </div>
-                      ))}
-                    </div>
+  return (
+    <>
+      {!loading ? (
+        <div>
+          <Hero />
+          <Counter list={list} />
+          <Filter
+            list={list}
+            select={handleChange}
+            reset={handleResetButton}
+            multipleFilter={multipleFilter}
+            propertyList={getPropertyList(list)}
+            pageOptions={handlePageOptions}
+            pageSelected={pageOptions}
+            url={url}
+            model={model}
+            paramsHandler={paramsHandler}
+          />
+          {pageOptions === 'list' && (
+            <div className="container">
+              <div className="columns">
+                <div className="column">
+                  <div className="columns is-multiline card-wrapper">
+                    {filteredMulti.map((card, index) => (
+                      <div className="column is-one-quarter" key={card._id}>
+                        <Card content={card} />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
-            )}{' '}
-            {pageOptions === 'map' && (
-              <div className="container is-fluid map-container">
-                <Map
-                  list={filteredMulti}
-                  clickPin={this.handleClickPin}
-                  clickCommunity={this.handleClickCommunity}
-                  communitySideBar={communitySideBar}
-                  closeSideBar={this.handleCloseSideBar}
-                  closeMobileSideBar={this.handleCloseMobileSideBar}
-                  reset={this.handleResetButton}
-                  mobileSideBar={mobileSideBar}
-                />
-              </div>
-            )}
-            <style jsx>{styles}</style>
-          </div>
-        ) : (
-          <div>
-            <img
-              src={loader}
-              style={{
-                maxWidth: '100px',
-                display: 'block',
-                margin: '100px auto',
-              }}
-            />
-          </div>
-        )}
-      </>
-    );
-  }
+            </div>
+          )}{' '}
+          {pageOptions === 'map' && (
+            <div className="container is-fluid map-container">
+              <Map
+                list={filteredMulti}
+                clickPin={handleClickPin}
+                clickCommunity={handleClickCommunity}
+                communitySideBar={communitySideBar}
+                closeSideBar={handleCloseSideBar}
+                closeMobileSideBar={handleCloseMobileSideBar}
+                reset={handleResetButton}
+                mobileSideBar={mobileSideBar}
+              />
+            </div>
+          )}
+          <style jsx>{styles}</style>
+        </div>
+      ) : (
+        <div>
+          <img
+            src={loader}
+            style={{
+              maxWidth: '100px',
+              display: 'block',
+              margin: '100px auto'
+            }}
+          />
+        </div>
+      )}
+    </>
+  )
 }
+
+Home.propTypes = {
+  credentials: PropTypes.object
+}
+
+export default Home

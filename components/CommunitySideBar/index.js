@@ -1,19 +1,21 @@
-import React from 'react';
-import styles from './styles';
-import { ICONS } from '../../utils/icons';
+import React from 'react'
+
+import PropTypes from 'prop-types'
+
+import { ICONS } from '../../utils/icons'
+import styles from './styles'
 
 const CommunitySideBar = ({ community }) => {
   const {
     name,
     location,
-    state,
     members,
     category,
     description,
     logo,
     tags,
-    slug,
-  } = community;
+    slug
+  } = community
 
   return (
     <div className="community-side-bar-wrapper">
@@ -61,9 +63,9 @@ const CommunitySideBar = ({ community }) => {
               <div>
                 {tags &&
                   tags.slice(0, 5).map(
-                    (tag, tag_item_index) =>
+                    (tag, tagItemIndex) =>
                       tag.length <= 20 && (
-                        <span key={tag_item_index} className="tag is-primary">
+                        <span key={tagItemIndex} className="tag is-primary">
                           {tag}
                         </span>
                       )
@@ -78,9 +80,9 @@ const CommunitySideBar = ({ community }) => {
                   <span className="tooltip">
                     <div className="title-tooltip">Tags:</div>
                     {tags.slice(5).map(
-                      (tag, tag_item_index) =>
+                      (tag, tagItemIndex) =>
                         tag.length <= 20 && (
-                          <span key={tag_item_index} className="tag is-primary">
+                          <span key={tagItemIndex} className="tag is-primary">
                             {tag}
                           </span>
                         )
@@ -100,7 +102,7 @@ const CommunitySideBar = ({ community }) => {
       </div>
       <div className="container links">
         {community.links.map((link) => (
-          <a href={link.url} target="_blank">
+          <a key={link.type} href={link.url} target="_blank" rel="noopener noreferrer">
             <i className={`${ICONS[link.type]} fa-2x`}></i>
           </a>
         ))}
@@ -115,7 +117,11 @@ const CommunitySideBar = ({ community }) => {
       </div>
       <style jsx>{styles}</style>
     </div>
-  );
-};
+  )
+}
 
-export default CommunitySideBar;
+CommunitySideBar.propTypes = {
+  community: PropTypes.object
+}
+
+export default CommunitySideBar

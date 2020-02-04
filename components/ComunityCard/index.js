@@ -1,54 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
-import Router from 'next/router';
-import { api, setHeader } from '../../utils/axios';
-import styles from './styles';
-import { ICONS } from '../../utils/icons';
-import Divider from '../Divider';
+import React from 'react'
+import { toast } from 'react-toastify'
+
+import Router from 'next/router'
+import PropTypes from 'prop-types'
+
+import { api, setHeader } from '../../utils/axios'
+import { ICONS } from '../../utils/icons'
+import Divider from '../Divider'
+import styles from './styles'
 
 const CommunityCard = ({ canModify, community, credentials }) => {
   const {
     _id,
     name,
     slug,
-    city,
-    state,
     location,
     members,
     category,
     description,
     logo,
     tags,
-    url,
     status,
     type,
-    managers,
-  } = community;
+    managers
+  } = community
 
   const sendNotification = (type) => {
     const types = {
       delete: 'Comunidade deletada com sucesso!',
-      publish: 'Comunidade publicada com sucesso!',
-    };
-    toast.success(types[type]);
-  };
+      publish: 'Comunidade publicada com sucesso!'
+    }
+    toast.success(types[type])
+  }
 
   const deleteCommunity = async () => {
-    setHeader(credentials);
-    await api.delete(`/community/${_id}`);
-    sendNotification('delete');
-    Router.push('/');
-  };
+    setHeader(credentials)
+    await api.delete(`/community/${_id}`)
+    sendNotification('delete')
+    Router.push('/')
+  }
 
   const publishCommunity = async () => {
-    setHeader(credentials);
+    setHeader(credentials)
     await api.put(`/community/publish/${_id}`, {
-      status: 'published',
-    });
-    sendNotification('publish');
-    Router.push(`/`);
-  };
-  console.log();
+      status: 'published'
+    })
+    sendNotification('publish')
+    Router.push('/')
+  }
+  console.log()
   return (
     <div className="wrapper">
       <div className="container head">
@@ -123,11 +123,11 @@ const CommunityCard = ({ canModify, community, credentials }) => {
               <div>
                 {tags
                   ? tags.map(
-                      (tag) =>
-                        tag.length <= 20 && (
-                          <span className="tag is-primary">{tag}</span>
-                        )
-                    )
+                    (tag, index) =>
+                      tag.length <= 20 && (
+                        <span key={`tag-${index}`} className="tag is-primary">{tag}</span>
+                      )
+                  )
                   : null}
               </div>
             </div>
@@ -144,7 +144,7 @@ const CommunityCard = ({ canModify, community, credentials }) => {
                           src={manager.avatar}
                           alt={manager.name}
                           onError={(img) => {
-                            img.target.src = '../../static/default-user.png';
+                            img.target.src = '../../static/default-user.png'
                           }}
                         />
                         <span>{manager.name}</span>
@@ -175,7 +175,7 @@ const CommunityCard = ({ canModify, community, credentials }) => {
                                 alt={manager.name}
                                 onError={(img) => {
                                   img.target.src =
-                                    '../../static/default-user.png';
+                                    '../../static/default-user.png'
                                 }}
                               />
                               <span>{manager.name}</span>
@@ -196,8 +196,8 @@ const CommunityCard = ({ canModify, community, credentials }) => {
         <Divider dataContent="Links" />
         <div className="columns is-multiline is-mobile">
           {community.links.map((link) => (
-            <div className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
-              <a href={link.url} target="_blank">
+            <div key={link.type} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
+              <a href={link.url} target="_blank" rel="noopener noreferrer">
                 <i className={`${ICONS[link.type]} fa-3x`}></i>
               </a>
             </div>
@@ -207,7 +207,13 @@ const CommunityCard = ({ canModify, community, credentials }) => {
       </div>
       <style jsx>{styles}</style>
     </div>
-  );
-};
+  )
+}
 
-export default CommunityCard;
+CommunityCard.propTypes = {
+  canModify: PropTypes.bool,
+  community: PropTypes.object,
+  credentials: PropTypes.object
+}
+
+export default CommunityCard

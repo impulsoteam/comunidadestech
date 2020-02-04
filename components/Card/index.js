@@ -1,15 +1,18 @@
-import React, { Component } from 'react';
-import styles from './styles';
+import React, { Component } from 'react'
+
+import PropTypes from 'prop-types'
+
+import styles from './styles'
 
 class Card extends Component {
-  render() {
-    const { content, miniPage, clickCommunity } = this.props;
+  render () {
+    const { content, miniPage, clickCommunity } = this.props
     const Media = () => {
       return (
         <div
           className="media"
           onClick={(e) => {
-            clickCommunity(e);
+            clickCommunity(e)
           }}
           data-name={content.nameSearch}
         >
@@ -37,8 +40,8 @@ class Card extends Component {
           </div>
           <style jsx>{styles}</style>
         </div>
-      );
-    };
+      )
+    }
 
     return (
       <div className="card">
@@ -75,9 +78,9 @@ class Card extends Component {
             </div>
             <div className="tags comunity-tags">
               {content.tags.slice(0, 5).map(
-                (tag, tag_element_index) =>
+                (tag, tagItemIndex) =>
                   tag.length <= 20 && (
-                    <span key={tag_element_index} className="tag is-primary">
+                    <span key={tagItemIndex} className="tag is-primary">
                       {tag}
                     </span>
                   )
@@ -92,9 +95,9 @@ class Card extends Component {
                 <span className="tooltip">
                   <div className="title-tooltip">Tags:</div>
                   {content.tags.slice(5).map(
-                    (tag, tag_item_index) =>
+                    (tag, tagItemIndex) =>
                       tag.length <= 20 && (
-                        <span key={tag_item_index} className="tag is-primary">
+                        <span key={tagItemIndex} className="tag is-primary">
                           {tag}
                         </span>
                       )
@@ -106,8 +109,14 @@ class Card extends Component {
         </div>
         <style jsx>{styles}</style>
       </div>
-    );
+    )
   }
 }
 
-export default Card;
+Card.propTypes = {
+  content: PropTypes.object,
+  miniPage: PropTypes.bool,
+  clickCommunity: PropTypes.func
+}
+
+export default Card

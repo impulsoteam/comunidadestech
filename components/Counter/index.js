@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
-import styles from './styles';
+import React, { Component } from 'react'
+
+import PropTypes from 'prop-types'
+
+import styles from './styles'
 
 class Counter extends Component {
-  render() {
-    const { list } = this.props;
+  render () {
+    const { list } = this.props
     return (
       <div className="container counter-wrapper is-fluid is-hidden-mobile">
         <div className="counter">
@@ -27,7 +30,7 @@ class Counter extends Component {
                 [
                   ...new Set(
                     list.map((item) => item.location.city).filter(Boolean)
-                  ),
+                  )
                 ].length
               }
             </h2>
@@ -55,8 +58,12 @@ class Counter extends Component {
         </div>
         <style jsx>{styles}</style>
       </div>
-    );
+    )
   }
 }
 
-export default Counter;
+Counter.propTypes = {
+  list: PropTypes.array
+}
+
+export default Counter

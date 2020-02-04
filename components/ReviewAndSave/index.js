@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
-import Router, { useRouter } from 'next/router';
-import { api, setHeader } from '../../utils/axios';
-import styles from './styles';
-import { ICONS } from '../../utils/icons';
-import Divider from '../Divider';
+import React from 'react'
+
+import PropTypes from 'prop-types'
+
+import { ICONS } from '../../utils/icons'
+import Divider from '../Divider'
+import styles from './styles'
 
 const ReviewAndSave = ({ community }) => {
   const {
@@ -16,10 +16,9 @@ const ReviewAndSave = ({ community }) => {
     description,
     logo,
     tags,
-    status,
     type,
-    managers,
-  } = community;
+    managers
+  } = community
 
   return (
     <div className="wrapper">
@@ -76,11 +75,11 @@ const ReviewAndSave = ({ community }) => {
               <div>
                 {tags
                   ? tags.map(
-                      (tag) =>
-                        tag.length <= 20 && (
-                          <span className="tag is-primary">{tag}</span>
-                        )
-                    )
+                    (tag) =>
+                      tag.length <= 20 && (
+                        <span className="tag is-primary">{tag}</span>
+                      )
+                  )
                   : null}
               </div>
             </div>
@@ -97,7 +96,7 @@ const ReviewAndSave = ({ community }) => {
                             src={manager.avatar}
                             alt={manager.name}
                             onError={(img) => {
-                              img.target.src = '../../static/default-user.png';
+                              img.target.src = '../../static/default-user.png'
                             }}
                           />
                           <span>{manager.name}</span>
@@ -117,8 +116,8 @@ const ReviewAndSave = ({ community }) => {
         <Divider dataContent="Links" />
         <div className="columns is-multiline is-mobile">
           {community.links.map((link) => (
-            <div className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
-              <a href={link.url} target="_blank">
+            <div key={link.type} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
+              <a href={link.url} target="_blank" rel="noopener noreferrer">
                 <i className={`${ICONS[link.type]} fa-3x`}></i>
               </a>
             </div>
@@ -128,7 +127,11 @@ const ReviewAndSave = ({ community }) => {
       </div>
       <style jsx>{styles}</style>
     </div>
-  );
-};
+  )
+}
 
-export default ReviewAndSave;
+ReviewAndSave.propTypes = {
+  community: PropTypes.object
+}
+
+export default ReviewAndSave

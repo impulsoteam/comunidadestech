@@ -1,8 +1,9 @@
-import React, { PureComponent } from 'react';
-import styles from './styles';
+import React, { PureComponent } from 'react'
+
+import styles from './styles'
 
 export default class Footer extends PureComponent {
-  render() {
+  render () {
     return (
       <div>
         <div className="hero-foot has-text-centered">
@@ -16,7 +17,7 @@ export default class Footer extends PureComponent {
               <strong>Comunidades.tech</strong> é um projeto open source
               desenvolvido pela comunidade da{' '}
               <strong>
-                <a href="https://impulso.link/comunidades-tech" target="_blank">
+                <a href="https://impulso.link/comunidades-tech" target="_blank" rel="noopener noreferrer">
                   Impulso.Network
                 </a>
               </strong>
@@ -26,6 +27,6 @@ export default class Footer extends PureComponent {
         </footer>
         <style jsx>{styles}</style>
       </div>
-    );
+    )
   }
 }

@@ -1,5 +1,6 @@
-import css from 'styled-jsx/css';
-import { colors } from '/utils/variables';
+import css from 'styled-jsx/css'
+
+import { colors } from '/utils/variables'
 
 export default css`
   .filter-wrapper {
@@ -177,4 +178,4 @@ export default css`
       }
     }
   }
-`;
+`

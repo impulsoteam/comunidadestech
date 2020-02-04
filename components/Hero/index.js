@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import styles from './styles';
+import React, { Component } from 'react'
+
+import styles from './styles'
 
 class Hero extends Component {
-  render() {
+  render () {
     return (
       <div className="container component-wrapper is-fluid is-hidden-mobile">
         <div className="hero-body">
@@ -19,8 +20,8 @@ class Hero extends Component {
         </div>
         <style jsx>{styles}</style>
       </div>
-    );
+    )
   }
 }
 
-export default Hero;
+export default Hero
