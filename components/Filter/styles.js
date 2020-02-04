@@ -126,7 +126,6 @@ export default css`
   @media screen and (max-width: 769px) {
     .filter-wrapper {
       border-top: solid 2px ${colors.wildSand};
-      margin-top: 101px;
       padding: 0.25rem 0.75rem;
     }
 

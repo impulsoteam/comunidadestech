@@ -33,6 +33,10 @@ export default css`
   }
 
   @media screen and (max-width: 769px) {
+    .subtitle {
+      margin-top: 95px;
+    }
+
     .hero-body {
       padding-left: 0;
       padding-right: 0;

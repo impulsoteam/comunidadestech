@@ -22,9 +22,21 @@ class MyApp extends App {
     return { pageProps, credentials, path: ctx.pathname }
   }
 
-  renderPages () {
-    const { Component, pageProps, credentials, path } = this.props
-    if (path === '/login') { return <Component credentials={credentials} {...pageProps} /> }
+  renderPages() {
+    const { Component, pageProps, credentials, path } = this.props;
+
+    if (path === '/login')
+      return <Component credentials={credentials} {...pageProps} />;
+
+    if (path === '/_error') {
+      return (
+        <>
+          <Header {...credentials} />
+          <Component credentials={credentials} {...pageProps} />
+        </>
+      );
+    }
+
     return (
       <>
         <Header {...credentials} />
