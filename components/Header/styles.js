@@ -21,7 +21,7 @@ export default css`
       padding: 0;
       width: 90%;
 
-      .navbar-item:not(:first-child) {
+      .navbar-item {
         border-top: solid 2px rgba(10, 10, 10, 0.1);
       }
     }
@@ -29,6 +29,15 @@ export default css`
 
   .navbar-item {
     font-weight: bold;
+
+    .btn-os {
+      border: none;
+      color: ${colors.dark};
+    }
+
+    .img-os {
+      margin-right: 10px;
+    }
 
     &:hover,
     &.has-dropdown:hover .navbar-link {
@@ -80,7 +89,18 @@ export default css`
       position: fixed;
       width: 100%;
       top: 0;
+
+      .img-os {
+        margin-right: 5px;
+        max-height: 1.4rem;
+      }
+
+      .btn-os {
+        align-items: center;
+        display: flex;
+      }
     }
+
     .navbar-menu.is-active {
       position: absolute;
       right: 0;
