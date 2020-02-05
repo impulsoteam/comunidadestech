@@ -26,8 +26,8 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        <style jsx>{styles}</style>
       </div>
+      <style jsx>{styles}</style>
     </div>
   )
 }
