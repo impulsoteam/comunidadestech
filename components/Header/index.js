@@ -28,15 +28,35 @@ const Header = ({ name, avatar, token }) => {
             >
               <strong>Cadastre uma comunidade</strong>
             </a>
+            <a
+              href="https://github.com/universoimpulso/comunidadestech"
+              className="button btn-os"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img className="img-os" src="/static/github.svg" />
+              <strong>Contribua</strong>
+            </a>
           </div>
         </div>
       ) : (
-        <a
-          href={token ? '/cadastrar' : '/sign-in'}
-          className="navbar-item is-hidden-desktop"
-        >
-          Cadastre uma comunidade
-        </a>
+        <div className="is-hidden-desktop">
+          <a
+            href={token ? '/cadastrar' : '/sign-in'}
+            className="navbar-item"
+          >
+            Cadastre uma comunidade
+          </a>
+          <a
+            href="https://github.com/universoimpulso/comunidadestech"
+            className="navbar-item btn-os"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="img-os" src="/static/github.svg" />
+            Contribua
+          </a>
+        </div>
       )}
       <style jsx>{styles}</style>
     </>
