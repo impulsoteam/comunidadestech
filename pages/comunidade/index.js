@@ -1,45 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { api } from '../../utils/axios';
-import { useRouter } from 'next/router';
-import styles from './styles';
-import CommunityHero from '../../components/ComunityHero';
-import CommunityCard from '../../components/ComunityCard';
-import Card from '../../components/Card';
-import loader from '../../static/comunidades-tech-loader.gif';
+import React, { useState, useEffect } from 'react'
+
+import { useRouter } from 'next/router'
+import PropTypes from 'prop-types'
+
+import Card from '../../components/Card'
+import CommunityCard from '../../components/ComunityCard'
+import CommunityHero from '../../components/ComunityHero'
+import loader from '../../static/comunidades-tech-loader.gif'
+import { api } from '../../utils/axios'
+import styles from './styles'
 
 const Community = ({ credentials }) => {
-  const [related, setRelated] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [community, setCommunity] = useState([]);
-  const router = useRouter();
+  const [related, setRelated] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [community, setCommunity] = useState([])
+  const router = useRouter()
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await api.get(`community/slug/${router.query.slug}`);
-      const managers = data.community.managers;
+      const { data } = await api.get(`community/slug/${router.query.slug}`)
+      const managers = data.community.managers
       if (managers[0]) {
         for (const manager of managers) {
           const { data: response } = await api.get(
             `/user/checkManager/${manager.email}`
-          );
-          manager.name = response.name;
-          manager.avatar = response.avatar;
+          )
+          manager.name = response.name
+          manager.avatar = response.avatar
         }
       }
-      data.community.managers = managers;
-      setCommunity(data.community);
-      setRelated(data.related);
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
+      data.community.managers = managers
+      setCommunity(data.community)
+      setRelated(data.related)
+      setLoading(false)
+    }
+    fetchData()
+  }, [])
 
   const checkCredentials = () => {
-    const { isModerator, _id } = credentials;
-    const { creator } = community;
-    if (isModerator) return true;
-    if (creator._id && creator._id === _id) return true;
-    return false;
-  };
+    const { isModerator, _id } = credentials
+    const { creator } = community
+    if (isModerator) return true
+    if (creator._id && creator._id === _id) return true
+    return false
+  }
 
   return (
     <>
@@ -62,7 +65,7 @@ const Community = ({ credentials }) => {
                 </div>
                 <div className="columns is-2 is-variable is-multiline">
                   {related.map((card) => (
-                    <div className="column is-one-third " key={card.id}>
+                    <div className="column is-one-third " key={card._id}>
                       <Card content={card} />
                     </div>
                   ))}
@@ -89,16 +92,20 @@ const Community = ({ credentials }) => {
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
 Community.getInitialProps = async (ctx) => {
   if (!ctx.query.slug) {
     ctx.res.writeHead(302, {
-      Location: '/',
-    });
-    ctx.res.end();
+      Location: '/'
+    })
+    ctx.res.end()
   }
-};
+}
 
-export default Community;
+Community.propTypes = {
+  credentials: PropTypes.object
+}
+
+export default Community

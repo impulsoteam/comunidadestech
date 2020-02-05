@@ -1,51 +1,51 @@
-import React from 'react';
-import { css, jsx } from '@emotion/core';
-/** @jsx jsx */
-import styles from './styles';
-import { colors } from '../../utils/variables';
+import { css, jsx } from '@emotion/core'
 
-export default function FormButton({
+/** @jsx jsx */
+import { colors } from '../../utils/variables'
+import styles from './styles'
+
+export default function FormButton ({
   isMobile,
   type,
   pageTitles,
   currentStatus,
   currentPage,
   setCurrentPage,
-  loading,
+  loading
 }) {
-  const { totalPercentage, stepsPercentage } = currentStatus;
+  const { totalPercentage, stepsPercentage } = currentStatus
 
   const getPercentage = () => {
-    if (isMobile) return totalPercentage;
-    return stepsPercentage[currentPage];
-  };
+    if (isMobile) return totalPercentage
+    return stepsPercentage[currentPage]
+  }
 
   const isDisabled = () => {
-    const isLoading = loading;
-    const mobileIncomplete = isMobile && totalPercentage < 100;
-    const currentStepIncomplete = stepsPercentage[currentPage] < 100;
+    const isLoading = loading
+    const mobileIncomplete = isMobile && totalPercentage < 100
+    const currentStepIncomplete = stepsPercentage[currentPage] < 100
 
-    if (isLoading || mobileIncomplete || currentStepIncomplete) return true;
+    if (isLoading || mobileIncomplete || currentStepIncomplete) return true
 
-    return false;
-  };
+    return false
+  }
 
   const setNextPage = () => {
-    if (type === 'edit') return;
-    const pages = Object.keys(pageTitles);
-    const currentIndex = pages.indexOf(currentPage);
+    if (type === 'edit') return
+    const pages = Object.keys(pageTitles)
+    const currentIndex = pages.indexOf(currentPage)
 
-    setCurrentPage(pages[currentIndex + 1]);
-  };
+    setCurrentPage(pages[currentIndex + 1])
+  }
 
   const getTitle = () => {
-    if (type === 'edit') return 'Atualizar Comunidade';
+    if (type === 'edit') return 'Atualizar Comunidade'
 
-    return currentPage === 'ReviewAndSave' ? 'Criar Comunidade' : 'Continuar';
-  };
+    return currentPage === 'ReviewAndSave' ? 'Criar Comunidade' : 'Continuar'
+  }
 
   const renderButton = () => {
-    if (currentPage !== 'ReviewAndSave')
+    if (currentPage !== 'ReviewAndSave') {
       return (
         <button
           disabled={isDisabled()}
@@ -54,7 +54,7 @@ export default function FormButton({
           style={{
             backgroundColor: colors.heliotrope,
             padding: 0,
-            height: '40px',
+            height: '40px'
           }}
           css={css`
             &:before {
@@ -81,7 +81,8 @@ export default function FormButton({
           {getTitle()}
           <style jsx>{styles}</style>
         </button>
-      );
+      )
+    }
     return (
       <div className="wrapper">
         <div className="container" style={{ maxWidth: '936px' }}>
@@ -117,8 +118,8 @@ export default function FormButton({
           </div>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
-  return renderButton();
+  return renderButton()
 }

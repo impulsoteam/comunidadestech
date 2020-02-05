@@ -1,55 +1,56 @@
-import React, { useState, useEffect } from 'react';
-import cookies from 'next-cookies';
+import React, { useState, useEffect } from 'react'
 
-import styles from './styles';
-import loader from '../../static/comunidades-tech-loader.gif';
-import { api, setHeader } from '../../utils/axios';
-import Card from '../../components/Card';
+import cookies from 'next-cookies'
 
-export default function Dashboard({ credentials }) {
-  const [loading, setLoading] = useState(true);
-  const [myCommunities, setMyCommunities] = useState([]);
-  const [pendingCommunities, setPendingCommunities] = useState([]);
-  const [pendingInvites, setPendingInvites] = useState([]);
+import Card from '../../components/Card'
+import loader from '../../static/comunidades-tech-loader.gif'
+import { api, setHeader } from '../../utils/axios'
+import styles from './styles'
+
+export default function Dashboard ({ credentials }) {
+  const [loading, setLoading] = useState(true)
+  const [myCommunities, setMyCommunities] = useState([])
+  const [pendingCommunities, setPendingCommunities] = useState([])
+  const [pendingInvites, setPendingInvites] = useState([])
 
   useEffect(() => {
     const fetchMyCommunities = async () => {
-      setHeader(credentials);
-      const { data } = await api.get(`/community/owner`);
-      setMyCommunities(data);
-    };
+      setHeader(credentials)
+      const { data } = await api.get('/community/owner')
+      setMyCommunities(data)
+    }
     const fetchPendingCommunities = async () => {
-      setHeader(credentials);
-      const { data } = await api.get(`/community/status/awaitingPublication`);
-      setPendingCommunities(data);
-    };
+      setHeader(credentials)
+      const { data } = await api.get('/community/status/awaitingPublication')
+      setPendingCommunities(data)
+    }
     const fetchPendingInvitations = async () => {
-      setHeader(credentials);
-      const { data } = await api.get(`/user/invitations`);
-      setPendingInvites(data);
-    };
-    fetchMyCommunities();
-    fetchPendingInvitations();
-    credentials.isModerator && fetchPendingCommunities();
-    setLoading(false);
-  }, []);
+      setHeader(credentials)
+      const { data } = await api.get('/user/invitations')
+      setPendingInvites(data)
+    }
+    fetchMyCommunities()
+    fetchPendingInvitations()
+    credentials.isModerator && fetchPendingCommunities()
+    setLoading(false)
+  }, [])
 
   const sendResponse = async ({ accept, communityId }) => {
-    setHeader(credentials);
-    const { data } = await api.put(`/community/invitation`, {
+    setHeader(credentials)
+    const { data } = await api.put('/community/invitation', {
       accept,
-      communityId,
-    });
+      communityId
+    })
 
     if (data.success) {
-      setHeader(credentials);
-      const { data } = await api.get(`/user/invitations`);
-      setPendingInvites(data);
+      setHeader(credentials)
+      const { data } = await api.get('/user/invitations')
+      setPendingInvites(data)
     }
-  };
+  }
 
   const renderDashboard = () => {
-    if (loading)
+    if (loading) {
       return (
         <div className="container head">
           <img
@@ -57,7 +58,8 @@ export default function Dashboard({ credentials }) {
             style={{ maxWidth: '100px', display: 'block', margin: '30px auto' }}
           />
         </div>
-      );
+      )
+    }
     return (
       <div className="container head">
         {pendingInvites.length > 0 && (
@@ -70,9 +72,9 @@ export default function Dashboard({ credentials }) {
                 Você é um administrador dessa comunidade?
               </h4>
 
-              <div className="columns is-multiline card-wrapper" style={{marginBottom: '2rem'}}>
+              <div className="columns is-multiline card-wrapper" style={{ marginBottom: '2rem' }}>
                 {pendingInvites.map((invite) => (
-                  <div className="column is-4">
+                  <div key={invite._id} className="column is-4">
                     <div className="card invite-card">
                       <div className="card-content">
                         <div className="media">
@@ -98,7 +100,7 @@ export default function Dashboard({ credentials }) {
                           onClick={() =>
                             sendResponse({
                               accept: true,
-                              communityId: invite._id,
+                              communityId: invite._id
                             })
                           }
                         >
@@ -108,7 +110,7 @@ export default function Dashboard({ credentials }) {
                           onClick={() =>
                             sendResponse({
                               accept: false,
-                              communityId: invite._id,
+                              communityId: invite._id
                             })
                           }
                         >
@@ -155,18 +157,18 @@ export default function Dashboard({ credentials }) {
         )}
         <style jsx>{styles}</style>
       </div>
-    );
-  };
+    )
+  }
 
-  return renderDashboard();
+  return renderDashboard()
 }
 
 Dashboard.getInitialProps = async (ctx) => {
-  const credentials = cookies(ctx).ctech_credentials || {};
+  const credentials = cookies(ctx).ctech_credentials || {}
   if (!credentials.token) {
     ctx.res.writeHead(302, {
-      Location: '/',
-    });
-    ctx.res.end();
+      Location: '/'
+    })
+    ctx.res.end()
   }
-};
+}

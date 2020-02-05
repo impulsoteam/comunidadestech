@@ -1,21 +1,22 @@
-import express from 'express';
-import CommunityController from '../controllers/CommunityController';
-import SessionController from '../controllers/SessionController';
+import express from 'express'
 
-const router = express.Router();
+import CommunityController from '../controllers/CommunityController'
+import SessionController from '../controllers/SessionController'
 
-router.get('/status/:status', CommunityController.getByStatus);
-router.get('/slug/:slug', CommunityController.getBySlug);
+const router = express.Router()
 
-router.use(SessionController.checkToken);
+router.get('/status/:status', CommunityController.getByStatus)
+router.get('/slug/:slug', CommunityController.getBySlug)
 
-router.get('/owner', CommunityController.getByOwner);
-router.put('/invitation', CommunityController.setInviteResponse);
-router.get('/checkName/:name', CommunityController.checkName);
-router.get('/checkSlug/:slug', CommunityController.checkSlug);
-router.post('/store', CommunityController.store);
-router.delete('/:_id', CommunityController.delete);
-router.put('/publish/:_id', CommunityController.publish);
-router.put('/update/:_id', CommunityController.update);
+router.use(SessionController.checkToken)
 
-export default router;
+router.get('/owner', CommunityController.getByOwner)
+router.put('/invitation', CommunityController.setInviteResponse)
+router.get('/checkName/:name', CommunityController.checkName)
+router.get('/checkSlug/:slug', CommunityController.checkSlug)
+router.post('/store', CommunityController.store)
+router.delete('/:_id', CommunityController.delete)
+router.put('/publish/:_id', CommunityController.publish)
+router.put('/update/:_id', CommunityController.update)
+
+export default router

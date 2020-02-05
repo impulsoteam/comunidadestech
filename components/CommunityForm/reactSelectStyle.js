@@ -1,4 +1,4 @@
-import { colors } from '/utils/variables';
+import { colors } from '/utils/variables'
 
 export const reactSelectStyle = {
   control: (styles, { ...props }) => ({
@@ -6,7 +6,7 @@ export const reactSelectStyle = {
     backgroundColor: props.isDisabled
       ? `${colors.softCloud}`
       : `${colors.white}`,
-    minHeight: '44px',
+    minHeight: '44px'
   }),
   option: (styles) => ({ ...styles }),
   dropdownIndicator: (styles, { ...props }) => ({
@@ -14,11 +14,11 @@ export const reactSelectStyle = {
     color: props.isDisabled ? `${colors.silverChalice}` : `${colors.primary}`,
     svg: {
       height: '25px',
-      width: '25px',
+      width: '25px'
     },
     ':hover': {
-      opacity: '0.5',
-    },
+      opacity: '0.5'
+    }
   }),
   indicatorSeparator: (styles) => ({ ...styles, display: 'none' }),
   placeholder: (styles, { ...props }) => {
@@ -39,9 +39,9 @@ export const reactSelectStyle = {
         fontWeight: 'normal',
         marginRight: 6,
         textAlign: 'center',
-        width: '1.25em',
-      },
-    };
+        width: '1.25em'
+      }
+    }
   },
   singleValue: (styles, { ...props }) => {
     return {
@@ -61,11 +61,11 @@ export const reactSelectStyle = {
         fontWeight: 'normal',
         marginRight: 6,
         textAlign: 'center',
-        width: '1.25em',
-      },
-    };
-  },
-};
+        width: '1.25em'
+      }
+    }
+  }
+}
 
 export const linksSelectStyle = {
   indicatorSeparator: (styles) => ({ ...styles, display: 'none' }),
@@ -78,16 +78,16 @@ export const linksSelectStyle = {
     width: '60px',
 
     i: {
-      color: `${colors.primary}`,
-    },
+      color: `${colors.primary}`
+    }
   }),
   dropdownIndicator: (styles) => ({
     ...styles,
     color: `${colors.primary}`,
     padding: '0 8px 0 0',
     ':hover': {
-      opacity: '0.5',
-    },
+      opacity: '0.5'
+    }
   }),
-  menu: (styles) => ({ ...styles, width: '100%' }),
-};
+  menu: (styles) => ({ ...styles, width: '100%' })
+}

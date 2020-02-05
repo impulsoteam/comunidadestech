@@ -1,28 +1,28 @@
-import UserController from '../../server/controllers/UserController';
-import Utils from '../../server/controllers/utils';
-import User from '../../server/models/user';
-import { connect } from '../utils';
-import factory from '../mocks/factories';
+import UserController from '../../server/controllers/UserController'
+// import Utils from '../../server/controllers/utils'
+import User from '../../server/models/user'
+// import factory from '../mocks/factories'
+import { connect } from '../utils'
 
-const spyFindOne = jest.spyOn(User, 'findOne');
-const spyCreate = jest.spyOn(User, 'create');
+// const spyFindOne = jest.spyOn(User, 'findOne')
+// const spyCreate = jest.spyOn(User, 'create')
 
 describe('UserController.findOrCreate', () => {
-  let connection;
+  let connection
   beforeAll(async () => {
-    connection = await connect();
-    await User.deleteMany({});
-  });
+    connection = await connect()
+    await User.deleteMany({})
+  })
 
   afterAll(async () => {
-    await connection.disconnect();
-  });
+    await connection.disconnect()
+  })
 
-  const code = 'LINKEDIN_CODE';
+  // const code = 'LINKEDIN_CODE'
 
   it('should have a show method', () => {
-    expect(typeof UserController.findOrCreate).toBe('function');
-  });
+    expect(typeof UserController.findOrCreate).toBe('function')
+  })
   // it('should call getLinkedinData', async () => {
   //   const spyUtilsGetLinkedinData = jest.spyOn(Utils, 'getLinkedinData');
   //   const spyUtilsGetLinkedinToken = jest.spyOn(Utils, 'getLinkedinToken');
@@ -49,4 +49,4 @@ describe('UserController.findOrCreate', () => {
   //   expect(spyCreate).toHaveBeenCalledTimes(1);
   //   expect(result.linkedinId).toStrictEqual(user.linkedinId);
   // });
-});
+})

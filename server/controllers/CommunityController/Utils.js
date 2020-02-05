@@ -1,12 +1,12 @@
-import Community from '../../models/community';
+import Community from '../../models/community'
 
 class Utils {
-  async getRelated({ name, category, city, state }) {
+  async getRelated ({ name, category, city, state }) {
     try {
-      let relatedByCity = [];
-      let relatedByState = [];
-      let relatedByCategory = [];
-      const max = 6;
+      let relatedByCity = []
+      let relatedByState = []
+      let relatedByCategory = []
+      const max = 6
 
       if (city) {
         relatedByCity = await Community.aggregate([
@@ -14,11 +14,11 @@ class Utils {
             $match: {
               status: 'published',
               name: { $ne: name },
-              'location.city': city,
-            },
+              'location.city': city
+            }
           },
-          { $limit: max },
-        ]);
+          { $limit: max }
+        ])
       }
 
       if (state && relatedByCity.length < max) {
@@ -28,14 +28,14 @@ class Utils {
               status: 'published',
               name: { $ne: name },
               'location.city': { $ne: city },
-              'location.state': state,
-            },
+              'location.state': state
+            }
           },
-          { $limit: max - (relatedByCity && relatedByCity.length) || 0 },
-        ]);
+          { $limit: max - (relatedByCity && relatedByCity.length) || 0 }
+        ])
       }
 
-      const relatedByLocation = [...relatedByCity, ...relatedByState];
+      const relatedByLocation = [...relatedByCity, ...relatedByState]
 
       if (relatedByLocation.length < max) {
         relatedByCategory = await Community.aggregate([
@@ -45,20 +45,20 @@ class Utils {
               name: { $ne: name },
               'location.city': { $ne: city },
               'location.state': { $ne: state },
-              category,
-            },
+              category
+            }
           },
           {
-            $limit: max - (relatedByLocation && relatedByLocation.length) || 0,
-          },
-        ]);
+            $limit: max - (relatedByLocation && relatedByLocation.length) || 0
+          }
+        ])
       }
 
-      return [...relatedByLocation, ...relatedByCategory];
+      return [...relatedByLocation, ...relatedByCategory]
     } catch (error) {
-      return error;
+      return error
     }
   }
 }
 
-export default new Utils();
+export default new Utils()

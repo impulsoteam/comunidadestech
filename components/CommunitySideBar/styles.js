@@ -1,5 +1,6 @@
-import css from 'styled-jsx/css';
-import { colors } from '/utils/variables';
+import css from 'styled-jsx/css'
+
+import { colors } from '/utils/variables'
 
 export default css`
   .community-side-bar-wrapper {
@@ -130,4 +131,4 @@ export default css`
       line-height: 1.125;
     }
   }
-`;
+`

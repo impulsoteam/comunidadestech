@@ -1,102 +1,103 @@
-import React, { useState } from 'react';
-import { toast } from 'react-toastify';
-import { Formik, Form } from 'formik';
-import { useWindowSize } from 'react-use';
-import { useBeforeunload } from 'react-beforeunload';
+import React, { useState } from 'react'
+import { useBeforeunload } from 'react-beforeunload'
+import { toast } from 'react-toastify'
+import { useWindowSize } from 'react-use'
 
-import ReviewAndSave from '../ReviewAndSave';
-import BasicInfos from './basicInfo';
-import Location from './location';
-import People from './people';
-import Links from './links';
-import FormButton from './formButton';
-import styles from './styles';
+import { Formik, Form } from 'formik'
+import cookies from 'next-cookies'
+import PropTypes from 'prop-types'
 
-import { api, setHeader } from '../../utils/axios';
-import { SignupSchema } from './utils';
-import { invitationStatus } from '../../utils/variables';
-import { getFormStatus } from './formStatus';
-import { cities } from './locationOptions';
+import { api, setHeader } from '../../utils/axios'
+import { invitationStatus } from '../../utils/variables'
+import ReviewAndSave from '../ReviewAndSave'
+import BasicInfos from './basicInfo'
+import FormButton from './formButton'
+import { getFormStatus } from './formStatus'
+import Links from './links'
+import Location from './location'
+import { cities } from './locationOptions'
+import People from './people'
+import styles from './styles'
+import { SignupSchema } from './utils'
 
 const CommunityForm = ({
   service,
   initialValues,
   loading,
   credentials,
-  type,
+  type
 }) => {
   const pageTitles = {
     BasicInfos: 'Informações básicas',
     Location: 'Localização',
     People: 'Membros e Administradores',
     Links: 'Links',
-    ReviewAndSave: 'Revisar e salvar',
-  };
-  const { width } = useWindowSize();
-  const isMobile = width > 768 ? false : true;
-  useBeforeunload(() => "You'll lose your data!");
+    ReviewAndSave: 'Revisar e salvar'
+  }
+  const { width } = useWindowSize()
+  const isMobile = !(width > 768)
+  useBeforeunload(() => "You'll lose your data!")
 
   const formatAndSendForm = async (values) => {
-    const { managers } = values;
+    const { managers } = values
 
     if (typeof values.logo === 'object') {
-      const data = new FormData();
-      data.append('file', values.logo);
-      setHeader(credentials);
-      const { data: response } = await api.post(`/logo/${values.slug}`, data);
-      const { success, logo } = response;
-      if (!success)
+      const data = new FormData()
+      data.append('file', values.logo)
+      setHeader(credentials)
+      const { data: response } = await api.post(`/logo/${values.slug}`, data)
+      const { success, logo } = response
+      if (!success) {
         toast.warn(
           'Não foi possível fazer upload do seu logo.\nTente novamente mais tarde'
-        );
-      values.logo = logo;
+        )
+      }
+      values.logo = logo
     }
 
     if (managers.length > 0) {
       for (const manager of managers) {
-        const { status } = manager.invitation;
-        if (status === invitationStatus.sending)
-          manager.invitation.status = invitationStatus.sent;
+        const { status } = manager.invitation
+        if (status === invitationStatus.sending) { manager.invitation.status = invitationStatus.sent }
       }
     }
 
-    if (typeof values.members === 'string')
-      values.members = parseInt(values.members.replace('.', ''));
+    if (typeof values.members === 'string') { values.members = parseInt(values.members.replace('.', '')) }
 
     if (values.location.city) {
-      const { location } = values;
+      const { location } = values
       for (const city of cities) {
         if (location.state === city.state && location.city === city.value) {
-          values.location.latitude = city.latitude;
-          values.location.longitude = city.longitude;
-          break;
+          values.location.latitude = city.latitude
+          values.location.longitude = city.longitude
+          break
         }
       }
     }
 
-    service(values);
-  };
+    service(values)
+  }
 
-  const [currentPage, setCurrentPage] = useState(Object.keys(pageTitles)[0]);
+  const [currentPage, setCurrentPage] = useState(Object.keys(pageTitles)[0])
 
   const isDisabled = ({ page: button, currentStatus, currentPage }) => {
-    const { stepsPercentage, totalPercentage } = currentStatus;
-    const pages = Object.keys(pageTitles);
+    const { stepsPercentage, totalPercentage } = currentStatus
+    const pages = Object.keys(pageTitles)
 
-    if (button === currentPage) return false;
-    if (button === 'ReviewAndSave') return totalPercentage < 100 ? true : false;
+    if (button === currentPage) return false
+    if (button === 'ReviewAndSave') return totalPercentage < 100
 
-    const previousSteps = pages.slice(0, pages.indexOf(button));
-    let previousCompleteness = 0;
+    const previousSteps = pages.slice(0, pages.indexOf(button))
+    let previousCompleteness = 0
     for (const step of previousSteps) {
-      previousCompleteness += stepsPercentage[step];
+      previousCompleteness += stepsPercentage[step]
     }
 
-    previousCompleteness = previousCompleteness / previousSteps.length;
-    const isDisabled = previousCompleteness < 100;
+    previousCompleteness = previousCompleteness / previousSteps.length
+    const isDisabled = previousCompleteness < 100
 
-    return isDisabled;
-  };
+    return isDisabled
+  }
 
   const renderPages = (props) => {
     if (isMobile) {
@@ -107,7 +108,7 @@ const CommunityForm = ({
           <People {...props} />
           <Links {...props} />
         </>
-      );
+      )
     }
 
     return {
@@ -117,17 +118,16 @@ const CommunityForm = ({
       Links: <Links {...props} />,
       ReviewAndSave: (
         <ReviewAndSave {...props} community={props.values} canModify={false} />
-      ),
-    }[props.currentPage];
-  };
+      )
+    }[props.currentPage]
+  }
 
   const renderMenu = ({ currentStatus }) => {
-    if (isMobile) return;
+    if (isMobile) return
 
-    let options = Object.keys(pageTitles);
+    let options = Object.keys(pageTitles)
 
-    if (type === 'edit')
-      options = options.filter((page) => page !== 'ReviewAndSave');
+    if (type === 'edit') { options = options.filter((page) => page !== 'ReviewAndSave') }
 
     return (
       <ul>
@@ -137,7 +137,7 @@ const CommunityForm = ({
               disabled={isDisabled({
                 page,
                 currentPage,
-                currentStatus,
+                currentStatus
               })}
               type="button"
               className={`page-title ${
@@ -151,8 +151,8 @@ const CommunityForm = ({
         ))}
         <style jsx>{styles}</style>
       </ul>
-    );
-  };
+    )
+  }
 
   return (
     <Formik
@@ -166,9 +166,9 @@ const CommunityForm = ({
         setFieldTouched,
         errors,
         touched,
-        setErrors,
+        setErrors
       }) => {
-        const currentStatus = getFormStatus({ errors, values });
+        const currentStatus = getFormStatus({ errors, values })
         return (
           <>
             <div className="columns is-centered">
@@ -213,7 +213,7 @@ const CommunityForm = ({
                     credentials,
                     setFieldValue,
                     setFieldTouched,
-                    setErrors,
+                    setErrors
                   })}
                   <FormButton
                     {...{
@@ -223,7 +223,7 @@ const CommunityForm = ({
                       currentStatus,
                       currentPage,
                       setCurrentPage,
-                      loading,
+                      loading
                     }}
                   />
                 </div>
@@ -231,15 +231,27 @@ const CommunityForm = ({
             </Form>
             <style jsx>{styles}</style>
           </>
-        );
+        )
       }}
     </Formik>
-  );
-};
+  )
+}
 
 CommunityForm.getInitialProps = async (ctx) => {
-  const credentials = cookies(ctx).ctech_credentials || {};
-  return { ...credentials };
-};
+  const credentials = cookies(ctx).ctech_credentials || {}
+  return { ...credentials }
+}
 
-export default CommunityForm;
+CommunityForm.propTypes = {
+  cookies: PropTypes.func,
+  credentials: PropTypes.object,
+  currentPage: PropTypes.number,
+  currentStatus: PropTypes.object,
+  initialValues: PropTypes.object,
+  loading: PropTypes.bool,
+  service: PropTypes.func,
+  type: PropTypes.string,
+  values: PropTypes.object
+}
+
+export default CommunityForm

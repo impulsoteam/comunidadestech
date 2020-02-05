@@ -1,5 +1,4 @@
-import css from 'styled-jsx/css';
-import { colors } from '/utils/variables';
+import css from 'styled-jsx/css'
 
 export default css`
   .hero-image {
@@ -15,4 +14,4 @@ export default css`
     background-size: cover;
     min-height: 260px;
   }
-`;
+`

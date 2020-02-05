@@ -1,7 +1,9 @@
-import ErrorMessage from '/components/ErrorMessage/';
+import React from 'react'
+
+import ErrorMessage from '/components/ErrorMessage/'
 
 const Error = () => {
-	return <ErrorMessage />;
+  return <ErrorMessage />
 }
 
-export default Error;
+export default Error

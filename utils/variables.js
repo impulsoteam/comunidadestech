@@ -11,16 +11,16 @@ export const colors = {
   softCloud: '#fbfbfb',
   turbo: '#f9ca24',
   white: '#fff',
-  wildSand: '#f5f5f5',
-};
+  wildSand: '#f5f5f5'
+}
 
 export const fonts = {
-  raleway: 'Raleway',
-};
+  raleway: 'Raleway'
+}
 
 export const invitationStatus = {
   sending: 'SENDING',
   sent: 'SENT',
   accepted: 'ACCEPTED',
-  declined: 'DECLINED',
-};
+  declined: 'DECLINED'
+}

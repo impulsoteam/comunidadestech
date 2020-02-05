@@ -1,5 +1,6 @@
-import css from 'styled-jsx/css';
-import { colors } from '/utils/variables';
+import css from 'styled-jsx/css'
+
+import { colors } from '/utils/variables'
 
 export default css`
   .title {
@@ -336,4 +337,4 @@ export default css`
       width: 99%;
     }
   }
-`;
+`

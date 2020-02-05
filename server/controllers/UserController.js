@@ -1,14 +1,15 @@
-import User from '../models/user';
-import Community from '../models/community';
+import Community from '../models/community'
+import User from '../models/user'
 
 class UserController {
-  async findOrCreate(accessToken, profile, service) {
-    let response;
+  async findOrCreate (accessToken, profile, service) {
+    let response
     await User.findOne(
       {
-        email: profile.emails[0].value,
+        email: profile.emails[0].value
       },
       (err, user) => {
+        if (err) return
         if (!user) {
           const newUser = new User({
             name: profile.displayName,
@@ -19,57 +20,57 @@ class UserController {
                 : profile.photos[0].value,
             [service === 'google' ? 'googleProvider' : 'linkedinProvider']: {
               id: profile.id,
-              token: accessToken,
-            },
-          });
-          newUser.save();
-          response = newUser;
+              token: accessToken
+            }
+          })
+          newUser.save()
+          response = newUser
         } else {
           user[service === 'google' ? 'googleProvider' : 'linkedinProvider'] = {
             id: profile.id,
-            token: accessToken,
-          };
+            token: accessToken
+          }
           user.avatar =
             service === 'google'
               ? profile._json.picture
-              : profile.photos[0].value;
-          user.save();
-          response = user;
+              : profile.photos[0].value
+          user.save()
+          response = user
         }
       }
-    );
-    return response;
+    )
+    return response
   }
 
-  async checkManager(req, res) {
+  async checkManager (req, res) {
     try {
-      const { email } = req.params;
+      const { email } = req.params
       const subscribed = await User.findOne(
         { email },
         { name: 1, email: 1, avatar: 1 }
-      );
-      return res.json(subscribed);
+      )
+      return res.json(subscribed)
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(500).json(error)
     }
   }
 
-  async getInvitations(req, res) {
-    const { id } = req.decoded;
+  async getInvitations (req, res) {
+    const { id } = req.decoded
     try {
       const invites = await Community.find(
         {
           managers: {
-            $elemMatch: { _id: id, 'invitation.status': 'SENT' },
-          },
+            $elemMatch: { _id: id, 'invitation.status': 'SENT' }
+          }
         },
         { name: 1, logo: 1, location: 1 }
-      );
-      return res.json(invites);
+      )
+      return res.json(invites)
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(500).json(error)
     }
   }
 }
 
-export default new UserController();
+export default new UserController()

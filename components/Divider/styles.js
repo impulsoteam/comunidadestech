@@ -1,5 +1,6 @@
-import css from 'styled-jsx/css';
-import { colors } from '/utils/variables';
+import css from 'styled-jsx/css'
+
+import { colors } from '/utils/variables'
 
 export default css`
   .divider {
@@ -27,4 +28,4 @@ export default css`
   .divider.content::after {
     padding: 0.4rem 0.8rem;
   }
-`;
+`

@@ -1,5 +1,6 @@
-import css from 'styled-jsx/css';
-import { colors } from '/utils/variables';
+import css from 'styled-jsx/css'
+
+import { colors } from '/utils/variables'
 
 export default css`
   .manager-card {
@@ -37,4 +38,4 @@ export default css`
     font-weight: 600;
     margin: 1.25rem 0 0.75rem;
   }
-`;
+`

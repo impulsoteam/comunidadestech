@@ -1,10 +1,13 @@
-import React from 'react';
-import styles from './styles';
-import { useWindowSize } from 'react-use';
+import React from 'react'
+import { useWindowSize } from 'react-use'
+
+import PropTypes from 'prop-types'
+
+import styles from './styles'
 
 const Counter = ({ list }) => {
-  const { width } = useWindowSize();
-  const isMobile = width > 769 ? false : true;
+  const { width } = useWindowSize()
+  const isMobile = !(width > 769)
 
   return (
     <div className="container counter-wrapper is-fluid">
@@ -32,7 +35,7 @@ const Counter = ({ list }) => {
               [
                 ...new Set(
                   list.map((item) => item.location.city).filter(Boolean)
-                ),
+                )
               ].length
             }
           </h2>
@@ -66,7 +69,11 @@ const Counter = ({ list }) => {
       </div>
       <style jsx>{styles}</style>
     </div>
-  );
-};
+  )
+}
 
-export default Counter;
+Counter.propTypes = {
+  list: PropTypes.array
+}
+
+export default Counter

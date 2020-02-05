@@ -8,5 +8,5 @@ export const ICONS = {
   telegram: 'fab fa-telegram-plane',
   twitter: 'fab fa-twitter',
   url: 'fas fa-globe',
-  whatsapp: 'fab fa-whatsapp',
-};
+  whatsapp: 'fab fa-whatsapp'
+}

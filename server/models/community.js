@@ -1,147 +1,147 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
-export const modelTypes = ['online', 'presential', 'both'];
-export const statusTypes = ['awaitingPublication', 'published', 'archived'];
+export const modelTypes = ['online', 'presential', 'both']
+export const statusTypes = ['awaitingPublication', 'published', 'archived']
 
 export const invitationStatus = {
   awaiting: 'AWAITING',
   accepted: 'ACCEPTED',
-  declined: 'DECLINED',
-};
-
-function validateCountry() {
-  return !(this.model === 'online');
+  declined: 'DECLINED'
 }
 
-function validateLocation() {
-  const isOnline = this.model === 'online';
+function validateCountry () {
+  return !(this.model === 'online')
+}
+
+function validateLocation () {
+  const isOnline = this.model === 'online'
   const isBrazilian =
-    this.location && this.location.country === 'Brasil' ? true : false;
-  return !isOnline && isBrazilian;
+    !!(this.location && this.location.country === 'Brasil')
+  return !isOnline && isBrazilian
 }
 
 const creator = {
   _id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
+    required: true
   },
   name: {
     type: String,
-    required: true,
+    required: true
   },
   email: {
     type: String,
-    required: true,
+    required: true
   },
   rocketChat: {
-    type: String,
-  },
-};
+    type: String
+  }
+}
 
 const location = {
   country: {
     type: String,
-    required: validateCountry,
+    required: validateCountry
   },
   state: {
     type: String,
-    required: validateLocation,
+    required: validateLocation
   },
   city: {
     type: String,
-    required: validateLocation,
+    required: validateLocation
   },
   latitude: {
     type: Number,
-    required: validateLocation,
+    required: validateLocation
   },
   longitude: {
     type: Number,
-    required: validateLocation,
-  },
-};
+    required: validateLocation
+  }
+}
 const globalProgram = {
   isParticipant: {
     type: Boolean,
-    required: true,
+    required: true
   },
   name: {
-    type: String,
-  },
-};
+    type: String
+  }
+}
 
 const manager = {
   _id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'User'
   },
   email: { type: String, required: true },
   invitation: {
     status: { type: String, required: true },
-    in: { type: Date, required: true },
-  },
-};
+    in: { type: Date, required: true }
+  }
+}
 
 const links = {
   type: {
     type: String,
-    required: true,
+    required: true
   },
   url: {
     type: String,
-    required: true,
-  },
-};
+    required: true
+  }
+}
 
 const communitySchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
-      unique: true,
+      unique: true
     },
     slug: {
       type: String,
       required: true,
-      unique: true,
+      unique: true
     },
     logo: {
       type: String,
-      required: true,
+      required: true
     },
 
     description: {
       type: String,
-      required: true,
+      required: true
     },
     type: {
       type: String,
-      required: true,
+      required: true
     },
     category: {
       type: String,
-      required: true,
+      required: true
     },
     tags: {
       type: Array,
-      required: true,
+      required: true
     },
     links: [links],
     members: {
       type: Number,
-      required: true,
+      required: true
     },
     model: {
       type: String,
       enum: modelTypes,
-      required: true,
+      required: true
     },
     location,
     globalProgram,
     owner: {
       type: String,
-      required: true,
+      required: true
     },
     managers: [manager],
     creator,
@@ -149,12 +149,12 @@ const communitySchema = new mongoose.Schema(
       type: String,
       enum: statusTypes,
       required: true,
-      default: 'awaitingPublication',
-    },
+      default: 'awaitingPublication'
+    }
   },
   {
-    timestamps: true,
+    timestamps: true
   }
-);
+)
 
-export default mongoose.model('Community', communitySchema);
+export default mongoose.model('Community', communitySchema)

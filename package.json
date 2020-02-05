@@ -4,9 +4,10 @@
   "description": "A página de todas as comunidades de tecnologia do Brasil",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon ./server/app.js",
+    "dev": "nodemon -r esm ./server/app.js",
     "build": "next build",
-    "start": "node -r esm ./server/start.js -p $PORT",
+    "lint": "eslint ./",
+    "start": "node -r esm ./server/app.js -p $PORT",
     "export": "next export",
     "deploy": "npm run build && npm run export",
     "prettier": "prettier --write '**/*.js{x,}'",
@@ -14,7 +15,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn build"
+      "pre-commit": "yarn lint && yarn build"
     }
   },
   "dependencies": {
@@ -64,6 +65,15 @@
     "@types/jest": "^24.0.21",
     "babel-jest": "^24.9.0",
     "babel-plugin-module-resolver": "^3.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-import-helpers": "^1.0.2",
+    "eslint-plugin-jest": "^23.3.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-standard": "^4.0.1",
     "factory-girl": "^5.0.4",
     "faker": "^4.1.0",
     "husky": "^2.7.0",

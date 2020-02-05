@@ -1,23 +1,25 @@
+import React from 'react'
+
 /*
 In production the stylesheet is compiled to .next/static/style.css.
 The file will be served from /_next/static/style.css
 You could include it into the page using either next/head or a custom _document.js.
 */
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, { Head, Main, NextScript } from 'next/document'
 
 export default class MyDocument extends Document {
-  setGoogleTags() {
+  setGoogleTags () {
     return {
       __html: `
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'UA-143000900-1');
-      `,
-    };
+      `
+    }
   }
 
-  render() {
+  render () {
     return (
       <html lang="pt-br">
         <Head>
@@ -122,6 +124,6 @@ export default class MyDocument extends Document {
           <NextScript />
         </body>
       </html>
-    );
+    )
   }
 }

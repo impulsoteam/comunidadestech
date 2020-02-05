@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
-import styles from './styles';
+import React from 'react'
+
+import PropTypes from 'prop-types'
+
+import styles from './styles'
 
 const Divider = (props) => (
   <>
@@ -9,6 +12,10 @@ const Divider = (props) => (
     ></div>
     <style jsx>{styles}</style>
   </>
-);
+)
 
-export default Divider;
+Divider.propTypes = {
+  dataContent: PropTypes.string
+}
+
+export default Divider

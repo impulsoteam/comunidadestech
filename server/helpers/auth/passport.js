@@ -1,41 +1,41 @@
-import passport from 'passport';
-import LinkedIn from 'passport-linkedin-oauth2';
-import GoogleStrategy from 'passport-google-oauth';
+import passport from 'passport'
+import GoogleStrategy from 'passport-google-oauth'
+import LinkedIn from 'passport-linkedin-oauth2'
 
-import UserController from '../../controllers/UserController';
+import UserController from '../../controllers/UserController'
 
 class PassportConfig {
-  google() {
+  google () {
     const {
       GOOGLE_CLIENT_ID,
       GOOGLE_SECRET,
-      GOOGLE_CALLBACK_URL,
-    } = process.env;
+      GOOGLE_CALLBACK_URL
+    } = process.env
     passport.use(
       new GoogleStrategy.OAuth2Strategy(
         {
           clientID: GOOGLE_CLIENT_ID,
           clientSecret: GOOGLE_SECRET,
-          callbackURL: GOOGLE_CALLBACK_URL,
+          callbackURL: GOOGLE_CALLBACK_URL
         },
         async (accessToken, refreshToken, profile, done) => {
           const user = await UserController.findOrCreate(
             accessToken,
             profile,
             'google'
-          );
-          return done(null, user);
+          )
+          return done(null, user)
         }
       )
-    );
+    )
   }
 
-  linkedin() {
+  linkedin () {
     const {
       LINKEDIN_API_KEY,
       LINKEDIN_SECRET_KEY,
-      LINKEDIN_CALLBACK_URL,
-    } = process.env;
+      LINKEDIN_CALLBACK_URL
+    } = process.env
     passport.use(
       'linkedin-token',
       new LinkedIn.Strategy(
@@ -43,19 +43,19 @@ class PassportConfig {
           clientID: LINKEDIN_API_KEY,
           clientSecret: LINKEDIN_SECRET_KEY,
           callbackURL: LINKEDIN_CALLBACK_URL,
-          scope: ['r_emailaddress', 'r_liteprofile'],
+          scope: ['r_emailaddress', 'r_liteprofile']
         },
         async (accessToken, refreshToken, profile, done) => {
           const user = await UserController.findOrCreate(
             accessToken,
             profile,
             'linkedin'
-          );
-          return done(null, user);
+          )
+          return done(null, user)
         }
       )
-    );
+    )
   }
 }
 
-export default new PassportConfig();
+export default new PassportConfig()

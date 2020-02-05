@@ -1,10 +1,12 @@
-import React from 'react';
-import { useWindowSize } from 'react-use';
-import styles from './styles';
+
+import React from 'react'
+import { useWindowSize } from 'react-use'
+
+import styles from './styles'
 
 const Hero = () => {
-  const { width } = useWindowSize();
-  const isMobile = width > 769 ? false : true;
+  const { width } = useWindowSize()
+  const isMobile = !(width > 769)
   return (
     <div className="container component-wrapper is-fluid">
       <div className="hero-body">
@@ -27,7 +29,7 @@ const Hero = () => {
       </div>
       <style jsx>{styles}</style>
     </div>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero

@@ -1,6 +1,8 @@
-import styles from './styles';
+import React from 'react'
 
-export default function ErrorMessage() {
+import styles from './styles'
+
+export default function ErrorMessage () {
   return (
     <div className="error-message">
       <div className="error-box">
@@ -23,5 +25,5 @@ export default function ErrorMessage() {
       </div>
       <style jsx>{styles}</style>
     </div>
-  );
+  )
 }

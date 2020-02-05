@@ -1,5 +1,6 @@
-import css from 'styled-jsx/css';
-import { colors } from '/utils/variables';
+import css from 'styled-jsx/css'
+
+import { colors } from '/utils/variables'
 
 export default css`
   .navbar {
@@ -85,4 +86,4 @@ export default css`
       right: 0;
     }
   }
-`;
+`

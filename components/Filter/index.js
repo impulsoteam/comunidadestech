@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import styles from './styles';
-import { STATES } from '../../utils/states';
+import React, { useState } from 'react'
+
+import PropTypes from 'prop-types'
+
+import { STATES } from '../../utils/states'
+import styles from './styles'
 
 const Filter = ({
   list,
@@ -12,22 +15,22 @@ const Filter = ({
   pageSelected,
   url,
   model,
-  paramsHandler,
+  paramsHandler
 }) => {
-  const [isActive, setIsActive] = useState('');
+  const [isActive, setIsActive] = useState('')
 
   const unify = (array, object) => {
     const item = [...new Set(array.map((x) => x[`${object}`]))].filter(
       (x) => x
-    );
-    return item;
-  };
+    )
+    return item
+  }
 
   const handleMoreFilter = (event) => {
     event === 'reset'
       ? setIsActive('')
-      : setIsActive(isActive === '' ? 'is-active' : '');
-  };
+      : setIsActive(isActive === '' ? 'is-active' : '')
+  }
 
   return (
     <>
@@ -45,8 +48,8 @@ const Filter = ({
                   }
                   name="category"
                   onChange={(event) => {
-                    select(event);
-                    paramsHandler(event);
+                    select(event)
+                    paramsHandler(event)
                   }}
                 >
                   <option value="all">Categoria</option>
@@ -67,8 +70,8 @@ const Filter = ({
                   value={multipleFilter.type ? multipleFilter.type : 'all'}
                   name="type"
                   onChange={(event) => {
-                    select(event);
-                    paramsHandler(event);
+                    select(event)
+                    paramsHandler(event)
                   }}
                 >
                   <option value="all">Tipo</option>
@@ -92,8 +95,8 @@ const Filter = ({
                   value={multipleFilter.tags ? multipleFilter.tags : 'all'}
                   name="tags"
                   onChange={(event) => {
-                    select(event);
-                    paramsHandler(event);
+                    select(event)
+                    paramsHandler(event)
                   }}
                 >
                   <option value="all">Tags</option>
@@ -114,11 +117,11 @@ const Filter = ({
             <div className="control has-icons-left filter-option-wrapper is-hidden-touch is-hidden-desktop-only is-hidden-widescreen-only">
               <div className="select is-small">
                 <select
-                  value={model ? model : 'all'}
+                  value={model || 'all'}
                   name="model"
                   onChange={(event) => {
-                    select(event);
-                    paramsHandler(event);
+                    select(event)
+                    paramsHandler(event)
                   }}
                 >
                   <option value="all">Modelo</option>
@@ -140,8 +143,8 @@ const Filter = ({
                     }
                     name="country"
                     onChange={(event) => {
-                      select(event);
-                      paramsHandler(event);
+                      select(event)
+                      paramsHandler(event)
                     }}
                   >
                     <option value="all">País</option>
@@ -169,8 +172,8 @@ const Filter = ({
                     name="state"
                     value={multipleFilter.state ? multipleFilter.state : 'all'}
                     onChange={(event) => {
-                      select(event);
-                      paramsHandler(event);
+                      select(event)
+                      paramsHandler(event)
                     }}
                   >
                     <option value="all">Estado</option>
@@ -193,7 +196,7 @@ const Filter = ({
             </div>
             <div className="control has-icons-left filter-option-wrapper is-hidden-touch is-hidden-desktop-only is-hidden-widescreen-only">
               <div className="select is-small">
-                {(!propertyList.locations['Brasil'][multipleFilter.state] && (
+                {(!propertyList.locations.Brasil[multipleFilter.state] && (
                   <select disabled title="Selecione um estado">
                     <option value="all">Cidade</option>
                   </select>
@@ -202,16 +205,16 @@ const Filter = ({
                     name="city"
                     value={multipleFilter.city ? multipleFilter.city : 'all'}
                     onChange={(event) => {
-                      select(event);
-                      paramsHandler(event);
+                      select(event)
+                      paramsHandler(event)
                     }}
                   >
                     <option value="all">Cidade</option>
-                    {(propertyList.locations['Brasil'][multipleFilter.state] &&
+                    {(propertyList.locations.Brasil[multipleFilter.state] &&
                       [
                         ...new Set(
-                          propertyList.locations['Brasil'][multipleFilter.state]
-                        ),
+                          propertyList.locations.Brasil[multipleFilter.state]
+                        )
                       ].map((item, index) => (
                         <option key={`${index}-${item}`}>{item}</option>
                       ))) || <option>Selecione um estado</option>}
@@ -228,8 +231,8 @@ const Filter = ({
                   <input
                     name="nameSearch"
                     onChange={(event) => {
-                      select(event);
-                      paramsHandler(event);
+                      select(event)
+                      paramsHandler(event)
                     }}
                     className="input is-small"
                     type="text"
@@ -270,8 +273,8 @@ const Filter = ({
           <div className="reset-wrapper unique-button is-hidden-mobile">
             <button
               onClick={(event) => {
-                reset(event);
-                handleMoreFilter('reset');
+                reset(event)
+                handleMoreFilter('reset')
               }}
               className="button button-reset"
             >
@@ -294,7 +297,7 @@ const Filter = ({
                 value="list"
                 className={`button ${pageSelected === 'list' && ' active'}`}
                 onClick={(e) => {
-                  pageOptions(e);
+                  pageOptions(e)
                 }}
               >
                 <span className="icon is-small">
@@ -309,7 +312,7 @@ const Filter = ({
                 type="button"
                 value="map"
                 onClick={(e) => {
-                  pageOptions(e);
+                  pageOptions(e)
                 }}
               >
                 <span className="icon is-small">
@@ -331,8 +334,8 @@ const Filter = ({
                 }
                 name="category"
                 onChange={(event) => {
-                  select(event);
-                  paramsHandler(event);
+                  select(event)
+                  paramsHandler(event)
                 }}
               >
                 <option value="all">Categoria</option>
@@ -353,8 +356,8 @@ const Filter = ({
                 value={multipleFilter.type ? multipleFilter.type : 'all'}
                 name="type"
                 onChange={(event) => {
-                  select(event);
-                  paramsHandler(event);
+                  select(event)
+                  paramsHandler(event)
                 }}
               >
                 <option value="all">Tipo</option>
@@ -378,8 +381,8 @@ const Filter = ({
                 value={multipleFilter.tags ? multipleFilter.tags : 'all'}
                 name="tags"
                 onChange={(event) => {
-                  select(event);
-                  paramsHandler(event);
+                  select(event)
+                  paramsHandler(event)
                 }}
               >
                 <option value="all">Tags</option>
@@ -400,11 +403,11 @@ const Filter = ({
           <div className="control has-icons-left filter-option-wrapper">
             <div className="select is-small">
               <select
-                value={model ? model : 'all'}
+                value={model || 'all'}
                 name="model"
                 onChange={(event) => {
-                  select(event);
-                  paramsHandler(event);
+                  select(event)
+                  paramsHandler(event)
                 }}
               >
                 <option value="all">Modelo</option>
@@ -426,8 +429,8 @@ const Filter = ({
                   }
                   name="country"
                   onChange={(event) => {
-                    select(event);
-                    paramsHandler(event);
+                    select(event)
+                    paramsHandler(event)
                   }}
                 >
                   <option value="all">País</option>
@@ -455,8 +458,8 @@ const Filter = ({
                   name="state"
                   value={multipleFilter.state ? multipleFilter.state : 'all'}
                   onChange={(event) => {
-                    select(event);
-                    paramsHandler(event);
+                    select(event)
+                    paramsHandler(event)
                   }}
                 >
                   <option value="all">Estado</option>
@@ -477,7 +480,7 @@ const Filter = ({
           </div>
           <div className="control has-icons-left filter-option-wrapper">
             <div className="select is-small">
-              {(!propertyList.locations['Brasil'][multipleFilter.state] && (
+              {(!propertyList.locations.Brasil[multipleFilter.state] && (
                 <select disabled title="Selecione um estado">
                   <option value="all">Cidade</option>
                 </select>
@@ -486,16 +489,16 @@ const Filter = ({
                   name="city"
                   value={multipleFilter.city ? multipleFilter.city : 'all'}
                   onChange={(event) => {
-                    select(event);
-                    paramsHandler(event);
+                    select(event)
+                    paramsHandler(event)
                   }}
                 >
                   <option value="all">Cidade</option>
-                  {(propertyList.locations['Brasil'][multipleFilter.state] &&
+                  {(propertyList.locations.Brasil[multipleFilter.state] &&
                     [
                       ...new Set(
-                        propertyList.locations['Brasil'][multipleFilter.state]
-                      ),
+                        propertyList.locations.Brasil[multipleFilter.state]
+                      )
                     ].map((item, index) => (
                       <option key={`${index}-${item}`}>{item}</option>
                     ))) || <option>Selecione um estado</option>}
@@ -512,8 +515,8 @@ const Filter = ({
                 <input
                   name="nameSearch"
                   onChange={(event) => {
-                    select(event);
-                    paramsHandler(event);
+                    select(event)
+                    paramsHandler(event)
                   }}
                   className="input is-small"
                   type="text"
@@ -537,8 +540,8 @@ const Filter = ({
         <div className="unique-button is-hidden-tablet">
           <button
             onClick={(event) => {
-              reset(event);
-              handleMoreFilter('reset');
+              reset(event)
+              handleMoreFilter('reset')
             }}
             className="button button-reset"
           >
@@ -551,7 +554,20 @@ const Filter = ({
       </div>
       <style jsx>{styles}</style>
     </>
-  );
-};
+  )
+}
 
-export default Filter;
+Filter.propTypes = {
+  list: PropTypes.array,
+  select: PropTypes.func,
+  reset: PropTypes.func,
+  multipleFilter: PropTypes.array,
+  propertyList: PropTypes.object,
+  pageOptions: PropTypes.func,
+  url: PropTypes.object,
+  pageSelected: PropTypes.string,
+  model: PropTypes.string,
+  paramsHandler: PropTypes.func
+}
+
+export default Filter

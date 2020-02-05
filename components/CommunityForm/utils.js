@@ -1,4 +1,6 @@
-import * as Yup from 'yup';
+import React from 'react'
+
+import * as Yup from 'yup'
 
 export const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -12,7 +14,7 @@ export const SignupSchema = Yup.object().shape({
       type: Yup.string(),
       url: Yup.string()
         .url('Link inválido. Exemplo: http://site.com')
-        .required('Item obrigatório'),
+        .required('Item obrigatório')
     })
   ),
   description: Yup.string()
@@ -39,20 +41,20 @@ export const SignupSchema = Yup.object().shape({
         is: (country) => country === 'Brasil',
         then: Yup.string().required(
           'Campo obrigatório quando Brasil está selecionado '
-        ),
+        )
       }),
       city: Yup.string().when('country', {
         is: (country) => country === 'Brasil',
         then: Yup.string().required(
           'Campo obrigatório quando Brasil está selecionado '
-        ),
-      }),
+        )
+      })
     }),
     otherwise: Yup.object({
       country: Yup.string(),
       state: Yup.string(),
-      city: Yup.string(),
-    }),
+      city: Yup.string()
+    })
   }),
   globalProgram: Yup.object().shape({
     isParticipant: Yup.bool(),
@@ -61,29 +63,29 @@ export const SignupSchema = Yup.object().shape({
       then: Yup.string()
         .required('Item obrigatório')
         .min(2, 'Muito curto!')
-        .max(30, 'Muito longo!'),
-    }),
+        .max(30, 'Muito longo!')
+    })
   }),
   creator: Yup.object().shape({
-    rocketChat: Yup.string(),
+    rocketChat: Yup.string()
   }),
   owner: Yup.string()
     .email('Endereço de email inválido')
-    .required('Item obrigatório'),
-});
+    .required('Item obrigatório')
+})
 
 export const errorMessages = {
   slugAlreadyExists: 'Url já existente, tente alterar o nome da comunidade',
   nameAlreadyExists: 'Comunidade já cadastrada',
   userNotSubscribed: 'Email ainda não está cadastrado no comunidades.tech',
   userSubscribed: 'Email está cadastrado no comunidades.tech',
-  managerAlreadyListed: 'Usuário já é administrador desta comunidade',
-};
+  managerAlreadyListed: 'Usuário já é administrador desta comunidade'
+}
 
 export const CATEGORIES = [
   {
     label: 'Desenvolvimento de software',
-    value: 'Desenvolvimento de software',
+    value: 'Desenvolvimento de software'
   },
   { label: 'DevOps', value: 'DevOps' },
   { label: 'Infraestrutura', value: 'Infraestrutura' },
@@ -92,8 +94,8 @@ export const CATEGORIES = [
   { label: 'CyberSecurity', value: 'CyberSecurity' },
   { label: 'Games', value: 'Games' },
   { label: 'Design', value: 'Design' },
-  { label: 'Tech Business', value: 'Tech Business' },
-];
+  { label: 'Tech Business', value: 'Tech Business' }
+]
 
 export const TAGS = [
   { label: 'Android', value: 'Android' },
@@ -140,32 +142,32 @@ export const TAGS = [
   { label: 'Hardware', value: 'Hardware' },
   { label: 'UX', value: 'UX' },
   { label: 'UI', value: 'UI' },
-  { label: 'Game design', value: 'Game design' },
-];
+  { label: 'Game design', value: 'Game design' }
+]
 
 export const TYPES = [
   { label: 'Discord', value: 'Discord' },
   {
     label: 'Grupo do Facebook',
-    value: 'Grupo do Facebook',
+    value: 'Grupo do Facebook'
   },
   { label: 'Meetup', value: 'Meetup' },
   { label: 'Podcast', value: 'Podcast' },
   { label: 'Slack', value: 'Slack' },
   { label: 'Telegram', value: 'Telegram' },
-  { label: 'Whatsapp', value: 'Whatsapp' },
-];
+  { label: 'Whatsapp', value: 'Whatsapp' }
+]
 
 export const MODEL = [
   { label: 'Presencial', value: 'presential' },
   { label: 'Online', value: 'online' },
-  { label: 'Ambos', value: 'both' },
-];
+  { label: 'Ambos', value: 'both' }
+]
 
 export const GLOBAL_PROGRAM = [
   { label: 'Sim', value: true },
-  { label: 'Não', value: false },
-];
+  { label: 'Não', value: false }
+]
 
 export const LINKS = [
   {
@@ -174,7 +176,7 @@ export const LINKS = [
         <i className="fab fa-discord"></i> <strong>Discord</strong>
       </span>
     ),
-    value: 'discord',
+    value: 'discord'
   },
   {
     label: (
@@ -182,7 +184,7 @@ export const LINKS = [
         <i className="fab fa-facebook-square"></i> <strong>Facebook</strong>
       </span>
     ),
-    value: 'facebook',
+    value: 'facebook'
   },
   {
     label: (
@@ -190,7 +192,7 @@ export const LINKS = [
         <i className="fab fa-instagram"></i> <strong>Instagram</strong>
       </span>
     ),
-    value: 'instagram',
+    value: 'instagram'
   },
   {
     label: (
@@ -198,7 +200,7 @@ export const LINKS = [
         <i className="fab fa-meetup"></i> <strong>Meetup</strong>
       </span>
     ),
-    value: 'meetup',
+    value: 'meetup'
   },
   {
     label: (
@@ -206,7 +208,7 @@ export const LINKS = [
         <i className="fas fa-link"></i> <strong>Outro</strong>
       </span>
     ),
-    value: 'other',
+    value: 'other'
   },
   {
     label: (
@@ -214,7 +216,7 @@ export const LINKS = [
         <i className="fab fa-slack"></i> <strong>Slack</strong>
       </span>
     ),
-    value: 'slack',
+    value: 'slack'
   },
   {
     label: (
@@ -222,7 +224,7 @@ export const LINKS = [
         <i className="fab fa-telegram-plane"></i> <strong>Telegram</strong>
       </span>
     ),
-    value: 'telegram',
+    value: 'telegram'
   },
   {
     label: (
@@ -230,7 +232,7 @@ export const LINKS = [
         <i className="fab fa-twitter"></i> <strong>Twitter</strong>
       </span>
     ),
-    value: 'twitter',
+    value: 'twitter'
   },
   {
     label: (
@@ -238,7 +240,7 @@ export const LINKS = [
         <i className="fas fa-globe"></i> <strong>Site</strong>
       </span>
     ),
-    value: 'url',
+    value: 'url'
   },
   {
     label: (
@@ -246,6 +248,6 @@ export const LINKS = [
         <i className="fab fa-whatsapp"></i> <strong>Whatsapp</strong>
       </span>
     ),
-    value: 'whatsapp',
-  },
-];
+    value: 'whatsapp'
+  }
+]
