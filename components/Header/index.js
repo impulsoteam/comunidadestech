@@ -97,8 +97,8 @@ const Header = ({ name, avatar, token }) => {
               <div className="buttons">
                 <a
                   href="/login"
-                  className="button is-primary" t
-                  itle="Página de Login"
+                  className="button is-primary"
+                  title="Página de Login"
                   rel="noopener noreferrer"
                 >
                   <strong>Entrar</strong>
