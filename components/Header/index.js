@@ -32,9 +32,14 @@ const Header = ({ name, avatar, token }) => {
               href="https://github.com/universoimpulso/comunidadestech"
               className="button btn-os"
               target="_blank"
+              title="Contribua"
               rel="noopener noreferrer"
             >
-              <img className="img-os" src="/static/github.svg" />
+              <img
+                className="img-os"
+                src="/static/github.svg"
+                alt="Github"
+              />
               <strong>Contribua</strong>
             </a>
           </div>
@@ -51,9 +56,14 @@ const Header = ({ name, avatar, token }) => {
             href="https://github.com/universoimpulso/comunidadestech"
             className="navbar-item btn-os"
             target="_blank"
+            title="Contribua"
             rel="noopener noreferrer"
           >
-            <img className="img-os" src="/static/github.svg" />
+            <img
+              className="img-os"
+              src="/static/github.svg"
+              alt="Github"
+            />
             Contribua
           </a>
         </div>
@@ -67,16 +77,16 @@ const Header = ({ name, avatar, token }) => {
       return (
         <div id="ctech-navbar" className={`navbar-menu  ${isActive}`}>
           <div className="navbar-end">
-            <a href="/" className="navbar-item">
+            <a href="/" className="navbar-item" alt="Página inicial">
               Home
             </a>
             {getCreateButton()}
-            <a href="/login" className="navbar-item is-hidden-desktop">
+            <a href="/login" className="navbar-item is-hidden-desktop" alt="Página de Login">
               Entrar
             </a>
             <div className="navbar-item is-hidden-touch">
               <div className="buttons">
-                <a href="/login" className="button is-primary">
+                <a href="/login" className="button is-primary" alt="Página de Login">
                   <strong>Entrar</strong>
                 </a>
               </div>
@@ -100,19 +110,19 @@ const Header = ({ name, avatar, token }) => {
               {name.split(' ')[0]}
             </a>
             <div className="navbar-dropdown">
-              <a href="/dashboard" className="navbar-item">
+              <a href="/dashboard" className="navbar-item" alt="Dashboard">
                 Dashboard
               </a>
               <hr className="navbar-divider" />
-              <a onClick={logout} className="navbar-item">
+              <a onClick={logout} className="navbar-item" alt="Sair">
                 <i className="fas fa-sign-out-alt"></i> Sair
               </a>
             </div>
           </div>
-          <a href="/dashboard" className="navbar-item is-hidden-desktop">
+          <a href="/dashboard" className="navbar-item is-hidden-desktop" alt="Dashboard">
             Dashboard
           </a>
-          <a onClick={logout} className="navbar-item is-hidden-desktop">
+          <a onClick={logout} className="navbar-item is-hidden-desktop" alt="Sair">
             <i className="fas fa-sign-out-alt"></i> Sair
           </a>
         </div>
@@ -124,10 +134,11 @@ const Header = ({ name, avatar, token }) => {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <a className="navbar-item" href="/">
+        <a className="navbar-item" href="/" alt="Comunidades.tech">
           <img
             className="navbar-logo"
             src="/static/ctech-logo.svg"
+            title="Comunidades.tech"
             width="112"
           />
         </a>
