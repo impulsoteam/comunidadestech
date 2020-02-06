@@ -38,13 +38,7 @@ export default {
     fileSize: 2 * 1024 * 1024
   },
   fileFilter: (req, file, cb) => {
-    const allowedMimes = [
-      'image/png',
-      'image/jpeg',
-      'image/jpg',
-      'image/svg',
-      'image/svg+xml'
-    ]
+    const allowedMimes = ['image/png', 'image/jpeg']
     const isAllowed = allowedMimes.includes(file.mimetype)
 
     isAllowed ? cb(null, true) : cb(new Error('Invalid file type.'))
