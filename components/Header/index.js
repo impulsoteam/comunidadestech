@@ -25,6 +25,8 @@ const Header = ({ name, avatar, token }) => {
             <a
               href={token ? '/cadastrar' : '/sign-in'}
               className="button is-primary is-outlined"
+              title="Cadastre uma comunidade"
+              rel="noopener noreferrer"
             >
               <strong>Cadastre uma comunidade</strong>
             </a>
@@ -49,6 +51,8 @@ const Header = ({ name, avatar, token }) => {
           <a
             href={token ? '/cadastrar' : '/sign-in'}
             className="navbar-item"
+            title="Cadastre uma comunidade"
+            rel="noopener noreferrer"
           >
             Cadastre uma comunidade
           </a>
@@ -77,16 +81,26 @@ const Header = ({ name, avatar, token }) => {
       return (
         <div id="ctech-navbar" className={`navbar-menu  ${isActive}`}>
           <div className="navbar-end">
-            <a href="/" className="navbar-item" alt="Página inicial">
+            <a href="/" className="navbar-item" title="Página inicial">
               Home
             </a>
             {getCreateButton()}
-            <a href="/login" className="navbar-item is-hidden-desktop" alt="Página de Login">
+            <a
+              href="/login"
+              className="navbar-item is-hidden-desktop"
+              title="Página de Login"
+              rel="noopener noreferrer"
+            >
               Entrar
             </a>
             <div className="navbar-item is-hidden-touch">
               <div className="buttons">
-                <a href="/login" className="button is-primary" alt="Página de Login">
+                <a
+                  href="/login"
+                  className="button is-primary" t
+                  itle="Página de Login"
+                  rel="noopener noreferrer"
+                >
                   <strong>Entrar</strong>
                 </a>
               </div>
@@ -100,7 +114,7 @@ const Header = ({ name, avatar, token }) => {
     return (
       <div id="ctech-navbar" className={`navbar-menu  ${isActive}`}>
         <div className="navbar-end">
-          <a href="/" className="navbar-item">
+          <a href="/" className="navbar-item" title="Página inicial">
             Home
           </a>
           {getCreateButton()}
@@ -110,19 +124,19 @@ const Header = ({ name, avatar, token }) => {
               {name.split(' ')[0]}
             </a>
             <div className="navbar-dropdown">
-              <a href="/dashboard" className="navbar-item" alt="Dashboard">
+              <a href="/dashboard" className="navbar-item" title="Dashboard">
                 Dashboard
               </a>
               <hr className="navbar-divider" />
-              <a onClick={logout} className="navbar-item" alt="Sair">
+              <a onClick={logout} className="navbar-item" title="Sair">
                 <i className="fas fa-sign-out-alt"></i> Sair
               </a>
             </div>
           </div>
-          <a href="/dashboard" className="navbar-item is-hidden-desktop" alt="Dashboard">
+          <a href="/dashboard" className="navbar-item is-hidden-desktop" title="Dashboard">
             Dashboard
           </a>
-          <a onClick={logout} className="navbar-item is-hidden-desktop" alt="Sair">
+          <a onClick={logout} className="navbar-item is-hidden-desktop" title="Sair">
             <i className="fas fa-sign-out-alt"></i> Sair
           </a>
         </div>
@@ -134,11 +148,11 @@ const Header = ({ name, avatar, token }) => {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <a className="navbar-item" href="/" alt="Comunidades.tech">
+        <a className="navbar-item" href="/" title="Comunidades.tech">
           <img
             className="navbar-logo"
             src="/static/ctech-logo.svg"
-            title="Comunidades.tech"
+            alt="Comunidades.tech"
             width="112"
           />
         </a>
