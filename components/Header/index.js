@@ -54,11 +54,11 @@ const Header = ({ name, avatar, token }) => {
             title="Cadastre uma comunidade"
             rel="noopener noreferrer"
           >
-              <img
-                className="img-os"
-                src="/static/icons/edit.svg"
-                alt="Github"
-              />
+            <img
+              className="img-os"
+              src="/static/icons/edit.svg"
+              alt="Github"
+            />
             Cadastre uma comunidade
           </a>
           <a
