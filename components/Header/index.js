@@ -23,14 +23,6 @@ const Header = ({ name, avatar, token }) => {
         <div className="navbar-item is-hidden-touch">
           <div className="buttons">
             <a
-              href={token ? '/cadastrar' : '/sign-in'}
-              className="button is-primary is-outlined"
-              title="Cadastre uma comunidade"
-              rel="noopener noreferrer"
-            >
-              <strong>Cadastre uma comunidade</strong>
-            </a>
-            <a
               href="https://github.com/universoimpulso/comunidadestech"
               className="button btn-os"
               target="_blank"
@@ -39,10 +31,18 @@ const Header = ({ name, avatar, token }) => {
             >
               <img
                 className="img-os"
-                src="/static/github.svg"
+                src="/static/icons/github.svg"
                 alt="Github"
               />
               <strong>Contribua</strong>
+            </a>
+            <a
+              href={token ? '/cadastrar' : '/sign-in'}
+              className="button is-primary is-outlined"
+              title="Cadastre uma comunidade"
+              rel="noopener noreferrer"
+            >
+              <strong>Cadastre uma comunidade</strong>
             </a>
           </div>
         </div>
@@ -54,6 +54,11 @@ const Header = ({ name, avatar, token }) => {
             title="Cadastre uma comunidade"
             rel="noopener noreferrer"
           >
+              <img
+                className="img-os"
+                src="/static/icons/edit.svg"
+                alt="Github"
+              />
             Cadastre uma comunidade
           </a>
           <a
@@ -65,7 +70,7 @@ const Header = ({ name, avatar, token }) => {
           >
             <img
               className="img-os"
-              src="/static/github.svg"
+              src="/static/icons/github.svg"
               alt="Github"
             />
             Contribua
@@ -82,6 +87,11 @@ const Header = ({ name, avatar, token }) => {
         <div id="ctech-navbar" className={`navbar-menu  ${isActive}`}>
           <div className="navbar-end">
             <a href="/" className="navbar-item" title="Página inicial">
+              <img
+                className="img-os is-hidden-desktop"
+                src="/static/icons/home.svg"
+                alt="Github"
+              />
               Home
             </a>
             {getCreateButton()}
@@ -91,6 +101,11 @@ const Header = ({ name, avatar, token }) => {
               title="Página de Login"
               rel="noopener noreferrer"
             >
+              <img
+                className="img-os"
+                src="/static/icons/sign-in.svg"
+                alt="Github"
+              />
               Entrar
             </a>
             <div className="navbar-item is-hidden-touch">

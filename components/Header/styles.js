@@ -91,8 +91,7 @@ export default css`
       top: 0;
 
       .img-os {
-        margin-right: 5px;
-        max-height: 1.4rem;
+        width: 22.4px;
       }
 
       .btn-os {
