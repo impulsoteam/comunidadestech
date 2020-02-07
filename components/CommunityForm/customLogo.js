@@ -160,7 +160,7 @@ function CustomLogo ({ setFieldValue, currentLogo }) {
 
       {!!imageError && <div className="image-error">{imageError}</div>}
 
-      <Dropzone accept="image/*" onDropAccepted={onSelectFile}>
+      <Dropzone accept="image/jpeg, image/png" onDropAccepted={onSelectFile}>
         {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
           <div className="drag-button" {...getRootProps()}>
             <input {...getInputProps()} />
