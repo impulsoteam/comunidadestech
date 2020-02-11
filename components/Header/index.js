@@ -151,7 +151,7 @@ const Header = ({ name, avatar, token }) => {
               <a onClick={logout} className="navbar-item" title="Sair">
                 <img
                   className="icons-menu"
-                  src="/static/icons-logout.svg"
+                  src="/static/icons/sign-out.svg"
                   alt="Sair"
                   width="112"
                 />
@@ -171,7 +171,7 @@ const Header = ({ name, avatar, token }) => {
           <a onClick={logout} className="navbar-item is-hidden-desktop" title="Sair">
             <img
               className="icons-menu"
-              src="/static/icons-logout.svg"
+              src="/static/icons/sign-out.svg"
               alt="Sair"
               width="112"
             />

@@ -29,6 +29,7 @@ export default css`
 
   .navbar-item {
     font-weight: bold;
+    display: flex;
 
     .btn-dark {
       border: none;
@@ -36,7 +37,7 @@ export default css`
 
     .icons-menu {
       width: 18px;
-      margin-right: 5px;
+      margin-right: 10px;
     }
 
     .github-icon {
