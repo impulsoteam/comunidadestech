@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken'
 
+import { amqpQueues } from '../helpers'
+import AmqpController from './AmqpController'
 class SessionController {
   login (req, res) {
     const { user, cookies } = req
@@ -29,6 +31,8 @@ class SessionController {
 
     const redirectUrl = cookies.previousPage || '/'
     if (cookies.previousPage) res.clearCookie('previousPage')
+
+    AmqpController.publish({ message: user, queue: amqpQueues.login })
 
     res.redirect(redirectUrl)
   }

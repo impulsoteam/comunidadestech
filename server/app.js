@@ -18,6 +18,7 @@ mongoose.set('useNewUrlParser', true)
 mongoose.set('useFindAndModify', false)
 mongoose.set('useUnifiedTopology', true)
 mongoose.connect(process.env.MONGODB_URI)
+mongoose.connection.on('connected', (connected) => console.log(connected))
 mongoose.connection.on('error', (err) => {
   console.error(`Error: ${err}`)
 })

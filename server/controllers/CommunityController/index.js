@@ -1,7 +1,9 @@
 import moment from 'moment'
 
+import { amqpQueues } from '../../helpers'
 import Community, { statusTypes } from '../../models/community'
 import User from '../../models/user'
+import AmqpController from '../AmqpController'
 import Utils from './Utils'
 
 class CommunityController {
@@ -70,7 +72,7 @@ class CommunityController {
         { $set: { status: community.status } },
         { returnOriginal: false }
       )
-
+      AmqpController.publish({ message: publishedCommunity, queue: amqpQueues.login })
       return res.json(publishedCommunity)
     } catch (error) {
       return res.status(500).json(error)
