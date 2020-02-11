@@ -30,13 +30,18 @@ export default css`
   .navbar-item {
     font-weight: bold;
 
-    .btn-os {
+    .btn-dark {
       border: none;
-      color: ${colors.dark};
     }
 
-    .img-os {
-      margin-right: 10px;
+    .icons-menu {
+      width: 18px;
+      margin-right: 5px;
+    }
+
+    .github-icon {
+      max-width: 1.75rem;
+      margin-right: 8px;
     }
 
     &:hover,
@@ -89,10 +94,6 @@ export default css`
       position: fixed;
       width: 100%;
       top: 0;
-
-      .img-os {
-        width: 22.4px;
-      }
 
       .btn-os {
         align-items: center;

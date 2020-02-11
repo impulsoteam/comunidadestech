@@ -22,17 +22,21 @@ const Header = ({ name, avatar, token }) => {
       {!isMobile ? (
         <div className="navbar-item is-hidden-touch">
           <div className="buttons">
+            <a href="/" className="button btn-dark navbar-item" title="Página inicial">
+              Home
+            </a>
             <a
               href="https://github.com/universoimpulso/comunidadestech"
-              className="button btn-os"
+              className="button btn-dark navbar-item"
               target="_blank"
               title="Contribua"
               rel="noopener noreferrer"
             >
               <img
-                className="img-os"
+                className="github-icon"
                 src="/static/icons/github.svg"
                 alt="Github"
+                width="112"
               />
               <strong>Contribua</strong>
             </a>
@@ -48,6 +52,15 @@ const Header = ({ name, avatar, token }) => {
         </div>
       ) : (
         <div className="is-hidden-desktop">
+          <a href="/" className="navbar-item" title="Página inicial">
+            <img
+              className="icons-menu"
+              src="/static/icons/home.svg"
+              alt="Página inicial"
+              width="112"
+            />
+            Home
+          </a>
           <a
             href={token ? '/cadastrar' : '/sign-in'}
             className="navbar-item"
@@ -55,9 +68,10 @@ const Header = ({ name, avatar, token }) => {
             rel="noopener noreferrer"
           >
             <img
-              className="img-os"
+              className="icons-menu"
               src="/static/icons/edit.svg"
-              alt="Github"
+              alt="Cadastre comunidade"
+              width="112"
             />
             Cadastre uma comunidade
           </a>
@@ -69,11 +83,12 @@ const Header = ({ name, avatar, token }) => {
             rel="noopener noreferrer"
           >
             <img
-              className="img-os"
+              className="icons-menu"
               src="/static/icons/github.svg"
               alt="Github"
+              width="112"
             />
-            Contribua
+            <strong>Contribua</strong>
           </a>
         </div>
       )}
@@ -86,14 +101,6 @@ const Header = ({ name, avatar, token }) => {
       return (
         <div id="ctech-navbar" className={`navbar-menu  ${isActive}`}>
           <div className="navbar-end">
-            <a href="/" className="navbar-item" title="Página inicial">
-              <img
-                className="img-os is-hidden-desktop"
-                src="/static/icons/home.svg"
-                alt="Github"
-              />
-              Home
-            </a>
             {getCreateButton()}
             <a
               href="/login"
@@ -102,9 +109,10 @@ const Header = ({ name, avatar, token }) => {
               rel="noopener noreferrer"
             >
               <img
-                className="img-os"
+                className="icons-menu"
                 src="/static/icons/sign-in.svg"
-                alt="Github"
+                alt="Página de login"
+                width="112"
               />
               Entrar
             </a>
@@ -129,9 +137,6 @@ const Header = ({ name, avatar, token }) => {
     return (
       <div id="ctech-navbar" className={`navbar-menu  ${isActive}`}>
         <div className="navbar-end">
-          <a href="/" className="navbar-item" title="Página inicial">
-            Home
-          </a>
           {getCreateButton()}
           <div className="navbar-item has-dropdown is-hoverable is-hidden-touch">
             <a className="navbar-link">
@@ -144,15 +149,33 @@ const Header = ({ name, avatar, token }) => {
               </a>
               <hr className="navbar-divider" />
               <a onClick={logout} className="navbar-item" title="Sair">
-                <i className="fas fa-sign-out-alt"></i> Sair
+                <img
+                  className="icons-menu"
+                  src="/static/icons-logout.svg"
+                  alt="Sair"
+                  width="112"
+                />
+                Sair
               </a>
             </div>
           </div>
           <a href="/dashboard" className="navbar-item is-hidden-desktop" title="Dashboard">
+            <img
+              className="icons-menu"
+              src="/static/icons/dashboard.svg"
+              alt="Dashboard"
+              width="112"
+            />
             Dashboard
           </a>
           <a onClick={logout} className="navbar-item is-hidden-desktop" title="Sair">
-            <i className="fas fa-sign-out-alt"></i> Sair
+            <img
+              className="icons-menu"
+              src="/static/icons-logout.svg"
+              alt="Sair"
+              width="112"
+            />
+            Sair
           </a>
         </div>
         <style jsx>{styles}</style>
