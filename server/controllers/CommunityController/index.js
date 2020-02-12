@@ -72,7 +72,9 @@ class CommunityController {
         { $set: { status: community.status } },
         { returnOriginal: false }
       )
-      AmqpController.publish({ message: publishedCommunity, type: amqpTypes.communityPublished })
+
+      AmqpController.publish({ message: publishedCommunity, type: amqpTypes.publishedCommunity })
+
       return res.json(publishedCommunity)
     } catch (error) {
       return res.status(500).json(error)
