@@ -29,14 +29,20 @@ export default css`
 
   .navbar-item {
     font-weight: bold;
+    display: flex;
 
-    .btn-os {
+    .btn-dark {
       border: none;
-      color: ${colors.dark};
     }
 
-    .img-os {
+    .icons-menu {
+      width: 18px;
       margin-right: 10px;
+    }
+
+    .github-icon {
+      max-width: 1.75rem;
+      margin-right: 8px;
     }
 
     &:hover,
@@ -89,11 +95,6 @@ export default css`
       position: fixed;
       width: 100%;
       top: 0;
-
-      .img-os {
-        margin-right: 5px;
-        max-height: 1.4rem;
-      }
 
       .btn-os {
         align-items: center;
