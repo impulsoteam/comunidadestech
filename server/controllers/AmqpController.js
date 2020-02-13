@@ -13,7 +13,7 @@ class AmqpController {
       conn.createChannel(async function (err, ch) {
         if (err) console.error(err)
 
-        await ch.assertQueue(amqpTypes.queue, { durable: false })
+        await ch.assertQueue(amqpTypes.queue, { durable: true })
         const payload = { ...message.toObject(), generatedIn: moment().toDate() }
 
         const success = await ch.sendToQueue(
