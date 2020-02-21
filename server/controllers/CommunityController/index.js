@@ -26,6 +26,13 @@ class CommunityController {
       }
 
       const community = await Community.create(body)
+
+      AmqpController.publish({
+        message: community,
+        type: amqpTypes.communityCreated,
+        queue: amqpTypes.queues.interactions
+      })
+
       return res.status(201).json(community)
     } catch (error) {
       return res.status(400).json(error)
@@ -73,7 +80,11 @@ class CommunityController {
         { returnOriginal: false }
       )
 
-      AmqpController.publish({ message: publishedCommunity, type: amqpTypes.publishedCommunity })
+      AmqpController.publish({
+        message: publishedCommunity,
+        type: amqpTypes.communityPublished,
+        queue: amqpTypes.queues.interactions
+      })
 
       return res.json(publishedCommunity)
     } catch (error) {

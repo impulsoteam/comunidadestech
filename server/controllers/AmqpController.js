@@ -1,7 +1,5 @@
 import { Connection } from 'amqplib-as-promised'
 import chalk from 'chalk'
-// import amqp from 'amqplib/callback_api'
-// import jackrabbit from 'jackrabbit'
 import moment from 'moment'
 
 import { amqpTypes } from '../helpers'

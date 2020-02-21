@@ -32,13 +32,11 @@ class SessionController {
     const redirectUrl = cookies.previousPage || '/'
     if (cookies.previousPage) res.clearCookie('previousPage')
 
-    const params = {
+    AmqpController.publish({
       message: user,
       type: amqpTypes.login,
       queue: amqpTypes.queues.interactions
-    }
-
-    AmqpController.publish(params)
+    })
 
     res.redirect(redirectUrl)
   }
