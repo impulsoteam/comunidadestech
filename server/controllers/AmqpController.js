@@ -15,7 +15,7 @@ class AmqpController {
       this.channel = await connection.createChannel()
 
       for (const queue of Object.values(amqpTypes.queues)) {
-        this[queue] = await this.channel.assertQueue(queue, { durable: false })
+        this[queue] = await this.channel.assertQueue(queue, { durable: true })
         console.log(`${chalk.green('✓')} Read to send message on ${queue}`)
       }
     } catch (error) {
