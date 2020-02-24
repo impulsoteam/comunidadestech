@@ -7,6 +7,7 @@ import next from 'next'
 import passport from 'passport'
 import path from 'path'
 
+import AmqpController from './controllers/AmqpController'
 import PassportConfig from './helpers/auth/passport'
 import routes from './routes'
 import sessionRoutes from './routes/session'
@@ -55,6 +56,8 @@ app
 
     PassportConfig.google()
     PassportConfig.linkedin()
+
+    AmqpController.connect()
 
     server.use('/auth', sessionRoutes)
     server.use('/api/v1', routes)

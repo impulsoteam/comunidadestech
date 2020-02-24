@@ -1,7 +1,9 @@
 import moment from 'moment'
 
+import { amqpTypes } from '../../helpers'
 import Community, { statusTypes } from '../../models/community'
 import User from '../../models/user'
+import AmqpController from '../AmqpController'
 import Utils from './Utils'
 
 class CommunityController {
@@ -24,6 +26,13 @@ class CommunityController {
       }
 
       const community = await Community.create(body)
+
+      AmqpController.publish({
+        message: community,
+        type: amqpTypes.communityCreated,
+        queue: amqpTypes.queues.interactions
+      })
+
       return res.status(201).json(community)
     } catch (error) {
       return res.status(400).json(error)
@@ -70,6 +79,12 @@ class CommunityController {
         { $set: { status: community.status } },
         { returnOriginal: false }
       )
+
+      AmqpController.publish({
+        message: publishedCommunity,
+        type: amqpTypes.communityPublished,
+        queue: amqpTypes.queues.interactions
+      })
 
       return res.json(publishedCommunity)
     } catch (error) {
