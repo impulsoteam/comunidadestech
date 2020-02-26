@@ -7,7 +7,6 @@ import Counter from '../../components/Counter'
 import Filter from '../../components/Filter'
 import styles from '../../components/HomeStyles/styles'
 import Map from '../../components/Map'
-import loader from '../../public/static/comunidades-tech-loader.gif'
 import { api, setHeader } from '../../utils/axios'
 import { paramFilter, normalize } from '../../utils/index'
 
@@ -252,7 +251,7 @@ const Home = ({ credentials }) => {
       ) : (
         <div>
           <img
-            src={loader}
+            src="/static/comunidades-tech-loader.gif"
             style={{
               maxWidth: '100px',
               display: 'block',
