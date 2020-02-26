@@ -57,7 +57,7 @@
     "react-select": "^3.0.8",
     "react-text-mask": "^5.4.3",
     "react-toastify": "^5.4.1",
-    "react-use": "^13.13.0",
+    "react-use": "^13.26.2",
     "slack-notify": "^0.1.7",
     "slug": "^2.1.1",
     "styled-jsx-plugin-sass": "^1.0.0",
