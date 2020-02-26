@@ -35,8 +35,8 @@ function CustomLogo ({ setFieldValue, currentLogo }) {
     setCrop({
       unit: 'px',
       aspect: 1,
-      width: 240,
-      height: 240,
+      width,
+      height,
       x,
       y
     })
