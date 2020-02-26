@@ -4,7 +4,6 @@ import cookies from 'next-cookies'
 
 import Card from '../../components/Card'
 import styles from '../../components/DashboardStyles/styles'
-import loader from '../../public/static/comunidades-tech-loader.gif'
 import { api, setHeader } from '../../utils/axios'
 
 export default function Dashboard ({ credentials }) {
@@ -54,7 +53,7 @@ export default function Dashboard ({ credentials }) {
       return (
         <div className="container head">
           <img
-            src={loader}
+            src="/static/comunidades-tech-loader.gif"
             style={{ maxWidth: '100px', display: 'block', margin: '30px auto' }}
           />
         </div>
