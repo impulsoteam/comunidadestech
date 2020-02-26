@@ -76,7 +76,7 @@ class Card extends Component {
             <div className="control">
               <span className="tag is-dark">{content.category}</span>
             </div>
-            <div className="tags comunity-tags">
+            <div className="tags community-tags">
               {content.tags.slice(0, 5).map(
                 (tag, tagItemIndex) =>
                   tag.length <= 20 && (

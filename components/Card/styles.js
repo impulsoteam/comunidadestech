@@ -46,7 +46,7 @@ export default css`
     }
   }
 
-  .comunity-tags {
+  .community-tags {
     margin-top: 5px;
   }
 

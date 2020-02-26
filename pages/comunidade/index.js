@@ -4,9 +4,9 @@ import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 
 import Card from '../../components/Card'
-import CommunityCard from '../../components/ComunityCard'
-import CommunityHero from '../../components/ComunityHero'
-import styles from '../../components/ComunityStyles/styles'
+import CommunityCard from '../../components/CommunityCard'
+import CommunityHero from '../../components/CommunityHero'
+import styles from '../../components/CommunityStyles/styles'
 import { api } from '../../utils/axios'
 
 const Community = ({ credentials }) => {
