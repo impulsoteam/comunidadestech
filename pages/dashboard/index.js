@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react'
 import cookies from 'next-cookies'
 
 import Card from '../../components/Card'
-import loader from '../../static/comunidades-tech-loader.gif'
+import styles from '../../components/DashboardStyles/styles'
+import loader from '../../public/static/comunidades-tech-loader.gif'
 import { api, setHeader } from '../../utils/axios'
-import styles from './styles'
 
 export default function Dashboard ({ credentials }) {
   const [loading, setLoading] = useState(true)
@@ -72,7 +72,10 @@ export default function Dashboard ({ credentials }) {
                 Você é um administrador dessa comunidade?
               </h4>
 
-              <div className="columns is-multiline card-wrapper" style={{ marginBottom: '2rem' }}>
+              <div
+                className="columns is-multiline card-wrapper"
+                style={{ marginBottom: '2rem' }}
+              >
                 {pendingInvites.map((invite) => (
                   <div key={invite._id} className="column is-4">
                     <div className="card invite-card">

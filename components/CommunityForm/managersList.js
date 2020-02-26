@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import PropTypes from 'prop-types'
 
-import loader from '../../static/comunidades-tech-loader.gif'
+import loader from '../../public/static/comunidades-tech-loader.gif'
 import { api, setHeader } from '../../utils/axios'
 import { invitationStatus } from '../../utils/variables'
 import Divider from '../Divider'

@@ -5,11 +5,11 @@ import PropTypes from 'prop-types'
 
 import Counter from '../../components/Counter'
 import Filter from '../../components/Filter'
+import styles from '../../components/HomeStyles/styles'
 import Map from '../../components/Map'
-import loader from '../../static/comunidades-tech-loader.gif'
+import loader from '../../public/static/comunidades-tech-loader.gif'
 import { api, setHeader } from '../../utils/axios'
 import { paramFilter, normalize } from '../../utils/index'
-import styles from './styles'
 
 import Card from '/components/Card/'
 import Hero from '/components/Hero/'
@@ -100,7 +100,10 @@ const Home = ({ credentials }) => {
         ? delete newFilter.country &&
           delete newFilter.state &&
           delete newFilter.city
-        : (newFilter = Object.assign({ country: 'Brasil', state: state, city: city }, newFilter))
+        : (newFilter = Object.assign(
+          { country: 'Brasil', state: state, city: city },
+          newFilter
+        ))
       setMultipleFilter(newFilter)
       const filteredMulti = paramFilter(list, newFilter)
       setFilteredMulti(filteredMulti)

@@ -2,7 +2,7 @@ import React from 'react'
 import { ToastContainer } from 'react-toastify'
 
 import cookies from 'next-cookies'
-import App, { Container } from 'next/app'
+import App from 'next/app'
 import Head from 'next/head'
 import { withRouter } from 'next/router'
 
@@ -25,7 +25,9 @@ class MyApp extends App {
   renderPages () {
     const { Component, pageProps, credentials, path } = this.props
 
-    if (path === '/login') { return <Component credentials={credentials} {...pageProps} /> }
+    if (path === '/login') {
+      return <Component credentials={credentials} {...pageProps} />
+    }
 
     if (path === '/_error') {
       return (
@@ -47,13 +49,13 @@ class MyApp extends App {
 
   render () {
     return (
-      <Container>
+      <>
         <ToastContainer />
         <Head>
           <title>Comunidades.tech</title>
         </Head>
         {this.renderPages()}
-      </Container>
+      </>
     )
   }
 }

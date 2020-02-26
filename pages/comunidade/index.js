@@ -6,9 +6,9 @@ import PropTypes from 'prop-types'
 import Card from '../../components/Card'
 import CommunityCard from '../../components/ComunityCard'
 import CommunityHero from '../../components/ComunityHero'
-import loader from '../../static/comunidades-tech-loader.gif'
+import styles from '../../components/ComunityStyles/styles'
+import loader from '../../public/static/comunidades-tech-loader.gif'
 import { api } from '../../utils/axios'
-import styles from './styles'
 
 const Community = ({ credentials }) => {
   const [related, setRelated] = useState([])

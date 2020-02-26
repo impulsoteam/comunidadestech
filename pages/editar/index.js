@@ -6,8 +6,8 @@ import Router, { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 
 import CommunityForm from '../../components/CommunityForm'
+import styles from '../../components/RegisterStyles/styles'
 import { api, setHeader } from '../../utils/axios'
-import styles from '../cadastrar/styles'
 
 const EditCommunity = ({ credentials }) => {
   const [loading, setLoading] = useState(true)
