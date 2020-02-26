@@ -101,7 +101,7 @@ const Home = ({ credentials }) => {
           delete newFilter.state &&
           delete newFilter.city
         : (newFilter = Object.assign(
-          { country: 'Brasil', state: state, city: city },
+          { country: 'Brasil', state, city },
           newFilter
         ))
       setMultipleFilter(newFilter)
