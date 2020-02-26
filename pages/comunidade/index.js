@@ -4,11 +4,10 @@ import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 
 import Card from '../../components/Card'
-import CommunityCard from '../../components/ComunityCard'
-import CommunityHero from '../../components/ComunityHero'
-import loader from '../../static/comunidades-tech-loader.gif'
+import CommunityCard from '../../components/CommunityCard'
+import CommunityHero from '../../components/CommunityHero'
+import styles from '../../components/CommunityStyles/styles'
 import { api } from '../../utils/axios'
-import styles from './styles'
 
 const Community = ({ credentials }) => {
   const [related, setRelated] = useState([])
@@ -86,7 +85,7 @@ const Community = ({ credentials }) => {
         <div>
           <CommunityHero />
           <img
-            src={loader}
+            src="/static/comunidades-tech-loader.gif"
             style={{ maxWidth: '100px', display: 'block', margin: '30px auto' }}
           />
         </div>

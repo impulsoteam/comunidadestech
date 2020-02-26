@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 
 import PropTypes from 'prop-types'
 
-import loader from '../../static/comunidades-tech-loader.gif'
 import { api, setHeader } from '../../utils/axios'
 import { invitationStatus } from '../../utils/variables'
 import Divider from '../Divider'
@@ -155,7 +154,7 @@ function ManagerCard ({ manager, removeManager, credentials }) {
       return (
         <div style={{ height: ' 45px' }}>
           <img
-            src={loader}
+            src="/static/comunidades-tech-loader.gif"
             style={{ maxWidth: '30px', display: 'block', margin: '0 auto' }}
           />
         </div>
