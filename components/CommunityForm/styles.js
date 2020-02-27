@@ -293,6 +293,8 @@ export default css`
         .crop-wrapper {
           display: flex;
           justify-content: center;
+          margin: 0 auto;
+          max-width: 300px;
         }
 
         .crop-controls {
