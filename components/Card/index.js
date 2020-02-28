@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import LazyLoad from 'react-lazyload'
 
 import PropTypes from 'prop-types'
 
@@ -19,12 +20,16 @@ class Card extends Component {
           <div className="media-left">
             <figure className="image is-32x32">
               {!content.logo || content.logo === 'legacy' ? (
-                <img
-                  src="../../static/ctech-small-logo.png"
-                  alt={content.name}
-                />
+                <LazyLoad height={32}>
+                  <img
+                    src="../../static/ctech-small-logo.png"
+                    alt={content.name}
+                  />
+                </LazyLoad>
               ) : (
-                <img src={content.logo} alt={content.name} />
+                <LazyLoad height={32}>
+                  <img src={content.logo} alt={content.name} />
+                </LazyLoad>
               )}
             </figure>
           </div>
