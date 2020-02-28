@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import LazyLoad from 'react-lazyload'
 
 import styles from './styles'
 
@@ -8,7 +9,9 @@ export default class Footer extends PureComponent {
       <div>
         <div className="hero-foot has-text-centered">
           <div className="container">
-            <img className="is-bottom" src="/static/hero.svg" alt="tech" />
+            <LazyLoad height={265}>
+              <img className="is-bottom" src="/static/hero.svg" alt="tech" />
+            </LazyLoad>
           </div>
         </div>
         <footer className="footer">
@@ -17,7 +20,11 @@ export default class Footer extends PureComponent {
               <strong>Comunidades.tech</strong> é um projeto open source
               desenvolvido pela comunidade da{' '}
               <strong>
-                <a href="https://impulso.link/comunidades-tech" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://impulso.link/comunidades-tech"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Impulso.Network
                 </a>
               </strong>
