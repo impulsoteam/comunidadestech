@@ -1,0 +1,28 @@
+version: '3.5'
+services:
+
+  db:
+    container_name: ctech-db
+    image: mongo:4.0.13
+    
+  web:  
+    container_name: ctech-web
+    image: node:13
+    working_dir: /comunidadestech
+    env_file: .env
+    depends_on: 
+      - db
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/comunidadestech
+      - yarn_cache:/comunidadestech/node_modules/
+    command: >
+                bash -c "
+                  yarn install &&
+                  yarn dev"
+
+
+volumes:
+  yarn_cache:
+    name: yarn_cache

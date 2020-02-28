@@ -14,6 +14,11 @@ Antes de iniciar, é importante verificar se o seu ambiente possui os requisitos
 - Mongo v4.0.13 ou superior
 - Yarn v1.19.1 ou superior
 
+Ou instale o Docker e Docker-Compose
+
+- https://docs.docker.com/install/
+- https://docs.docker.com/compose/install/
+
 ### Criando um app teste
 
 O Comunidades.tech utiliza a API do LinkedIn como login para manter os cadastros. Por isso, você precisará criar um app de teste. Siga as instruções abaixo:
@@ -41,6 +46,13 @@ Por fim, rode os comandos:
 - `yarn` para instalar as dependências
 - `yarn test` para rodar alguns testes e popular o DB local com algumas comunidades
 - `yarn dev` para abrir o projeto
+
+Ou se preferir o Docker, rode:
+
+- `docker-compose up` para instalar as dependências e abrir o projeto
+- `docker exec -it ctech-web bash -c "yarn test"` para rodar alguns testes e popular o DB local com algumas comunidades
+
+Logo após o app estará disponível em `http://localhost:3000`
 
 ## Dúvidas?
 
