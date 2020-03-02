@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useWindowSize } from 'react-use'
 
 import Cookies from 'js-cookie'
 import Router from 'next/router'
@@ -9,8 +8,6 @@ import styles from './styles'
 
 const Header = ({ name, avatar, token }) => {
   const [isActive, setIsActive] = useState('')
-  const { width } = useWindowSize()
-  const isMobile = !(width > 1023)
 
   const logout = () => {
     Cookies.remove('ctech_credentials')
@@ -19,79 +16,80 @@ const Header = ({ name, avatar, token }) => {
 
   const getCreateButton = () => (
     <>
-      {!isMobile ? (
-        <div className="navbar-item is-hidden-touch">
-          <div className="buttons">
-            <a href="/" className="button btn-dark navbar-item" title="Página inicial">
-              Home
-            </a>
-            <a
-              href="https://github.com/universoimpulso/comunidadestech"
-              className="button btn-dark navbar-item"
-              target="_blank"
-              title="Contribua"
-              rel="noopener noreferrer"
-            >
-              <img
-                className="github-icon"
-                src="/static/icons/github.svg"
-                alt="Github"
-                width="112"
-              />
-              <strong>Contribua</strong>
-            </a>
-            <a
-              href={token ? '/cadastrar' : '/sign-in'}
-              className="button is-primary is-outlined"
-              title="Cadastre uma comunidade"
-              rel="noopener noreferrer"
-            >
-              <strong>Cadastre uma comunidade</strong>
-            </a>
-          </div>
-        </div>
-      ) : (
-        <div className="is-hidden-desktop">
-          <a href="/" className="navbar-item" title="Página inicial">
-            <img
-              className="icons-menu"
-              src="/static/icons/home.svg"
-              alt="Página inicial"
-              width="112"
-            />
+      <div className="navbar-item is-hidden-touch">
+        <div className="buttons">
+          <a
+            href="/"
+            className="button btn-dark navbar-item"
+            title="Página inicial"
+          >
             Home
           </a>
           <a
-            href={token ? '/cadastrar' : '/sign-in'}
-            className="navbar-item"
-            title="Cadastre uma comunidade"
-            rel="noopener noreferrer"
-          >
-            <img
-              className="icons-menu"
-              src="/static/icons/edit.svg"
-              alt="Cadastre comunidade"
-              width="112"
-            />
-            Cadastre uma comunidade
-          </a>
-          <a
             href="https://github.com/universoimpulso/comunidadestech"
-            className="navbar-item btn-os"
+            className="button btn-dark navbar-item"
             target="_blank"
             title="Contribua"
             rel="noopener noreferrer"
           >
             <img
-              className="icons-menu"
+              className="github-icon"
               src="/static/icons/github.svg"
               alt="Github"
               width="112"
             />
             <strong>Contribua</strong>
           </a>
+          <a
+            href={token ? '/cadastrar' : '/sign-in'}
+            className="button is-primary is-outlined"
+            title="Cadastre uma comunidade"
+            rel="noopener noreferrer"
+          >
+            <strong>Cadastre uma comunidade</strong>
+          </a>
         </div>
-      )}
+      </div>
+      <div className="is-hidden-desktop">
+        <a href="/" className="navbar-item" title="Página inicial">
+          <img
+            className="icons-menu"
+            src="/static/icons/home.svg"
+            alt="Página inicial"
+            width="112"
+          />
+          Home
+        </a>
+        <a
+          href={token ? '/cadastrar' : '/sign-in'}
+          className="navbar-item"
+          title="Cadastre uma comunidade"
+          rel="noopener noreferrer"
+        >
+          <img
+            className="icons-menu"
+            src="/static/icons/edit.svg"
+            alt="Cadastre comunidade"
+            width="112"
+          />
+          Cadastre uma comunidade
+        </a>
+        <a
+          href="https://github.com/universoimpulso/comunidadestech"
+          className="navbar-item btn-os"
+          target="_blank"
+          title="Contribua"
+          rel="noopener noreferrer"
+        >
+          <img
+            className="icons-menu"
+            src="/static/icons/github.svg"
+            alt="Github"
+            width="112"
+          />
+          <strong>Contribua</strong>
+        </a>
+      </div>
       <style jsx>{styles}</style>
     </>
   )
@@ -159,7 +157,11 @@ const Header = ({ name, avatar, token }) => {
               </a>
             </div>
           </div>
-          <a href="/dashboard" className="navbar-item is-hidden-desktop" title="Dashboard">
+          <a
+            href="/dashboard"
+            className="navbar-item is-hidden-desktop"
+            title="Dashboard"
+          >
             <img
               className="icons-menu"
               src="/static/icons/dashboard.svg"
@@ -168,7 +170,11 @@ const Header = ({ name, avatar, token }) => {
             />
             Dashboard
           </a>
-          <a onClick={logout} className="navbar-item is-hidden-desktop" title="Sair">
+          <a
+            onClick={logout}
+            className="navbar-item is-hidden-desktop"
+            title="Sair"
+          >
             <img
               className="icons-menu"
               src="/static/icons/sign-out.svg"
