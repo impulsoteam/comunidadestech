@@ -56,6 +56,15 @@ export default css`
     }
   }
 
+  .empty-state {
+    font-size: 20px;
+    margin-top: 33px;
+  }
+  
+  .container.head {
+    margin-bottom: 240px;
+  }
+
   @media screen and (max-width: 769px) {
     .container {
       padding-top: 1.5rem;
@@ -71,6 +80,10 @@ export default css`
     }
     .is-divider {
       display: none;
+    }
+    .container.head {
+      margin-bottom: 150px;
+      margin-top: 7rem;
     }
   }
 `

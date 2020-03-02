@@ -132,11 +132,18 @@ export default function Dashboard ({ credentials }) {
               minhas comunidades
             </h2>
             <div className="columns is-multiline card-wrapper">
-              {myCommunities.map((card) => (
-                <div className="column is-one-quarter" key={card.id}>
-                  <Card withOptions content={card} />
+              {myCommunities.length <= 0 && pendingCommunities.length <= 0 ? (
+                <div className="column has-text-centered">
+                  <img src="../static/empty-state.svg" alt="Nenhuma comunidade" />
+                  <p className="empty-state">Você ainda não possui comunidades cadastradas.</p>
                 </div>
-              ))}
+              ) : (
+                myCommunities.map((card) =>
+                  <div className="column is-one-quarter" key={card.id}>
+                    <Card withOptions content={card} />
+                  </div>
+                )
+              )}
             </div>
           </div>
         </div>
@@ -156,7 +163,7 @@ export default function Dashboard ({ credentials }) {
               </div>
             </div>
           </div>
-        )}
+        ) }
         <style jsx>{styles}</style>
       </div>
     )
