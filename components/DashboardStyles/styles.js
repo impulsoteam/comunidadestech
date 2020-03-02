@@ -55,10 +55,12 @@ export default css`
       }
     }
   }
-  .empty-state{
+
+  .empty-state {
     font-size: 20px;
     margin-top: 33px;
   }
+  
   .container.head {
     margin-bottom: 240px;
   }
