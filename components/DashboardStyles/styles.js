@@ -79,5 +79,9 @@ export default css`
     .is-divider {
       display: none;
     }
+    .container.head {
+      margin-bottom: 150px;
+      margin-top: 7rem;
+    }
   }
 `
