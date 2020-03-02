@@ -55,6 +55,13 @@ export default css`
       }
     }
   }
+  .empty-state{
+    font-size: 20px;
+    margin-top: 33px;
+  }
+  .container.head {
+    margin-bottom: 240px;
+  }
 
   @media screen and (max-width: 769px) {
     .container {
