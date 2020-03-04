@@ -8,21 +8,31 @@ You could include it into the page using either next/head or a custom _document.
 import Document, { Head, Main, NextScript } from 'next/document'
 
 export default class MyDocument extends Document {
-  setGoogleTags () {
-    return {
-      __html: `
+  setGoogleScript () {
+    const trackingId = process.env.TRACKING_ID
+    return (
+      <>
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`}
+        />
+        <script dangerouslySetInnerHTML={{
+          __html: `
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'UA-143000900-1');
+        gtag('config', ${trackingId});
       `
-    }
+        }} />
+      </>
+    )
   }
 
   render () {
     return (
       <html lang="pt-br">
         <Head>
+          {this.setGoogleScript()}
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content="#8c43ff" />
           <meta
@@ -112,11 +122,6 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content="#ffffff" />
           <link rel="manifest" href="/static/manifest.json" />
           <script src="/static/sw-register.js"></script>
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=UA-143000900-1"
-          ></script>
-          <script dangerouslySetInnerHTML={this.setGoogleTags()} />
           <script src="https://kit.fontawesome.com/e258bd240c.js"></script>
         </Head>
         <body>
