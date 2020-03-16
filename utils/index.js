@@ -7,7 +7,9 @@ export const paramFilter = (array, filter) => {
       if (
         Object.keys(array[0].location).includes(key) &&
         filter[key] !== item.location[key]
-      ) { return false }
+      ) {
+        return false
+      }
     }
     return true
   })
@@ -17,4 +19,16 @@ export const paramFilter = (array, filter) => {
 export const normalize = (array) => {
   array.map((item) => (item.nameSearch = item.name.toLowerCase()))
   return array.sort((a, b) => (a.name > b.name ? 1 : -1))
+}
+
+export const page = (array, itensPerPage) => {
+  const newArray = []
+  let index = 0
+
+  while (index < array.length) {
+    newArray.push(array.slice(index, itensPerPage + index))
+    index += itensPerPage
+  }
+
+  return newArray
 }

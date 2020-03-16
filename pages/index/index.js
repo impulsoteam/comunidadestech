@@ -7,8 +7,9 @@ import Counter from '../../components/Counter'
 import Filter from '../../components/Filter'
 import styles from '../../components/HomeStyles/styles'
 import Map from '../../components/Map'
+import PaginationMenu from '../../components/PaginationMenu'
 import { api, setHeader } from '../../utils/axios'
-import { paramFilter, normalize } from '../../utils/index'
+import { paramFilter, normalize, page } from '../../utils/index'
 
 import Card from '/components/Card/'
 import Hero from '/components/Hero/'
@@ -18,6 +19,8 @@ const Home = ({ credentials }) => {
   const [loading, setLoading] = useState(true)
   const [multipleFilter, setMultipleFilter] = useState([])
   const [filteredMulti, setFilteredMulti] = useState([])
+  const [pageList, setPageList] = useState([])
+  const [pageCount, setPageCount] = useState(0)
   const [pageOptions, setPageOptions] = useState('')
   const [model, setModel] = useState('')
   const [mobileSideBar, setMobileSideBar] = useState(false)
@@ -42,7 +45,9 @@ const Home = ({ credentials }) => {
       const model = url.model
 
       setFilteredMulti(filteredMulti)
+      setPageList(page(filteredMulti, 20))
       setMultipleFilter(newFilter)
+      setPageCount(0)
       setLoading(false)
       setPageOptions('list')
       setCommunitySideBar({})
@@ -66,6 +71,8 @@ const Home = ({ credentials }) => {
     setMultipleFilter(newFilter)
     const filteredMulti = paramFilter(list, newFilter)
     setFilteredMulti(filteredMulti)
+    setPageList(page(filteredMulti, 20))
+    setPageCount(0)
 
     let address = '/?'
     for (const prop in newFilter) {
@@ -84,6 +91,8 @@ const Home = ({ credentials }) => {
     Router.push(href, as, { shallow: true })
 
     setFilteredMulti(list)
+    setPageList(page(filteredMulti, 20))
+    setPageCount(0)
     setMultipleFilter({})
     setCommunitySideBar({})
     setUrl({})
@@ -218,11 +227,14 @@ const Home = ({ credentials }) => {
             paramsHandler={paramsHandler}
           />
           {pageOptions === 'list' && (
-            <div className="container">
+            <div
+              className="container"
+              style={{ display: 'flex', flexDirection: 'column' }}
+            >
               <div className="columns">
                 <div className="column">
                   <div className="columns is-multiline card-wrapper">
-                    {filteredMulti.map((card, index) => (
+                    {pageList[pageCount].map((card, index) => (
                       <div className="column is-one-quarter" key={card._id}>
                         <Card content={card} />
                       </div>
@@ -230,6 +242,11 @@ const Home = ({ credentials }) => {
                   </div>
                 </div>
               </div>
+              <PaginationMenu
+                pageCount={pageCount}
+                setPageCount={setPageCount}
+                numberOfPages={pageList.length}
+              />
             </div>
           )}{' '}
           {pageOptions === 'map' && (
