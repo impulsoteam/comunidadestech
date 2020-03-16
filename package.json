@@ -19,7 +19,7 @@
     }
   },
   "dependencies": {
-    "@emotion/core": "^10.0.27",
+    "@emotion/core": "^10.0.28",
     "@zeit/next-sass": "^1.0.1",
     "amqplib-as-promised": "^4.0.0",
     "aws-sdk": "^2.612.0",
