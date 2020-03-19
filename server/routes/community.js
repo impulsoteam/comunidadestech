@@ -7,6 +7,7 @@ const router = express.Router()
 
 router.get('/status/:status', CommunityController.getByStatus)
 router.get('/slug/:slug', CommunityController.getBySlug)
+router.get('/communitiesDetails', CommunityController.getCommunityDetails)
 
 router.use(SessionController.checkToken)
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import Router from 'next/router'
 import PropTypes from 'prop-types'
+import queryString from 'query-string'
 
 import Counter from '../../components/Counter'
 import Filter from '../../components/Filter'
@@ -30,7 +31,23 @@ const Home = ({ credentials }) => {
   useEffect(() => {
     const getList = async () => {
       setHeader(credentials)
-      const { data } = await api.get('/community/status/published')
+      // const { data } = await api.get('/community/status/published')
+      const query = {
+        // name: 'golan',
+        status: 'published',
+        type: 'Meetup',
+        category: 'Desenvolvimento de software',
+        model: 'both',
+        tags: 'Back-end',
+        city: 'São Paulo',
+        state: 'SP',
+        country: 'Brasil'
+      }
+
+      const { data: a } = await api.get(`/community/status/published?${queryString.stringify(query)}`)
+      const { data: b } = await api.get('/community/communitiesDetails')
+      console.log('-=-=-=-', a, b)
+      return
       setList(normalize(data))
 
       const route = Router.router.query

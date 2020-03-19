@@ -169,9 +169,25 @@ class CommunityController {
     }
   }
 
+  async getCommunityDetails (req, res) {
+    return res.json({ communities: 125, cities: 38, members: 186732 })
+  }
+
   async getByStatus (req, res) {
     try {
       const { status } = req.params
+      const {
+        name,
+        type,
+        category,
+        tags,
+        model,
+        country,
+        state,
+        city,
+        page = 0,
+        limit = 20
+      } = req.query
 
       if (!statusTypes.includes(status)) {
         return res
@@ -179,9 +195,24 @@ class CommunityController {
           .json({ message: 'Status provided is not valid' })
       }
 
-      const communities = await Community.find({ status })
+      const query = { status }
 
-      return res.json(communities)
+      if (type) query.type = type
+      if (category) query.category = category
+      if (name) query.name = { $regex: name, $options: 'i' }
+      if (model) query.model = model
+      if (tags) query.tags = { $in: [tags] }
+      if (city) query['location.city'] = city
+      if (state) query['location.state'] = state
+      if (country) query['location.country'] = country
+      console.log(query)
+      const totalCommunities = await Community.countDocuments(query)
+      const communities = await Community.find(query).collation({
+        locale: 'pt',
+        strength: 1
+      }).sort('name').limit(limit).skip(page * limit)
+
+      return res.json({ communities, total: totalCommunities, currentPage: page })
     } catch (error) {
       return res.status(500).json(error)
     }
