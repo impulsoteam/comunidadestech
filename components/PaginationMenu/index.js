@@ -1,17 +1,17 @@
-import React from 'react';
+import React from 'react'
 
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
-import styles from './styles';
+import styles from './styles'
 
 const PaginationMenu = ({ pageCount, setPageCount, totalCommunities }) => {
-  const numberOfPages = Math.ceil(totalCommunities / 20);
+  const numberOfPages = Math.ceil(totalCommunities / 20)
 
-  if (numberOfPages === 1) return null;
+  if (numberOfPages === 1) return null
 
-  const counter = [];
+  const counter = []
   for (let i = 0; i < numberOfPages; i++) {
-    counter.push(i);
+    counter.push(i)
   }
 
   return (
@@ -132,13 +132,13 @@ const PaginationMenu = ({ pageCount, setPageCount, totalCommunities }) => {
       )}
       <style jsx>{styles}</style>
     </div>
-  );
-};
+  )
+}
 
 PaginationMenu.propTypes = {
   setPageCount: PropTypes.func,
   pageCount: PropTypes.number,
-  numberOfPages: PropTypes.number,
-};
+  totalCommunities: PropTypes.number,
+}
 
-export default PaginationMenu;
+export default PaginationMenu
