@@ -6,7 +6,8 @@
   },
   "extends": [
     "plugin:react/recommended",
-    "standard"
+    "standard",
+    "prettier"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -22,7 +23,8 @@
   "plugins": [
     "react",
     "jest",
-    "eslint-plugin-import-helpers"
+    "eslint-plugin-import-helpers",
+    "prettier"
   ],
   "rules": {
     "import/no-absolute-path": "off",
