@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 
-import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 
 import { STATES } from '../../utils/states';
-import styles from './styles';
-import { CATEGORIES, TYPES, TAGS, MODEL } from '../CommunityForm/utils';
 import { countries } from '../CommunityForm/locationOptions';
+import { CATEGORIES, TYPES, TAGS, MODEL } from '../CommunityForm/utils';
+import styles from './styles';
 
 const Filter = () => {
   const router = useRouter();
+  const propertyList = { locations: { Brasil: 'a' } };
+  const multipleFilter = {};
+  const select = () => {};
+  const paramsHandler = () => {};
   const [moreFilters, setMoreFilters] = useState(false);
   const [name, setName] = useState('');
   const pageSelected = 'list';
@@ -134,7 +138,7 @@ const Filter = () => {
     </>
   );
 
-  const renderListFilter = () => {
+  const renderDefaultFilter = () => {
     return (
       <form id="filter">
         <div className="container is-fluid filter-wrapper">
@@ -219,7 +223,8 @@ const Filter = () => {
             </div>
             <div className="filter-toggle-wrapper is-hidden-tablet unique-button">
               <button
-                onClick={() => setMoreFilters(!!moreFilters)}
+                type="button"
+                onClick={() => setMoreFilters(!moreFilters)}
                 className="button"
               >
                 <span className="icon is-small">
@@ -230,8 +235,9 @@ const Filter = () => {
             </div>
             <div className="filter-toggle-wrapper is-hidden-fullhd is-hidden-mobile unique-button">
               <button
-                onClick={() => setMoreFilters(!!moreFilters)}
+                onClick={() => setMoreFilters(!moreFilters)}
                 className="button"
+                type="button"
               >
                 <span className="icon is-small">
                   <i className="fas fa-filter"></i>
@@ -295,11 +301,12 @@ const Filter = () => {
             </div>
           </div>
         </div>
+        {moreFilters && renderMoreFilters()}
         <style jsx>{styles}</style>
       </form>
     );
   };
-  return renderListFilter();
+  return renderDefaultFilter();
   return (
     <>
       <div className={`filter-box more-filter  ${isActive}`}>
