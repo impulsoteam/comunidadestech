@@ -170,7 +170,22 @@ class CommunityController {
   }
 
   async getCommunityDetails(req, res) {
-    return res.json({ communities: 125, cities: 38, members: 186732 })
+    try {
+      const communities = await Community.find({ status: 'published' })
+      const response = {
+        communities: communities.length,
+        cities: [],
+        members: 0,
+      }
+      for (const { location, members } of communities) {
+        location.city && response.cities.push(location.city)
+        response.members += members
+      }
+      response.cities = [...new Set(response.cities)].length
+      return res.json(response)
+    } catch (error) {
+      return res.status(500).json(error)
+    }
   }
 
   async getByStatus(req, res) {
@@ -204,19 +219,13 @@ class CommunityController {
       if (state) query['location.state'] = state
       if (country) query['location.country'] = country
 
-      const totalCommunities = await Community.countDocuments(query)
       const communities = await Community.find(query)
-        .collation({
-          locale: 'pt',
-          strength: 1,
-        })
         .sort('name')
         .limit(limit)
         .skip(page * limit)
 
-      return res.json({ communities, totalCommunities, currentPage: page })
+      return res.json({ communities, totalCommunities: communities.length })
     } catch (error) {
-      console.log(error)
       return res.status(500).json(error)
     }
   }
