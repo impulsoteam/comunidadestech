@@ -45,7 +45,7 @@ const Home = ({ credentials }) => {
           limit: pageView === 'map' ? 9999 : 20,
         })}`
       )
-
+      console.log(data)
       setQuery(newQuery)
       setTotalCommunities(data.totalCommunities)
       setCommunities(data.communities)

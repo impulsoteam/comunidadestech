@@ -78,7 +78,6 @@ const Filter = ({ pageView, setPageView }) => {
   )
 
   const renderMoreFilters = (isMoreFilter) => {
-    console.log('olha', isMoreFilter)
     return (
       <div className="filter-options">
         <div

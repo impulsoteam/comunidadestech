@@ -224,7 +224,9 @@ class CommunityController {
         .limit(limit)
         .skip(page * limit)
 
-      return res.json({ communities, totalCommunities: communities.length })
+      const totalCommunities = await Community.countDocuments(query)
+
+      return res.json({ communities, totalCommunities })
     } catch (error) {
       return res.status(500).json(error)
     }
