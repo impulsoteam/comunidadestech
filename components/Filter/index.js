@@ -41,8 +41,7 @@ const Filter = ({ pageView, setPageView }) => {
         query.model === 'online' ||
         query.model === 'all' ||
         query.country !== 'Brasil'
-      )
-        return true
+      ) { return true }
 
       return false
     }
@@ -476,7 +475,7 @@ const Filter = ({ pageView, setPageView }) => {
 
 Filter.propTypes = {
   setPageView: PropTypes.func,
-  pageView: PropTypes.string,
+  pageView: PropTypes.string
 }
 
 export default Filter

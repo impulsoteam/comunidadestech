@@ -42,7 +42,7 @@ const Home = ({ credentials }) => {
         `/community/status/published?${queryString.stringify({
           ...router.query,
           page,
-          limit: pageView === 'map' ? 9999 : 20,
+          limit: pageView === 'map' ? 9999 : 20
         })}`
       )
       setQuery(newQuery)
@@ -54,7 +54,7 @@ const Home = ({ credentials }) => {
   }, [pageCount, router.query, pageView])
 
   const renderPage = () => {
-    if (loading)
+    if (loading) {
       return (
         <div>
           <img
@@ -62,11 +62,12 @@ const Home = ({ credentials }) => {
             style={{
               maxWidth: '100px',
               display: 'block',
-              margin: '100px auto',
+              margin: '100px auto'
             }}
           />
         </div>
       )
+    }
 
     const list = (
       <div
@@ -113,7 +114,7 @@ const Home = ({ credentials }) => {
 }
 
 Home.propTypes = {
-  credentials: PropTypes.object,
+  credentials: PropTypes.object
 }
 
 export default Home

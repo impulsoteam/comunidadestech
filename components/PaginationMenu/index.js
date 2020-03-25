@@ -138,7 +138,7 @@ const PaginationMenu = ({ pageCount, setPageCount, totalCommunities }) => {
 PaginationMenu.propTypes = {
   setPageCount: PropTypes.func,
   pageCount: PropTypes.number,
-  totalCommunities: PropTypes.number,
+  totalCommunities: PropTypes.number
 }
 
 export default PaginationMenu

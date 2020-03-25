@@ -4,11 +4,7 @@
     "es6": true,
     "jest/globals": true
   },
-  "extends": [
-    "plugin:react/recommended",
-    "standard",
-    "prettier"
-  ],
+  "extends": ["plugin:react/recommended", "standard"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -20,12 +16,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "jest",
-    "eslint-plugin-import-helpers",
-    "prettier"
-  ],
+  "plugins": ["react", "jest", "eslint-plugin-import-helpers"],
   "rules": {
     "import/no-absolute-path": "off",
     "import-helpers/order-imports": [

@@ -7,7 +7,7 @@ import AmqpController from '../AmqpController'
 import Utils from './Utils'
 
 class CommunityController {
-  async store(req, res) {
+  async store (req, res) {
     try {
       const { decoded, body } = req
       const user = await User.findOne({ _id: decoded.id })
@@ -30,7 +30,7 @@ class CommunityController {
       AmqpController.publish({
         message: community,
         type: amqpTypes.communityCreated,
-        queue: amqpTypes.queues.interactions,
+        queue: amqpTypes.queues.interactions
       })
 
       return res.status(201).json(community)
@@ -39,7 +39,7 @@ class CommunityController {
     }
   }
 
-  async delete(req, res) {
+  async delete (req, res) {
     try {
       const { params, decoded } = req
       const { _id, isModerator } = await User.findOne({ _id: decoded.id })
@@ -56,21 +56,21 @@ class CommunityController {
       const status = await Community.deleteOne({ _id: params._id })
       return res.status(200).json({
         status,
-        message: `Community removed by ${isOwner ? 'owner' : 'moderator'}`,
+        message: `Community removed by ${isOwner ? 'owner' : 'moderator'}`
       })
     } catch (error) {
       return res.status(500).json(error)
     }
   }
 
-  async publish(req, res) {
+  async publish (req, res) {
     try {
       const { body: community, params, decoded } = req
       const { isModerator } = await User.findOne({ _id: decoded.id })
 
       if (!isModerator) {
         return res.status(403).json({
-          message: 'User does not have credentials to published this community',
+          message: 'User does not have credentials to published this community'
         })
       }
 
@@ -83,7 +83,7 @@ class CommunityController {
       AmqpController.publish({
         message: publishedCommunity,
         type: amqpTypes.communityPublished,
-        queue: amqpTypes.queues.interactions,
+        queue: amqpTypes.queues.interactions
       })
 
       return res.json(publishedCommunity)
@@ -92,7 +92,7 @@ class CommunityController {
     }
   }
 
-  async setInviteResponse(req, res) {
+  async setInviteResponse (req, res) {
     try {
       const { body, decoded } = req
       const response = body.accept ? 'ACCEPTED' : 'DECLINED'
@@ -100,14 +100,14 @@ class CommunityController {
         {
           _id: body.communityId,
           managers: {
-            $elemMatch: { _id: decoded.id, 'invitation.status': 'SENT' },
-          },
+            $elemMatch: { _id: decoded.id, 'invitation.status': 'SENT' }
+          }
         },
         {
           $set: {
             'managers.$.invitation.status': response,
-            'managers.$.invitation.in': moment().toDate(),
-          },
+            'managers.$.invitation.in': moment().toDate()
+          }
         },
         { returnOriginal: false }
       )
@@ -121,7 +121,7 @@ class CommunityController {
     }
   }
 
-  async update(req, res) {
+  async update (req, res) {
     try {
       const { body: community, params, decoded } = req
       const { _id, isModerator } = await User.findOne({ _id: decoded.id })
@@ -130,7 +130,7 @@ class CommunityController {
 
       if (!isModerator && !isOwner) {
         return res.status(403).json({
-          message: 'User cannot update this community',
+          message: 'User cannot update this community'
         })
       }
 
@@ -146,12 +146,12 @@ class CommunityController {
     }
   }
 
-  async checkName(req, res) {
+  async checkName (req, res) {
     try {
       const { name } = req.params
       const alreadyExists = await Community.findOne({ name }).collation({
         locale: 'pt',
-        strength: 1,
+        strength: 1
       })
       return res.json(!!alreadyExists)
     } catch (error) {
@@ -159,7 +159,7 @@ class CommunityController {
     }
   }
 
-  async checkSlug(req, res) {
+  async checkSlug (req, res) {
     try {
       const { slug } = req.params
       const alreadyExists = await Community.findOne({ slug })
@@ -169,13 +169,13 @@ class CommunityController {
     }
   }
 
-  async getCommunityDetails(req, res) {
+  async getCommunityDetails (req, res) {
     try {
       const communities = await Community.find({ status: 'published' })
       const response = {
         communities: communities.length,
         cities: [],
-        members: 0,
+        members: 0
       }
       for (const { location, members } of communities) {
         location.city && response.cities.push(location.city)
@@ -188,7 +188,7 @@ class CommunityController {
     }
   }
 
-  async getByStatus(req, res) {
+  async getByStatus (req, res) {
     try {
       const { status } = req.params
       const page = req.query.page ? parseInt(req.query.page) : 0
@@ -201,7 +201,7 @@ class CommunityController {
         model,
         country,
         state,
-        city,
+        city
       } = req.query
 
       if (!statusTypes.includes(status)) {
@@ -232,7 +232,7 @@ class CommunityController {
     }
   }
 
-  async getBySlug(req, res) {
+  async getBySlug (req, res) {
     try {
       const { slug } = req.params
 
@@ -248,18 +248,18 @@ class CommunityController {
         name: community.name,
         city: community.location.city,
         state: community.location.state,
-        category: community.category,
+        category: community.category
       })
       return res.json({
         community,
-        related,
+        related
       })
     } catch (error) {
       return res.status(500).json(error)
     }
   }
 
-  async getByOwner(req, res) {
+  async getByOwner (req, res) {
     try {
       const { id } = req.decoded
       const communities = await Community.find({ 'creator._id': id })

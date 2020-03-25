@@ -14,7 +14,7 @@ const Map = ({ communities }) => {
     longitude: -58.6388463,
     zoom: 3.5,
     width: '100%',
-    height: '100%',
+    height: '100%'
   })
   const [communitySideBar, setCommunitySideBar] = useState({})
   const [mobileSideBar, setMobileSideBar] = useState(false)
@@ -22,7 +22,7 @@ const Map = ({ communities }) => {
   const handleResetButton = () => {
     router.push({
       pathname: '/',
-      query: {},
+      query: {}
     })
   }
   const closeMobileSideBar = () => {
@@ -33,7 +33,7 @@ const Map = ({ communities }) => {
     setMobileSideBar(!mobileSideBar)
     router.push({
       pathname: '/',
-      query: { ...e.target.dataset, ...router.query },
+      query: { ...e.target.dataset, ...router.query }
     })
   }
 
@@ -46,7 +46,7 @@ const Map = ({ communities }) => {
             state: item.location.state,
             city: item.location.city,
             latitude: item.location.latitude,
-            longitude: item.location.longitude,
+            longitude: item.location.longitude
           })
       }
     })
@@ -89,53 +89,53 @@ const Map = ({ communities }) => {
                   location.state === community.location.state &&
                   location.city === community.location.city
               ).length > 0 ? (
-                <Marker
-                  key={community._id}
-                  latitude={community.location.latitude}
-                  longitude={community.location.longitude}
-                >
-                  <button
-                    className="marker-wrapper"
-                    onClick={(e) => {
-                      handleClickPin(e)
-                    }}
-                    data-state={community.location.state}
-                    data-city={community.location.city}
+                  <Marker
+                    key={community._id}
+                    latitude={community.location.latitude}
+                    longitude={community.location.longitude}
                   >
-                    <div className="marker-form"></div>
-                    <div className="marker-content">
-                      <span>
-                        {
-                          locations.filter(
-                            (location) =>
-                              location.state === community.location.state &&
+                    <button
+                      className="marker-wrapper"
+                      onClick={(e) => {
+                        handleClickPin(e)
+                      }}
+                      data-state={community.location.state}
+                      data-city={community.location.city}
+                    >
+                      <div className="marker-form"></div>
+                      <div className="marker-content">
+                        <span>
+                          {
+                            locations.filter(
+                              (location) =>
+                                location.state === community.location.state &&
                               location.city === community.location.city
-                          )[0].number
-                        }
-                      </span>
-                    </div>
-                  </button>
-                </Marker>
-              ) : (
-                <Marker
-                  key={community._id}
-                  latitude={community.location.latitude}
-                  longitude={community.location.longitude}
-                >
-                  <button
-                    className="marker-wrapper"
-                    onClick={() => {
-                      setCommunitySideBar(community)
-                    }}
-                    data-name={community.nameSearch}
+                            )[0].number
+                          }
+                        </span>
+                      </div>
+                    </button>
+                  </Marker>
+                ) : (
+                  <Marker
+                    key={community._id}
+                    latitude={community.location.latitude}
+                    longitude={community.location.longitude}
                   >
-                    <div className="marker-form"></div>
-                    <div className="marker-content">
-                      <img src={community.logo} alt={community.name} />
-                    </div>{' '}
-                  </button>
-                </Marker>
-              ))
+                    <button
+                      className="marker-wrapper"
+                      onClick={() => {
+                        setCommunitySideBar(community)
+                      }}
+                      data-name={community.nameSearch}
+                    >
+                      <div className="marker-form"></div>
+                      <div className="marker-content">
+                        <img src={community.logo} alt={community.name} />
+                      </div>{' '}
+                    </button>
+                  </Marker>
+                ))
           )}
           <div style={{ position: 'absolute', left: '10px', top: '10px' }}>
             <NavigationControl />
@@ -212,7 +212,7 @@ const Map = ({ communities }) => {
 }
 
 Map.propTypes = {
-  communities: PropTypes.array,
+  communities: PropTypes.array
 }
 
 export default Map
