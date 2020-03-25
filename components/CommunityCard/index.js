@@ -48,7 +48,7 @@ const CommunityCard = ({ canModify, community, credentials }) => {
     sendNotification('publish')
     Router.push('/')
   }
-  console.log()
+
   return (
     <div className="wrapper">
       <div className="container head">
