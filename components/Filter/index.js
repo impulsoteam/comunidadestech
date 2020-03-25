@@ -9,7 +9,7 @@ import { CATEGORIES, TYPES, TAGS, MODEL } from '../CommunityForm/utils'
 import styles from './styles'
 
 const Filter = ({ pageView, setPageView }) => {
-  const [moreFilters, setMoreFilters] = useState(true)
+  const [moreFilters, setMoreFilters] = useState(false)
   const [name, setName] = useState('')
 
   const router = useRouter()
