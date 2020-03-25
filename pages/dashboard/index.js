@@ -21,7 +21,7 @@ export default function Dashboard ({ credentials }) {
     const fetchPendingCommunities = async () => {
       setHeader(credentials)
       const { data } = await api.get('/community/status/awaitingPublication')
-      setPendingCommunities(data)
+      setPendingCommunities(data.communities)
     }
     const fetchPendingInvitations = async () => {
       setHeader(credentials)
