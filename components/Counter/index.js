@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import styles from './styles'
 
-const Counter = ({ list }) => {
+const Counter = ({ communities, cities, members }) => {
   const { width } = useWindowSize()
   const isMobile = !(width > 769)
 
@@ -15,7 +15,7 @@ const Counter = ({ list }) => {
         {!isMobile && <i className="fas fa-laptop-code"></i>}
         <div className="counter-info">
           <h2 className="is-size-1-desktop is-size-2-tablet is-size-4-mobile">
-            {list.length.toString().padStart(2, '0')}
+            {communities}
           </h2>
           <h5 className="is-size-7-mobile">
             <span>Comunidades</span>
@@ -31,13 +31,7 @@ const Counter = ({ list }) => {
         {!isMobile && <i className="fas fa-map-marked-alt"></i>}
         <div className="counter-info">
           <h2 className="is-size-1-desktop is-size-2-tablet is-size-4-mobile">
-            {
-              [
-                ...new Set(
-                  list.map((item) => item.location.city).filter(Boolean)
-                )
-              ].length
-            }
+            {cities}
           </h2>
           <h5 className="is-size-7-mobile">
             <span>Cidades</span>
@@ -53,9 +47,7 @@ const Counter = ({ list }) => {
         {!isMobile && <i className="fas fa-users"></i>}
         <div className="counter-info">
           <h2 className="is-size-1-desktop is-size-2-tablet is-size-4-mobile">
-            {Object.values(list)
-              .reduce((total, { members }) => total + members, 0)
-              .toLocaleString('pt-BR')}
+            {members.toLocaleString('pt-BR')}
           </h2>
           <h5 className="is-size-7-mobile">
             <span>Membros</span>
@@ -73,7 +65,9 @@ const Counter = ({ list }) => {
 }
 
 Counter.propTypes = {
-  list: PropTypes.array
+  communities: PropTypes.number,
+  cities: PropTypes.number,
+  members: PropTypes.number
 }
 
 export default Counter

@@ -169,19 +169,64 @@ class CommunityController {
     }
   }
 
+  async getCommunityDetails (req, res) {
+    try {
+      const communities = await Community.find({ status: 'published' })
+      const response = {
+        communities: communities.length,
+        cities: [],
+        members: 0
+      }
+      for (const { location, members } of communities) {
+        location.city && response.cities.push(location.city)
+        response.members += members
+      }
+      response.cities = [...new Set(response.cities)].length
+      return res.json(response)
+    } catch (error) {
+      return res.status(500).json(error)
+    }
+  }
+
   async getByStatus (req, res) {
     try {
       const { status } = req.params
+      const page = req.query.page ? parseInt(req.query.page) : 0
+      const limit = req.query.limit ? parseInt(req.query.limit) : 20
+      const {
+        name,
+        type,
+        category,
+        tags,
+        model,
+        country,
+        state,
+        city
+      } = req.query
 
       if (!statusTypes.includes(status)) {
-        return res
-          .status(400)
-          .json({ message: 'Status provided is not valid' })
+        return res.status(400).json({ message: 'Status provided is not valid' })
       }
 
-      const communities = await Community.find({ status })
+      const query = { status }
 
-      return res.json(communities)
+      if (type) query.type = type
+      if (category) query.category = category
+      if (name) query.name = { $regex: name, $options: 'i' }
+      if (model) query.model = model
+      if (tags) query.tags = { $in: [tags] }
+      if (city) query['location.city'] = city
+      if (state) query['location.state'] = state
+      if (country) query['location.country'] = country
+
+      const communities = await Community.find(query)
+        .sort('name')
+        .limit(limit)
+        .skip(page * limit)
+
+      const totalCommunities = await Community.countDocuments(query)
+
+      return res.json({ communities, totalCommunities })
     } catch (error) {
       return res.status(500).json(error)
     }

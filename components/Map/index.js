@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import ReactMap, { NavigationControl, Marker } from 'react-map-gl'
 
+import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 
 import Card from '../Card'
 import CommunitySideBar from '../CommunitySideBar'
 import styles from './styles'
-
-const Map = ({
-  list,
-  clickPin,
-  clickCommunity,
-  communitySideBar,
-  closeSideBar,
-  closeMobileSideBar,
-  reset,
-  mobileSideBar
-}) => {
+const Map = ({ communities }) => {
+  const router = useRouter()
   const [viewport, setViewport] = useState({
     latitude: -15.6634068,
     longitude: -58.6388463,
@@ -24,10 +16,30 @@ const Map = ({
     width: '100%',
     height: '100%'
   })
+  const [communitySideBar, setCommunitySideBar] = useState({})
+  const [mobileSideBar, setMobileSideBar] = useState(false)
   const [locations, setLocations] = useState([])
+  const handleResetButton = () => {
+    router.push({
+      pathname: '/',
+      query: {}
+    })
+  }
+  const closeMobileSideBar = () => {
+    setMobileSideBar(!mobileSideBar)
+    handleResetButton()
+  }
+  const handleClickPin = (e) => {
+    setMobileSideBar(!mobileSideBar)
+    router.push({
+      pathname: '/',
+      query: { ...e.target.dataset, ...router.query }
+    })
+  }
+
   useEffect(() => {
     let locations = []
-    list.forEach((item) => {
+    communities.forEach((item) => {
       if (locations.filter((city) => city.state) !== item.location.state) {
         item.location.state &&
           locations.push({
@@ -54,7 +66,7 @@ const Map = ({
         }) === index
     )
     setLocations(locations)
-  }, [list])
+  }, [communities])
 
   return (
     <div className="map-component-wrapper">
@@ -69,7 +81,7 @@ const Map = ({
             setViewport(viewport)
           }}
         >
-          {list.map(
+          {communities.map(
             (community) =>
               community.location.latitude &&
               (locations.filter(
@@ -85,7 +97,7 @@ const Map = ({
                     <button
                       className="marker-wrapper"
                       onClick={(e) => {
-                        clickPin(e)
+                        handleClickPin(e)
                       }}
                       data-state={community.location.state}
                       data-city={community.location.city}
@@ -112,8 +124,8 @@ const Map = ({
                   >
                     <button
                       className="marker-wrapper"
-                      onClick={(e) => {
-                        clickPin(e)
+                      onClick={() => {
+                        setCommunitySideBar(community)
                       }}
                       data-name={community.nameSearch}
                     >
@@ -130,9 +142,7 @@ const Map = ({
           </div>
           <div style={{ position: 'absolute', right: '10px', top: '10px' }}>
             <button
-              onClick={(event) => {
-                reset(event)
-              }}
+              onClick={() => handleResetButton()}
               className="button button-reset-map"
             >
               <span className="icon is-small">
@@ -155,20 +165,18 @@ const Map = ({
           <div className="columns">
             <div className="column">
               <div className="columns is-multiline card-wrapper">
-                {list.map((card) => (
+                {communities.map((card) => (
                   <div className="column is-12" key={card.id}>
                     <Card
                       content={card}
                       miniPage
-                      clickCommunity={clickCommunity}
+                      clickCommunity={() => setCommunitySideBar(card)}
                     />
                   </div>
                 ))}
                 <div className="column is-12">
                   <button
-                    onClick={(event) => {
-                      reset(event)
-                    }}
+                    onClick={() => handleResetButton()}
                     className="button button-reset is-fullwidth"
                   >
                     <span className="icon is-small">
@@ -189,7 +197,10 @@ const Map = ({
         {communitySideBar.name && (
           <>
             <CommunitySideBar community={communitySideBar} />
-            <div className="close-button" onClick={closeSideBar}>
+            <div
+              className="close-button"
+              onClick={() => setCommunitySideBar({})}
+            >
               <i className="fas fa-chevron-right"></i>
             </div>
           </>
@@ -201,14 +212,7 @@ const Map = ({
 }
 
 Map.propTypes = {
-  clickCommunity: PropTypes.func,
-  clickPin: PropTypes.func,
-  closeMobileSideBar: PropTypes.func,
-  closeSideBar: PropTypes.func,
-  communitySideBar: PropTypes.object,
-  list: PropTypes.array,
-  mobileSideBar: PropTypes.bool,
-  reset: PropTypes.func
+  communities: PropTypes.array
 }
 
 export default Map
