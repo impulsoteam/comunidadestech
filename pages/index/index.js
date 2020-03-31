@@ -5,11 +5,13 @@ import PropTypes from 'prop-types'
 import queryString from 'query-string'
 
 import Counter from '../../components/Counter'
+import EasterEggLoader from '../../components/EasterEggLoader'
 import Filter from '../../components/Filter'
 import styles from '../../components/HomeStyles/styles'
 import Map from '../../components/Map'
 import PaginationMenu from '../../components/PaginationMenu'
 import { api, setHeader } from '../../utils/axios'
+import useKonamiCode from '../../utils/use-konami-code'
 
 import Card from '/components/Card/'
 import Hero from '/components/Hero/'
@@ -24,6 +26,8 @@ const Home = ({ credentials }) => {
   const [query, setQuery] = useState({})
   const [pageCount, setPageCount] = useState(0)
   const [communities, setCommunities] = useState([])
+  const [easterEgg, setEasterEgg] = useState(false)
+  useKonamiCode(() => setEasterEgg(true))
 
   useEffect(() => {
     const getList = async () => {
@@ -52,6 +56,8 @@ const Home = ({ credentials }) => {
     }
     getList()
   }, [pageCount, router.query, pageView])
+
+  easterEgg && useRouter().push('/zaek', '/', { shallow: true })
 
   const renderPage = () => {
     if (loading) {
@@ -101,6 +107,7 @@ const Home = ({ credentials }) => {
 
     return (
       <div>
+        {easterEgg && <EasterEggLoader />}
         <Hero />
         <Counter {...communitiesDetails} />
         <Filter {...{ pageView, setPageView }} />
