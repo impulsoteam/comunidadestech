@@ -50,8 +50,17 @@ const CommunityCard = () => {
               Você encontrou o Easter Egg do site, e agora você faz parte do
               grupo de <b>Caçadores de Easter Eggs Sêniores</b> do Comunidades
               Tech! Com isso, você tem direito a recompensas! Para descobrir e
-              resgatar sua recompensa, entre em contato conosco através desse
-              formulário!
+              resgatar sua recompensa, entre em contato conosco através{' '}
+              <b>
+                <a
+                  href="https://impulsowork.typeform.com/to/NUubrf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  desse formulário
+                </a>
+              </b>
+              !
             </p>
           </div>
         </div>
