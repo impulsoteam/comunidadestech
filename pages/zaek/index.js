@@ -7,13 +7,7 @@ import styles from '../../components/CommunityStyles/styles'
 const Zaek = () => (
   <div>
     <CommunityHero />
-    <CommunityCardEasterEgg
-      community={{
-        name: 'All Saints Bay',
-        logo:
-          'https://s3.sa-east-1.amazonaws.com/assets.comunidades.tech/all-saints-bay.jpg'
-      }}
-    />
+    <CommunityCardEasterEgg />
     <style jsx>{styles}</style>
   </div>
 )
