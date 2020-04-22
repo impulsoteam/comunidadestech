@@ -1,6 +1,7 @@
 import React from 'react'
 import { toast } from 'react-toastify'
 
+import Cookies from 'js-cookie'
 import Router from 'next/router'
 import PropTypes from 'prop-types'
 
@@ -41,12 +42,18 @@ const CommunityCard = ({ canModify, community, credentials }) => {
   }
 
   const publishCommunity = async () => {
-    setHeader(credentials)
-    await api.put(`/community/publish/${_id}`, {
-      status: 'published'
-    })
-    sendNotification('publish')
-    Router.push('/')
+    try {
+      setHeader(credentials)
+      await api.put(`/community/publish/${_id}`, {
+        status: 'published'
+      })
+      sendNotification('publish')
+      Router.push('/')
+    } catch (e) {
+      toast.warn('Sessão expirada. Você será redirecionado para página de login!')
+      Cookies.remove('ctech_credentials')
+      setTimeout(() => Router.push('/sign-in?previousPage=dashboard'), 4000)
+    }
   }
 
   return (

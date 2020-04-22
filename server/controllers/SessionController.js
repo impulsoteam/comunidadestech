@@ -13,7 +13,7 @@ class SessionController {
       },
       process.env.JWT_SECRET_KEY,
       {
-        expiresIn: '7 days'
+        expiresIn: 10
       }
     )
 
