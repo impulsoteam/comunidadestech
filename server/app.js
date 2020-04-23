@@ -63,7 +63,8 @@ app
     server.use('/api/v1', routes)
 
     server.get('/sign-in', (req, res) => {
-      res.cookie('previousPage', '/cadastrar')
+      const { previousPage } = req.query
+      res.cookie('previousPage', `/${previousPage || 'cadastrar'}`)
       return res.redirect('/login')
     })
 
