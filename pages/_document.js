@@ -34,7 +34,6 @@ export default class MyDocument extends Document {
             type="image/png"
             href="/static/favicon.ico"
           />
-
           <link
             rel="apple-touch-icon"
             sizes="57x57"
@@ -104,20 +103,51 @@ export default class MyDocument extends Document {
             sizes="16x16"
             href="/static/favicon/favicon-16x16.png?v1"
           />
-          <meta name="msapplication-TileColor" content="#ffffff" />
+          <meta
+            property="og:image"
+            content="/static/seo-ctech.jpg?v1"
+          />
+          <meta
+            property="og:image:type"
+            content="image/jpeg"
+          />
+          <meta
+            property="og:image:height"
+            content="630"
+          />
+          <meta
+            property="og:image:width"
+            content="1200"
+          />
+          <meta
+            name="msapplication-TileColor"
+            content="#ffffff"
+          />
           <meta
             name="msapplication-TileImage"
-            content="/ms-icon-144x144.png?v1"
+            content="/static/favicon/ms-icon-144x144.png?v1 "
           />
-          <meta name="theme-color" content="#ffffff" />
-          <link rel="manifest" href="/static/manifest.json" />
-          <script src="/static/sw-register.js"></script>
+          <meta
+            name="theme-color"
+            content="#ffffff"
+          />
+          <link
+            rel="manifest"
+            href="/static/manifest.json"
+          />
+          <script
+            src="/static/sw-register.js"
+          ></script>
           <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=UA-143000900-1"
           ></script>
-          <script dangerouslySetInnerHTML={this.setGoogleTags()} />
-          <script src="https://kit.fontawesome.com/e258bd240c.js"></script>
+          <script
+            dangerouslySetInnerHTML={this.setGoogleTags()}
+          />
+          <script
+            src="https://kit.fontawesome.com/e258bd240c.js"
+          ></script>
         </Head>
         <body>
           <Main />
