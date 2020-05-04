@@ -113,7 +113,7 @@ export default class MyDocument extends Document {
           />
           <meta
             property="og:image:height"
-            content="630"
+            content="600"
           />
           <meta
             property="og:image:width"
