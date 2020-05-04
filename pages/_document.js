@@ -125,7 +125,7 @@ export default class MyDocument extends Document {
           />
           <meta
             name="msapplication-TileImage"
-            content="/static/favicon/ms-icon-144x144.png?v1 "
+            content="/static/favicon/ms-icon-144x144.png?v1"
           />
           <meta
             name="theme-color"
