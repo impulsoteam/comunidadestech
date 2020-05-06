@@ -3,6 +3,10 @@ import css from 'styled-jsx/css'
 import { colors } from '/utils/variables'
 
 export default css`
+  #filter {
+    margin-bottom: 30px;
+  }
+
   .filter-wrapper {
     align-items: center;
     border-bottom: solid 2px ${colors.wildSand};
