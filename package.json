@@ -86,8 +86,8 @@
     "jest": "^24.9.0",
     "nodemon": "^1.19.4",
     "prettier": "^1.18.2",
+    "sucrase": "^3.15.0",
     "set-cookie-parser": "^2.4.6",
-    "sucrase": "^3.10.1",
     "supertest": "^4.0.2"
   }
 }
