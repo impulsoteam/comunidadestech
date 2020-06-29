@@ -54,7 +54,7 @@
     "react-dom": "^16.13.1",
     "react-dropzone": "^10.2.1",
     "react-image-crop": "^8.5.0",
-    "react-lazyload": "^2.6.5",
+    "react-lazyload": "^2.6.9",
     "react-map-gl": "^5.2.3",
     "react-select": "^3.0.8",
     "react-text-mask": "^5.4.3",
