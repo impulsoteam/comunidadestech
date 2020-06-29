@@ -50,7 +50,7 @@
     "prop-types": "^15.7.2",
     "query-string": "^6.11.1",
     "react": "^16.13.1",
-    "react-beforeunload": "^2.1.0",
+    "react-beforeunload": "^2.2.1",
     "react-dom": "^16.13.1",
     "react-image-crop": "^8.6.4",
     "react-dropzone": "^10.2.2",
