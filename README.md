@@ -1,5 +1,6 @@
 ![CTech Logo](https://www.comunidades.tech/static/ctech-logo.svg)
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/7c842d991bcd66584f19/maintainability)](https://codeclimate.com/github/universoimpulso/comunidadestech/maintainability)
 [![Website](https://img.shields.io/website-up-down-green-red/http/shields.io.svg?label=about)](http://comunidades.tech) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Twitter Follow](https://img.shields.io/twitter/follow/universoimpulso.svg?style=social&label=Follow)](https://twitter.com/UniversoImpulso)
 
 Comunidades.tech é um espaço de visibilidade e fortalecimento das comunidades de tecnologia
