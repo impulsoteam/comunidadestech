@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  comunidadestech:
+    build: 
+      context: ./
+      dockerfile: ./docker/app/Dockerfile
+    command: yarn dev
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+    container_name: comunidadestech
+    volumes:
+      - ../comunidadestech:/usr/src/app
+    depends_on:
+      - comunidadestech-mongo
+    env_file:
+      - ./.env
+
+  comunidadestech-mongo:
+    build: ./docker/mongo
+    container_name: comunidadestech-mongo
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
+    volumes:
+      - ../docker-volumes/mongo-comunidadestech/db/data:/data/db
+      - ../docker-volumes/mongo-comunidadestech/db/log:/var/log/mongodb
