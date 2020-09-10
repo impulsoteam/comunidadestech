@@ -62,12 +62,12 @@ class Card extends Component {
             <div className="control">
               <div className="tags has-addons is-inline-block">
                 <span className="tag is-dark">membros</span>
-                <span className="tag gray">{content.members}</span>
+                <span className="tag gray-border">{content.members}</span>
               </div>
               {content.type !== 'legacy' && (
                 <div className="tags has-addons is-inline-block">
                   <span className="tag is-dark">tipo</span>
-                  <span className="tag gray">{content.type}</span>
+                  <span className="tag gray-border">{content.type}</span>
                 </div>
               )}
             </div>
@@ -78,7 +78,7 @@ class Card extends Component {
               {content.tags.slice(0, 5).map(
                 (tag, tagItemIndex) =>
                   tag.length <= 20 && (
-                    <span key={tagItemIndex} className="tag gray">
+                    <span key={tagItemIndex} className="tag gray-border">
                       {tag}
                     </span>
                   )
@@ -95,7 +95,7 @@ class Card extends Component {
                   {content.tags.slice(5).map(
                     (tag, tagItemIndex) =>
                       tag.length <= 20 && (
-                        <span key={tagItemIndex} className="tag gray">
+                        <span key={tagItemIndex} className="tag gray-border">
                           {tag}
                         </span>
                       )

@@ -81,8 +81,8 @@ export default css`
     .tag {
       font-size: 10px;
 
-      &.gray {
-        background: ${colors.silverChalice};
+      &.gray-border {
+        border: 1px solid ${colors.silverChalice};
         color: ${colors.dark};
       }
     }
