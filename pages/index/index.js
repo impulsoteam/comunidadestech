@@ -46,7 +46,7 @@ const Home = ({ credentials }) => {
         `/community/status/published?${queryString.stringify({
           ...router.query,
           page,
-          limit: pageView === 'map' ? 9999 : 20
+          limit: pageView === 'map' ? 9999 : 48
         })}`
       )
       setQuery(newQuery)

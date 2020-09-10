@@ -125,7 +125,7 @@ const CommunityCard = ({ canModify, community, credentials }) => {
                   ? tags.map(
                     (tag, index) =>
                       tag.length <= 20 && (
-                        <span key={`tag-${index}`} className="tag is-primary">{tag}</span>
+                        <span key={`tag-${index}`} className="tag gray">{tag}</span>
                       )
                   )
                   : null}

@@ -9,6 +9,7 @@ export default css`
 
   .card {
     border-radius: 2px;
+    cursor: pointer;
     height: 100%;
 
     a {
@@ -79,6 +80,11 @@ export default css`
 
     .tag {
       font-size: 10px;
+
+      &.gray {
+        background: ${colors.silverChalice};
+        color: ${colors.dark};
+      }
     }
 
     .btn-tooltip {
