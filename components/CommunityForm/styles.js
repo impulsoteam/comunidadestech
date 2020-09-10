@@ -20,7 +20,9 @@ export default css`
   }
 
   .content-column {
-    padding-left: 36px;
+    @media screen and (min-width: 769px) {
+      padding-left: 36px;
+    }
   }
 
   .image-error {
