@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import LazyLoad from 'react-lazyload'
 
+import Router from 'next/router'
 import PropTypes from 'prop-types'
 
 import styles from './styles'
@@ -10,13 +11,7 @@ class Card extends Component {
     const { content, miniPage, clickCommunity } = this.props
     const Media = () => {
       return (
-        <div
-          className="media"
-          onClick={(e) => {
-            clickCommunity(e)
-          }}
-          data-name={content.nameSearch}
-        >
+        <div className="media">
           <div className="media-left">
             <figure className="image is-32x32">
               {!content.logo || content.logo === 'legacy' ? (
@@ -49,17 +44,15 @@ class Card extends Component {
     }
 
     return (
-      <div className="card">
+      <div
+        className="card"
+        onClick={(e) =>
+          miniPage ? clickCommunity(e) : Router.push(`/c/${content.slug}`)
+        }
+        data-name={content.nameSearch}
+      >
         <div className="card-content">
-          {miniPage ? (
-            <a href="#">
-              <Media />
-            </a>
-          ) : (
-            <a href={`/c/${content.slug}`}>
-              <Media />
-            </a>
-          )}
+          <Media />
           <div className="content">
             <p className="description">
               {content.description <= 85

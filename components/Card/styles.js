@@ -9,6 +9,7 @@ export default css`
 
   .card {
     border-radius: 2px;
+    cursor: pointer;
     height: 100%;
 
     a {
