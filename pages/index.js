@@ -4,14 +4,14 @@ import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
 
-import Counter from '../../components/Counter'
-import EasterEggLoader from '../../components/EasterEggLoader'
-import Filter from '../../components/Filter'
-import styles from '../../components/HomeStyles/styles'
-import Map from '../../components/Map'
-import PaginationMenu from '../../components/PaginationMenu'
-import { api, setHeader } from '../../utils/axios'
-import useKonamiCode from '../../utils/use-konami-code'
+import Counter from '../components/Counter'
+import EasterEggLoader from '../components/EasterEggLoader'
+import Filter from '../components/Filter'
+import styles from '../components/HomeStyles/styles'
+import Map from '../components/Map'
+import PaginationMenu from '../components/PaginationMenu'
+import { api, setHeader } from '../utils/axios'
+import useKonamiCode from '../utils/use-konami-code'
 
 import Card from '/components/Card/'
 import Hero from '/components/Hero/'
@@ -46,7 +46,7 @@ const Home = ({ credentials }) => {
         `/community/status/published?${queryString.stringify({
           ...router.query,
           page,
-          limit: pageView === 'map' ? 9999 : 20
+          limit: pageView === 'map' ? 9999 : 48
         })}`
       )
       setQuery(newQuery)

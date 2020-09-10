@@ -109,6 +109,11 @@ export default css`
   }
   .tags > div {
     width: 100%;
+
+    .tag.gray {
+      background: ${colors.silverChalice};
+      color: ${colors.dark};
+    }
   }
 
   .managers-wrapper {

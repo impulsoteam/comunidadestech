@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import styles from './styles'
 
 const PaginationMenu = ({ pageCount, setPageCount, totalCommunities }) => {
-  const numberOfPages = Math.ceil(totalCommunities / 20)
+  const numberOfPages = Math.ceil(totalCommunities / 48)
 
   if (numberOfPages === 1) return null
 
