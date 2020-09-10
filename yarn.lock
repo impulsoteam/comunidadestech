@@ -7005,7 +7005,7 @@ next-cookies@^2.0.1:
   dependencies:
     universal-cookie "^4.0.2"
 
-next-images@^1.4.1:
+next-images@^1.4.0:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/next-images/-/next-images-1.4.1.tgz#946f34728609dc24517234d85b2f6b6f9a3344d1"
   integrity sha512-Xkxxf+Hw/Pet2VVbw72jc7PAcOGisTTXa/L3a6XPRqSlhOJSXyGxE3U8hJn5wwfrzkXT31nxrfnfQKfbgjCPEg==
