@@ -80,6 +80,11 @@ export default css`
 
     .tag {
       font-size: 10px;
+
+      &.gray {
+        background: ${colors.silverChalice};
+        color: ${colors.dark};
+      }
     }
 
     .btn-tooltip {
