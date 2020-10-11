@@ -1,5 +1,5 @@
 
-# Documentação Arquitetural para o Comunidades.tech"
+# Documentação Arquitetural para o Comunidades.tech
 
 # Autora
 
