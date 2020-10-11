@@ -40,7 +40,7 @@ As informações das comunidades cadastradas são maninpuladas pelo Back-end do 
  
 Abaixo está o diagrama de contexto.
 
-![fig1](diagrama-contexto.png)
+![fig1](architectural-documentation/diagrama-contexto.png)
 
 **OBS**: Além do LinkedIn, também pode ser utilizada uma conta do Google para realizar o cadastro do usuário, mas, por questões de simplificação, esse detalhe não foi ilustrado.
 
@@ -54,7 +54,7 @@ O sistema Comunidades.tech é uma aplicação que pode ser dividida basicamente 
 
 Abaixo está o diagrama de containers.
 
-![fig2](diagrama-containers.svg)
+![fig2](architectural-documentation/diagrama-containers.svg)
 
 [//]: <> (O Back-end  expõe uma API-REST utilizando o Express. )
 Os **containers** estão **executando/implantandos** na plataforma em núvem **Heroku**. E toda comunicação é feita via API-REST em formato JSON utilizando protocolos HTTPS.
@@ -78,7 +78,7 @@ Os principais componentes da API do sistema Comunidades.tech estão descritos a 
 
 A seguir está o diagrama de componentes ilustrando os componentes supracitados.
 
-![fig3](diagrama-componentes.png)
+![fig3](architectural-documentation/diagrama-componentes.png)
 
 [//]: <> (### Código <pre>Em breve!</pre>)
 
@@ -90,5 +90,5 @@ O primeiro passo para conseguir publicar uma comunidade é fazer parte do Comuni
 
 A seguir está o diagrama de máquina de estados para descrever os estados do procedimento de publicação de uma comunidade.
 
-![fig](diagrama-maquina-estados.jpeg)
+![fig4](architectural-documentation/diagrama-maquina-estados.jpeg)
 
