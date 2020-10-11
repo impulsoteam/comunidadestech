@@ -80,12 +80,12 @@ A seguir está o diagrama de componentes ilustrando os componentes supracitados.
 
 ![fig3](diagrama-componentes.png)
 
+[//]: <> (
 ### Código
 
 <pre>
-Nesta etapa não faremos diagramas que apresentam detalhes da
-implementação. Faremos isso mais adiante.
-</pre>
+Em breve!
+</pre>)
 
 ### Visão de Informação
 
