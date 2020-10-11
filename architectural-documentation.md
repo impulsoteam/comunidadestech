@@ -80,12 +80,7 @@ A seguir está o diagrama de componentes ilustrando os componentes supracitados.
 
 ![fig3](diagrama-componentes.png)
 
-[//]: <> (
-### Código
-
-<pre>
-Em breve!
-</pre>)
+[//]: <> (### Código <pre>Em breve!</pre>)
 
 ### Visão de Informação
 
