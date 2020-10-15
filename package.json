@@ -42,7 +42,7 @@
     "next-compose-plugins": "^2.2.0",
     "next-cookies": "^2.0.1",
     "node-sass": "^4.14.1",
-    "next-images": "^1.4.0",
+    "next-images": "^1.6.0",
     "passport": "^0.4.0",
     "passport-google-oauth": "^2.0.0",
     "passport-linkedin-oauth2": "^2.0.0",
