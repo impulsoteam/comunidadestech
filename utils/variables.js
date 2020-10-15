@@ -2,6 +2,8 @@ export const colors = {
   boulder: '#7a7a7a',
   chestnutRose: '#D26060',
   dark: '#363636',
+  darkBlue: '#151546',
+  darkBlueGrey: '#26265e',
   emerald: '#2ecc71',
   gradientDark: '#dbdbdb',
   heliotrope: '#be99ff',
