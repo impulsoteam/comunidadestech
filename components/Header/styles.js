@@ -31,8 +31,23 @@ export default css`
     font-weight: bold;
     display: flex;
 
+    .button-darkBlueGrey {
+      background-color: transparent;
+      border-color: ${colors.darkBlueGrey};
+      color: ${colors.darkBlueGrey};
+      &:hover {
+        background-color: ${colors.darkBlue};
+        color: ${colors.white};
+      }
+    }
+
     .btn-dark {
       border: none;
+    }
+
+    .icon {
+      margin-right: 8px;
+      margin-left: auto;
     }
 
     .icons-menu {

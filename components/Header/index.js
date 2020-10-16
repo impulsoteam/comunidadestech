@@ -41,6 +41,18 @@ const Header = ({ name, avatar, token }) => {
             <strong>Contribua</strong>
           </a>
           <a
+            href="https://comunidades.impulso.network/"
+            className="button button-darkBlueGrey"
+            target="_blank"
+            title="Cadastre uma comunidade"
+            rel="noopener noreferrer"
+          >
+            <img className="icon" src="/static/impulso-icon.svg" alt="Impulso - Apoio para comunidades" />
+            <strong>
+              Apoio para comunidades
+            </strong>
+          </a>
+          <a
             href={token ? '/cadastrar' : '/sign-in'}
             className="button is-primary is-outlined"
             title="Cadastre uma comunidade"
@@ -59,6 +71,16 @@ const Header = ({ name, avatar, token }) => {
             width="112"
           />
           Home
+        </a>
+        <a
+          href="https://comunidades.impulso.network/"
+          className="navbar-item"
+          target="_blank"
+          title="Cadastre uma comunidade"
+          rel="noopener noreferrer"
+        >
+          <img className="icons-menu" src="/static/impulso-icon.svg" alt="Impulso - Apoio para comunidades" />
+          Apoio para comunidades
         </a>
         <a
           href={token ? '/cadastrar' : '/sign-in'}
