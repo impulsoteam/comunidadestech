@@ -4,7 +4,7 @@
 # Autora
 
 Este documento foi produzido por Raquel Ambrozio da Fonseca.
-- Contato: raquel.fonseca@ccc.ufcg.edu.br
+- Contato: https://github.com/RaquelFonseca/
 
 # Descrição Arquitetural -- Comunidades.tech
 
