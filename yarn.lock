@@ -8357,10 +8357,10 @@ react-lazyload@^2.6.9:
   resolved "https://registry.yarnpkg.com/react-lazyload/-/react-lazyload-2.6.9.tgz#5a88c885bb98a3b6580759d51039867d1c97d198"
   integrity sha512-vB7WLp+ZlTEy6LEFFiMtCys7ShX4P64t/eUOAXt58qret6HCbwMY5f/cD0EPCXx1z/UZC3wb9kxPf2DVIQkc4Q==
 
-react-map-gl@^5.2.7:
-  version "5.2.8"
-  resolved "https://registry.yarnpkg.com/react-map-gl/-/react-map-gl-5.2.8.tgz#1ab717de8cb48dd3c5ff09588d260bd690790099"
-  integrity sha512-r0ef3AgsaZ1q3TmqqkTKkUrhfAe61xfwvmzgfwkiQOK9NLx9Z9GD8s8yg2XRoENsN4Yy3jFd9jBPgDscMp6DZw==
+react-map-gl@^5.2.12:
+  version "5.2.12"
+  resolved "https://registry.yarnpkg.com/react-map-gl/-/react-map-gl-5.2.12.tgz#41d77e9f6865893152d7bc05792718f2c4404ba6"
+  integrity sha512-NqkwTKS6jhlD76/B23/5E9mkSVxcgWZzkQ/gHOWv0xBDkG1KDRr+IdKAs1MEHO5U8MspM6Q0UvPlDoC2OhC2bQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     mapbox-gl "^1.0.0"
