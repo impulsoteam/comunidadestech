@@ -9,8 +9,10 @@ import { withRouter } from 'next/router'
 import 'react-toastify/dist/ReactToastify.css'
 import 'styles/styles.scss'
 
+import CookiesPolicy from '../components/CookiesPolicy'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
+import PrivacyPolicy from '../components/PrivacyPolicy'
 
 class MyApp extends App {
   static async getInitialProps ({ Component, ctx }) {
@@ -34,6 +36,7 @@ class MyApp extends App {
         <>
           <Header {...credentials} />
           <Component credentials={credentials} {...pageProps} />
+          <CookiesPolicy />
         </>
       )
     }
@@ -42,6 +45,8 @@ class MyApp extends App {
       <>
         <Header {...credentials} />
         <Component credentials={credentials} {...pageProps} />
+        <PrivacyPolicy />
+        <CookiesPolicy />
         <Footer />
       </>
     )
