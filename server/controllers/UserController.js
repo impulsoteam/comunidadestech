@@ -3,43 +3,26 @@ import User from '../models/user'
 
 class UserController {
   async findOrCreate (accessToken, profile, service) {
-    let response
-    await User.findOne(
-      {
-        email: profile.emails[0].value
-      },
-      (err, user) => {
-        if (err) return
-        if (!user) {
-          const newUser = new User({
-            name: profile.displayName,
-            email: profile.emails[0].value,
-            avatar:
-              service === 'google'
-                ? profile._json.picture
-                : profile.photos[0].value,
-            [service === 'google' ? 'googleProvider' : 'linkedinProvider']: {
-              id: profile.id,
-              token: accessToken
-            }
-          })
-          newUser.save()
-          response = newUser
-        } else {
-          user[service === 'google' ? 'googleProvider' : 'linkedinProvider'] = {
-            id: profile.id,
-            token: accessToken
-          }
-          user.avatar =
-            service === 'google'
-              ? profile._json.picture
-              : profile.photos[0].value
-          user.save()
-          response = user
-        }
+    const user = {
+      name: profile.displayName,
+      email: profile.emails[0].value,
+      avatar:
+      service === 'google'
+        ? profile._json.picture
+        : profile.photos[0].value,
+      [service === 'google' ? 'googleProvider' : 'linkedinProvider']: {
+        id: profile.id,
+        token: accessToken
       }
+    }
+
+    await User.updateOne(
+      { email: user.email },
+      user,
+      { upsert: true, runValidators: true, setDefaultsOnInsert: true }
     )
-    return response
+
+    return User.findOne({ email: user.email })
   }
 
   async checkManager (req, res) {
@@ -70,6 +53,36 @@ class UserController {
     } catch (error) {
       return res.status(500).json(error)
     }
+  }
+
+  async updateDataPolicyAccepted (req, res) {
+    const { _id } = req.params
+
+    await User.updateOne({ _id }, { dataPolicyAccepted: true })
+    const user = await User.findOne({ _id })
+
+    const [, token] = req.headers.authorization.split(' ')
+
+    res.cookie(
+      'ctech_credentials',
+      JSON.stringify({
+        token,
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+        isModerator: user.isModerator,
+        dataPolicyAccepted: user.dataPolicyAccepted
+      })
+    )
+
+    return res.json(user)
+  }
+
+  async destroy (req, res) {
+    const { _id } = req.params
+    await User.deleteOne({ _id })
+    res.json('')
   }
 }
 

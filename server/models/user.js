@@ -12,7 +12,6 @@ const userSchema = new mongoose.Schema(
     },
     isModerator: {
       type: Boolean,
-      required: true,
       default: false
     },
     avatar: {
@@ -26,6 +25,10 @@ const userSchema = new mongoose.Schema(
     googleProvider: {
       id: String,
       token: String
+    },
+    dataPolicyAccepted: {
+      type: Boolean,
+      default: false
     }
   },
   {

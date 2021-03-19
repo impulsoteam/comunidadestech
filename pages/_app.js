@@ -43,7 +43,7 @@ class MyApp extends App {
       <>
         <Header {...credentials} />
         <Component credentials={credentials} {...pageProps} />
-        <PrivacyPolicy />
+        <PrivacyPolicy credentials={credentials}/>
         <Footer />
       </>
     )
