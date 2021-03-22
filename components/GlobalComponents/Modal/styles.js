@@ -73,6 +73,10 @@ export default css`
         cursor: pointer;
         text-decoration: underline;
       }
+
+      &.center {
+        text-align: center;
+      }
     }
 
     @media (max-width: 768px) {

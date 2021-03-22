@@ -5,10 +5,11 @@ import Router from 'next/router'
 import PropTypes from 'prop-types'
 
 import { api, setHeader } from '../../utils/axios'
-import styles from './styles'
+import styles from '../GlobalComponents/Modal/styles'
 
 const PrivacyPolicy = ({ credentials }) => {
   const [modal, setModal] = useState(false)
+  const [reject, setReject] = useState(false)
 
   useEffect(() => {
     if (credentials.email && !credentials.dataPolicyAccepted) {
@@ -29,39 +30,71 @@ const PrivacyPolicy = ({ credentials }) => {
     setModal(false)
   }
 
-  return (
-    <>
-      {modal
-        ? <div className="modal">
-          <div className="modal-content">
-            <h2 className="title-modal">Proteção de dados</h2>
-            <div className="modal-body">
-              <p>
-                <b>Que Dados coletamos e como nós coletamos?</b> <br/>
+  const getContent = () => {
+    if (reject) {
+      return content.reject
+    } else {
+      return content.default
+    }
+  }
+
+  const content = {
+    default: (
+      <>
+        {modal
+          ? <div className="modal">
+            <div className="modal-content">
+              <h2 className="title-modal">Proteção de dados</h2>
+              <div className="modal-body">
+                <p>
+                  <b>Que Dados coletamos e como nós coletamos?</b> <br />
                 Dados obtidos quando você se candidata a uma vaga: quando você se candidata a uma vaga para alocação em
                 um de nossos clientes, coletamos dados adicionais sobre você, por meio de avaliações, testes, dinâmicas
                 e feedbacks.
-              </p>
-              <p>
-                <b>Como e por que utilizamos seus dados?</b> <br/>
+                </p>
+                <p>
+                  <b>Como e por que utilizamos seus dados?</b> <br />
                 Quando você se candidata a uma vaga para alocação em um de nossos clientes, os seus dados nos auxiliam a
                 traçar o seu perfil profissional. Isso nos permite encontrar as melhores oportunidades para você, tanto
                 para geração de conteúdo quanto para a oferta de vagas do seu interesse. Esses dados são fundamentais
                 para que realizemos estudos aprofundados de interesse de mercado e pessoal a todo momento,
                 possibilitando que nosso serviço seja continuamente aprimorado e modernizado.
-                <a href="https://impulso.network/privacidade" target="_blank" rel="noreferrer"> (Ler política completa)</a>
-              </p>
-              <div className="modal-buttons">
-                <button title="Recusar" className="modal-btn" onClick={handleReject}>Recusar</button>
-                <button title="Aceitar" className="modal-btn" onClick={handleAccepted}>Aceitar</button>
+                  <a href="https://impulso.network/privacidade" target="_blank" rel="noreferrer"> (Ler política completa)</a>
+                </p>
+                <div className="modal-buttons">
+                  <button title="Recusar" className="modal-btn" onClick={() => setReject(true)}>Recusar</button>
+                  <button title="Aceitar" className="modal-btn" onClick={handleAccepted}>Aceitar</button>
+                </div>
               </div>
             </div>
+            <style jsx>{styles}</style>
           </div>
-          <style jsx>{styles}</style>
-        </div>
-        : null}
-    </>
-  )
+          : null}
+      </>
+    ),
+    reject: (
+      <>
+        {modal
+          ? <div className="modal">
+            <div className="modal-content">
+              <h2 className="title-modal">Seus dados serão excluídos</h2>
+              <div className="modal-body">
+                <p className="center">
+                  Caso você não aceite a Política de Privacidade, vamos excluir seus dados, tudo bem?
+                </p>
+                <div className="modal-buttons">
+                  <button title="Voltar" className="modal-btn" onClick={() => setReject(false)}>Voltar</button>
+                  <button title="Confirmar" className="modal-btn" onClick={handleReject}>Ok</button>
+                </div>
+              </div>
+            </div>
+            <style jsx>{styles}</style>
+          </div>
+          : null}
+      </>
+    )
+  }
+  return getContent()
 }
 
 PrivacyPolicy.propTypes = {
