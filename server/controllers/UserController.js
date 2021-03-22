@@ -1,3 +1,5 @@
+import AmqpController from '../controllers/AmqpController'
+import { amqpTypes } from '../helpers'
 import Community from '../models/community'
 import User from '../models/user'
 
@@ -81,8 +83,16 @@ class UserController {
 
   async destroy (req, res) {
     const { _id } = req.params
+    const user = await User.findOne({ _id })
     await User.deleteOne({ _id })
-    res.json('')
+
+    AmqpController.publish({
+      message: user,
+      type: amqpTypes.userRemoved,
+      queue: amqpTypes.queues.interactions
+    })
+
+    return res.json(user)
   }
 }
 
