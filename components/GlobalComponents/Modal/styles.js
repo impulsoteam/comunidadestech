@@ -19,7 +19,8 @@ export default css`
   }
 
   .modal-content {
-    background: white none repeat scroll 0% 0%;
+    background: none repeat scroll 0% 0%;
+    background-color: ${colors.white};
     border-radius: 8px;
     box-shadow: rgba(38, 38, 94, 0.5) 0px 0px 50px 0px;
     display: flex;

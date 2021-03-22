@@ -31,11 +31,7 @@ const PrivacyPolicy = ({ credentials }) => {
   }
 
   const getContent = () => {
-    if (reject) {
-      return content.reject
-    } else {
-      return content.default
-    }
+    return reject ? content.reject : content.default
   }
 
   const content = {

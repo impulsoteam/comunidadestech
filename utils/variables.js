@@ -12,7 +12,7 @@ export const colors = {
   silverChalice: '#a9a9a9',
   softCloud: '#fbfbfb',
   turbo: '#f9ca24',
-  white: '#fff',
+  white: '#ffffff',
   wildSand: '#f5f5f5'
 }
 
