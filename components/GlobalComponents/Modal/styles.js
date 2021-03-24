@@ -93,14 +93,13 @@ export default css`
 
   .modal-btn {
     text-align: center;
-    border-radius: 30px;
+    border-radius: 4px;
     color: ${colors.white};
     cursor: pointer;
     display: flex;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 700;
     letter-spacing: 3px;
-    line-height: 26px;
     margin-top: 18px;
     padding: 5px 25px;
 
