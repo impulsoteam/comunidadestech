@@ -84,6 +84,13 @@ class UserController {
   async destroy (req, res) {
     const { _id } = req.params
     const user = await User.findOne({ _id })
+
+    await Community.deleteMany({ $or: [{ owner: user.email }, { 'creator.email': user.email }] })
+    await Community.updateMany(
+      { managers: { $elemMatch: { email: user.email } } },
+      { $pull: { managers: { email: user.email } } }
+    )
+
     await User.deleteOne({ _id })
 
     AmqpController.publish({
