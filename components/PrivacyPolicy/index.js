@@ -76,11 +76,11 @@ const PrivacyPolicy = ({ credentials }) => {
               <h2 className="title-modal">Seus dados serão excluídos</h2>
               <div className="modal-body">
                 <p className="center">
-                  Caso você não aceite a Política de Privacidade, vamos excluir seus dados, tudo bem?
+                Tem certeza que deseja excluir todos os seus dados do comunidades.tech? Todas as comunidades que você cadastrou, gerencia e possui, bem como os seus dados serão excluídos permanentemente.
                 </p>
                 <div className="modal-buttons">
-                  <button title="Voltar" className="modal-btn" onClick={() => setReject(false)}>Voltar</button>
-                  <button title="Confirmar" className="modal-btn" onClick={handleReject}>Ok</button>
+                  <button title="Voltar" className="modal-btn" onClick={() => setReject(false)}>Cancelar</button>
+                  <button title="Confirmar" className="modal-btn" onClick={handleReject}>Excluir mesmo assim</button>
                 </div>
               </div>
             </div>
