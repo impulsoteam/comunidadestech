@@ -3,6 +3,7 @@ export const amqpTypes = {
     interactions: 'ctech.interactions'
   },
   login: 'ctech.login',
-  communityPublished: 'ctech.communityPublished',
-  communityCreated: 'ctech.communityCreated'
+  userRemoved: 'ctech.userRemoved',
+  communityCreated: 'ctech.communityCreated',
+  communityPublished: 'ctech.communityPublished'
 }

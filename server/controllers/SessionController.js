@@ -23,9 +23,10 @@ class SessionController {
         token,
         _id: user._id,
         name: user.name,
-        avatar: user.avatar,
         email: user.email,
-        isModerator: user.isModerator
+        avatar: user.avatar,
+        isModerator: user.isModerator,
+        dataPolicyAccepted: user.dataPolicyAccepted
       })
     )
 
