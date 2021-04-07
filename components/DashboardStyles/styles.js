@@ -66,11 +66,11 @@ export default css`
   }
 
   .info {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 2px;
     font-family: ${fonts.raleway};
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    line-height: 24px;
   }
 
   .privacy-buttons {
@@ -78,10 +78,12 @@ export default css`
     display: flex;
     justify-content: left;
   }
+  
   .privacy-btn {
-    text-align: center;
+    background-color: ${colors.white};
+    border: 1px solid ${colors.primary};
     border-radius: 4px;
-    color: ${colors.white};
+    color: ${colors.primary};
     cursor: pointer;
     display: flex;
     font-size: 14px;
@@ -89,9 +91,7 @@ export default css`
     letter-spacing: 3px;
     margin-top: 18px;
     padding: 5px 25px;
-    background-color: ${colors.white};
-    border: 1px solid ${colors.primary};
-    color: ${colors.primary};
+    text-align: center;
   }
 
   @media screen and (max-width: 769px) {

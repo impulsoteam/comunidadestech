@@ -182,7 +182,7 @@ export default function Dashboard ({ credentials }) {
 
         <p className="info">Nós respeitamos sua privacidade. Fique à vontade para solicitar que seus dados sejam deletados. </p>
         <div className="privacy-buttons">
-          <button title="Voltar" className="privacy-btn" onClick={() => setModal(true)}>excluir meus dados</button>
+          <button title="Excluir meus dados" className="privacy-btn" onClick={() => setModal(true)}>excluir meus dados</button>
         </div>
         {modal && <PrivacyModal handleConfirm={handleConfirm} handleGoBack={() => setModal(false)}/>}
         <style jsx>{styles}</style>
