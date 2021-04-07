@@ -1,6 +1,6 @@
 import css from 'styled-jsx/css'
 
-import { colors } from '/utils/variables'
+import { colors, fonts } from '/utils/variables'
 
 export default css`
   .container {
@@ -63,6 +63,35 @@ export default css`
   
   .container.head {
     margin-bottom: 240px;
+  }
+
+  .info {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 2px;
+    font-family: ${fonts.raleway};
+  }
+
+  .privacy-buttons {
+    cursor: initial;
+    display: flex;
+    justify-content: left;
+  }
+  .privacy-btn {
+    text-align: center;
+    border-radius: 4px;
+    color: ${colors.white};
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-top: 18px;
+    padding: 5px 25px;
+    background-color: ${colors.white};
+    border: 1px solid ${colors.primary};
+    color: ${colors.primary};
   }
 
   @media screen and (max-width: 769px) {
