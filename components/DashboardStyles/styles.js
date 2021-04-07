@@ -1,6 +1,6 @@
 import css from 'styled-jsx/css'
 
-import { colors, fonts } from '/utils/variables'
+import { colors } from '/utils/variables'
 
 export default css`
   .container {
@@ -66,7 +66,6 @@ export default css`
   }
 
   .info {
-    font-family: ${fonts.raleway};
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 2px;
@@ -78,7 +77,7 @@ export default css`
     display: flex;
     justify-content: left;
   }
-  
+
   .privacy-btn {
     background-color: ${colors.white};
     border: 1px solid ${colors.primary};
