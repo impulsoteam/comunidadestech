@@ -14,14 +14,13 @@ const Hero = () => {
           <div className="columns is-centered">
             <div className="column has-text-centered">
               <h2 className="subtitle is-size-4-desktop">
-                {!isMobile ? (
-                  <>
-                    Espaço de visibilidade e fortalecimento das comunidades de
-                    tecnologia.
-                  </>
-                ) : (
-                  <>Espaço das comunidades de tecnologia</>
-                )}
+                {!isMobile
+                  ? <>
+                      Espaço de visibilidade e fortalecimento das comunidades de
+                      tecnologia.
+                    </>
+                  : <>Espaço das comunidades de tecnologia</>
+                }
               </h2>
             </div>
           </div>
