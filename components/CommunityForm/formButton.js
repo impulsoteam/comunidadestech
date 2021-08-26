@@ -104,13 +104,12 @@ export default function FormButton ({
                   className="button is-primary is-large is-fullwidth"
                   type="submit"
                 >
-                  {loading ? (
-                    <span>
-                      <i className="fa fa-spinner fa-spin"></i> Continuar
-                    </span>
-                  ) : (
-                    getTitle()
-                  )}
+                  { loading
+                    ? <span>
+                          <i className="fa fa-spinner fa-spin"></i> Continuar
+                        </span>
+                    : getTitle()
+                  }
                 </button>
               </div>
             </div>

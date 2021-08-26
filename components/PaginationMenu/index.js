@@ -16,8 +16,8 @@ const PaginationMenu = ({ pageCount, setPageCount, totalCommunities }) => {
 
   return (
     <div className="pagination-wrapper">
-      {counter.length > 5 ? (
-        <>
+      {counter.length > 5
+        ? <>
           <span onClick={() => pageCount > 0 && setPageCount(pageCount - 1)}>
             <i className="fas fa-chevron-left"></i>
           </span>
@@ -107,8 +107,7 @@ const PaginationMenu = ({ pageCount, setPageCount, totalCommunities }) => {
             <i className="fas fa-chevron-right"></i>
           </span>
         </>
-      ) : (
-        <>
+        : <>
           <span onClick={() => pageCount > 0 && setPageCount(pageCount - 1)}>
             <i className="fas fa-chevron-left"></i>
           </span>
@@ -129,7 +128,7 @@ const PaginationMenu = ({ pageCount, setPageCount, totalCommunities }) => {
             <i className="fas fa-chevron-right"></i>
           </span>
         </>
-      )}
+      }
       <style jsx>{styles}</style>
     </div>
   )

@@ -31,11 +31,10 @@ const ReviewAndSave = ({ community }) => {
         <div className="columns is-2 is-variable">
           <div className="column is-one-quarter-mobile is-one-quarter ">
             <figure className="image">
-              {logo ? (
-                <img src={logo.tempUrl || logo} alt={name} />
-              ) : (
-                <img src="../../static/logo.svg" alt={name} />
-              )}
+              {logo
+                ? <img src={logo.tempUrl || logo} alt={name} />
+                : <img src="../../static/logo.svg" alt={name} />
+              }
             </figure>
           </div>
           <div className="column is-flex">
@@ -44,13 +43,10 @@ const ReviewAndSave = ({ community }) => {
             </h2>
             <p className="info">
               <i className="fas fa-map-marker-alt"></i>
-              {city ? (
-                <span>
-                  {city}, {state}
-                </span>
-              ) : (
-                <span>Remota</span>
-              )}
+              {city
+                ? <span>{city}, {state}</span>
+                : <span>Remota</span>
+              }
             </p>
             <p className="info">
               <i className="fas fa-users"></i>
