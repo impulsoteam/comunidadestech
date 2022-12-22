@@ -33,7 +33,7 @@
     "express": "^4.17.1",
     "formik": "^2.2.9",
     "js-cookie": "^2.2.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "moment": "^2.29.1",
     "mongo-sanitize": "^1.1.0",
     "mongoose": "^5.10.9",
