@@ -39,8 +39,8 @@ export default function Login () {
 
               <p>
                 Ao participar da Comunidades.tech você também faz parte da
-                <a href="http://impulso.network" target="blank">
-                  <b> Impulso.Network</b>
+                <a href="https://impulso.team/?referral=comunidadestech" target="blank">
+                  <b> Impulso</b>
                 </a>
               </p>
             </div>
@@ -64,8 +64,8 @@ export default function Login () {
             <p>
               <b>Comunidades.tech</b> é um projeto open source desenvolvido pela
               comunidade da
-              <a href="http://impulso.network" target="blank">
-                <b> Impulso.Network</b>
+              <a href="https://impulso.team/?referral=comunidadestech" target="blank">
+                <b> Impulso</b>
               </a>
             </p>
           </div>

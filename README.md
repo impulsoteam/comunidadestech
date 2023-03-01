@@ -31,13 +31,11 @@ Faça o fork deste repositório e, em seguida, faça o clone do projeto em sua m
 
 Em seguida, na raíz do projeto, crie um arquivo `.env` a partir do `.env.example` e atualize essas variáveis com as suas chaves:
 
-```
+````
 LINKEDIN_API_KEY="Seu Client ID"
 LINKEDIN_SECRET_KEY="Seu Client Secret"
 
-```
-
-Por fim, rode os comandos:
+```Por fim, rode os comandos:
 
 - `yarn` para instalar as dependências
 - `yarn test` para rodar alguns testes e popular o DB local com algumas comunidades
@@ -45,7 +43,7 @@ Por fim, rode os comandos:
 
 ## Dúvidas?
 
-Acesse o [chat da comunidade da Impulso Network](https://impulso.network/entrar) e comente no canal #open-source ou abra uma issue nesse projeto.
+Acesse o [chat da comunidade da Impulso](https://impulso.link/discord) e comente no canal #open-source ou abra uma issue nesse projeto.
 
 ## Código de Conduta
 
@@ -61,6 +59,7 @@ Este projeto está licenciado sob a licença MIT - consulte o arquivo [LICENSE.m
 
 ## Disclaimer
 
-**Comunidades.tech** é um projeto open source desenvolvido pela comunidade da **[Impulso.Network](https://impulso.link/comunidades-tech)**.
+**Comunidades.tech** é um projeto open source desenvolvido pela comunidade da **[Impulso](https://impulso.link/discord)**.
 
 ![](https://camo.githubusercontent.com/0abec20d7187ac743910c67b5b8fadd09d64f069/68747470733a2f2f73332d73612d656173742d312e616d617a6f6e6177732e636f6d2f6173736574732e696d70756c736f2e6e6574776f726b2f696d616765732f696d70756c736f6e6574776f726b2d6c6f676f2e737667)
+````
