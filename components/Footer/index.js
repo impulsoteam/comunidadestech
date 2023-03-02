@@ -21,11 +21,11 @@ export default class Footer extends PureComponent {
               desenvolvido pela comunidade da{' '}
               <strong>
                 <a
-                  href="https://impulso.link/comunidades-tech"
+                  href="https://impulso.link/discord"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Impulso.Network
+                  Impulso
                 </a>
               </strong>
               .

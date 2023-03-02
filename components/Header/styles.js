@@ -32,12 +32,11 @@ export default css`
     display: flex;
 
     .button-darkBlueGrey {
-      background-color: transparent;
-      border-color: ${colors.darkBlueGrey};
-      color: ${colors.darkBlueGrey};
+      background-color: ${colors.darkBlue};
+      border-color: ${colors.darkBlue};
+      color: ${colors.white};
       &:hover {
-        background-color: ${colors.darkBlue};
-        color: ${colors.white};
+        opacity: 0.7;
       }
     }
 
