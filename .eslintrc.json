@@ -19,8 +19,14 @@
   "plugins": ["react", "jest", "eslint-plugin-import-helpers"],
   "rules": {
     "import/no-absolute-path": "off",
-    "@typescript-eslint/consistent-type-imports": 1,
-    "react/no-unknown-property": ["error", { "ignore": ["jsx"] }],
+    "react/no-unknown-property": [
+      2,
+      {
+        "ignore": [
+          "jsx"
+        ]
+      }
+    ],
     "import-helpers/order-imports": [
       "warn",
       {
