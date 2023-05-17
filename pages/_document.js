@@ -8,13 +8,18 @@ You could include it into the page using either next/head or a custom _document.
 import Document, { Head, Main, NextScript } from 'next/document'
 
 export default class MyDocument extends Document {
-  setGoogleTags () {
+  setGoogleTagManager () {
     return {
       __html: `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-143000900-1');
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || []; w[l].push({
+          'gtm.start':
+        new Date().getTime(),
+          event: 'gtm.js'
+        }); var f = d.getElementsByTagName(s)[0]
+        var j = d.createElement(s); var dl = l !== 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f)
+      })(window, document, 'script', 'dataLayer', '${process.env.GTM_ID}')
       `
     }
   }
@@ -138,13 +143,9 @@ export default class MyDocument extends Document {
           <script
             src="/static/sw-register.js"
           ></script>
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=UA-143000900-1"
-          ></script>
-          <script
-            dangerouslySetInnerHTML={this.setGoogleTags()}
-          />
+          {process.env.IS_PRODUCTION === 'true' && (
+            <script dangerouslySetInnerHTML={this.setGoogleTagManager()} />
+          )}
           <script
             src="https://kit.fontawesome.com/e258bd240c.js"
           ></script>
@@ -152,6 +153,16 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+
+          {process.env.IS_PRODUCTION === 'true' && (
+            <noscript>
+              <iframe
+                src={`https://www.googletagmanager.com/ns.html?id=${process.env.GTM_ID}`}
+                height="0"
+                width="0"
+              ></iframe>
+            </noscript>
+          )}
         </body>
       </html>
     )
