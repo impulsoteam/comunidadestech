@@ -24,8 +24,7 @@
       {
         "ignore": [
           "jsx",
-          "css",
-          "key"
+          "css"
         ]
       }
     ],
