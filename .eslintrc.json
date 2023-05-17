@@ -23,7 +23,9 @@
       2,
       {
         "ignore": [
-          "jsx"
+          "jsx",
+          "css",
+          "key"
         ]
       }
     ],
