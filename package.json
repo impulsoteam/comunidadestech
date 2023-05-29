@@ -58,7 +58,7 @@
     "react": "^16.13.1",
     "react-beforeunload": "^2.5.3",
     "react-dom": "^16.13.1",
-    "react-dropzone": "^10.2.2",
+    "react-dropzone": "^14.2.3",
     "react-image-crop": "^8.6.4",
     "react-lazyload": "^2.6.9",
     "react-map-gl": "^5.2.7",
