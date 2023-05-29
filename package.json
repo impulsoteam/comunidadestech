@@ -69,11 +69,14 @@
     "react-use": "^13.27.1",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 1dc9abe (build: :arrow_up: check slack-notify from 0.1.7 to 2.0.6 upgrade)
     "slack-notify": "^0.1.7",
     "slug": "^8.2.3",
 =======
+=======
+>>>>>>> 6ddf08f (chore(deps): bump slack-notify from 0.1.7 to 2.0.6)
     "slack-notify": "^2.0.6",
     "slug": "^2.1.1",
 >>>>>>> 6ddf08f (chore(deps): bump slack-notify from 0.1.7 to 2.0.6)
