@@ -70,7 +70,7 @@
     "slug": "^2.1.1",
     "styled-jsx-plugin-sass": "^1.0.0",
     "text-mask-addons": "^3.8.0",
-    "yup": "^0.27.0"
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@sucrase/jest-plugin": "^2.1.1",
