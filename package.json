@@ -67,8 +67,13 @@
     "react-text-mask": "^5.5.0",
     "react-toastify": "5.5.0",
     "react-use": "^13.27.1",
+<<<<<<< HEAD
     "slack-notify": "^0.1.7",
     "slug": "^8.2.3",
+=======
+    "slack-notify": "^2.0.6",
+    "slug": "^2.1.1",
+>>>>>>> 6ddf08f (chore(deps): bump slack-notify from 0.1.7 to 2.0.6)
     "styled-jsx-plugin-sass": "^1.0.0",
     "text-mask-addons": "^3.8.0",
     "yup": "^1.2.0"
