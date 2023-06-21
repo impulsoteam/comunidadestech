@@ -70,15 +70,15 @@ export const SignupSchema = Yup.object().shape({
     rocketChat: Yup.string()
   }),
   owner: Yup.string()
-    .email('Endereço de email inválido')
+    .email('Endereço de e-mail inválido')
     .required('Item obrigatório')
 })
 
 export const errorMessages = {
   slugAlreadyExists: 'Url já existente, tente alterar o nome da comunidade',
   nameAlreadyExists: 'Comunidade já cadastrada',
-  userNotSubscribed: 'Email ainda não está cadastrado no comunidades.tech',
-  userSubscribed: 'Email está cadastrado no comunidades.tech',
+  userNotSubscribed: 'E-mail ainda não está cadastrado no comunidades.tech',
+  userSubscribed: 'E-mail está cadastrado no comunidades.tech',
   managerAlreadyListed: 'Usuário já é administrador desta comunidade'
 }
 
