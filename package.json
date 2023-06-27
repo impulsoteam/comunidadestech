@@ -27,7 +27,7 @@
     "@emotion/core": "^10.0.28",
     "@zeit/next-sass": "^1.0.1",
     "amqplib-as-promised": "^4.1.0",
-    "aws-sdk": "^2.1325.0",
+    "aws-sdk": "^2.1405.0",
     "axios": "^0.19.2",
     "bulma": "^0.7.5",
     "chalk": "^3.0.0",
