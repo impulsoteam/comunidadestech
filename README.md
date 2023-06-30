@@ -56,20 +56,20 @@ db.users.updateOne({email: 'USER_EMAIL'}, {$set:{isModerator: true}})
 db.communities.find({name: 'COMMUNITY_NAME'})
 
 # Set community as published
-db.users.updateOne({email: 'USER_EMAIL'}, {$set:{status: 'published'}})
+db.users.updateOne({email: 'COMMUNITY_NAME'}, {$set:{status: 'published'}})
 ```
 
 ## Backup to S3
 
 ### Buildpacks requirements: 
 ```shell
+# Obs.: The addition of libraries makes it necessary to use a Procfile
+heroku buildpacks:add heroku-community/awscli -a comunidadestech
 heroku buildpacks:add http://github.com/Lendix/heroku-buildpack-mongo.git -a comunidadestech
 ```
 
 ### Variables
 ```shell
-HEROKU_API_KEY    # heroku authorization
-
 BACKUP_S3_BUCKET  # storage container
 BACKUP_S3_KEY     # user key in AWS IAM
 BACKUP_S3_SECRET  # user secret key in AWS IAM
@@ -94,7 +94,8 @@ mongorestore --drop tmp/dump
 
 ### Restore remote
 ```shell
-https://hitech-backup-apps.s3.us-east-1.amazonaws.com/comunidadestech/comunidadestech-2023-02-28_23_32.tar.gz?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjECQaCXNhLWVhc3QtMSJGMEQCIEvdS75lDtI%2BC9MXvXSJqh84PjTzaFlaelafCmVJdGSdAiAbawPlzTVyaZ6PIBAPaFk9mYpf%2B1lpcI9YfWWgyEgmpirxAgiN%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAQaDDc1MzU2NDc1MjQ4OCIMwGHhO0AhYqvYgtZoKsUC2Dd9lEwS2F4h8XLKr8j6F0H1FrYBcgs2UNm%2BVgESvqGeuLWTLZSFA%2BvsupDPAZHEiVFxvuUQVZ73m%2ByZFtoauAg5u12Sou7AmgYc6qStwi7id7iXwszOw9gAWExTqgYAFJ4h%2FT2ZcJ9JBhUOWTEPE6iaShoBkOtuOJgvoxVu%2FZNcQYEeY6yrOE6bdxzT4lWAZDtbmrHk8j6iqlKiZUprfZ4JvdxsDfl9reNzcwe4X0l%2FIc0p58esYyyv3T2eMwW3q4KhStdbmkC5XpAufKHEYhYHDte4TUXkAqYP6ry3Y50EVtkz4n9mdTUl1wjsCthHOQNULGQaUZkUbHe0K9MBQSlTMscbi9sIf3RsB%2BA1fVLwsEqwDQVLFZKIBabnwlSZCKmKWv%2BBjMHc45GmEynCfCN0ufEBdtH2VpLYGhjk8ggd6ZhSezCn5vWkBjq0AubxxZvXx5uW5nl7GerKNLuJORCnqiXZbs7pep3DioQrZVpSSMEUXBTazNSXchofndpNSa9GRwUMJavV3efOx0YeMv3SzBefNKqm5xzWMTmhArLg%2B%2BOGzLic5XHrNI%2BKM%2ByVDitkTBxsuFWVupKqpOBO0yq9wmH%2FlT%2Bnv%2FdrhW8tXD5ABvIn9xKCjATwZ1mzyCyWOWCidxfXQsDiaghh5YdiOGulHqpDwoPo7%2Fw%2F2IMLYsonuBTrEUZVde2VT8w2dF1OaMwnvzF5wPtbGY5B4tHNod9d2rG01XCMsTzGeIUDV3vXbYU7BPCrZEXv%2BQrOoo8ikMeDjKo71NwnI9tE4zQVMLuLzGv1ADexsJ7tDlOG0Tc0KjTIQ0dRPKPinmxtIkCRPDhE20K4qHkge8PAkvb6h9AY&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230629T181327Z&X-Amz-SignedHeaders=host&X-Amz-Expires=1800&X-Amz-Credential=ASIA2647VTJUGMRVVCN6%2F20230629%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=c6fb95bc5805e9f14159b60e71f51140ef9c53213d6b9a65f14f92f9e607c5ba
+# Warning: The staging and production server are using the same mongodb
+heroku run tar -xvf FILE_URL && mongorestore --drop tmp/dump/production --db=production -a comunidadestech
 ```
 
 ### References
