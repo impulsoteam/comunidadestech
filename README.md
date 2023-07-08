@@ -4,8 +4,10 @@
 ### *Comunidades.tech é um espaço de visibilidade e fortalecimento das comunidades de tecnologia*
 ## Sumário
 - [Requisitos](#requisitos)
-- [Primeiros passos](#primeiros_passos)
-- [Criando um app teste](#criando_um_app_teste)
+- [Primeiros passos](#primeiros-passos)
+- [Criando um app teste](#criando-um-app-teste)
+- [Configurando o banco de dados](#configurando-o-banco-de-dados)
+- [Configurando e rodando o projeto](#configurando-e-rodando-o-projeto)
 
 ## Requisitos
 - Node v14.20.1 ou superior
@@ -93,4 +95,40 @@ git clone <chave_copiada_no_passo_2>
   ```
 
 ## Configurando o banco de dados
-  1. 
+  1. Acesse [https://www.mongodb.com/](https://www.mongodb.com/) e crie uma conta ou acesse sua conta se já tiver uma.
+
+  2. Ao criar sua conta, selecione a opção **M0** e escolha um nome para seu cluster e clique em **CREATE**
+<img src="https://i.imgur.com/6jgr5xl.png" width="300" height="220">
+
+  3. Copie o password gerado e guarde para usar posteriormente
+<img src="https://i.imgur.com/0lsDC5G.png" width="300" height="220">
+
+  4. Clique em **Create user** e depois em **Finish and close**
+
+  5. Clique em **Go to Databases**e clique em **connect**
+<img src="https://i.imgur.com/NEYRxG9.png" width="300" height="220">
+
+  6. Selecione a opção **Drivers** e execute o comando `npm install mongodb` em seu projeto
+
+  7. Copie sua string de conexão
+<img src="https://i.imgur.com/0SupNt2.png" width="300" height="220">
+
+  8. E atualize com este valor a variável de ambiente `MONGODB_URI` do arquivo `.env`
+  
+  9. Instale a extensão **MongoDB for VS Code** e após a instalação ser concluída:
+      ```sh
+      Ctrl + Shift + P ou Cmd + Shift + P
+      MongoDB: Connect
+      ```
+  10. Clique em **Connect**
+<img src="https://i.imgur.com/xm7YYfM.png" width="300" height="220">
+
+11. Cole a mesma string de conexão adicionada na variável de ambiente `MONGODB_URI` do arquivo `.env`
+
+
+## Configurando e rodando o projeto
+1. Execute o comando `yarn` para instalar as dependências
+
+2. Execute o comando `yarn dev` para executar o projeto
+
+3. Acesse [http://localhost:3000](http://localhost:3000)
