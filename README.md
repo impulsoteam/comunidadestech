@@ -37,19 +37,26 @@ git clone <chave_copiada_no_passo_2>
 ## Criando um app teste
 - LinkedIn
   1. Acesse [https://developer.linkedin.com/](https://developer.linkedin.com/)
+
   2. Clique em **Create app**
      <img src="https://i.imgur.com/pEKewjg.png" width="300" height="220">
+
   3. Escolha um nome para seu app teste e após isso seleciona a página da Impulso
      <img src="https://i.imgur.com/T6tHC2q.png" width="300" height="220">
+
   4. Preencha o restante das informações obrigatórias e clique em **Create app**
+
   5. Na aba **Products**, na opção **Sign in with LInkedIn** clique em **Request access**
      <img src="https://i.imgur.com/nnai0Ul.png" width="300" height="220">
+
   6. Na aba **Auth**, adicione a URL [http://localhost:3000/auth/linkedin](http://localhost:3000/auth/linkedin)
      <img src="https://i.imgur.com/JK9Hqnc.png" width="300" height="220">
+
   7. Nessa aba, você também encontrará um **Client ID** e um **Client Secret**. Utilize essas informações para preencher as seguintes variáveis de ambiente:
     ```sh
     LINKEDIN_API_KEY="seu Client ID"
     LINKEDIN_SECRET_KEY="seu Client Secret"
     ```
+    
 - Google
   1. Acesse [https://console.cloud.google.com/](https://console.cloud.google.com/) e clique em APIs e Serviços
