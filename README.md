@@ -31,11 +31,13 @@ git clone <chave_copiada_no_passo_2>
 ```
 
 5. **Na raíz de seu projeto crie um arquivo `.env` com as mesmas variáveis de ambiente que estão no arquivo `.env.example`**
+
+6. Atualize a variável de ambiente `JWT_SECRET_KEY` do arquivo `.env` com um valor de sua escolha
     - Deixe esse arquivo aberto e siga o restante das instruções
  
 
 ## Criando um app teste
-- LinkedIn
+- **LinkedIn**
   1. Acesse [https://developer.linkedin.com/](https://developer.linkedin.com/)
 
   2. Clique em **Create app**
@@ -58,7 +60,7 @@ git clone <chave_copiada_no_passo_2>
     LINKEDIN_SECRET_KEY="seu Client Secret"
     ```
 
-- Google
+- **Google**
   1. Acesse [https://console.cloud.google.com/](https://console.cloud.google.com/) e clique no menu dropdown superior
     <img src="https://i.imgur.com/iNvLgQD.png" width="300" height="220">
 
@@ -90,5 +92,5 @@ git clone <chave_copiada_no_passo_2>
   GOOGLE_SECRET="seu Client secret"
   ```
 
-## Configurando o projeto
-  1. Atualize a variável de ambiente `JWT_SECRET_KEY` do arquivo `.env` com um valor de sua escolha
+## Configurando o banco de dados
+  1. 
