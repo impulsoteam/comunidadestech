@@ -59,4 +59,36 @@ git clone <chave_copiada_no_passo_2>
     ```
 
 - Google
-  1. Acesse [https://console.cloud.google.com/](https://console.cloud.google.com/) e clique em APIs e Serviços
+  1. Acesse [https://console.cloud.google.com/](https://console.cloud.google.com/) e clique no menu dropdown superior
+    <img src="https://i.imgur.com/iNvLgQD.png" width="300" height="220">
+
+  2. Clique em **NEW PROJECT**, preencha o nome do projeto e clique em **CREATE**
+
+  3. Selecione o projeto recém criado, clique em **APIs & Services** e em **OAuth consent screen**
+    <img src="https://i.imgur.com/iNvLgQD.png" width="300" height="220">
+
+  4. Selecione **Internal** e clique em **CREATE**
+  
+  5. Preencha apenas o seguintes campos:
+     - App name
+     - User suport email
+     - Developer contact information
+
+  6. Após clicar em **SAVE AND CONTINUE** selecione a sessão **Credentials**
+    <img src="https://i.imgur.com/tRbsrac.png" width="300" height="220">
+
+  7. Clique em **Create credentials** e selecione **OAuth client ID**
+
+  8. Preencha apenas os campos **Application type** e **Name**. Depois clique em **CREATE**
+
+  9. Copie seu **Client ID** e seu **Client secret**
+  <img src="https://i.imgur.com/PwMceTN.png" width="300" height="220">
+
+  10. Atualize as seguintes variáveis de ambiente no arquivo `.env`
+  ```sh
+  GOOGLE_CLIENT_ID="seu Client ID"
+  GOOGLE_SECRET="seu Client secret"
+  ```
+
+## Configurando o projeto
+  1. Atualize a variável de ambiente `JWT_SECRET_KEY` do arquivo `.env` com um valor de sua escolha
