@@ -17,7 +17,9 @@
 <img src="https://i.imgur.com/nSU5hDr.png" width="300" height="220">
 
 2. **Após seguir os passos para fazer o fork, escolha uma das opções de chave para clonar seu novo repositório e clique em copiar**
-<img src="https://i.imgur.com/3bTKbdW.png" width="300" height="220"> <img src="https://i.imgur.com/cyPAQ48.png" width="300" height="220">
+
+<img src="https://i.imgur.com/3bTKbdW.png" width="300" height="220"> 
+<img src="https://i.imgur.com/cyPAQ48.png" width="300" height="220">
 
 3. **Crie um diretório em sua máquina para armazenar esse repositório localmente e abra esse diretório em seu editor de código de preferencia. Você pode fazer isso por clicar com o botão direito do mouse e clicar na opção "Abrir com". Ou através da linha de comando no terminal do seu editor dessa maneira:**
     - Use o comando `ls -l ` sempre que precisar para listar o conteúdo de um diretório
