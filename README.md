@@ -108,7 +108,7 @@ git clone <chave_copiada_no_passo_2>
   5. Clique em **Go to Databases**e clique em **connect**
 <img src="https://i.imgur.com/NEYRxG9.png" width="300" height="220">
 
-  6. Selecione a opção **Drivers** e execute o comando `npm install mongodb` em seu projeto
+  6. Selecione a opção **Drivers** e execute o comando `sudo docker pull mongo` ou `npm install mongodb` em seu projeto
 
   7. Copie sua string de conexão
 <img src="https://i.imgur.com/0SupNt2.png" width="300" height="220">
@@ -129,6 +129,14 @@ git clone <chave_copiada_no_passo_2>
 ## Configurando e rodando o projeto
 1. Execute o comando `yarn` para instalar as dependências
 
-2. Execute o comando `yarn dev` para executar o projeto
+2. Para evitar erros e fazer um update no banco de dados execute o comando `npx browserslist@latest --update-db`
 
-3. Acesse [http://localhost:3000](http://localhost:3000)
+3. Execute o comando `yarn dev` para executar o projeto
+
+4. Acesse [http://localhost:3000](http://localhost:3000)
+
+## Solucionando problemas
+
+Caso você enfrente algum problema, certifique-se de estar utilizando a versão 14.20.1 do node. Você pode verificar sua versão do node utilizando o comando `node -v`. Caso sua versão seja diferente da recomendada para este projeto, instale a versão correta utilizando o comando `nvm install 14.20.1`
+
+Se mesmo assim você continuar tendo problemas, peça ajuda na comunidade do [Discord](https://impulso.link/yvpkDv) ou do [Whatsapp](https://impulso.link/dyolup)
