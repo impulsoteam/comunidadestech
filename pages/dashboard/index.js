@@ -150,8 +150,8 @@ export default function Dashboard ({ credentials }) {
                 </div>
                   )
                 : (
-                    myCommunities.map((card) =>
-                  <div className="column is-one-quarter" key={card.id}>
+                    myCommunities.map((card, i) =>
+                  <div className="column is-one-quarter" key={`community-${card.id || i}`}>
                     <Card withOptions content={card} />
                   </div>
                     )
@@ -168,8 +168,8 @@ export default function Dashboard ({ credentials }) {
                 comunidades pendentes
                 </h2>
                 <div className="columns is-multiline card-wrapper">
-                  {pendingCommunities.map((card) => (
-                    <div className="column is-one-quarter" key={card.id}>
+                  {pendingCommunities.map((card, i) => (
+                    <div className="column is-one-quarter" key={`pending-community-${card.id || i}`}>
                       <Card withOptions content={card} />
                     </div>
                   ))}
