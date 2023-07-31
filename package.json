@@ -91,7 +91,7 @@
     "faker": "^5.5.3",
     "husky": "^7.0.1",
     "jest": "^27.0.6",
-    "nodemon": "^2.0.20",
+    "nodemon": "^3.0.1",
     "prettier": "^3.0.0",
     "set-cookie-parser": "^2.6.0",
     "sucrase": "^3.29.0",
