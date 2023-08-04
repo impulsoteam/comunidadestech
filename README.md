@@ -88,9 +88,15 @@ npm install
 5. Clique em **Go to Databases**e clique em **connect**.
   <img src="https://i.imgur.com/NEYRxG9.png" width="300" height="220">
 6. Selecione a opção **Drivers** e copie sua string de conexão que estará disponível no ítem 3 e será semelhante a esta:
+<<<<<<< HEAD
   ```sh
   mongodb+srv://<user>:<password>@cluster0.<clusterid>.mongodb.net/?retryWrites=true&w=majority
   ``````
+=======
+  ´´´sh
+  mongodb+srv://<user>:<password>@cluster0.<clusterid>.mongodb.net/?retryWrites=true&w=majority
+  ´´´
+>>>>>>> 048b163 (Update README.md file)
 7. Substitua <password> pelo password que você armazenou no passo **3** e armazene essa string na variável de ambiente `MONGODB_URI` do arquivo `.env`.
 8. No seu terminal digite `mongosh <string-de-conexão>`. Ficará semelhante a este comando:
   ```sh
