@@ -89,6 +89,7 @@ npm install
   <img src="https://i.imgur.com/NEYRxG9.png" width="300" height="220">
 6. Selecione a opção **Drivers** e copie sua string de conexão que estará disponível no ítem 3 e será semelhante a esta:
 <<<<<<< HEAD
+<<<<<<< HEAD
   ```sh
   mongodb+srv://<user>:<password>@cluster0.<clusterid>.mongodb.net/?retryWrites=true&w=majority
   ``````
@@ -97,6 +98,11 @@ npm install
   mongodb+srv://<user>:<password>@cluster0.<clusterid>.mongodb.net/?retryWrites=true&w=majority
   ´´´
 >>>>>>> 048b163 (Update README.md file)
+=======
+  ```sh
+  mongodb+srv://<user>:<password>@cluster0.<clusterid>.mongodb.net/?retryWrites=true&w=majority
+  ``````
+>>>>>>> 81774ab (Update README.md DB section)
 7. Substitua <password> pelo password que você armazenou no passo **3** e armazene essa string na variável de ambiente `MONGODB_URI` do arquivo `.env`.
 8. No seu terminal digite `mongosh <string-de-conexão>`. Ficará semelhante a este comando:
   ```sh
