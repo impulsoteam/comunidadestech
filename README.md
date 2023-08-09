@@ -3,13 +3,13 @@
 
 ### *Comunidades.tech é um espaço de visibilidade e fortalecimento das comunidades de tecnologia*
 ## Sumário
-- [Requisitos](#requisitos)
-- [Primeiros passos](#primeiros-passos)
-- [Criando um app teste](#criando-um-app-teste)
-- [Instalando as dependências](#instalando-as-dependências)
-- [Configurando o banco de dados](#configurando-o-banco-de-dados)
-- [Rodando o projeto](#rodando-o-projeto)
-- [Solucionando problemas](#solucionando-problemas)
+- 1 [Requisitos](#requisitos)
+- 2 [Primeiros passos](#primeiros-passos)
+- 3 [Criando um app teste](#criando-um-app-teste)
+- 4 [Instalando as dependências](#instalando-as-dependências)
+- 5 [Configurando o banco de dados](#configurando-o-banco-de-dados)
+- 6 [Rodando o projeto](#rodando-o-projeto)
+- 7 [Solucionando problemas](#solucionando-problemas)
 
 ## Requisitos
 - Node v14.20.1 ou superior
