@@ -1908,7 +1908,11 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 4be25b8 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
+>>>>>>> fd6b012 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
 "@typescript-eslint/scope-manager@5.62.0":
   version "5.62.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/scope-manager/-/scope-manager-5.62.0.tgz#d9457ccc6a0b8d6b37d0eb252a23022478c5460c"
@@ -1921,7 +1925,11 @@
   integrity sha512-zeQjOoES5JFjTnAhI5QY7ZviczMzDptls15GFsI6jyUOq0kOf9+WonkhtlIhh0RgHRnqj5gdNxW5j1EvAyYg6Q==
 >>>>>>> 471bd36 (build: :arrow_up: test upgrade prettier version)
 =======
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 4be25b8 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
+>>>>>>> fd6b012 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
   dependencies:
     "@typescript-eslint/types" "5.62.0"
     "@typescript-eslint/visitor-keys" "5.62.0"
@@ -1929,7 +1937,11 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 4be25b8 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
+>>>>>>> fd6b012 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
 "@typescript-eslint/types@5.62.0":
   version "5.62.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-5.62.0.tgz#258607e60effa309f067608931c3df6fed41fd2f"
@@ -1999,7 +2011,11 @@
   version "5.62.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/utils/-/utils-5.62.0.tgz#141e809c71636e4a75daa39faed2fb5f4b10df86"
   integrity sha512-n8oxjeb5aIbPFEtmQxQYOLI0i9n5ySBEY/ZEHHZqKQSFnxio1rv6dthascc9dLuwrL0RC5mPCxB7vnAVGAYWAQ==
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 4be25b8 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
+>>>>>>> fd6b012 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
   dependencies:
     "@eslint-community/eslint-utils" "^4.2.0"
     "@types/json-schema" "^7.0.9"
@@ -3974,6 +3990,11 @@ debug@3.1.0, debug@=3.1.0:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 4be25b8 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
+>>>>>>> fd6b012 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
 debug@4, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
@@ -4557,7 +4578,11 @@ eslint-plugin-import@^2.28.1:
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 4be25b8 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
+>>>>>>> fd6b012 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
 eslint-plugin-jest@^27.2.3:
   version "27.2.3"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-27.2.3.tgz#6f8a4bb2ca82c0c5d481d1b3be256ab001f5a3ec"
@@ -4570,7 +4595,11 @@ eslint-plugin-jest@^24.4.0:
   integrity sha512-wUxdF2bAZiYSKBclsUMrYHH6WxiBreNjyDxbRv345TIvPeoCEgPNEn3Sa+ZrSqsf1Dl9SqqSREXMHExlMMu1DA==
 >>>>>>> 471bd36 (build: :arrow_up: test upgrade prettier version)
 =======
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 4be25b8 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
+>>>>>>> fd6b012 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
   dependencies:
     "@typescript-eslint/utils" "^5.10.0"
 
@@ -4655,6 +4684,9 @@ eslint-utils@^3.0.0:
 <<<<<<< HEAD
 eslint-visitor-keys@^1.1.0:
 >>>>>>> 471bd36 (build: :arrow_up: test upgrade prettier version)
+=======
+eslint-visitor-keys@^1.1.0, eslint-visitor-keys@^1.3.0:
+>>>>>>> 4be25b8 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
   version "1.3.0"
   resolved "https://registry.npmjs.org/eslint-visitor-keys/-/eslint-visitor-keys-1.3.0.tgz"
   integrity sha512-6J72N8UNa462wa/KFODt/PJ3IU60SDpC3QXC1Hjc1BXXpfL2C9R5+AU7jhe0F6GREqVMh4Juu+NY7xn+6dipUQ==
@@ -4681,7 +4713,11 @@ eslint-visitor-keys@^2.0.0:
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 4be25b8 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
+>>>>>>> fd6b012 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
 eslint-visitor-keys@^3.3.0:
   version "3.4.2"
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-3.4.2.tgz#8c2095440eca8c933bedcadf16fefa44dbe9ba5f"
@@ -9710,8 +9746,13 @@ semver@^7.2.1, semver@^7.3.2, semver@^7.3.5, semver@^7.3.8, semver@^7.5.3, semve
 semver@^7.2.1, semver@^7.3.2, semver@^7.3.7, semver@^7.3.8, semver@^7.5.3, semver@^7.5.4:
 >>>>>>> 21f8dfc (Update jsonwebtoken to version 9.0.2)
 =======
+<<<<<<< HEAD
 semver@^7.2.1, semver@^7.3.2, semver@^7.3.7, semver@^7.3.8, semver@^7.5.3, semver@^7.5.4:
 >>>>>>> master
+=======
+semver@^7.2.1, semver@^7.3.2, semver@^7.3.7, semver@^7.3.8, semver@^7.5.3:
+>>>>>>> 4be25b8 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
+>>>>>>> fd6b012 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
   version "7.5.4"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.5.4.tgz#483986ec4ed38e1c6c48c34894a9182dbff68a6e"
   integrity sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==
