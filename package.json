@@ -27,7 +27,11 @@
     "@emotion/core": "^10.0.28",
     "@zeit/next-sass": "^1.0.1",
     "amqplib-as-promised": "^4.1.0",
+<<<<<<< HEAD
     "aws-sdk": "^2.1449.0",
+=======
+    "aws-sdk": "^2.1445.0",
+>>>>>>> cee112e (chore(deps): bump aws-sdk from 2.1429.0 to 2.1445.0)
     "axios": "^0.19.2",
     "bulma": "^0.9.4",
     "chalk": "^3.0.0",
