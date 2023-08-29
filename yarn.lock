@@ -4958,13 +4958,19 @@ debug@3.1.0, debug@=3.1.0:
 >>>>>>> 80f6767 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
   resolved "https://registry.npmjs.org/debug/-/debug-3.1.0.tgz"
 >>>>>>> master
 =======
+=======
+>>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 debug@3.1.0, debug@=3.1.0:
   version "3.1.0"
   resolved "https://registry.npmjs.org/debug/-/debug-3.1.0.tgz"
 >>>>>>> 80f6767 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
+<<<<<<< HEAD
+>>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
+=======
 >>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
   integrity sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==
   dependencies:
@@ -4974,7 +4980,10 @@ debug@3.1.0, debug@=3.1.0:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 =======
 >>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 =======
@@ -4990,15 +4999,21 @@ debug@4, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1, debug@^4.3.4:
 >>>>>>> 80f6767 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 debug@4, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.npmjs.org/debug/-/debug-4.3.4.tgz"
 >>>>>>> master
 =======
+=======
+>>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 debug@4, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1, debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.npmjs.org/debug/-/debug-4.3.4.tgz"
 >>>>>>> 80f6767 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
+<<<<<<< HEAD
+>>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
+=======
 >>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
   integrity sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==
   dependencies:
@@ -5859,9 +5874,12 @@ eslint-visitor-keys@^2.0.0:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 =======
 >>>>>>> 4be25b8 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
 >>>>>>> fd6b012 (chore(deps-dev): bump eslint-plugin-jest from 24.4.0 to 27.2.3)
