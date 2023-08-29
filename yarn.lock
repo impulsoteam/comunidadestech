@@ -8863,7 +8863,11 @@ prelude-ls@^1.2.1:
 
 prettier@^3.0.3:
   version "3.0.3"
+<<<<<<< HEAD
   resolved "https://registry.npmjs.org/prettier/-/prettier-3.0.3.tgz"
+=======
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.0.3.tgz#432a51f7ba422d1469096c0fdc28e235db8f9643"
+>>>>>>> 91f2b61 (chore(deps-dev): bump prettier from 3.0.1 to 3.0.3)
   integrity sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==
 
 pretty-error@^2.1.1:

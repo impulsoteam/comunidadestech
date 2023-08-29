@@ -108,6 +108,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
     "jest": "^27.0.6",
+<<<<<<< HEAD
     "nodemon": "^3.0.1",
     "prettier": "^3.0.0",
 =======
@@ -116,10 +117,16 @@
     "prettier": "^3.0.3",
 >>>>>>> 1d9fe88 (Update all of jest to version 29.6.4)
 =======
+<<<<<<< HEAD
     "jest": "^29.6.4",
     "nodemon": "^2.0.20",
     "prettier": "^3.0.3",
 >>>>>>> master
+=======
+    "nodemon": "^2.0.20",
+    "prettier": "^3.0.3",
+>>>>>>> 91f2b61 (chore(deps-dev): bump prettier from 3.0.1 to 3.0.3)
+>>>>>>> 7472666 (chore(deps-dev): bump prettier from 3.0.1 to 3.0.3)
     "set-cookie-parser": "^2.6.0",
     "sucrase": "^3.29.0",
     "supertest": "^6.3.3"
