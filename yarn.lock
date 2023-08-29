@@ -9167,7 +9167,7 @@ repeating@^2.0.0:
   dependencies:
     is-finite "^1.0.0"
 
-request@^2.51.0, request@^2.87.0, request@^2.88.0:
+request@^2.87.0, request@^2.88.0:
   version "2.88.2"
   resolved "https://registry.npmjs.org/request/-/request-2.88.2.tgz"
   integrity sha512-MsvtOrfG9ZcrOwAW+Qi+F6HbD0CWXEh9ou77uOb7FM2WPhwT7smM833PzanhJLsgXjN89Ir6V2PczXNnMpwKhw==
@@ -9669,13 +9669,10 @@ sisteransi@^1.0.5:
   resolved "https://registry.npmjs.org/sisteransi/-/sisteransi-1.0.5.tgz"
   integrity sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==
 
-slack-notify@^0.1.7:
-  version "0.1.7"
-  resolved "https://registry.npmjs.org/slack-notify/-/slack-notify-0.1.7.tgz"
-  integrity sha512-eDWa4JTy77xbuOM8fZHqBFcEh+xDlol6gttnFxKFwNS0iNayzQ2G1cgbyHXSmBhk/55vooX15ar6W9DnEhw6yQ==
-  dependencies:
-    lodash "^4.17.10"
-    request "^2.51.0"
+slack-notify@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/slack-notify/-/slack-notify-2.0.6.tgz#03052d6eebfd72e76a76e11feff7fa6bd8224f6c"
+  integrity sha512-9JJGBzdODgcIgtx5unQZX9yHx9ckM5kXkSJHhU//Eh1rj7vhAK6L89ElXU5ftprID2qbcMADPuzyu4XEp/142Q==
 
 slash@^3.0.0:
   version "3.0.0"
