@@ -78,6 +78,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1dc9abe (build: :arrow_up: check slack-notify from 0.1.7 to 2.0.6 upgrade)
 =======
 >>>>>>> 1dc9abe (build: :arrow_up: check slack-notify from 0.1.7 to 2.0.6 upgrade)
     "slack-notify": "^0.1.7",
