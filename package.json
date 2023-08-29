@@ -68,6 +68,9 @@
     "react-toastify": "5.5.0",
     "react-use": "^13.27.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1dc9abe (build: :arrow_up: check slack-notify from 0.1.7 to 2.0.6 upgrade)
     "slack-notify": "^0.1.7",
     "slug": "^8.2.3",
 =======
