@@ -4959,9 +4959,12 @@ debug@3.1.0, debug@=3.1.0:
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   resolved "https://registry.npmjs.org/debug/-/debug-3.1.0.tgz"
 >>>>>>> master
 =======
+=======
+>>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 =======
 >>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 debug@3.1.0, debug@=3.1.0:
@@ -4969,6 +4972,9 @@ debug@3.1.0, debug@=3.1.0:
   resolved "https://registry.npmjs.org/debug/-/debug-3.1.0.tgz"
 >>>>>>> 80f6767 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
+=======
 >>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 =======
 >>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
@@ -4981,7 +4987,10 @@ debug@3.1.0, debug@=3.1.0:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 =======
 >>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 =======
@@ -5000,6 +5009,7 @@ debug@4, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1, debug@^4.3.4:
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 debug@4, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.npmjs.org/debug/-/debug-4.3.4.tgz"
@@ -5007,11 +5017,16 @@ debug@4, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.4:
 =======
 =======
 >>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
+=======
+>>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 debug@4, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1, debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.npmjs.org/debug/-/debug-4.3.4.tgz"
 >>>>>>> 80f6767 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
+=======
 >>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 =======
 >>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
@@ -5875,9 +5890,12 @@ eslint-visitor-keys@^2.0.0:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 =======
 >>>>>>> 7c77b96 (chore(deps): bump aws-sdk from 2.1445.0 to 2.1446.0)
 =======
