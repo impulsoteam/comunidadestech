@@ -5,7 +5,7 @@
   "license": "MIT",
   "engines": {
     "npm": "6.x",
-    "node": "14.x"
+    "node": "16.x"
   },
   "scripts": {
     "dev": "nodemon -r esm ./server/app.js",
