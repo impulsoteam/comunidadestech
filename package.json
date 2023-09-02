@@ -102,10 +102,14 @@
   "devDependencies": {
     "@sucrase/jest-plugin": "^2.1.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "@types/jest": "^29.5.4",
 =======
     "@types/jest": "^27.0.1",
 >>>>>>> 1d9fe88 (Update all of jest to version 29.6.4)
+=======
+    "@types/jest": "^29.5.4",
+>>>>>>> ddfeb3c (chore(deps-dev): bump @types/jest from 27.5.2 to 29.5.4)
     "babel-jest": "^29.6.4",
     "babel-plugin-module-resolver": "^4.1.0",
     "eslint": "^7.32.0",

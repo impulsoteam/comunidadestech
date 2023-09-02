@@ -2390,16 +2390,22 @@
     "@types/istanbul-lib-report" "*"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ddfeb3c (chore(deps-dev): bump @types/jest from 27.5.2 to 29.5.4)
 "@types/jest@^29.5.4":
   version "29.5.4"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-29.5.4.tgz#9d0a16edaa009a71e6a71a999acd582514dab566"
   integrity sha512-PhglGmhWeD46FYOVLt3X7TiWjzwuVGW9wG/4qocPevXMjCmrIc5b6db9WjeGE4QYVpUAWMDv3v0IiBwObY289A==
+<<<<<<< HEAD
 =======
 "@types/jest@^27.0.1":
   version "27.5.2"
   resolved "https://registry.npmjs.org/@types/jest/-/jest-27.5.2.tgz"
   integrity sha512-mpT8LJJ4CMeeahobofYWIjFo0xonRS/HfxnVEPMPFSQdGUt1uHCnoPT7Zhb+sjDU2wz0oKV0OLUR0WzrHNgfeA==
 >>>>>>> 471bd36 (build: :arrow_up: test upgrade prettier version)
+=======
+>>>>>>> ddfeb3c (chore(deps-dev): bump @types/jest from 27.5.2 to 29.5.4)
   dependencies:
     expect "^29.0.0"
     pretty-format "^29.0.0"
@@ -5354,6 +5360,7 @@ dezalgo@^1.0.4:
     wrappy "1"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 diff-sequences@^29.6.3:
   version "29.6.3"
   resolved "https://registry.yarnpkg.com/diff-sequences/-/diff-sequences-29.6.3.tgz#4deaf894d11407c51efc8418012f9e70b84ea921"
@@ -5365,6 +5372,8 @@ diff-sequences@^27.5.1:
   integrity sha512-k1gCAXAsNgLwEL+Y8Wvl+M6oEFj5bgazfZULpS5CneoPPXRaCCW7dm+q21Ky2VEE5X+VeRDBVg1Pcvvsr4TtNQ==
 >>>>>>> 471bd36 (build: :arrow_up: test upgrade prettier version)
 
+=======
+>>>>>>> ddfeb3c (chore(deps-dev): bump @types/jest from 27.5.2 to 29.5.4)
 diff-sequences@^29.6.3:
   version "29.6.3"
   resolved "https://registry.yarnpkg.com/diff-sequences/-/diff-sequences-29.6.3.tgz#4deaf894d11407c51efc8418012f9e70b84ea921"
@@ -6312,6 +6321,7 @@ expand-brackets@^2.1.4:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 expect@^29.0.0, expect@^29.6.4:
   version "29.6.4"
   resolved "https://registry.yarnpkg.com/expect/-/expect-29.6.4.tgz#a6e6f66d4613717859b2fe3da98a739437b6f4b8"
@@ -6324,6 +6334,9 @@ expect@^27.5.1:
 >>>>>>> 471bd36 (build: :arrow_up: test upgrade prettier version)
 =======
 expect@^29.6.4:
+=======
+expect@^29.0.0, expect@^29.6.4:
+>>>>>>> ddfeb3c (chore(deps-dev): bump @types/jest from 27.5.2 to 29.5.4)
   version "29.6.4"
   resolved "https://registry.yarnpkg.com/expect/-/expect-29.6.4.tgz#a6e6f66d4613717859b2fe3da98a739437b6f4b8"
   integrity sha512-F2W2UyQ8XYyftHT57dtfg8Ue3X5qLgm2sSug0ivvLRH/VKNRL/pDxg/TH7zVzbQB0tu80clNFy6LU7OS/VSEKA==
@@ -8290,6 +8303,7 @@ jest-config@^27.5.1:
     strip-json-comments "^3.1.1"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 jest-diff@^29.6.4:
   version "29.6.4"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-29.6.4.tgz#85aaa6c92a79ae8cd9a54ebae8d5b6d9a513314a"
@@ -8309,6 +8323,8 @@ jest-diff@^27.5.1:
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> ddfeb3c (chore(deps-dev): bump @types/jest from 27.5.2 to 29.5.4)
 jest-diff@^29.6.4:
   version "29.6.4"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-29.6.4.tgz#85aaa6c92a79ae8cd9a54ebae8d5b6d9a513314a"
@@ -8414,11 +8430,6 @@ jest-environment-node@^27.5.1:
 =======
 >>>>>>> 1d9fe88 (Update all of jest to version 29.6.4)
 
-jest-get-type@^27.5.1:
-  version "27.5.1"
-  resolved "https://registry.npmjs.org/jest-get-type/-/jest-get-type-27.5.1.tgz"
-  integrity sha512-2KY95ksYSaK7DMBWQn6dQz3kqAf3BB64y2udeG+hv4KfSOb9qwcYQstTJc1KCbsix+wLZWZYN8t7nwX3GOBLRw==
-
 jest-get-type@^29.6.3:
   version "29.6.3"
   resolved "https://registry.yarnpkg.com/jest-get-type/-/jest-get-type-29.6.3.tgz#36f499fdcea197c1045a127319c0481723908fd1"
@@ -8471,6 +8482,7 @@ jest-jasmine2@^27.5.1:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 jest-matcher-utils@^29.6.4:
   version "29.6.4"
   resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-29.6.4.tgz#327db7ababea49455df3b23e5d6109fe0c709d24"
@@ -8501,6 +8513,8 @@ jest-matcher-utils@^27.0.0:
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> ddfeb3c (chore(deps-dev): bump @types/jest from 27.5.2 to 29.5.4)
 jest-matcher-utils@^29.6.4:
   version "29.6.4"
   resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-29.6.4.tgz#327db7ababea49455df3b23e5d6109fe0c709d24"
@@ -11255,6 +11269,7 @@ pretty-error@^2.1.1:
     renderkid "^2.0.4"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 pretty-format@^29.0.0, pretty-format@^29.6.3:
   version "29.6.3"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-29.6.3.tgz#d432bb4f1ca6f9463410c3fb25a0ba88e594ace7"
@@ -11271,6 +11286,9 @@ pretty-format@^27.0.0, pretty-format@^27.5.1:
     react-is "^18.0.0"
 
 pretty-format@^29.6.3:
+=======
+pretty-format@^29.0.0, pretty-format@^29.6.3:
+>>>>>>> ddfeb3c (chore(deps-dev): bump @types/jest from 27.5.2 to 29.5.4)
   version "29.6.3"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-29.6.3.tgz#d432bb4f1ca6f9463410c3fb25a0ba88e594ace7"
   integrity sha512-ZsBgjVhFAj5KeK+nHfF1305/By3lechHQSMWCTl8iHSbfOm2TN5nHEtFc/+W7fAyUeCs2n5iow72gld4gW0xDw==
@@ -11598,6 +11616,7 @@ react-is@16.13.1, react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1:
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 react-is@^18.0.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
@@ -11609,6 +11628,8 @@ react-is@^17.0.1:
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 >>>>>>> 471bd36 (build: :arrow_up: test upgrade prettier version)
 
+=======
+>>>>>>> ddfeb3c (chore(deps-dev): bump @types/jest from 27.5.2 to 29.5.4)
 react-is@^18.0.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
