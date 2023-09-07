@@ -5091,10 +5091,10 @@ formidable@^2.1.2:
     once "^1.4.0"
     qs "^6.11.0"
 
-formik@^2.4.2:
-  version "2.4.3"
-  resolved "https://registry.npmjs.org/formik/-/formik-2.4.3.tgz"
-  integrity sha512-2Dy79Szw3zlXmZiokUdKsn+n1ow4G8hRrC/n92cOWHNTWXCRpQXlyvz6HcjW7aSQZrldytvDOavYjhfmDnUq8Q==
+formik@^2.4.4:
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/formik/-/formik-2.4.4.tgz#41b775db867713fd4ea34930068391b01749b69c"
+  integrity sha512-MV99upag7fCC3JfsI60WcxhymwNZnJUcMcnGuoz6mDf78SUfBbKjmfcA9LzHx4lEmjzmOflhP7oqz+ZQv5eStg==
   dependencies:
     deepmerge "^2.1.1"
     hoist-non-react-statics "^3.3.0"
