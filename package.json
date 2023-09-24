@@ -63,7 +63,7 @@
     "react-image-crop": "8.6.5",
     "react-lazyload": "^3.2.0",
     "react-map-gl": "^5.2.7",
-    "react-select": "^5.7.4",
+    "react-select": "^5.7.5",
     "react-text-mask": "^5.5.0",
     "react-toastify": "5.5.0",
     "react-use": "^13.27.1",
