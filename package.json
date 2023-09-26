@@ -41,7 +41,7 @@
     "moment": "^2.29.4",
     "mongo-sanitize": "^1.1.0",
     "mongodb": "^5.7.0",
-    "mongoose": "^5.10.9",
+    "mongoose": "^7.5.3",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "multer-s3": "^2.9.0",
