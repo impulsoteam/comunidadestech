@@ -76,7 +76,7 @@
   "devDependencies": {
     "@sucrase/jest-plugin": "^2.1.1",
     "@types/jest": "^29.5.6",
-    "babel-jest": "^29.6.4",
+    "babel-jest": "^29.7.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.3",
@@ -90,7 +90,7 @@
     "factory-girl": "^5.0.4",
     "faker": "^5.5.3",
     "husky": "^7.0.1",
-    "jest": "^29.6.4",
+    "jest": "^29.7.0",
     "nodemon": "^2.0.20",
     "prettier": "^3.0.3",
     "set-cookie-parser": "^2.6.0",
