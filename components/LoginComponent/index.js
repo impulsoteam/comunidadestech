@@ -23,7 +23,7 @@ export default function Login () {
                   className="button linkedin is-outlined"
                 >
                   <span className="icon">
-                    <i className="fab fa-linkedin-in"></i>
+                    <i className="fab fa-linkedin-in" aria-hidden="true"></i>
                   </span>
                   <span>Login LinkedIn</span>
                 </a>
