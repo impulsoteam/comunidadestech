@@ -66,7 +66,7 @@ function BasicInfos ({
       <label>
         Nome da comunidade *
         <div className="input-wrapper">
-          <i className="fas fa-users fa-fw"></i>
+          <i className="fas fa-users fa-fw" aria-hidden="true"></i>
           <Field
             name="name"
             validate={checkName}
@@ -85,7 +85,7 @@ function BasicInfos ({
       <label>
         Url da comunidade *
         <div className="input-wrapper">
-          <i className="fas fa-users fa-fw"></i>
+          <i className="fas fa-users fa-fw" aria-hidden="true"></i>
           <Field
             name="slug"
             value={`comunidades.tech/c/${values.slug}`}
