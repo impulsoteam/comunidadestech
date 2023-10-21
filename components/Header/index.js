@@ -26,7 +26,7 @@ const Header = ({ name, avatar, token }) => {
             Home
           </a>
           <a
-            href="https://github.com/universoimpulso/comunidadestech"
+            href="https://github.com/impulsoteam/comunidadestech"
             className="button btn-dark navbar-item"
             target="_blank"
             title="Contribua"
@@ -41,7 +41,7 @@ const Header = ({ name, avatar, token }) => {
             <strong>Contribua</strong>
           </a>
           <a
-            href="https://comunidades.impulso.network/"
+            href="https://impulso.team/pt/profissionais/comunidades"
             className="button button-darkBlueGrey"
             target="_blank"
             title="Cadastre uma comunidade"
@@ -73,7 +73,7 @@ const Header = ({ name, avatar, token }) => {
           Home
         </a>
         <a
-          href="https://comunidades.impulso.network/"
+          href="https://impulso.team/pt/profissionais/comunidades"
           className="navbar-item"
           target="_blank"
           title="Cadastre uma comunidade"
@@ -97,7 +97,7 @@ const Header = ({ name, avatar, token }) => {
           Cadastre uma comunidade
         </a>
         <a
-          href="https://github.com/universoimpulso/comunidadestech"
+          href="https://github.com/impulsoteam/comunidadestech"
           className="navbar-item btn-os"
           target="_blank"
           title="Contribua"

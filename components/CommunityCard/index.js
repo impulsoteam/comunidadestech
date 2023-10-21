@@ -60,11 +60,10 @@ const CommunityCard = ({ canModify, community, credentials }) => {
         <div className="columns is-2 is-variable">
           <div className="column is-one-quarter-mobile is-one-quarter ">
             <figure className="image">
-              {logo ? (
-                <img src={logo} alt={name} />
-              ) : (
-                <img src="../../static/logo.svg" alt={name} />
-              )}
+              {logo
+                ? <img src={logo} alt={name} />
+                : <img src="../../static/logo.svg" alt={name} />
+              }
             </figure>
           </div>
           <div className="column is-flex">
@@ -73,13 +72,10 @@ const CommunityCard = ({ canModify, community, credentials }) => {
             </h2>
             <p className="info">
               <i className="fas fa-map-marker-alt"></i>
-              {location.city ? (
-                <span>
-                  {location.city}, {location.state}
-                </span>
-              ) : (
-                <span>Remota</span>
-              )}
+              {location.city
+                ? <span>{location.city}, {location.state}</span>
+                : <span>Remota</span>
+              }
             </p>
             <p className="info">
               <i className="fas fa-users"></i>

@@ -45,51 +45,49 @@ const Community = ({ credentials }) => {
 
   return (
     <>
-      {!loading ? (
-        <>
-          {community ? (
-            <div>
-              <CommunityHero />
-              <CommunityCard
-                canModify={checkCredentials()}
-                community={community}
-                credentials={credentials}
-                type={community.type}
-              />
-              <div className="container related">
-                <div className="columns">
-                  <div className="column isfull">
-                    <h3 className="title is-5">COMUNIDADES RELACIONADAS</h3>
+      {!loading
+        ? <>
+          {community
+            ? <div>
+                <CommunityHero />
+                <CommunityCard
+                  canModify={checkCredentials()}
+                  community={community}
+                  credentials={credentials}
+                  type={community.type}
+                />
+                <div className="container related">
+                  <div className="columns">
+                    <div className="column isfull">
+                      <h3 className="title is-5">COMUNIDADES RELACIONADAS</h3>
+                    </div>
+                  </div>
+                  <div className="columns is-2 is-variable is-multiline">
+                    {related.map((card) => (
+                      <div className="column is-one-third " key={card._id}>
+                        <Card content={card} />
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <div className="columns is-2 is-variable is-multiline">
-                  {related.map((card) => (
-                    <div className="column is-one-third " key={card._id}>
-                      <Card content={card} />
-                    </div>
-                  ))}
+                <style jsx>{styles}</style>
+              </div>
+            : <div>
+                <CommunityHero />
+                <div className="container">
+                  <h2>Essa comunidade não existe!</h2>
                 </div>
               </div>
-              <style jsx>{styles}</style>
-            </div>
-          ) : (
-            <div>
-              <CommunityHero />
-              <div className="container">
-                <h2>Essa comunidade não existe!</h2>
-              </div>
-            </div>
-          )}
+          }
         </>
-      ) : (
-        <div>
-          <CommunityHero />
-          <img
-            src="/static/comunidades-tech-loader.gif"
-            style={{ maxWidth: '100px', display: 'block', margin: '30px auto' }}
-          />
+        : <div>
+            <CommunityHero />
+            <img
+              src="/static/comunidades-tech-loader.gif"
+              style={{ maxWidth: '100px', display: 'block', margin: '30px auto' }}
+            />
         </div>
-      )}
+          }
     </>
   )
 }
