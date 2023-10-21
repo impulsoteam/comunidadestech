@@ -98,13 +98,12 @@ export default function Dashboard ({ credentials }) {
                           </div>
                           <div className="media-content">
                             <p className="title is-6">{invite.name}</p>
-                            {invite.location.state ? (
-                              <p className="subtitle is-7">
-                                {invite.location.city}, {invite.location.state}
-                              </p>
-                            ) : (
-                              <p className="subtitle is-7">Remota</p>
-                            )}
+                            {invite.location.state
+                              ? <p className="subtitle is-7">
+                                  {invite.location.city}, {invite.location.state}
+                                </p>
+                              : <p className="subtitle is-7">Remota</p>
+                            }
                           </div>
                         </div>
                       </div>
@@ -143,18 +142,20 @@ export default function Dashboard ({ credentials }) {
               minhas comunidades
             </h2>
             <div className="columns is-multiline card-wrapper">
-              {myCommunities.length <= 0 && pendingCommunities.length <= 0 ? (
+              {myCommunities.length <= 0 && pendingCommunities.length <= 0
+                ? (
                 <div className="column has-text-centered">
                   <img src="../static/empty-state.svg" alt="Nenhuma comunidade" />
                   <p className="empty-state">Você ainda não possui comunidades cadastradas.</p>
                 </div>
-              ) : (
-                myCommunities.map((card) =>
-                  <div className="column is-one-quarter" key={card.id}>
+                  )
+                : (
+                    myCommunities.map((card, i) =>
+                  <div className="column is-one-quarter" key={`community-${card.id || i}`}>
                     <Card withOptions content={card} />
                   </div>
-                )
-              )}
+                    )
+                  )}
             </div>
           </div>
         </div>
@@ -167,8 +168,8 @@ export default function Dashboard ({ credentials }) {
                 comunidades pendentes
                 </h2>
                 <div className="columns is-multiline card-wrapper">
-                  {pendingCommunities.map((card) => (
-                    <div className="column is-one-quarter" key={card.id}>
+                  {pendingCommunities.map((card, i) => (
+                    <div className="column is-one-quarter" key={`pending-community-${card.id || i}`}>
                       <Card withOptions content={card} />
                     </div>
                   ))}

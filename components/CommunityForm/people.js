@@ -104,7 +104,7 @@ function People ({
         Informe um e-mail da liderança *
         <div className="input-wrapper">
           <i className="fas fa-envelope"></i>
-          <Field name="owner" className="input" placeholder="Digite o email" />
+          <Field name="owner" className="input" placeholder="Digite o e-mail" />
         </div>
         <ErrorMessage name="owner">
           {(msg) => <div className="form-error">{msg}</div>}
@@ -114,7 +114,7 @@ function People ({
         <ManagersList {...{ managers, removeManager, credentials, pageType }} />
       )}
       <label style={{ marginBottom: '1.25rem' }}>
-        Email do administrador
+        E-mail do administrador
         <div className="input-wrapper">
           <i className="fas fa-envelope"></i>
           <Field
@@ -122,7 +122,7 @@ function People ({
             onBlur={() => setFieldTouched('manager', true)}
             validate={checkManager}
             className="input is-medium"
-            placeholder="Digite o email do administrador"
+            placeholder="Digite o e-mail do administrador"
           />
         </div>
         <ErrorMessage name="manager">

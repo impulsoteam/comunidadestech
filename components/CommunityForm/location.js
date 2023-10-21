@@ -73,32 +73,31 @@ function Location ({
       </label>
       <label>
         Estado
-        {values.location.country === 'Brasil' && values.model !== 'online' ? (
-          <Select
-            name="location.state"
-            icon="\f279"
-            defaultValue={states.filter(
-              (state) => state.value === values.location.state
-            )}
-            closeMenuOnSelect={true}
-            components={animatedComponents}
-            placeholder="Clique para selecionar"
-            options={states}
-            onBlur={() => setFieldTouched('location.state', true)}
-            onChange={(selectedOption, data) =>
-              handleStringChange(selectedOption, data.name, setFieldValue)
-            }
-            styles={reactSelectStyle}
-          />
-        ) : (
-          <Select
-            styles={reactSelectStyle}
-            icon="\f279"
-            placeholder="Não aplica à sua seleção"
-            value="Não aplica à sua seleção"
-            isDisabled
-          />
-        )}
+        {values.location.country === 'Brasil' && values.model !== 'online'
+          ? <Select
+              name="location.state"
+              icon="\f279"
+              defaultValue={states.filter(
+                (state) => state.value === values.location.state
+              )}
+              closeMenuOnSelect={true}
+              components={animatedComponents}
+              placeholder="Clique para selecionar"
+              options={states}
+              onBlur={() => setFieldTouched('location.state', true)}
+              onChange={(selectedOption, data) =>
+                handleStringChange(selectedOption, data.name, setFieldValue)
+              }
+              styles={reactSelectStyle}
+            />
+          : <Select
+              styles={reactSelectStyle}
+              icon="\f279"
+              placeholder="Não aplica à sua seleção"
+              value="Não aplica à sua seleção"
+              isDisabled
+            />
+        }
         <ErrorMessage name="location.state">
           {(msg) => <div className="form-error">{msg}</div>}
         </ErrorMessage>
@@ -107,8 +106,8 @@ function Location ({
         Cidade
         {values.location.country === 'Brasil' &&
         values.model !== 'online' &&
-        values.location.state ? (
-            <Select
+        values.location.state
+          ? <Select
               name="location.city"
               icon="\f3c5"
               options={getCities(values.location.state)}
@@ -124,15 +123,15 @@ function Location ({
               }
               styles={reactSelectStyle}
             />
-          ) : (
-            <Select
+
+          : <Select
               icon="\f3c5"
               styles={reactSelectStyle}
               placeholder="Não aplica à sua seleção"
               value="Não aplica à sua seleção"
               isDisabled
             />
-          )}
+        }
         <ErrorMessage name="location.city">
           {(msg) => <div className="form-error">{msg}</div>}
         </ErrorMessage>
