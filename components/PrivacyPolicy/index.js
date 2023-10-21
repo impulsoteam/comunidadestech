@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 
 import { api, setHeader } from '../../utils/axios'
 import styles from '../GlobalComponents/Modal/styles'
+import ConfirmModal from './modal'
 
 const PrivacyPolicy = ({ credentials }) => {
   const [modal, setModal] = useState(false)
@@ -55,7 +56,7 @@ const PrivacyPolicy = ({ credentials }) => {
                 para geração de conteúdo quanto para a oferta de vagas do seu interesse. Esses dados são fundamentais
                 para que realizemos estudos aprofundados de interesse de mercado e pessoal a todo momento,
                 possibilitando que nosso serviço seja continuamente aprimorado e modernizado.
-                  <a href="https://impulso.network/privacidade" target="_blank" rel="noreferrer"> (Ler política completa)</a>
+                  <a href="https://impulso.team/pt/privacidade" target="_blank" rel="noreferrer"> (Ler política completa)</a>
                 </p>
                 <div className="modal-buttons">
                   <button title="Recusar" className="modal-btn" onClick={() => setReject(true)}>Recusar</button>
@@ -68,27 +69,8 @@ const PrivacyPolicy = ({ credentials }) => {
           : null}
       </>
     ),
-    reject: (
-      <>
-        {modal
-          ? <div className="modal">
-            <div className="modal-content">
-              <h2 className="title-modal">Seus dados serão excluídos</h2>
-              <div className="modal-body">
-                <p className="center">
-                Tem certeza que deseja excluir todos os seus dados do comunidades.tech? Todas as comunidades que você cadastrou, gerencia e possui, bem como os seus dados serão excluídos permanentemente.
-                </p>
-                <div className="modal-buttons">
-                  <button title="Voltar" className="modal-btn" onClick={() => setReject(false)}>Cancelar</button>
-                  <button title="Confirmar" className="modal-btn" onClick={handleReject}>Excluir mesmo assim</button>
-                </div>
-              </div>
-            </div>
-            <style jsx>{styles}</style>
-          </div>
-          : null}
-      </>
-    )
+    reject: modal && <ConfirmModal handleConfirm={handleReject} handleGoBack={() => setReject(false)}/>
+
   }
   return getContent()
 }

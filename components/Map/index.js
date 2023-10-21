@@ -88,8 +88,8 @@ const Map = ({ communities }) => {
                 (location) =>
                   location.state === community.location.state &&
                   location.city === community.location.city
-              ).length > 0 ? (
-                  <Marker
+              ).length > 0
+                ? <Marker
                     key={community._id}
                     latitude={community.location.latitude}
                     longitude={community.location.longitude}
@@ -116,8 +116,7 @@ const Map = ({ communities }) => {
                       </div>
                     </button>
                   </Marker>
-                ) : (
-                  <Marker
+                : <Marker
                     key={community._id}
                     latitude={community.location.latitude}
                     longitude={community.location.longitude}
@@ -135,7 +134,7 @@ const Map = ({ communities }) => {
                       </div>{' '}
                     </button>
                   </Marker>
-                ))
+              )
           )}
           <div style={{ position: 'absolute', left: '10px', top: '10px' }}>
             <NavigationControl />

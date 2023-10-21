@@ -23,28 +23,24 @@ const CommunitySideBar = ({ community }) => {
         <div className="columns is-multiline">
           <div className="column is-12 logo">
             <figure className="image">
-              {logo ? (
-                <img src={logo} alt={name} />
-              ) : (
-                <img
-                  src="../../static/logo.svg"
-                  alt={name}
-                  className="is-200x200"
-                />
-              )}
+              {logo
+                ? <img src={logo} alt={name} />
+                : <img
+                    src="../../static/logo.svg"
+                    alt={name}
+                    className="is-200x200"
+                  />
+              }
             </figure>
           </div>
           <div className="column is-flex info">
             <h2 className="title has-text-weight-bold ">{name}</h2>
             <p>
               <i className="fas fa-map-marker-alt"></i>
-              {location.city ? (
-                <span>
-                  {location.city}, {location.state}
-                </span>
-              ) : (
-                <span>Remota</span>
-              )}
+              {location.city
+                ? <span>{location.city}, {location.state}</span>
+                : <span>Remota</span>
+              }
             </p>
             <p>
               <i className="fas fa-users"></i>

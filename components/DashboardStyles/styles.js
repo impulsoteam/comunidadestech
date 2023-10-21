@@ -65,6 +65,34 @@ export default css`
     margin-bottom: 240px;
   }
 
+  .info {
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    line-height: 24px;
+  }
+
+  .privacy-buttons {
+    cursor: initial;
+    display: flex;
+    justify-content: left;
+  }
+
+  .privacy-btn {
+    background-color: ${colors.white};
+    border: 1px solid ${colors.primary};
+    border-radius: 4px;
+    color: ${colors.primary};
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-top: 18px;
+    padding: 5px 25px;
+    text-align: center;
+  }
+
   @media screen and (max-width: 769px) {
     .container {
       padding-top: 1.5rem;

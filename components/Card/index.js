@@ -14,29 +14,27 @@ class Card extends Component {
         <div className="media">
           <div className="media-left">
             <figure className="image is-32x32">
-              {!content.logo || content.logo === 'legacy' ? (
-                <LazyLoad height={32}>
-                  <img
-                    src="../../static/ctech-small-logo.png"
-                    alt={content.name}
-                  />
-                </LazyLoad>
-              ) : (
-                <LazyLoad height={32}>
-                  <img src={content.logo} alt={content.name} />
-                </LazyLoad>
-              )}
+              {!content.logo || content.logo === 'legacy'
+                ? <LazyLoad height={32}>
+                    <img
+                      src="../../static/ctech-small-logo.png"
+                      alt={content.name}
+                    />
+                  </LazyLoad>
+                : <LazyLoad height={32}>
+                    <img src={content.logo} alt={content.name} />
+                  </LazyLoad>
+              }
             </figure>
           </div>
           <div className="media-content">
             <p className="title is-6">{content.name}</p>
-            {content.location.city ? (
-              <p className="subtitle is-7">
+            {content.location.city
+              ? <p className="subtitle is-7">
                 {content.location.city}, {content.location.state}
               </p>
-            ) : (
-              <p className="subtitle is-7">Remota</p>
-            )}
+              : <p className="subtitle is-7">Remota</p>
+            }
           </div>
           <style jsx>{styles}</style>
         </div>
