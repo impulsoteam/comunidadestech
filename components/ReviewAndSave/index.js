@@ -73,7 +73,7 @@ const ReviewAndSave = ({ community }) => {
                   ? tags.map(
                     (tag) =>
                       tag.length <= 20 && (
-                        <span className="tag is-primary">{tag}</span>
+                        <span className="tag is-primary" key={tag}>{tag}</span>
                       )
                   )
                   : null}
