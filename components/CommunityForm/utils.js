@@ -33,24 +33,24 @@ export const SignupSchema = Yup.object().shape({
   model: Yup.string().required('Item obrigatório'),
   location: Yup.object().when('model', {
     is: (model) => model !== 'online',
-    then: Yup.object({
+    then: () => Yup.object({
       country: Yup.string().required(
         'Campo obrigatório para este tipo de modalidade'
       ),
       state: Yup.string().when('country', {
         is: (country) => country === 'Brasil',
-        then: Yup.string().required(
+        then: () => Yup.string().required(
           'Campo obrigatório quando Brasil está selecionado '
         )
       }),
       city: Yup.string().when('country', {
         is: (country) => country === 'Brasil',
-        then: Yup.string().required(
+        then: () => Yup.string().required(
           'Campo obrigatório quando Brasil está selecionado '
         )
       })
     }),
-    otherwise: Yup.object({
+    otherwise: () => Yup.object({
       country: Yup.string(),
       state: Yup.string(),
       city: Yup.string()
@@ -60,7 +60,7 @@ export const SignupSchema = Yup.object().shape({
     isParticipant: Yup.bool(),
     name: Yup.string().when('isParticipant', {
       is: (isParticipant) => isParticipant,
-      then: Yup.string()
+      then: () => Yup.string()
         .required('Item obrigatório')
         .min(2, 'Muito curto!')
         .max(30, 'Muito longo!')
@@ -70,15 +70,15 @@ export const SignupSchema = Yup.object().shape({
     rocketChat: Yup.string()
   }),
   owner: Yup.string()
-    .email('Endereço de email inválido')
+    .email('Endereço de e-mail inválido')
     .required('Item obrigatório')
 })
 
 export const errorMessages = {
   slugAlreadyExists: 'Url já existente, tente alterar o nome da comunidade',
   nameAlreadyExists: 'Comunidade já cadastrada',
-  userNotSubscribed: 'Email ainda não está cadastrado no comunidades.tech',
-  userSubscribed: 'Email está cadastrado no comunidades.tech',
+  userNotSubscribed: 'E-mail ainda não está cadastrado no comunidades.tech',
+  userSubscribed: 'E-mail está cadastrado no comunidades.tech',
   managerAlreadyListed: 'Usuário já é administrador desta comunidade'
 }
 

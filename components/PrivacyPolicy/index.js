@@ -56,7 +56,7 @@ const PrivacyPolicy = ({ credentials }) => {
                 para geração de conteúdo quanto para a oferta de vagas do seu interesse. Esses dados são fundamentais
                 para que realizemos estudos aprofundados de interesse de mercado e pessoal a todo momento,
                 possibilitando que nosso serviço seja continuamente aprimorado e modernizado.
-                  <a href="https://impulso.network/privacidade" target="_blank" rel="noreferrer"> (Ler política completa)</a>
+                  <a href="https://impulso.team/pt/privacidade" target="_blank" rel="noreferrer"> (Ler política completa)</a>
                 </p>
                 <div className="modal-buttons">
                   <button title="Recusar" className="modal-btn" onClick={() => setReject(true)}>Recusar</button>
