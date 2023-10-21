@@ -69,7 +69,7 @@ export const reactSelectStyle = {
 
 export const linksSelectStyle = {
   indicatorSeparator: (styles) => ({ ...styles, display: 'none' }),
-  singleValue: (styles) => ({ ...styles, strong: { display: 'none' } }),
+  singleValue: (styles) => ({ ...styles, overflow: 'visible', strong: { display: 'none' } }),
   control: (styles) => ({
     ...styles,
     borderBottomRightRadius: 0,
