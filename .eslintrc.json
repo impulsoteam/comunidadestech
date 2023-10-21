@@ -19,6 +19,15 @@
   "plugins": ["react", "jest", "eslint-plugin-import-helpers"],
   "rules": {
     "import/no-absolute-path": "off",
+    "react/no-unknown-property": [
+      2,
+      {
+        "ignore": [
+          "jsx",
+          "css"
+        ]
+      }
+    ],
     "import-helpers/order-imports": [
       "warn",
       {
