@@ -1,9 +1,10 @@
 import dotenv from 'dotenv'
 import moment from 'moment'
 import Pretty from 'pretty-error'
+import SlackNotify from 'slack-notify'
+
 dotenv.config()
 
-import SlackNotify from 'slack-notify';
 const slack = SlackNotify(process.env.SLACK_LOG);
 
 slack.onError = function (err) {
