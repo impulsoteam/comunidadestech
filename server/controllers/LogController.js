@@ -3,13 +3,14 @@ import moment from 'moment'
 import Pretty from 'pretty-error'
 dotenv.config()
 
-const slack = require('slack-notify')(process.env.SLACK_LOG)
+import SlackNotify from 'slack-notify';
+const slack = SlackNotify(process.env.SLACK_LOG);
 
 slack.onError = function (err) {
   console.log('API error:', err)
 }
 class LogController {
-  sendNotify ({ type, file, resume, details }) {
+  sendNotify({ type, file, resume, details }) {
     const text =
       type === 'error'
         ? new Pretty().withoutColors().render(details)
@@ -22,7 +23,7 @@ class LogController {
     }
   }
 
-  sendSlackMessage ({ type, file, resume, details, text }) {
+  sendSlackMessage({ type, file, resume, details, text }) {
     slack.send({
       channel: process.env.SLACK_CHANNEL,
       icon_url: 'https://impulsowork.slack.com/services/BLA0E0RA5',
