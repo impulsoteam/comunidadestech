@@ -1,9 +1,11 @@
 import dotenv from 'dotenv'
 import moment from 'moment'
 import Pretty from 'pretty-error'
+import SlackNotify from 'slack-notify'
+
 dotenv.config()
 
-const slack = require('slack-notify')(process.env.SLACK_LOG)
+const slack = SlackNotify(process.env.SLACK_LOG)
 
 slack.onError = function (err) {
   console.log('API error:', err)
