@@ -62,7 +62,7 @@
     "react-dropzone": "^10.2.2",
     "react-image-crop": "10.1.8",
     "react-lazyload": "^3.2.0",
-    "react-map-gl": "^5.2.7",
+    "react-map-gl": "^7.1.6",
     "react-select": "^5.7.7",
     "react-text-mask": "^5.5.0",
     "react-toastify": "5.5.0",
