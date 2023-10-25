@@ -17,7 +17,7 @@
 - Yarn v1.19.1 ou superior
 
 ## Primeiros passos
-1. Faça um Fork do repositório.
+1. **Faça um Fork do repositório**
 <img src="https://i.imgur.com/nSU5hDr.png" width="300" height="220">
 
 2. Após seguir os passos para fazer o fork, clone seu repositório localmente.
@@ -25,10 +25,8 @@
 git clone <chave_copiada_no_passo_2>
 ```
 
-3. Duplique o arquivo `.env.example` e renomeie a cópia para `.env`.
-
-4. No arquivo `.env`, atualize a variável de ambiente `JWT_SECRET_KEY` com um valor de sua escolha.
-    - Deixe esse arquivo aberto e siga o restante das instruções.
+5. **Na raíz de seu projeto crie um arquivo `.env` com as mesmas variáveis de ambiente que estão no arquivo `.env.example`**
+    - Deixe esse arquivo aberto e siga o restante das instruções
  
 
 ## Criando um app teste
