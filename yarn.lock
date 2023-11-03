@@ -9882,10 +9882,10 @@ sisteransi@^1.0.5:
   resolved "https://registry.npmjs.org/sisteransi/-/sisteransi-1.0.5.tgz"
   integrity sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==
 
-slack-notify@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/slack-notify/-/slack-notify-2.0.6.tgz#03052d6eebfd72e76a76e11feff7fa6bd8224f6c"
-  integrity sha512-9JJGBzdODgcIgtx5unQZX9yHx9ckM5kXkSJHhU//Eh1rj7vhAK6L89ElXU5ftprID2qbcMADPuzyu4XEp/142Q==
+slack-notify@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/slack-notify/-/slack-notify-2.0.7.tgz#8301b14a8602ff8660086dd59e19a3fb9b9a7448"
+  integrity sha512-DZ4J3RVszHUaJf5zXtAocxEhZRAvwWoswB6a/8sAG/QMWkuZdvk3e8d2YQQlPJNYNSbfak+rCtn3zrZ5UmMnYg==
 
 slash@^3.0.0:
   version "3.0.0"
