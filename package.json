@@ -75,7 +75,7 @@
   },
   "devDependencies": {
     "@sucrase/jest-plugin": "^3.0.0",
-    "@types/jest": "^27.0.1",
+    "@types/jest": "^29.5.9",
     "babel-jest": "^29.7.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "eslint": "^7.32.0",
