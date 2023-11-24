@@ -1,5 +1,4 @@
 import React from 'react'
-
 import CommunityCardEasterEgg from '../../components/CommunityCardEasterEgg'
 import CommunityHero from '../../components/CommunityHero'
 import styles from '../../components/CommunityStyles/styles'

@@ -1,8 +1,8 @@
 import React from 'react'
-
 import styles from './styles'
 
-export default function ErrorMessage () {
+export default function ErrorMessage() {
+
   return (
     <div className="error-message">
       <div className="error-box">

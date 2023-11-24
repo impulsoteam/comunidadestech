@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { toast } from 'react-toastify'
-
-import cookies from 'next-cookies'
 import Router, { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
+import cookies from 'next-cookies'
 import PropTypes from 'prop-types'
-
+import { api, setHeader } from '../../utils/axios'
 import CommunityForm from '../../components/CommunityForm'
 import styles from '../../components/RegisterStyles/styles'
-import { api, setHeader } from '../../utils/axios'
+
 
 const EditCommunity = ({ credentials }) => {
   const [loading, setLoading] = useState(true)
@@ -27,6 +26,7 @@ const EditCommunity = ({ credentials }) => {
       setCommunity(data.community)
       setLoading(false)
     }
+
     fetchData()
   }, [])
 

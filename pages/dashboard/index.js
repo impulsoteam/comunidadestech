@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react'
-
 import Cookies from 'js-cookie'
 import cookies from 'next-cookies'
 import Router from 'next/router'
-
 import Card from '../../components/Card'
 import styles from '../../components/DashboardStyles/styles'
 import PrivacyModal from '../../components/PrivacyPolicy/modal'
 import { api, setHeader } from '../../utils/axios'
 
-export default function Dashboard ({ credentials }) {
+export default function Dashboard({ credentials }) {
   const [loading, setLoading] = useState(true)
   const [modal, setModal] = useState(false)
   const [myCommunities, setMyCommunities] = useState([])
@@ -17,21 +15,26 @@ export default function Dashboard ({ credentials }) {
   const [pendingInvites, setPendingInvites] = useState([])
 
   useEffect(() => {
+
     const fetchMyCommunities = async () => {
       setHeader(credentials)
+
       const { data } = await api.get('/community/owner')
       setMyCommunities(data)
     }
+
     const fetchPendingCommunities = async () => {
       setHeader(credentials)
       const { data } = await api.get('/community/status/awaitingPublication')
       setPendingCommunities(data.communities)
     }
+
     const fetchPendingInvitations = async () => {
       setHeader(credentials)
       const { data } = await api.get('/user/invitations')
       setPendingInvites(data)
     }
+
     fetchMyCommunities()
     fetchPendingInvitations()
     credentials.isModerator && fetchPendingCommunities()
@@ -70,6 +73,7 @@ export default function Dashboard ({ credentials }) {
         </div>
       )
     }
+
     return (
       <div className="container head">
         {pendingInvites.length > 0 && (
@@ -100,13 +104,14 @@ export default function Dashboard ({ credentials }) {
                             <p className="title is-6">{invite.name}</p>
                             {invite.location.state
                               ? <p className="subtitle is-7">
-                                  {invite.location.city}, {invite.location.state}
-                                </p>
+                                {invite.location.city}, {invite.location.state}
+                              </p>
                               : <p className="subtitle is-7">Remota</p>
                             }
                           </div>
                         </div>
                       </div>
+
                       <div className="invite-buttons">
                         <button
                           onClick={() =>
@@ -144,18 +149,18 @@ export default function Dashboard ({ credentials }) {
             <div className="columns is-multiline card-wrapper">
               {myCommunities.length <= 0 && pendingCommunities.length <= 0
                 ? (
-                <div className="column has-text-centered">
-                  <img src="../static/empty-state.svg" alt="Nenhuma comunidade" />
-                  <p className="empty-state">Você ainda não possui comunidades cadastradas.</p>
-                </div>
-                  )
-                : (
-                    myCommunities.map((card, i) =>
-                  <div className="column is-one-quarter" key={`community-${card.id || i}`}>
-                    <Card withOptions content={card} />
+                  <div className="column has-text-centered">
+                    <img src="../static/empty-state.svg" alt="Nenhuma comunidade" />
+                    <p className="empty-state">Você ainda não possui comunidades cadastradas.</p>
                   </div>
-                    )
-                  )}
+                )
+                : (
+                  myCommunities.map((card, i) =>
+                    <div className="column is-one-quarter" key={`community-${card.id || i}`}>
+                      <Card withOptions content={card} />
+                    </div>
+                  )
+                )}
             </div>
           </div>
         </div>
@@ -165,7 +170,7 @@ export default function Dashboard ({ credentials }) {
             <div className="columns">
               <div className="column">
                 <h2 className="title is-size-6 is-uppercase has-text-centered-mobile">
-                comunidades pendentes
+                  comunidades pendentes
                 </h2>
                 <div className="columns is-multiline card-wrapper">
                   {pendingCommunities.map((card, i) => (
@@ -177,7 +182,7 @@ export default function Dashboard ({ credentials }) {
               </div>
             </div>
           </>
-        ) }
+        )}
         <div className="is-divider"></div>
         <h2 className="title is-size-6 is-uppercase has-text-centered-mobile">privacidade</h2>
 
@@ -185,7 +190,7 @@ export default function Dashboard ({ credentials }) {
         <div className="privacy-buttons">
           <button title="Excluir meus dados" className="privacy-btn" onClick={() => setModal(true)}>Excluir meus dados</button>
         </div>
-        {modal && <PrivacyModal handleConfirm={handleConfirm} handleGoBack={() => setModal(false)}/>}
+        {modal && <PrivacyModal handleConfirm={handleConfirm} handleGoBack={() => setModal(false)} />}
         <style jsx>{styles}</style>
       </div>
     )

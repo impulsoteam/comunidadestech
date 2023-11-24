@@ -15,6 +15,10 @@ export default css`
       color: ${colors.white};
       display: flex;
 
+      span{
+      margin-top:4%
+      }
+
       :not(:last-child) {
         margin-right: 20px;
       }

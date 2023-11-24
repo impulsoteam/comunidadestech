@@ -1,9 +1,7 @@
 import React from 'react'
 import { toast } from 'react-toastify'
-
 import Router from 'next/router'
 import PropTypes from 'prop-types'
-
 import { api, setHeader } from '../../utils/axios'
 import { ICONS } from '../../utils/icons'
 import Divider from '../Divider'
@@ -150,40 +148,40 @@ const CommunityCard = ({ canModify, community, credentials }) => {
               {managers.filter(
                 (manager) => manager.invitation.status === 'ACCEPTED'
               ).length > 4 && (
-                <div className="tooltip-toggle">
-                  <div className="tooltip-button">
-                    <span>
-                      <i className="fas fa-plus"></i> mostrar mais
-                    </span>
+                  <div className="tooltip-toggle">
+                    <div className="tooltip-button">
+                      <span>
+                        <i className="fas fa-plus"></i> mostrar mais
+                      </span>
+                    </div>
+                    <div className="tooltip-wrapper">
+                      {managers
+                        .filter(
+                          (manager) => manager.invitation.status === 'ACCEPTED'
+                        )
+                        .slice(4)
+                        .map(
+                          (manager) =>
+                            manager.invitation.status && (
+                              <div className="managers" key={manager._id}>
+                                <img
+                                  src={manager.avatar}
+                                  alt={manager.name}
+                                  onError={(img) => {
+                                    img.target.src =
+                                      '../../static/default-user.png'
+                                  }}
+                                />
+                                <span>{manager.name}</span>
+                              </div>
+                            )
+                        )}
+                    </div>
                   </div>
-                  <div className="tooltip-wrapper">
-                    {managers
-                      .filter(
-                        (manager) => manager.invitation.status === 'ACCEPTED'
-                      )
-                      .slice(4)
-                      .map(
-                        (manager) =>
-                          manager.invitation.status && (
-                            <div className="managers" key={manager._id}>
-                              <img
-                                src={manager.avatar}
-                                alt={manager.name}
-                                onError={(img) => {
-                                  img.target.src =
-                                    '../../static/default-user.png'
-                                }}
-                              />
-                              <span>{manager.name}</span>
-                            </div>
-                          )
-                      )}
-                  </div>
-                </div>
-              )}
+                )}
             </div>
           </div>
-          <div className="column">
+          <div className="column column">
             <p>{description}</p>
           </div>
         </div>

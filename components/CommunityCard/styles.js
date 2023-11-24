@@ -45,6 +45,11 @@ export default css`
     padding: 12px;
   }
 
+  .column-description{
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  } 
+
   .column.is-flex {
     flex-direction: column;
   }
@@ -119,6 +124,7 @@ export default css`
   .managers-wrapper {
     position: relative;
 
+
     h3 {
       font-weight: 600;
       margin-bottom: 0.75rem;
@@ -128,6 +134,7 @@ export default css`
       display: flex;
       align-items: center;
       margin-bottom: 0.5rem;
+  
 
       img {
         border-radius: 50%;
@@ -170,6 +177,7 @@ export default css`
 
   .links {
     max-width: 936px;
+    
 
     .columns {
       justify-content: center;

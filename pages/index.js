@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from 'react'
-
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
-
+import { api, setHeader } from '../utils/axios'
+import useKonamiCode from '../utils/use-konami-code'
 import Counter from '../components/Counter'
 import EasterEggLoader from '../components/EasterEggLoader'
 import Filter from '../components/Filter'
 import styles from '../components/HomeStyles/styles'
 import Map from '../components/Map'
 import PaginationMenu from '../components/PaginationMenu'
-import { api, setHeader } from '../utils/axios'
-import useKonamiCode from '../utils/use-konami-code'
-
 import Card from '/components/Card/'
 import Hero from '/components/Hero/'
 
 const Home = ({ credentials }) => {
   const router = useRouter()
-
   const [loading, setLoading] = useState(true)
   const [pageView, setPageView] = useState('list')
   const [communitiesDetails, setCommunitiesDetails] = useState()
@@ -27,6 +23,7 @@ const Home = ({ credentials }) => {
   const [pageCount, setPageCount] = useState(0)
   const [communities, setCommunities] = useState([])
   const [easterEgg, setEasterEgg] = useState(false)
+
   useKonamiCode(() => setEasterEgg(true))
 
   useEffect(() => {
@@ -49,11 +46,13 @@ const Home = ({ credentials }) => {
           limit: pageView === 'map' ? 9999 : 48
         })}`
       )
+
       setQuery(newQuery)
       setTotalCommunities(data.totalCommunities)
       setCommunities(data.communities)
       setLoading(false)
     }
+
     getList()
   }, [pageCount, router.query, pageView])
 

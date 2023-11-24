@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import { useWindowSize } from 'react-use'
-
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
-
 import { countries, states, cities } from '../CommunityForm/locationOptions'
 import { CATEGORIES, TYPES, TAGS, MODEL } from '../CommunityForm/utils'
 import styles from './styles'
@@ -11,16 +9,15 @@ import styles from './styles'
 const Filter = ({ pageView, setPageView }) => {
   const [moreFilters, setMoreFilters] = useState(false)
   const [name, setName] = useState('')
-
   const router = useRouter()
-
   const { width } = useWindowSize()
   const isFullHD = width > 1408
-
   const handleChange = ({ name, value }) => {
+
     const { query } = router
     const isDefaultName = name === 'name' && value === ''
     const isDefaultValue = value === 'all' && name !== 'name'
+
     if (isDefaultName || isDefaultValue) {
       delete query[name]
       return router.push({ pathname: '/', query })
@@ -36,7 +33,9 @@ const Filter = ({ pageView, setPageView }) => {
 
   const isDisabled = (type) => {
     const { query } = router
+
     if (type === 'state') {
+
       if (
         query.model === 'online' ||
         query.model === 'all' ||
@@ -45,6 +44,7 @@ const Filter = ({ pageView, setPageView }) => {
 
       return false
     }
+
     if (type === 'city') return !query.state
   }
 
@@ -80,9 +80,8 @@ const Filter = ({ pageView, setPageView }) => {
     return (
       <div className="filter-options">
         <div
-          className={`control has-icons-left filter-option-wrapper ${
-            !isMoreFilter ? 'is-hidden' : 'is-hidden-tablet'
-          }`}
+          className={`control has-icons-left filter-option-wrapper ${!isMoreFilter ? 'is-hidden' : 'is-hidden-tablet'
+            }`}
         >
           <div className="select is-small">
             <select
@@ -103,9 +102,8 @@ const Filter = ({ pageView, setPageView }) => {
           </span>
         </div>
         <div
-          className={`control has-icons-left filter-option-wrapper ${
-            !isMoreFilter ? 'is-hidden' : 'is-hidden-desktop'
-          }`}
+          className={`control has-icons-left filter-option-wrapper ${!isMoreFilter ? 'is-hidden' : 'is-hidden-desktop'
+            }`}
         >
           <div className="select is-small">
             <select
@@ -126,9 +124,8 @@ const Filter = ({ pageView, setPageView }) => {
           </span>
         </div>
         <div
-          className={`control has-icons-left filter-option-wrapper ${
-            !isMoreFilter ? 'is-hidden' : 'is-hidden-tablet'
-          }`}
+          className={`control has-icons-left filter-option-wrapper ${!isMoreFilter ? 'is-hidden' : 'is-hidden-tablet'
+            }`}
         >
           <div className="select is-small">
             <select
@@ -262,9 +259,8 @@ const Filter = ({ pageView, setPageView }) => {
         </div>
         <div className="filter-options">
           <div
-            className={`filter-option-wrapper filter-by-name ${
-              !isMoreFilter ? 'is-hidden' : 'is-hidden-desktop'
-            }`}
+            className={`filter-option-wrapper filter-by-name ${!isMoreFilter ? 'is-hidden' : 'is-hidden-desktop'
+              }`}
           >
             <div className="control has-icons-left">
               <input

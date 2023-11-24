@@ -1,8 +1,6 @@
 import React from 'react'
 import { useWindowSize } from 'react-use'
-
 import PropTypes from 'prop-types'
-
 import styles from './styles'
 
 const Counter = ({ communities, cities, members }) => {
@@ -12,7 +10,7 @@ const Counter = ({ communities, cities, members }) => {
   return (
     <div className="container counter-wrapper is-fluid">
       <div className="counter">
-        {!isMobile && <i className="fas fa-laptop-code"></i>}
+        <span>{!isMobile && <i className="fas fa-laptop-code"></i>}</span>
         <div className="counter-info">
           <h2 className="is-size-1-desktop is-size-2-tablet is-size-4-mobile">
             {communities}
@@ -28,7 +26,7 @@ const Counter = ({ communities, cities, members }) => {
         </div>
       </div>
       <div className="counter">
-        {!isMobile && <i className="fas fa-map-marked-alt"></i>}
+        <span>{!isMobile && <i className="fas fa-map-marked-alt"></i>}</span>
         <div className="counter-info">
           <h2 className="is-size-1-desktop is-size-2-tablet is-size-4-mobile">
             {cities}
@@ -44,7 +42,7 @@ const Counter = ({ communities, cities, members }) => {
         </div>
       </div>
       <div className="counter">
-        {!isMobile && <i className="fas fa-users"></i>}
+        <span>{!isMobile && <i className="fas fa-users"></i>}</span>
         <div className="counter-info">
           <h2 className="is-size-1-desktop is-size-2-tablet is-size-4-mobile">
             {members.toLocaleString('pt-BR')}

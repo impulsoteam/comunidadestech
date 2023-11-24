@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-
 import Cookies from 'js-cookie'
 import Router from 'next/router'
 import PropTypes from 'prop-types'
-
 import styles from './styles'
 
 const Header = ({ name, avatar, token }) => {

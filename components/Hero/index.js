@@ -1,12 +1,12 @@
 
 import React from 'react'
 import { useWindowSize } from 'react-use'
-
 import styles from './styles'
 
 const Hero = () => {
   const { width } = useWindowSize()
   const isMobile = !(width > 769)
+
   return (
     <div className="container component-wrapper is-fluid">
       <div className="hero-body">
@@ -16,9 +16,9 @@ const Hero = () => {
               <h2 className="subtitle is-size-4-desktop">
                 {!isMobile
                   ? <>
-                      Espaço de visibilidade e fortalecimento das comunidades de
-                      tecnologia.
-                    </>
+                    Espaço de visibilidade e fortalecimento das comunidades de
+                    tecnologia.
+                  </>
                   : <>Espaço das comunidades de tecnologia</>
                 }
               </h2>

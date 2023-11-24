@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
 import LazyLoad from 'react-lazyload'
-
 import styles from './styles'
 
 export default class Footer extends PureComponent {
-  render () {
+
+  render() {
     return (
       <div>
         <div className="hero-foot has-text-centered">

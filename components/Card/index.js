@@ -1,29 +1,29 @@
 import React, { Component } from 'react'
 import LazyLoad from 'react-lazyload'
-
 import Router from 'next/router'
 import PropTypes from 'prop-types'
-
 import styles from './styles'
 
 class Card extends Component {
-  render () {
+
+  render() {
     const { content, miniPage, clickCommunity } = this.props
     const Media = () => {
+
       return (
         <div className="media">
           <div className="media-left">
             <figure className="image is-32x32">
               {!content.logo || content.logo === 'legacy'
                 ? <LazyLoad height={32}>
-                    <img
-                      src="../../static/ctech-small-logo.png"
-                      alt={content.name}
-                    />
-                  </LazyLoad>
+                  <img
+                    src="../../static/ctech-small-logo.png"
+                    alt={content.name}
+                  />
+                </LazyLoad>
                 : <LazyLoad height={32}>
-                    <img src={content.logo} alt={content.name} />
-                  </LazyLoad>
+                  <img src={content.logo} alt={content.name} />
+                </LazyLoad>
               }
             </figure>
           </div>

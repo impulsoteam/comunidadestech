@@ -1,7 +1,5 @@
 import React from 'react'
-
 import cookies from 'next-cookies'
-
 import LoginComponent from '/components/LoginComponent/'
 
 const Login = () => <LoginComponent />

@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
-
 import cookies from 'next-cookies'
 import Router from 'next/router'
 import PropTypes from 'prop-types'
-
 import CommunityForm from '../../components/CommunityForm'
 import styles from '../../components/RegisterStyles/styles'
 import { api, setHeader } from '../../utils/axios'
@@ -15,6 +13,7 @@ const RegisterCommunity = ({ credentials }) => {
   const getInitialValues = () => {
     const { _id, name, email } = credentials
     const logo = `${process.env.DEFAULT_LOGO}`
+    
     return {
       name: '',
       slug: 'comunidades.tech/c/',

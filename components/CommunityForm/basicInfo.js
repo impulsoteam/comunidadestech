@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react'
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
-
 import { Field, ErrorMessage } from 'formik'
 import PropTypes from 'prop-types'
 import slug from 'slug'
-
 import { api, setHeader } from '../../utils/axios'
 import CustomLogo from './customLogo'
 import { reactSelectStyle } from './reactSelectStyle'
@@ -18,7 +16,7 @@ import {
   errorMessages
 } from './utils'
 
-function BasicInfos ({
+function BasicInfos({
   credentials,
   errors,
   touched,
@@ -28,7 +26,6 @@ function BasicInfos ({
   setFieldTouched
 }) {
   const { nameAlreadyExists, slugAlreadyExists } = errorMessages
-
   const animatedComponents = makeAnimated()
 
   useEffect(() => {
@@ -38,15 +35,18 @@ function BasicInfos ({
   const checkSlug = async (slug) => {
     const toShort = slug.length < 4
     const notChanged = slug === initialValues.slug
+
     if (!slug || toShort || notChanged) return
     setHeader(credentials)
     const { data } = await api.get(`/community/checkSlug/${slug}`)
+
     return data ? slugAlreadyExists : null
   }
 
   const checkName = async (name) => {
     const toShort = name.length < 4
     const notChanged = name === initialValues.name
+
     if (!name || toShort || notChanged) return
     setHeader(credentials)
     const { data } = await api.get(`/community/checkName/${name}`)
@@ -58,9 +58,11 @@ function BasicInfos ({
     const selected = selectedOption && selectedOption.map(({ value }) => value)
     setFieldValue('tags', selected)
   }
+
   const handleStringChange = (selectedOption, data) => {
     setFieldValue(data || data.value, selectedOption.value)
   }
+
   return (
     <>
       <label>

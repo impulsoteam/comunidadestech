@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import ReactMap, { NavigationControl, Marker } from 'react-map-gl'
-
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
-
 import Card from '../Card'
 import CommunitySideBar from '../CommunitySideBar'
 import styles from './styles'
+
 const Map = ({ communities }) => {
+
   const router = useRouter()
   const [viewport, setViewport] = useState({
     latitude: -15.6634068,
@@ -25,10 +25,12 @@ const Map = ({ communities }) => {
       query: {}
     })
   }
+
   const closeMobileSideBar = () => {
     setMobileSideBar(!mobileSideBar)
     handleResetButton()
   }
+
   const handleClickPin = (e) => {
     setMobileSideBar(!mobileSideBar)
     router.push({
@@ -50,11 +52,13 @@ const Map = ({ communities }) => {
           })
       }
     })
+
     locations.forEach((location) => {
       location.number = locations.filter(
         (item) => item.state === location.state && item.city === location.city
       ).length
     })
+
     locations = locations.filter(
       (elem, index, self) =>
         self.findIndex((item) => {
@@ -65,6 +69,7 @@ const Map = ({ communities }) => {
           )
         }) === index
     )
+
     setLocations(locations)
   }, [communities])
 
@@ -90,50 +95,50 @@ const Map = ({ communities }) => {
                   location.city === community.location.city
               ).length > 0
                 ? <Marker
-                    key={community._id}
-                    latitude={community.location.latitude}
-                    longitude={community.location.longitude}
+                  key={community._id}
+                  latitude={community.location.latitude}
+                  longitude={community.location.longitude}
+                >
+                  <button
+                    className="marker-wrapper"
+                    onClick={(e) => {
+                      handleClickPin(e)
+                    }}
+                    data-state={community.location.state}
+                    data-city={community.location.city}
                   >
-                    <button
-                      className="marker-wrapper"
-                      onClick={(e) => {
-                        handleClickPin(e)
-                      }}
-                      data-state={community.location.state}
-                      data-city={community.location.city}
-                    >
-                      <div className="marker-form"></div>
-                      <div className="marker-content">
-                        <span>
-                          {
-                            locations.filter(
-                              (location) =>
-                                location.state === community.location.state &&
+                    <div className="marker-form"></div>
+                    <div className="marker-content">
+                      <span>
+                        {
+                          locations.filter(
+                            (location) =>
+                              location.state === community.location.state &&
                               location.city === community.location.city
-                            )[0].number
-                          }
-                        </span>
-                      </div>
-                    </button>
-                  </Marker>
+                          )[0].number
+                        }
+                      </span>
+                    </div>
+                  </button>
+                </Marker>
                 : <Marker
-                    key={community._id}
-                    latitude={community.location.latitude}
-                    longitude={community.location.longitude}
+                  key={community._id}
+                  latitude={community.location.latitude}
+                  longitude={community.location.longitude}
+                >
+                  <button
+                    className="marker-wrapper"
+                    onClick={() => {
+                      setCommunitySideBar(community)
+                    }}
+                    data-name={community.nameSearch}
                   >
-                    <button
-                      className="marker-wrapper"
-                      onClick={() => {
-                        setCommunitySideBar(community)
-                      }}
-                      data-name={community.nameSearch}
-                    >
-                      <div className="marker-form"></div>
-                      <div className="marker-content">
-                        <img src={community.logo} alt={community.name} />
-                      </div>{' '}
-                    </button>
-                  </Marker>
+                    <div className="marker-form"></div>
+                    <div className="marker-content">
+                      <img src={community.logo} alt={community.name} />
+                    </div>{' '}
+                  </button>
+                </Marker>
               )
           )}
           <div style={{ position: 'absolute', left: '10px', top: '10px' }}>

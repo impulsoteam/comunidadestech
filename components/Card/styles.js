@@ -11,12 +11,16 @@ export default css`
     border-radius: 2px;
     cursor: pointer;
     height: 100%;
-
+    
     a {
       color: ${colors.dark};
     }
-  }
 
+    &:hover {
+    scale:1.1;
+    animation: ease-in-out;
+    }
+  }
   .image {
     overflow: hidden;
 
@@ -66,8 +70,11 @@ export default css`
     }
 
     .content {
+      /* overflow: hidden; */
+      overflow-wrap: break-word;
+      word-wrap: break-word;
       font-size: 12px;
-      font-weight: 400;
+      font-weight: 400;    
     }
 
     .media-left {
