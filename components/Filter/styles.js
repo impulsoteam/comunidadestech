@@ -42,10 +42,11 @@ export default css`
         }
         select,
         input {
+          display: flex;
           color: ${colors.boulder};
           font-weight: bold;
-          height: 34px;
-          padding-left: 1.2rem;
+          height: 35px;
+          padding-left: 1.5rem;
           width: 7.125rem;
 
           &::placeholder {
@@ -147,6 +148,7 @@ export default css`
           select,
           input {
             width: 100%;
+            
             font-size: 16px;
             &:not(.is-multiple):not(.is-loading)::after {
               top: 50%;
@@ -154,7 +156,7 @@ export default css`
           }
           select,
           input {
-            padding-left: 1.4rem;
+            padding-left: 1.7rem;
           }
         }
       }

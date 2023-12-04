@@ -3,6 +3,7 @@ import React from 'react'
 import styles from '../CommunityCard/styles'
 
 const CommunityCard = () => {
+
   return (
     <div className="wrapper">
       <div className="container head">
@@ -32,6 +33,7 @@ const CommunityCard = () => {
           </div>
         </div>
       </div>
+
       <div className="container description">
         <div className="columns is-2 is-variable">
           <div className="column is-one-quarter">

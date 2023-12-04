@@ -1,29 +1,30 @@
 import React from 'react'
+import { withRouter } from 'next/router'
 import { ToastContainer } from 'react-toastify'
-
 import cookies from 'next-cookies'
 import App from 'next/app'
 import Head from 'next/head'
-import { withRouter } from 'next/router'
-
-import 'react-toastify/dist/ReactToastify.css'
-import 'styles/styles.scss'
-
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import PrivacyPolicy from '../components/PrivacyPolicy'
+import 'react-toastify/dist/ReactToastify.css'
+import 'styles/styles.scss'
+
+
 
 class MyApp extends App {
-  static async getInitialProps ({ Component, ctx }) {
+  static async getInitialProps({ Component, ctx }) {
     let pageProps = {}
     const credentials = cookies(ctx).ctech_credentials || {}
+
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
     }
+    
     return { pageProps, credentials, path: ctx.pathname }
   }
 
-  renderPages () {
+  renderPages() {
     const { Component, pageProps, credentials, path } = this.props
 
     if (path === '/login') {
@@ -43,13 +44,13 @@ class MyApp extends App {
       <>
         <Header {...credentials} />
         <Component credentials={credentials} {...pageProps} />
-        <PrivacyPolicy credentials={credentials}/>
+        <PrivacyPolicy credentials={credentials} />
         <Footer />
       </>
     )
   }
 
-  render () {
+  render() {
     return (
       <>
         <ToastContainer />

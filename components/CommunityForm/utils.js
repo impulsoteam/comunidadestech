@@ -1,8 +1,8 @@
 import React from 'react'
-
 import * as Yup from 'yup'
 
 export const SignupSchema = Yup.object().shape({
+
   name: Yup.string()
     .min(3, 'Muito curto!')
     .max(30, 'Muito longo!')

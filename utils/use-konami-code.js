@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react'
 
-export default function (cb = () => {}) {
+export default function (cb = () => { }) {
   const [sequence, setSequence] = useState([])
-
   const konamiCodeSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]
-
   const keyPress = (e) => setSequence((prev) => [...prev, e.keyCode])
 
   useEffect(() => {
@@ -22,6 +20,7 @@ export default function (cb = () => {}) {
 
   useEffect(() => {
     document.addEventListener('keydown', keyPress)
+
     return () => {
       document.removeEventListener('keydown', keyPress)
     }

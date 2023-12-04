@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
-
 import PropTypes from 'prop-types'
-
 import { api, setHeader } from '../../utils/axios'
 import { invitationStatus } from '../../utils/variables'
 import Divider from '../Divider'
 import styles from './cardStyles'
 
-function ManagersList ({
+function ManagersList({
   managers: allManagers,
   removeManager,
   credentials,
@@ -20,18 +18,22 @@ function ManagersList ({
   const sendingInvites = allManagers.filter(
     ({ invitation }) => invitation.status === sending
   )
+
   const pendingInvites = allManagers.filter(
     ({ invitation }) => invitation.status === sent
   )
+
   const declinedInvites = allManagers.filter(
     ({ invitation }) => invitation.status === declined
   )
+
   const acceptedInvites = allManagers.filter(
     ({ invitation }) => invitation.status === accepted
   )
 
   const renderManagers = () => {
     if (acceptedInvites.length === 0 && pageType !== 'create') {
+
       return (
         <>
           <Divider dataContent="Não há administradores cadastrados" />
@@ -39,6 +41,7 @@ function ManagersList ({
         </>
       )
     }
+
     return (
       <>
         <Divider dataContent="Administradores" />
@@ -58,6 +61,7 @@ function ManagersList ({
 
   const renderPendingInvites = () => {
     if (pendingInvites.length === 0) return
+
     return (
       <>
         <h5 className="admin-title">Convites Pendentes</h5>
@@ -77,6 +81,7 @@ function ManagersList ({
   }
   const renderDeclinedInvites = () => {
     if (declinedInvites.length === 0) return
+
     return (
       <>
         <h5 className="admin-title">Convites Recusados</h5>
@@ -97,6 +102,7 @@ function ManagersList ({
 
   const renderSendingInvites = () => {
     if (sendingInvites.length === 0) return
+
     return (
       <>
         <h5 className="admin-title">Convites a Serem Enviados</h5>
@@ -125,7 +131,7 @@ function ManagersList ({
   )
 }
 
-function ManagerCard ({ manager, removeManager, credentials }) {
+function ManagerCard({ manager, removeManager, credentials }) {
   const [loading, setLoading] = useState(true)
   const [managerDetails, setManager] = useState({})
 
@@ -141,9 +147,11 @@ function ManagerCard ({ manager, removeManager, credentials }) {
         manager.avatar = response.avatar
         manager._id = response._id
       }
+
       setManager(manager)
       setLoading(false)
     }
+
     getManager()
   }, [])
 
@@ -151,6 +159,7 @@ function ManagerCard ({ manager, removeManager, credentials }) {
     const { email, name, avatar } = managerDetails
 
     if (loading) {
+
       return (
         <div style={{ height: ' 45px' }}>
           <img

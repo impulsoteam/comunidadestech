@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-
 import styles from './styles'
 
 class CommunityHero extends Component {
+  
   render () {
     return (
       <>

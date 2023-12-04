@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import Dropzone from 'react-dropzone'
 import ReactCrop from 'react-image-crop'
-
-import 'react-image-crop/lib/ReactCrop.scss'
+// import 'react-image-crop/lib/ReactCrop.scss'
 import PropTypes from 'prop-types'
 
 import styles from './styles'

@@ -68,6 +68,7 @@ export const getFormStatus = ({ errors, values }) => {
 
       return (stepFour[`link${index}`] = 1)
     })
+    
     return stepFour
   }
 

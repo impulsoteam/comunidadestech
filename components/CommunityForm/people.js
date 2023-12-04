@@ -1,18 +1,16 @@
 import React, { useState } from 'react'
 import MaskedInput from 'react-text-mask'
-
 import { Field, ErrorMessage } from 'formik'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 import createNumberMask from 'text-mask-addons/dist/createNumberMask'
-
 import { api, setHeader } from '../../utils/axios'
 import { invitationStatus } from '../../utils/variables'
 import ManagersList from './managersList'
 import styles from './styles'
 import { errorMessages } from './utils'
 
-function People ({
+function People({
   credentials,
   errors,
   setErrors,
@@ -25,9 +23,7 @@ function People ({
   const [subscribed, setSubscribed] = useState({})
   const [managers, setManagers] = useState(values.managers)
   const [isValidEmail, setValidEmail] = useState(false)
-
   const { managerAlreadyListed, userNotSubscribed } = errorMessages
-
   const validator = /\S+@\S+\.\S+/
   const formatEmail = (email) => (email ? email.trim().toLowerCase() : '')
   const numberMask = createNumberMask({
@@ -48,9 +44,9 @@ function People ({
     setValidEmail(true)
     setHeader(credentials)
     const { data: subscribed } = await api.get(`/user/checkManager/${email}`)
-    if (!subscribed) return userNotSubscribed
-
     const managersEmails = values.managers.map(({ email }) => email)
+
+    if (!subscribed) return userNotSubscribed
     if (managersEmails.includes(value)) return managerAlreadyListed
     setSubscribed(subscribed)
   }

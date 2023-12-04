@@ -1,5 +1,4 @@
 import React from 'react'
-
 /*
 In production the stylesheet is compiled to .next/static/style.css.
 The file will be served from /_next/static/style.css
@@ -8,7 +7,8 @@ You could include it into the page using either next/head or a custom _document.
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 export default class MyDocument extends Document {
-  setGoogleTagManager () {
+  setGoogleTagManager() {
+
     return {
       __html: `
       (function (w, d, s, l, i) {
@@ -24,7 +24,7 @@ export default class MyDocument extends Document {
     }
   }
 
-  render () {
+  render() {
     return (
       <Html lang="pt-br">
         <Head>

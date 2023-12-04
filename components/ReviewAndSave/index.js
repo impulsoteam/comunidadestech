@@ -1,12 +1,11 @@
 import React from 'react'
-
 import PropTypes from 'prop-types'
-
 import { ICONS } from '../../utils/icons'
 import Divider from '../Divider'
 import styles from './styles'
 
 const ReviewAndSave = ({ community }) => {
+
   const {
     name,
     city,

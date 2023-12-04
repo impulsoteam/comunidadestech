@@ -1,17 +1,16 @@
 import React from 'react'
 import Select from 'react-select'
-
 import { Field, ErrorMessage, FieldArray } from 'formik'
 import PropTypes from 'prop-types'
-
 import { linksSelectStyle } from './reactSelectStyle'
 import styles from './styles'
 import { LINKS } from './utils'
 
-function Links ({ errors, values, setFieldValue }) {
+function Links({ errors, values, setFieldValue }) {
   const handleStringChange = (selectedOption, data) => {
     setFieldValue(data || data.value, selectedOption.value)
   }
+
   return (
     <>
       <div className="links-wrapper">

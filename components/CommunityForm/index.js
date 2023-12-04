@@ -2,11 +2,9 @@ import React, { useState } from 'react'
 import { useBeforeunload } from 'react-beforeunload'
 import { toast } from 'react-toastify'
 import { useWindowSize } from 'react-use'
-
 import { Formik, Form } from 'formik'
 import cookies from 'next-cookies'
 import PropTypes from 'prop-types'
-
 import { api, setHeader } from '../../utils/axios'
 import { invitationStatus } from '../../utils/variables'
 import ReviewAndSave from '../ReviewAndSave'
@@ -47,11 +45,13 @@ const CommunityForm = ({
       setHeader(credentials)
       const { data: response } = await api.post(`/logo/${values.slug}`, data)
       const { success, logo } = response
+
       if (!success) {
         toast.warn(
           'Não foi possível fazer upload do seu logo.\nTente novamente mais tarde'
         )
       }
+
       values.logo = logo
     }
 
@@ -89,6 +89,7 @@ const CommunityForm = ({
 
     const previousSteps = pages.slice(0, pages.indexOf(button))
     let previousCompleteness = 0
+
     for (const step of previousSteps) {
       previousCompleteness += stepsPercentage[step]
     }
@@ -140,9 +141,8 @@ const CommunityForm = ({
                 currentStatus
               })}
               type="button"
-              className={`page-title ${
-                page === currentPage ? 'is-active' : ''
-              }`}
+              className={`page-title ${page === currentPage ? 'is-active' : ''
+                }`}
               onClick={() => setCurrentPage(page)}
             >
               {pageTitles[page]}

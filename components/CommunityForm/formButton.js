@@ -1,10 +1,9 @@
 import { css, jsx } from '@emotion/core'
-
 /** @jsx jsx */
 import { colors } from '../../utils/variables'
 import styles from './styles'
 
-export default function FormButton ({
+export default function FormButton({
   isMobile,
   type,
   pageTitles,
@@ -17,6 +16,7 @@ export default function FormButton ({
 
   const getPercentage = () => {
     if (isMobile) return totalPercentage
+
     return stepsPercentage[currentPage]
   }
 
@@ -46,6 +46,7 @@ export default function FormButton ({
 
   const renderButton = () => {
     if (currentPage !== 'ReviewAndSave') {
+
       return (
         <button
           disabled={isDisabled()}
@@ -104,10 +105,10 @@ export default function FormButton ({
                   className="button is-primary is-large is-fullwidth"
                   type="submit"
                 >
-                  { loading
+                  {loading
                     ? <span>
-                          <i className="fa fa-spinner fa-spin"></i> Continuar
-                        </span>
+                      <i className="fa fa-spinner fa-spin"></i> Continuar
+                    </span>
                     : getTitle()
                   }
                 </button>

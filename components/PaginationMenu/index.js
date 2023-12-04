@@ -1,15 +1,13 @@
 import React from 'react'
-
 import PropTypes from 'prop-types'
-
 import styles from './styles'
 
 const PaginationMenu = ({ pageCount, setPageCount, totalCommunities }) => {
   const numberOfPages = Math.ceil(totalCommunities / 48)
+  const counter = []
 
   if (numberOfPages === 1) return null
 
-  const counter = []
   for (let i = 0; i < numberOfPages; i++) {
     counter.push(i)
   }
