@@ -11,7 +11,7 @@ pids
 # Environment
 .env
 
-# Docker
+# Config Docker ignore
 Dockerfile
 docker-compose.yml
 
