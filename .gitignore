@@ -43,3 +43,6 @@ jspm_packages
 out
 
 .DS_Store
+
+# docs
+Dockerfile
