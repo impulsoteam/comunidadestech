@@ -94,7 +94,7 @@
     "nodemon": "^2.0.20",
     "prettier": "^3.0.3",
     "set-cookie-parser": "^2.6.0",
-    "sucrase": "^3.29.0",
+    "sucrase": "^3.35.0",
     "supertest": "^6.3.3"
   }
 }
