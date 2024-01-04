@@ -9020,10 +9020,10 @@ react-fast-compare@^2.0.1:
   resolved "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-2.0.4.tgz"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
 
-react-image-crop@10.1.8:
-  version "10.1.8"
-  resolved "https://registry.yarnpkg.com/react-image-crop/-/react-image-crop-10.1.8.tgz#6f7b33d069f6cfb887e66faee16a9fb2e6d31137"
-  integrity sha512-4rb8XtXNx7ZaOZarKKnckgz4xLMvds/YrU6mpJfGhGAsy2Mg4mIw1x+DCCGngVGq2soTBVVOxx2s/C6mTX9+pA==
+react-image-crop@11.0.4:
+  version "11.0.4"
+  resolved "https://registry.yarnpkg.com/react-image-crop/-/react-image-crop-11.0.4.tgz#044a34467fd52fde5cb03907cfb156e131cc798d"
+  integrity sha512-FO6N0oJIs+T/kw9wHZ1sjLYURUBv7BOKamjwkiQ0lI4D2Vp5OZFDNhrSJW41K0V9oCsbHtEymbOT/8eF28OOhg==
 
 react-is@16.13.1, react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
