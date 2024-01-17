@@ -92,7 +92,7 @@
     "husky": "^8.0.3",
     "jest": "^29.7.0",
     "nodemon": "^2.0.20",
-    "prettier": "^3.0.3",
+    "prettier": "^3.2.4",
     "set-cookie-parser": "^2.6.0",
     "sucrase": "^3.29.0",
     "supertest": "^6.3.3"
