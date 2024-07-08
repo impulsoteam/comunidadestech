@@ -68,7 +68,7 @@
     "react-toastify": "5.5.0",
     "react-use": "^17.5.0",
     "slack-notify": "^2.0.7",
-    "slug": "^9.0.0",
+    "slug": "^9.1.0",
     "styled-jsx-plugin-sass": "^1.0.0",
     "text-mask-addons": "^3.8.0",
     "yup": "^1.4.0"
