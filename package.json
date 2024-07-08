@@ -65,7 +65,7 @@
     "react-map-gl": "^5.2.7",
     "react-select": "^5.8.0",
     "react-text-mask": "^5.5.0",
-    "react-toastify": "5.5.0",
+    "react-toastify": "10.0.5",
     "react-use": "^17.5.0",
     "slack-notify": "^2.0.7",
     "slug": "^9.0.0",
