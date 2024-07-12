@@ -60,7 +60,7 @@
     "react-beforeunload": "^2.5.3",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
-    "react-image-crop": "11.0.5",
+    "react-image-crop": "11.0.6",
     "react-lazyload": "^3.2.1",
     "react-map-gl": "^5.2.7",
     "react-select": "^5.8.0",
