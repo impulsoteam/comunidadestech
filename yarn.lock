@@ -7272,10 +7272,10 @@ react-fast-compare@^2.0.1:
   resolved "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-2.0.4.tgz"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
 
-react-image-crop@11.0.5:
-  version "11.0.5"
-  resolved "https://registry.yarnpkg.com/react-image-crop/-/react-image-crop-11.0.5.tgz#c7abcf9cae28305d253d55d481158a594a937867"
-  integrity sha512-A/Y/kspOzki1zDL/bSgwWIY1X3CQ9F1QwpdnncWLBVAktnKfAZDIQnWmjXzuzEjZHDMsBlArytIcPBVi6DNklg==
+react-image-crop@11.0.7:
+  version "11.0.7"
+  resolved "https://registry.yarnpkg.com/react-image-crop/-/react-image-crop-11.0.7.tgz#25f3d37ccbb65a05d19d23b4740a5912835c741e"
+  integrity sha512-ZciKWHDYzmm366JDL18CbrVyjnjH0ojufGDmScfS4ZUqLHg4nm6ATY+K62C75W4ZRNt4Ii+tX0bSjNk9LQ2xzQ==
 
 react-is@17.0.2:
   version "17.0.2"
