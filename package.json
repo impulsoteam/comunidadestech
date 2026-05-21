@@ -36,7 +36,7 @@
     "esm": "^3.2.25",
     "express": "^4.19.2",
     "formik": "^2.4.5",
-    "js-cookie": "^3.0.5",
+    "js-cookie": "^3.0.7",
     "jsonwebtoken": "^9.0.2",
     "moment": "^2.30.1",
     "mongo-sanitize": "^1.1.0",
